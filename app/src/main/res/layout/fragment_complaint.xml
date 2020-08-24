@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewModel"
+            type="kz.almaty.satbayevuniversity.ui.settings.complaintFragment.ComplaintViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_gravity="center"
+        tools:context="kz.almaty.satbayevuniversity.ui.settings.complaintFragment.ComlaintFragment"
+        android:background="@color/colorWhiteGray">
+
+        <TextView
+            android:id="@+id/dialogComplaintTv"
+            android:padding="15dp"
+            android:textColor="@color/colorBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/complaintShort"
+            android:fontFamily="@font/open_sans_bold"
+            app:layout_constraintBottom_toTopOf="@+id/dialogComplaintEt"/>
+
+        <EditText
+            android:layout_margin="15dp"
+            android:layout_width="0dp"
+            android:padding="5dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintWidth_percent="0.9"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/dialogComplaintTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/dialogComplaintEt"
+            android:text="@={viewModel.complaintString}"
+            android:background="@drawable/citcular_et" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.5"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_bold"
+            app:layout_constraintTop_toBottomOf="@+id/dialogComplaintEt"
+            android:text="@string/sendComplaint"
+            android:textAlignment="center"
+            android:background="@drawable/tv_border"
+            android:id="@+id/dialogComplaintReady"
+            android:padding="10dp"
+            android:textColor="@color/blue"
+            android:onClick="@{() -> viewModel.sendComplaint()}"/>
+
+        <TextView
+            android:fontFamily="@font/open_sans_bold"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.5"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/dialogComplaintEt"
+            android:background="@drawable/tv_border"
+            android:textColor="@color/blue"
+            app:layout_constraintStart_toEndOf="@+id/dialogComplaintReady"
+            android:text="@string/cancelComplaint"
+            android:textAlignment="center"
+            android:id="@+id/dialogComplaintExit"
+            android:padding="10dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

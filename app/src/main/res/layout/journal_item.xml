@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="journal"
+            type="kz.almaty.satbayevuniversity.data.entity.academic.ResponseJournal"
+            />
+        <variable
+            name="itemClickListener"
+            type="kz.almaty.satbayevuniversity.ui.academicProgress.ResponseEventListener" />
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:onClick="@{() -> itemClickListener.cardClicked(journal)}"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardView"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        app:cardPreventCornerOverlap="false"
+        app:cardCornerRadius="4dp"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/courseImg"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/book"
+                app:layout_constraintEnd_toStartOf="@+id/guideline12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/courseName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="@{journal.courseTitle}"
+                app:layout_constraintBottom_toTopOf="@+id/teacherName"
+                app:layout_constraintStart_toEndOf="@+id/guideline12"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Компьтерные сети"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/teacherName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="@{journal.instructorFullName}"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/missedNumber"
+                app:layout_constraintStart_toEndOf="@+id/guideline12"
+                app:layout_constraintTop_toBottomOf="@+id/courseName"
+                tools:text="Кабдуллин Максат Амангельдыулы" />
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/missedNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="1dp"
+                android:text="@{journal.missedOverride}"
+                app:layout_constraintBottom_toBottomOf="@+id/missedPercentNumber"
+                app:layout_constraintEnd_toStartOf="@+id/missedPercentNumber"
+                app:layout_constraintStart_toStartOf="@+id/textViewMissed"
+                app:layout_constraintTop_toTopOf="@+id/missedPercentNumber"
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="0" />
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/missedPercentNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:text="@{`(`+ String.valueOf(journal.missedPercent)+`%)`}"
+                app:layout_constraintBottom_toTopOf="@+id/textViewMissed"
+                app:layout_constraintEnd_toEndOf="@+id/textViewMissed"
+                app:layout_constraintStart_toEndOf="@+id/missedNumber"
+                app:layout_constraintTop_toBottomOf="@+id/teacherName"
+                tools:text="(1%)" />
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/textViewMissed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="1dp"
+                android:text="@string/missed"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/teacherName"
+                app:layout_constraintTop_toBottomOf="@+id/missedNumber"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/gradeNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:maxLength="4"
+                android:text="@{String.valueOf(journal.grade != 0 ? journal.grade : @string/nullDoubleString)}"
+                app:layout_constraintBottom_toTopOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/teacherName"
+                tools:text="0.0" />
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="52dp"
+                android:text="баллов"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline13"
+                app:layout_constraintTop_toBottomOf="@+id/missedNumber"
+                android:layout_marginBottom="5dp"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.12" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LoginActivity">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="kz.almaty.satbayevuniversity.AuthViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/loginHeaderImg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/header"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mainConstraint"
+            app:layout_constraintVertical_bias="0.009" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/graduationImg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/graduation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.23"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginHeaderImg" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="22dp"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/graduationImg"
+            app:layout_constraintWidth_percent="0.9">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardViewLoginConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvHello"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:gravity="center"
+                    android:text="@string/login_hello"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/LoginConstraint"
+                    android:layout_width="0dp"
+                    android:layout_height="61dp"
+                    android:background="#00000000"
+                    android:padding="7dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHello"
+                    app:layout_constraintVertical_bias="0.2"
+                    app:layout_constraintWidth_percent="0.9">
+
+                    <!--                    <androidx.appcompat.widget.AppCompatImageView-->
+                    <!--                        android:id="@+id/imgLogin"-->
+                    <!--                        android:layout_width="30dp"-->
+                    <!--                        android:layout_height="30dp"-->
+                    <!--                        android:src="@drawable/id_icon_blue"-->
+                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                        app:layout_constraintEnd_toEndOf="@+id/LoginConstraint"-->
+                    <!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/et_login_hint"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-"
+                            android:inputType="textFilter"
+                            android:id="@+id/textInputEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.username}"
+                            android:textSize="14sp"
+                            app:layout_constraintVertical_bias="1.0"
+                            tools:layout_editor_absoluteX="-1dp" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <!--                                        android:id="@+id/etLogin"-->
+                <!--                                        android:layout_width="0dp"-->
+                <!--                                        android:layout_height="30dp"-->
+                <!--                                        android:background="@null"-->
+                <!--                                        android:fontFamily="@font/open_sans_light"-->
+                <!--                                        android:hint="@string/et_login_hint"-->
+                <!--                                        android:inputType="text"-->
+                <!--                                        android:paddingStart="12dp"-->
+                <!--                                        android:text="@={viewModel.username}"-->
+                <!--                                        android:textSize="15sp"-->
+                <!--                                        app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                                        app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                                        app:layout_constraintStart_toEndOf="@+id/imgLogin"-->
+                <!--                                        app:layout_constraintTop_toTopOf="parent"-->
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/PasswordConstraint"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:padding="7dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LoginConstraint"
+                    app:layout_constraintWidth_percent="0.9">
+
+                    <!--                    <androidx.appcompat.widget.AppCompatImageView-->
+                    <!--                        android:id="@+id/imgPassword"-->
+                    <!--                        android:layout_width="30dp"-->
+                    <!--                        android:layout_height="30dp"-->
+                    <!--                        android:src="@drawable/password_icon_blue"-->
+                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                        app:layout_constraintEnd_toEndOf="@+id/etLayout"-->
+                    <!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/et_password_hint"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-"
+                            android:inputType="textFilter"
+                            android:id="@+id/etPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.password}"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="1.0"
+                            tools:layout_editor_absoluteX="-1dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/showPassword"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="right"
+                        android:src="@drawable/ic_baseline_remove_red_eye_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/etLayout"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--                <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                    android:id="@+id/tvBeta"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:fontFamily="@font/open_sans_semibold"-->
+                <!--                    android:text="@string/beta_version"-->
+                <!--                    android:textColor="@color/colorBntLogin"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintEnd_toEndOf="@+id/PasswordConstraint"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/PasswordConstraint" />-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/loginBtn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/field_registration_margin_top"
+            android:background="@drawable/bound"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="@string/btn_login"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toTopOf="@+id/rocket"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewLogin"
+            app:layout_constraintWidth_percent="0.9"
+            app:spinning_bar_color="@color/colorWhite"
+            app:spinning_bar_padding="6dp"
+            app:spinning_bar_width="3dp" />
+
+        <!--        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton-->
+        <!--            android:id="@+id/loginBtn2"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:background="@drawable/bound"-->
+        <!--            android:fontFamily="@font/open_sans_semibold"-->
+        <!--            android:onClick="startAdmissionLoginActivity"-->
+        <!--            android:text="@string/enrollee"-->
+        <!--            android:textColor="@color/colorWhite"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/rocket"-->
+        <!--            app:layout_constraintHeight_percent="0.06"-->
+        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--            app:layout_constraintRight_toRightOf="parent"-->
+        <!--            app:layout_constraintWidth_percent="0.9"-->
+        <!--            app:spinning_bar_color="@color/colorWhite"-->
+        <!--            app:spinning_bar_padding="6dp"-->
+        <!--            app:spinning_bar_width="3dp" />-->
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/rocket"
+            android:layout_width="412dp"
+            android:layout_height="245dp"
+            android:layout_marginTop="486dp"
+            android:src="@drawable/rocket"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.23"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="exam"
+            type="kz.almaty.satbayevuniversity.data.entity.schedule.Exam" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:ems="10"
+                    android:layout_marginTop="7dp"
+                    android:id="@+id/exam_course_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{exam.courseTitle}"
+                    tools:text="Системное программирование"
+                    app:layout_constraintStart_toStartOf="@+id/guideline11"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/scheduleTime"/>
+
+                <TextView
+                    android:padding="1dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:layout_marginTop="7dp"
+                    android:id="@+id/scheduleTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@{exam.start + `-` + exam.end}"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@+id/exam_course_title"
+                    app:layout_constraintTop_toBottomOf="@+id/exam_course_title"
+                    tools:text="8:50-9:50"
+                    app:layout_constraintBottom_toTopOf="@+id/exam_room_title"/>
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:layout_marginTop="7dp"
+                    app:layout_constraintStart_toStartOf="@+id/exam_course_title"
+                    app:layout_constraintTop_toBottomOf="@+id/scheduleTime"
+                    android:id="@+id/exam_room_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{`Кабинет: `+exam.roomTitle}"
+                    tools:text="ГУК 1023"
+                    app:layout_constraintBottom_toTopOf="@+id/exam_examinator_name"/>
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:layout_marginTop="7dp"
+                    app:layout_constraintStart_toStartOf="@+id/exam_course_title"
+                    app:layout_constraintTop_toBottomOf="@+id/exam_room_title"
+                    android:id="@+id/exam_examinator_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{`Экзаменаторы: `+exam.examinatorName}"
+                    tools:text="Косников В.А."
+                    app:layout_constraintBottom_toTopOf="@+id/exam_proctor_name"/>
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:layout_marginTop="7dp"
+                    app:layout_constraintStart_toStartOf="@+id/exam_course_title"
+                    app:layout_constraintTop_toBottomOf="@+id/exam_examinator_name"
+                    android:id="@+id/exam_proctor_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{`Прокторы: `+exam.proctorNames}"
+                    tools:text="Мухатаева А.Ж."
+                    android:layout_marginBottom="7dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.1"/>
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:layout_marginEnd="10dp"
+                    android:ems="2"
+                    android:textSize="17sp"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/exam_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{exam.getDateFormatted}"
+                    tools:text="05 дек"
+                    android:paddingBottom="7dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

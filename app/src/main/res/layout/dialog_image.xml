@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="bitmap"
+            type="android.graphics.Bitmap" />
+        <variable
+            name="imageDialog"
+            type="kz.almaty.satbayevuniversity.ui.admission.bachelor.ImageDialog" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:bitmap="@{bitmap}" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/close_blue"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/field_registration_margin_top"
+            android:layout_marginTop="30dp"
+            android:onClick="@{() -> imageDialog.closeFullImage() }"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

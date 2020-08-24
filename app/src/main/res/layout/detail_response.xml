@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="dateItem"
+            type="kz.almaty.satbayevuniversity.data.entity.academic.DatesItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="80dp"
+        android:layout_height="90dp">
+
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/detailImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            tools:text="P=0.0"
+            android:text="@{`P=` + String.valueOf(dateItem.grade != null ? dateItem.grade : @string/nullDoubleString)}"
+            android:id="@+id/detailGrade"/>
+
+        <ImageView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_gravity="center"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/checkedAttended"
+            android:id="@+id/detailImg"
+            android:src="@{dateItem.attended == false ? @drawable/attend_false_icon : @drawable/checked}" />
+
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detailTime"
+            android:textSize="11sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/open_sans_bold"
+            tools:text="12.10.19"
+            android:text="@{dateItem.dateFormatted}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

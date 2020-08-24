@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="kz.almaty.satbayevuniversity.ui.grade.transcriptFragment.TranscriptDialogFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<data>
+        
+        <variable
+            name="viewModel"
+            type="kz.almaty.satbayevuniversity.ui.grade.transcriptFragment.TranscriptDialogViewModel" />
+        
+    </data>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="17dp"
+                android:background="@drawable/transcript_dialog_gradient">
+
+                <TextView
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:layout_margin="3dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:id="@+id/semestr_ect"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/calcCredits"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Кредиты за семестр/ECTS: 17/16"
+                    android:text="@{`Кредиты за семестр/ECTS: ` +viewModel.semestersItemObservableField.semesterCredits + `/` + viewModel.semestersItemObservableField.semesterEctsCredits}"/>
+
+                <TextView
+                    android:textColor="@color/colorWhite"
+                    android:layout_margin="3dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:id="@+id/calcCredits"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/semesterGpa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/semestr_ect"
+                    tools:text="Засчитано кредитов: 10"
+                    android:text="@{`Засчитано кредитов: ` +viewModel.semestersItemObservableField.calcCredits}" />
+
+                <TextView
+                    android:textColor="@color/colorWhite"
+                    android:id="@+id/semesterGpa"
+                    android:fontFamily="@font/open_sans_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/calcCredits"
+                    android:layout_margin="3dp"
+                    tools:text="Семестровый GPA: 10"
+                    app:layout_constraintBottom_toTopOf="@+id/yearGpa"
+                    android:text="@{`Семестровый GPA: ` + String.valueOf(viewModel.semestersItemObservableField.semesterGpa)}"/>
+
+                <TextView
+                    android:textColor="@color/colorWhite"
+                    android:id="@+id/yearGpa"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:fontFamily="@font/open_sans_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    app:layout_constraintTop_toBottomOf="@+id/semesterGpa"
+                    tools:text="Годовой GPA: 10"
+                    android:text="@{`Годовой GPA: ` + String.valueOf(viewModel.semestersItemObservableField.yearGpa)}" />
+
+                <TextView
+                    android:textColor="@color/colorWhite"
+                    android:id="@+id/cumulativeGpa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="@{`Кумулятивный GPA: ` + String.valueOf(viewModel.semestersItemObservableField.cumulativeGpa)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/yearGpa"
+                    android:layout_margin="3dp"
+                    tools:text="Кумулятивный GPA: 10" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+</layout>

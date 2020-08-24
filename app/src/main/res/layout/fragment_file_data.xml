@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="kz.almaty.satbayevuniversity.ui.umkd.filefragment.fileDataFragment.FileDataFragment"
+        android:background="@color/colorWhite">
+
+
+    <include
+            layout="@layout/empty_toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/toolbarFileData"
+            app:layout_constraintBottom_toTopOf="@+id/recycler_file_data_fragment" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            app:layout_constraintTop_toBottomOf="@+id/toolbarFileData"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/recycler_file_data_fragment"
+            tools:listitem="@layout/fragment_file_data_item"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

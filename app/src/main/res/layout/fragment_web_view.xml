@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="webView"
+            type="kz.almaty.satbayevuniversity.ui.umkd.filefragment.fileDataFragment.webViewFragment.WebViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="kz.almaty.satbayevuniversity.ui.umkd.filefragment.fileDataFragment.webViewFragment.WebViewFragmentView"
+        android:background="@color/colorWhite">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarWebView"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/primary"
+            app:theme="@style/Theme.AppCompat.NoActionBar"
+            app:titleTextColor="@color/colorWhite"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextAppearance="@style/textSize">
+
+            <ImageView
+                android:id="@+id/shareLink"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="15dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/download" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:indeterminateDrawable="@drawable/progress"
+            android:visibility="@{webView.loadPB ? View.VISIBLE : View.INVISIBLE}"/>
+
+        <kz.almaty.satbayevuniversity.ui.umkd.filefragment.fileDataFragment.webViewFragment.LollipopFixedWebView
+            app:layout_constraintTop_toBottomOf="@+id/toolbarWebView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/webViewFragment"
+            android:visibility="@{webView.loadPB ? View.INVISIBLE : View.VISIBLE}"/>
+
+        <ProgressBar
+            android:id="@+id/web_view_progress_bar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:indeterminateDrawable="@drawable/progress"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

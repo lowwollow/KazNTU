@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+    <variable
+        name="viewModel"
+        type="kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment.studentsList.StudentsListViewModel">
+    </variable>
+    <variable
+        name="schedule"
+        type="kz.almaty.satbayevuniversity.data.entity.schedule.Schedule">
+    </variable>
+    </data>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/close_image_view"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/close_blue"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/course_title_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/close_image_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{schedule.courseTitle}"
+            android:gravity="center"
+            tools:text="Финансовый анализ и оценка проектов 2 "
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/student_list_recycler_view"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_student"
+        android:layout_below="@+id/top_constraint_layout"
+        />
+    <ProgressBar
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:indeterminateDrawable="@drawable/progress"
+        android:visibility="@{viewModel.loadRv ? View.VISIBLE : View.GONE}"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
+</layout>

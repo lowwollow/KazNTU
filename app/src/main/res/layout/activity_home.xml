@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="kz.almaty.satbayevuniversity.ui.HomeActivity">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_background">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_container"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/main"/>
+
+        <com.google.android.material.navigation.NavigationView
+            android:background="@color/main_background"
+            app:itemTextColor="@color/colorWhite"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            app:menu="@menu/drawer_menu"
+            android:id="@+id/navigationView">
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

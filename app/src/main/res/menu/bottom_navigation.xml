@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/academicProgressFragment"
+        android:title="@string/journal"
+        android:icon="@drawable/attendance" />
+    <item
+        android:id="@+id/schedule"
+        android:title="@string/schedule"
+        android:icon="@drawable/schedule"/>
+    <item
+        android:id="@+id/grade"
+        android:title="@string/grade"
+        android:icon="@drawable/grade"
+        />
+    <item
+        android:id="@+id/notifications"
+        android:title="@string/notifications"
+        android:icon="@drawable/notificatoin"
+        />
+</menu>

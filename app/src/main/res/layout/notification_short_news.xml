@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="notification"
+            type="kz.almaty.satbayevuniversity.data.entity.notification.Notification" />
+
+        <variable
+            name="webClickListener"
+            type="kz.almaty.satbayevuniversity.ui.notification.portalNotification.PortalNotificationListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:onClick="@{() -> webClickListener.WebClicked(notification)}">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/news"
+            android:id="@+id/notification_short_news_icon"
+            app:layout_constraintEnd_toStartOf="@+id/textViewNotification"/>
+        <TextView
+            android:id="@+id/textViewNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/notification_short_news_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{notification.title}"
+            android:ems="15"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:textSize="13sp"
+            />
+
+        <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

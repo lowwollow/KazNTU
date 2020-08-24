@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="kz.almaty.satbayevuniversity">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:name="kz.almaty.satbayevuniversity.data.App"
+        android:usesCleartextTraffic="true"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <meta-data android:name="io.sentry.dsn" android:value="https://b53c5a2deaf640c8bfabca157308caae@o437215.ingest.sentry.io/5399471" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="kz.almaty.satbayevuniversity.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+        <activity android:name=".ui.notification.portalNotification.webViewNotification.WebViewNotification"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="kz.almaty.satbayevuniversity.ui.HomeActivity"
+            android:configChanges="locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="kz.almaty.satbayevuniversity.ui.LoginActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.admission.registration.RegistrationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.admission.bachelor.BachelorActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.admission.master.MasterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.admission.doctor.DoctorActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.admission.login.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+        <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
+    </application>
+
+
+</manifest>

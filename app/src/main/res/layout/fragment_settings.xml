@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+            <variable
+                name="settings"
+                type="kz.almaty.satbayevuniversity.ui.settings.SettingsFragment"/>
+            <variable
+                name="accountEntity"
+                type="kz.almaty.satbayevuniversity.utils.Storage"/>
+            <variable
+                name="imageUrl"
+                type="android.graphics.Bitmap"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="kz.almaty.satbayevuniversity.ui.settings.SettingsFragment"
+        android:background="@color/colorWhiteGray">
+
+        <include layout="@layout/empty_toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/settingsToolbar"
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settingsAccount"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settingsToolbar">
+
+            <ImageView
+                android:id="@+id/userProfilePhoto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:imageUrl="@{imageUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guideline14"
+                android:contentDescription="@string/profilePhoto"
+                app:layout_constraintBottom_toTopOf="@+id/userFullName"/>
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@+id/userProfilePhoto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/userFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="@{accountEntity.accountFullName}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorBlack" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="0dp"
+                app:layout_constraintGuide_percent="0.2"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settingsLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorWhite"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settingsAccount"
+            app:layout_constraintBottom_toTopOf="@+id/settingsComplaint">
+
+            <ImageView
+                android:id="@+id/imageViewLanguage"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/language"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/textViewLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:text="@string/chooseLng"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewLanguage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageViewArrowLanguage"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settingsComplaint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settingsLanguage">
+
+
+            <ImageView
+                android:id="@+id/imageViewComplaint"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/angry_face"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:text="@string/complaint"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewComplaint"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageViewArrow"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/settingsLoginBtn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bound"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="@string/btn_login_exit"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintWidth_percent="0.9"
+            app:spinning_bar_width="3dp"
+            app:spinning_bar_padding="6dp"
+            app:layout_constraintTop_toBottomOf="@+id/settingsComplaint"
+            app:spinning_bar_color="@color/colorWhite"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

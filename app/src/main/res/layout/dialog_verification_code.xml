@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="data"
+            type="kz.almaty.satbayevuniversity.data.entity.admission.email_verification.Data" />
+        <variable
+            name="registrationActivity"
+            type="kz.almaty.satbayevuniversity.ui.admission.registration.RegistrationActivity" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/padding">
+
+        <TextView
+            android:id="@+id/font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/verify_your_email"
+            android:textColor="@color/black" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="@={data.verificationCode}"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/field_registration_margin_top"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/verify_your_email_button"
+            android:onClick="@{() -> registrationActivity.verifyEmail(data)}"
+            android:layout_marginTop="@dimen/field_registration_margin_top"/>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LoginActivity">
+    <data>
+        <variable
+            name="viewModel"
+            type="kz.almaty.satbayevuniversity.ui.admission.login.LoginViewModel"/>
+        <import type="android.view.View"/>
+        
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/mainConstraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/loginHeaderImg"
+            android:src="@drawable/header"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.01"
+            app:layout_constraintHeight_percent="0.1"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/graduationImg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/graduation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginHeaderImg"
+            app:layout_constraintHeight_percent="0.23" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/graduationImg"
+            app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:cardElevation="22dp"
+            app:cardCornerRadius="4dp"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintWidth_percent="0.9">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cardViewLoginConstraint">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvHello"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    android:text="@string/correcting_and_filling"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/LoginConstraint"
+                    android:layout_width="288dp"
+                    android:layout_height="61dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHello"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:padding="7dp"
+                    app:layout_constraintWidth_percent="0.9"
+                    app:layout_constraintVertical_bias="0.2">
+
+<!--                    <androidx.appcompat.widget.AppCompatImageView-->
+<!--                        android:id="@+id/imgLogin"-->
+<!--                        android:layout_width="30dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:src="@drawable/id_icon_blue"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/etLogin"/>-->
+
+<!--                    <androidx.appcompat.widget.AppCompatEditText-->
+<!--                        android:id="@+id/etLogin"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:background="@null"-->
+<!--                        android:fontFamily="@font/open_sans_light"-->
+<!--                        android:hint="@string/et_login_hint"-->
+<!--                        android:inputType="text"-->
+<!--                        android:paddingStart="12dp"-->
+<!--                        android:text="@={viewModel.username}"-->
+<!--                        android:textSize="15sp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/imgLogin"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"/>-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/et_login_hint"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.username}"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/PasswordConstraint"
+                    android:layout_width="288dp"
+                    android:layout_height="61dp"
+                    app:layout_constraintTop_toBottomOf="@+id/LoginConstraint"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:padding="7dp"
+                    app:layout_constraintWidth_percent="0.9">
+
+<!--                    <androidx.appcompat.widget.AppCompatImageView-->
+<!--                        android:id="@+id/imgPassword"-->
+<!--                        android:layout_width="30dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:src="@drawable/password_icon_blue"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/etLayout"/>-->
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/etLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/et_password_hint"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.password}"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="1.0"
+                            tools:layout_editor_absoluteX="-1dp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+        android:id="@+id/loginBtn"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/field_registration_margin_top"
+        android:background="@drawable/bound"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="@string/btn_login"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/registration_btn"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewLogin"
+        app:layout_constraintWidth_percent="0.9"
+        app:spinning_bar_color="@color/colorWhite"
+        app:spinning_bar_padding="6dp"
+        app:spinning_bar_width="3dp" />
+
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+        android:id="@+id/registration_btn"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bound"
+        android:fontFamily="@font/open_sans_semibold"
+        android:onClick="startChoosingLevel"
+        android:text="@string/inital_data_filling"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.9"
+        app:spinning_bar_color="@color/colorWhite"
+        app:spinning_bar_padding="6dp"
+        app:spinning_bar_width="3dp"
+        android:layout_marginTop="@dimen/field_registration_margin_top"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/languageCardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/field_registration_margin_top"
+        app:layout_constraintEnd_toEndOf="@+id/cardViewLogin"
+        app:layout_constraintStart_toStartOf="@+id/cardViewLogin"
+        app:layout_constraintTop_toBottomOf="@+id/registration_btn"
+        app:layout_constraintWidth_percent="0.9">
+
+        <Button
+            android:id="@+id/kzLanguageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/bound"
+            android:text="@string/kz"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick='@{() -> viewModel.changeLang("kz")}'/>
+
+        <Button
+            android:id="@+id/ruLanguageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/bound"
+            android:text="@string/ru"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="@+id/enLanguageButton"
+            app:layout_constraintStart_toStartOf="@+id/kzLanguageButton"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick='@{() -> viewModel.changeLang("ru")}'/>
+
+        <Button
+            android:id="@+id/enLanguageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/bound"
+            android:text="@string/en"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick='@{() -> viewModel.changeLang("en")}'/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

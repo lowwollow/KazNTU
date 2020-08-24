@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="push_notification"
+            type="kz.almaty.satbayevuniversity.data.entity.notification.PushNotification" />
+
+        <variable
+            name="language"
+            type="java.lang.String" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/push_notification_item_image_view"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:src="@drawable/point" />
+    <TextView
+        android:id="@+id/push_notification_item_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/push_notification_item_image_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:text='@{language.equals("kk") ? push_notification.textKaz : push_notification.textRus }'
+        android:textColor="@color/black"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textSize="14sp"
+        tools:text="Вам выставлена оценка по курсу Вам выставлена оценка по курсу "/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
