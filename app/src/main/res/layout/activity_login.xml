@@ -24,20 +24,18 @@
             android:src="@drawable/header"
             app:layout_constraintBottom_toTopOf="@+id/graduationImg"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.009"
             app:layout_constraintHeight_percent="0.09"
-            app:layout_constraintTop_toTopOf="@+id/mainConstraint"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mainConstraint" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/graduationImg"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.2"
             android:src="@drawable/graduation"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/cardViewLogin"
             app:layout_constraintTop_toBottomOf="@+id/loginHeaderImg" />
 
         <androidx.cardview.widget.CardView
@@ -46,13 +44,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
             app:cardCornerRadius="4dp"
-            app:cardElevation="22dp"
             app:cardPreventCornerOverlap="false"
             app:layout_constraintBottom_toTopOf="@+id/loginBtn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cardViewLoginConstraint"
@@ -75,14 +72,16 @@
                     android:layout_width="0dp"
                     android:layout_height="61dp"
                     android:layout_marginTop="10dp"
+                    android:padding="7dp"
+
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:background="#00000000"
                     app:layout_constraintBottom_toBottomOf="@+id/etLayout"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvHello"
-                    app:layout_constraintVertical_bias="0.2"
-                    app:layout_constraintWidth_percent="0.9"
-                    tools:ignore="NotSibling">
+                    tools:ignore="NotSibling" >
 
                     <!--                    <androidx.appcompat.widget.AppCompatImageView-->
                     <!--                        android:id="@+id/imgLogin"-->
@@ -112,8 +111,7 @@
                             android:inputType="textFilter"
                             android:text="@={viewModel.username}"
                             android:textSize="14sp"
-                            app:layout_constraintVertical_bias="1.0"
-                            tools:layout_editor_absoluteX="-1dp" />
+                             />
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -143,15 +141,15 @@
                     android:layout_height="wrap_content"
                     android:background="#00000000"
                     android:padding="7dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.486"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/LoginConstraint"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:layout_constraintWidth_percent="0.9">
+                    >
 
                     <!--                    <androidx.appcompat.widget.AppCompatImageView-->
                     <!--                        android:id="@+id/imgPassword"-->
@@ -258,4 +256,5 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
