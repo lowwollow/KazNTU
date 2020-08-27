@@ -23,18 +23,16 @@ import kz.almaty.satbayevuniversity.ui.HomeActivity;
 
 
 public class UmkdFragment extends Fragment {
-
     private UmkdViewModel mViewModel;
     private FragmentUmkdBinding umkdFragmentBinding;
     private UmkdAdapter umkdAdapter;
     private View view;
     public Toolbar toolbar;
-
     private static final String TAG = "UmkdFragment";
-
     public static UmkdFragment newInstance() {
         return new UmkdFragment();
     }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -42,15 +40,13 @@ public class UmkdFragment extends Fragment {
 
         umkdFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_umkd, container, false);
         view = umkdFragmentBinding.getRoot();
-
         toolbar = view.findViewById(R.id.umkd_toolbar);
-
         return view;
     }
+
     @Override
     public void onResume(){
         super.onResume();
-
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener((view, i, keyEvent) -> {
@@ -62,13 +58,13 @@ public class UmkdFragment extends Fragment {
             return false;
         });
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d(TAG, "Fragment2 onActivityCreated");
         mViewModel = ViewModelProviders.of(this).get(UmkdViewModel.class);
         umkdFragmentBinding.setUmkdViewModel(mViewModel);
-
         umkdFragmentBinding.umkdRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         umkdFragmentBinding.umkdRecyclerView.setHasFixedSize(true);
         umkdFragmentBinding.umkdRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));

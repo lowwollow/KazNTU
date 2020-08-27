@@ -169,11 +169,11 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                     result.add(Schedule.copy(schedule));
                 }
             }
-            f:
+            function:
             for (int i=0;i<localScheduleList.size();i++) {
                 for (int j=0;j<result.size();j++) {
                     if(i == localScheduleList.size()-1 && localScheduleList.get(i).getStartTimeId() == result.get(j).getStartTimeId() ){
-                        continue f;
+                        continue function;
                     }else if (localScheduleList.get(i).getStartTimeId() == result.get(j).getStartTimeId() ) {
                         if (localScheduleList.get(i+1).getEndTime().contains(result.get(j).getEndTime())) {
                                 Schedule schedule1 = Schedule.copy(result.get(j));
@@ -182,11 +182,9 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                                 result.add(schedule1);
                                 result.get(j).setEndTime(localScheduleList.get(i).getEndTime());
                         }
-                        continue f;
+                        continue function;
                     }
-
                 }
-
                 result.add(localScheduleList.get(i));
             }
 
