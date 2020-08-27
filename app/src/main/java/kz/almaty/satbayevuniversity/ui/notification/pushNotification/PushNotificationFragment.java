@@ -52,10 +52,10 @@ public class PushNotificationFragment extends Fragment {
 
             pushNotificationViewModel.getPushNotification();
             pushNotificationViewModel.getNotificationLiveData().observe(this, new Observer<List<PushNotification>>() {
-                        @Override
-                        public void onChanged(List<PushNotification> pushNotifications) {
-                            pushNotificationAdapter.setNotificationList(pushNotifications);
-                        }
+                @Override
+                public void onChanged(List<PushNotification> pushNotifications) {
+                    pushNotificationAdapter.setNotificationList(pushNotifications);
+                }
             });
             fragmentPushNotificationBinding.setViewModel(pushNotificationViewModel);
 

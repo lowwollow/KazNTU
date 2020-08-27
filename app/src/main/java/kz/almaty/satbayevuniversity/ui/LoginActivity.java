@@ -131,7 +131,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         login();
-
     }
 
     private void login() {
@@ -141,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
             if (accountEntity != null) {
                 doIntent(accountEntity);
             } else {
+
                 loginBtn.setOnClickListener(v -> {
                     if (connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                             connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
@@ -153,6 +153,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onPostResume() {
         super.onPostResume();
@@ -187,10 +188,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void hideSoftKeyboard() {
         View view = this.getCurrentFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (view !=null){
+        if (view != null){
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+    // пока не нужно
     public void startAdmissionLoginActivity(View view){
         Intent intent = new Intent(this, kz.almaty.satbayevuniversity.ui.admission.login.LoginActivity.class);
         startActivity(intent);

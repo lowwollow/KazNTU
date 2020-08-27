@@ -15,6 +15,8 @@ import com.onesignal.OneSignal;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import io.sentry.android.core.SentryAndroid;
+import io.sentry.core.SentryLevel;
 import kz.almaty.satbayevuniversity.ui.LoginActivity;
 
 public class App extends Application {
@@ -38,6 +40,18 @@ public class App extends Application {
         builder.unsubscribeWhenNotificationsAreDisabled(true);
         builder.setNotificationOpenedHandler(new NotificationHandler());
         builder.init();
+
+
+        SentryAndroid.init(this, options -> {
+            // Add a callback that will be used before the event is sent to Sentry.
+            // With this callback, you can modify the event or, when returning null, also discard the event.
+            options.setBeforeSend((event, hint) -> {
+                if (SentryLevel.DEBUG.equals(event.getLevel()))
+                    return null;
+                else
+                    return event;
+            });
+        });
 //        createPushNotification("test notification");
 
     }

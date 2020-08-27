@@ -32,7 +32,8 @@ public class TranscriptAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public int getItemViewType(int position) {
         if (semestersItems.get(position) instanceof SemestersItem)
             return 0;
-        else return 1;
+        else
+            return 1;
     }
 
     @NonNull
@@ -49,12 +50,12 @@ public class TranscriptAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                 return new ViewHolder2(transcript2);
         }
-            return null;
+        return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(getItemViewType(position) == 0){
+        if (getItemViewType(position) == 0){
             ViewHolder viewHolder = (ViewHolder) holder;
             Object semestersItem = semestersItems.get(position);
             viewHolder.transcriptItemBinding.setTranscript((SemestersItem) semestersItem);
@@ -80,7 +81,6 @@ public class TranscriptAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void transcriptClicked(SemestersItem semestersItem) {
         TranscriptDialogFragment transcriptDialogFragment = new TranscriptDialogFragment();
         Storage.getInstance().setSemestersItem(semestersItem); //исправить на bundle, но пока лень
-        System.out.println("#####Storage semesterItem: " + semestersItem);
         HomeActivity activity = (HomeActivity) context;
         transcriptDialogFragment.show(activity.getSupportFragmentManager(), "transcriptDialogFragment");
     }
