@@ -145,4 +145,8 @@ dependencies {
 
     //Senty
     implementation 'io.sentry:sentry-android:2.3.0'
+
+    //espresso testing
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+
 }

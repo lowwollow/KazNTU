@@ -31,7 +31,7 @@ public class PushNotificationViewModel extends ViewModel {
     public void getPushNotification(){
         loadRv.set(true);
         isEmpty.set(false);
-        if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+        if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
             getPushNotificationFromServer();
         }else{
             loadRv.set(false);
@@ -55,7 +55,7 @@ public class PushNotificationViewModel extends ViewModel {
             }
         });
     }
-    public void removeItem(int position){
+    public void removeItem(int position) {
         loadRv.set(true);
         KaznituRetrofit.getApi().removePushNotification(position).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -69,6 +69,7 @@ public class PushNotificationViewModel extends ViewModel {
             }
         });
     }
+
     public LiveData<List<PushNotification>> getNotificationLiveData(){
         if(pushNotificationList == null){
             pushNotificationList = new MutableLiveData<>();

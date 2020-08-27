@@ -32,6 +32,7 @@ public class LevelDialog extends DialogFragment {
         builder.setView(dialogDegreeBinding.getRoot());
         return builder.create();
     }
+
     public void startRegistration(int levelId){
         dismiss();
         Intent i = new Intent(getContext(), RegistrationActivity.class);
