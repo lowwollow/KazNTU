@@ -3,6 +3,7 @@ package kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +31,13 @@ import org.threeten.bp.LocalDate;
 import org.threeten.bp.YearMonth;
 import org.threeten.bp.format.DateTimeFormatter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 
 import kz.almaty.satbayevuniversity.AuthViewModel;
 import kz.almaty.satbayevuniversity.R;
@@ -58,10 +63,10 @@ public class ScheduleFragment extends Fragment implements Cloneable{
     private RecyclerView recyclerView;
     private ConstraintLayout emptyConstraint;
     FragmentScheduleBinding scheduleFragmentBinding;
-    private int i=0;
-
+    private int i = 0;
     private DateTimeFormatter dayOfMonthFormatter = DateTimeFormatter.ofPattern("d");
     private DateTimeFormatter dayOfWeekFormatter = DateTimeFormatter.ofPattern("EE");
+
     public ScheduleFragment() {
     }
 
@@ -76,7 +81,6 @@ public class ScheduleFragment extends Fragment implements Cloneable{
         View view = scheduleFragmentBinding.getRoot();
         emptyConstraint = view.findViewById(R.id.emptyConstraint);
         calendarView =  view.findViewById(R.id.weekCalendar);
-
         return view;
     }
 
@@ -146,7 +150,9 @@ public class ScheduleFragment extends Fragment implements Cloneable{
 
     private void setDateSchedule(LocalDate date) {
         mViewModel.getScheduleLiveData().observe(this, scheduleList -> {
-
+            Date dt = Calendar.getInstance().getTime();
+            int hours = dt.getHours();
+            int minutes = dt.getMinutes();
             ArrayList<Schedule> result = new ArrayList<>();
             localScheduleList = new ArrayList<>(Arrays.asList(
                     new Schedule("7:50", "8:40", 1),
@@ -170,43 +176,46 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                 }
             }
             function:
-            for (int i=0;i<localScheduleList.size();i++) {
-                for (int j=0;j<result.size();j++) {
-                    if(i == localScheduleList.size()-1 && localScheduleList.get(i).getStartTimeId() == result.get(j).getStartTimeId() ){
-                        continue function;
-                    }else if (localScheduleList.get(i).getStartTimeId() == result.get(j).getStartTimeId() ) {
-                        if (localScheduleList.get(i+1).getEndTime().contains(result.get(j).getEndTime())) {
-                                Schedule schedule1 = Schedule.copy(result.get(j));
-                                schedule1.setStartTime(localScheduleList.get(i + 1).getStartTime());
-                                schedule1.setStartTimeId(result.get(j).getStartTimeId() + 2);
-                                result.add(schedule1);
-                                result.get(j).setEndTime(localScheduleList.get(i).getEndTime());
+                for (int i = 0; i < localScheduleList.size(); i++) {
+                    for (int j = 0;j < result.size(); j++) {
+                        if (i == localScheduleList.size()-1 && localScheduleList.get(i).getStartTimeId() == result.get(j).getStartTimeId()){
+                            continue function;
+                        }else if (localScheduleList.get(i).getStartTimeId() == result.get(j).getStartTimeId()) {
+                            if (localScheduleList.get(i+1).getEndTime().contains(result.get(j).getEndTime())) {
+                                    Schedule schedule1 = Schedule.copy(result.get(j));
+                                    schedule1.setStartTime(localScheduleList.get(i + 1).getStartTime());
+                                    schedule1.setStartTimeId(result.get(j).getStartTimeId() + 2);
+                                    result.add(schedule1);
+                                    result.get(j).setEndTime(localScheduleList.get(i).getEndTime());
+                            }
+                            continue function;
                         }
-                        continue function;
+                    }
+                    result.add(localScheduleList.get(i));
+                }
+
+                Collections.sort(result, Schedule.CompareId);
+                for (Schedule schedule : result) {
+                    String scheduleString = schedule.getStartTime();
+                    char ch = (char) scheduleString.indexOf(1);
+                    Log.d("chars", "setDateSchedule: " + ch);
+                    if (schedule.getDayOfWeekId() == 0){
+                        i++;
                     }
                 }
-                result.add(localScheduleList.get(i));
-            }
-
-            Collections.sort(result, Schedule.CompareId);
-
-            for (Schedule schedule : result) {
-                if (schedule.getDayOfWeekId() == 0){
-                    i++;
+                if(i == 14){
+                    emptyConstraint.setVisibility(View.VISIBLE);
+                } else{
+                    emptyConstraint.setVisibility(View.INVISIBLE);
                 }
-                System.out.println(schedule);
-            }
-            if(i==14){
-                emptyConstraint.setVisibility(View.VISIBLE);
-            } else{
-                emptyConstraint.setVisibility(View.INVISIBLE);
-            }
-            scheduleAdapter.setScheduleList(result);
-            i = 0;
+                scheduleAdapter.setScheduleList(result);
+                i = 0;
 
         });
 
     }
+
+
     private void setCalendar(){
         class DayViewContainer extends ViewContainer {
             CalendarDay day;
@@ -219,7 +228,7 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                     currentDay = day.getDate();
                     setDateSchedule(currentDay);
                     calendarView.notifyDateChanged(selectedDate);
-                    if(oldDate!=null)
+                    if(oldDate != null)
                         calendarView.notifyDateChanged(oldDate);
                 });
             }

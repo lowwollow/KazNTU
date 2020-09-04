@@ -36,6 +36,7 @@
             tools:text="8:50-9:50"
             android:layout_marginTop="5dp"/>
 
+
         <TextView
             app:layout_constraintBottom_toTopOf="@+id/scheduleInstructorName"
             android:id="@+id/scheduleCourseTitle"

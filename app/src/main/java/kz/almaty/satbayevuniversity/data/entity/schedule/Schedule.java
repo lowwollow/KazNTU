@@ -67,7 +67,7 @@ public class Schedule implements Serializable{
 	}
 
 	public Schedule() {}
-	public static Schedule copy( Schedule other ) {
+	public static Schedule copy(Schedule other) {
 		Schedule newSchedule = new Schedule();
 		newSchedule.durationHours = other.durationHours;
 		newSchedule.endTimeId = other.endTimeId;
@@ -87,6 +87,7 @@ public class Schedule implements Serializable{
 		newSchedule.primaryId = other.primaryId;
 		return newSchedule;
 	}
+
 	@Ignore
 	public Schedule(int primaryId, int durationHours, int endTimeId, String instructorName, String courseCode, int dayOfWeekId, int groupNumber, String roomId, String courseTitle, int classId, int startTimeId, String startTime, String endTime, String roomTitle, int classType, int instructorId) {
 		this.durationHours = durationHours;
@@ -242,13 +243,10 @@ public class Schedule implements Serializable{
 		}
 
 	public static Comparator<Schedule> CompareId = (s1, s2) -> {
-
 		int Id1 = s1.getStartTimeId();
 		int Id2 = s2.getStartTimeId();
-
 		/*For ascending order*/
 		return Id1-Id2;
-
 	};
 
 	@Override
