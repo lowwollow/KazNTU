@@ -10,7 +10,7 @@ public class Storage {
     private static Storage storage;
 
     public static Storage getInstance(){
-        if( storage == null){
+        if(storage == null){
             storage = new Storage();
         }
         return storage;

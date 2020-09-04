@@ -10,6 +10,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,13 +52,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public static final String FRAGMENT_THIRD = "FRAGMENT_THIRD";
     private float scaleFactor = 5f;
     public NavigationView navigationView;
-
     public DrawerLayout drawer;
-
     public AuthViewModel authViewModel;
-
     public ActivityHomeBinding activityHomeBinding;
     private NavHeaderBinding navHeaderBinding;
+    public SharedPreferences sPref;
     public HomeActivity() {
     }
 
@@ -74,7 +73,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupBindings(savedInstanceState);
-
         SharedPrefCache sharedPrefCache = new SharedPrefCache();
         String sharedString = sharedPrefCache.getStr("language",this);
         Gson gson = new Gson();
@@ -84,23 +82,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             getMenuText();
         } catch (IllegalStateException | JsonSyntaxException ignored){}
 
-
         showWeSettedPushNoficationDialog();
     }
 
     public void getMenuText(){
         Menu menu = navigationView.getMenu();
-        MenuItem academicProgress = menu.findItem(R.id.academicProgress);
-        academicProgress.setTitle(R.string.academicProgress);
+        if (menu != null) {
+            MenuItem academicProgress = menu.findItem(R.id.academicProgress);
+            academicProgress.setTitle(R.string.academicProgress);
 
-        MenuItem umkd = menu.findItem(R.id.umkd);
-        umkd.setTitle(R.string.umkd);
+            MenuItem umkd = menu.findItem(R.id.umkd);
+            umkd.setTitle(R.string.umkd);
 
-        MenuItem settings = menu.findItem(R.id.settings);
-        settings.setTitle(R.string.settings);
+            MenuItem settings = menu.findItem(R.id.settings);
+            settings.setTitle(R.string.settings);
 
-        MenuItem logout = menu.findItem(R.id.logout);
-        logout.setTitle(R.string.btn_login_exit);
+            MenuItem logout = menu.findItem(R.id.logout);
+            logout.setTitle(R.string.btn_login_exit);
+        }
     }
 
     private void setupBindings(Bundle savedInstanceState) {
@@ -117,11 +116,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Point size = new Point();
         display.getSize(size);
         int height = size.y;
-        params.topMargin = height/6;
+        params.topMargin = height / 6;
 
         navHeaderBinding.headerLayout.setLayoutParams(params);
 
         navHeaderBinding.setAccountEntity(Storage.getInstance());
+        //Log.d("main window", "setupBindings: " + Storage.getInstance());
         authViewModel.getImageUrl();
 
         drawer = findViewById(R.id.drawer);
@@ -175,22 +175,33 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 exit();
                 break;
         }
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     public void exit(){
+        clearSharedPreferences();
         authViewModel.clearDB();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
-
+    public void clearSharedPreferences() {
+        sPref = getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putString("MyToken", "");
+        editor.putString("Username", "");
+        editor.putString("FullName", "");
+        editor.apply();
+    }
     private void replaceFragment(Fragment newFragment,  int container) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(container, newFragment).commit();
     }
+
     boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -202,14 +213,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
             this.doubleBackToExitPressedOnce = true;
             Toast.makeText(this, getResources().getString(R.string.click_back_again), Toast.LENGTH_SHORT).show();
-
-            new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, 2000);
+            new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
         }
     }
 
     public void OpenToggleNavMenu() {
         drawer.openDrawer(GravityCompat.START);
     }
+
     private void showWeSettedPushNoficationDialog(){
         SharedPreferences sharedPreferences = getSharedPreferences("FIRST_RUN",MODE_PRIVATE);
         boolean first_run = sharedPreferences.getBoolean("FIRST_RUN",false);

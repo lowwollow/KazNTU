@@ -51,7 +51,6 @@ public class ViewPagerFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager){
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
-
         viewPagerAdapter.addFragment(new GradeFragment(), "Аттестация");
         viewPagerAdapter.addFragment(new TranscriptFragment(), "Транскрипт");
         viewPager.setAdapter(viewPagerAdapter);

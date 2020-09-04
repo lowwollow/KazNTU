@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.onesignal.OSNotificationOpenResult;
@@ -32,8 +33,9 @@ public class App extends Application {
         AndroidThreeTen.init(this);
         instance = this;
         database = Room.databaseBuilder(this, AppDatabase.class, "database")
-                .fallbackToDestructiveMigration()
+                .setJournalMode(RoomDatabase.JournalMode.AUTOMATIC)
                 .build();
+
         mContext = getApplicationContext();
         OneSignal.Builder builder = OneSignal.startInit(this);
         builder.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification);
@@ -80,7 +82,7 @@ public class App extends Application {
         public void notificationOpened(OSNotificationOpenResult result) {
             SharedPreferences.Editor editor = getSharedPreferences("one_signal_notification_handler",Context.MODE_PRIVATE).edit();
             JSONObject data = result.notification.payload.additionalData;
-            if(data !=null && data.has("typeId")){
+            if(data != null && data.has("typeId")){
                 editor.putInt("typeId",data.optInt("typeId"));
                 editor.commit();
             }

@@ -3,6 +3,7 @@ package kz.almaty.satbayevuniversity.data.network;
 import java.util.List;
 import java.util.Map;
 
+import kz.almaty.satbayevuniversity.data.User;
 import kz.almaty.satbayevuniversity.data.entity.AccountEntity;
 import kz.almaty.satbayevuniversity.data.entity.academic.ResponseJournal;
 import kz.almaty.satbayevuniversity.data.entity.grade.attestation.Attestation;
@@ -25,7 +26,7 @@ import retrofit2.http.Query;
 public interface MyApi {
 
     @POST("token")
-    Call<AccountEntity> onLogin(@Body RequestBody requestBody);
+    Call<User> onLogin(@Body RequestBody requestBody);
 
     @GET("api/User/Photo")
     Call<ResponseBody> updatePhoto();

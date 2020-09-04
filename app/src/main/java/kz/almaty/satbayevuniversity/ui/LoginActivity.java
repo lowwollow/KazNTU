@@ -2,6 +2,7 @@ package kz.almaty.satbayevuniversity.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -16,10 +17,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.esotericsoftware.kryo.NotNull;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.concurrent.ArrayBlockingQueue;
@@ -34,7 +37,9 @@ import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.AccountDao;
 import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.data.AppDatabase;
+import kz.almaty.satbayevuniversity.data.User;
 import kz.almaty.satbayevuniversity.data.entity.AccountEntity;
+import kz.almaty.satbayevuniversity.data.entity.admission.registration.Account;
 import kz.almaty.satbayevuniversity.databinding.ActivityLoginBinding;
 import kz.almaty.satbayevuniversity.utils.Storage;
 
@@ -45,12 +50,14 @@ public class LoginActivity extends AppCompatActivity {
     private boolean showPsw = false;
     private AppDatabase db = App.getInstance().getDatabase();
     private AccountDao accountDao = db.accountDao();
-    ConnectivityManager connManager ;
+    private ConnectivityManager connManager ;
     private TextInputEditText psw;
     private ImageView img;
     private BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(3);
     private ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 1, 1,
             TimeUnit.SECONDS, queue);
+    private SharedPreferences sPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +91,9 @@ public class LoginActivity extends AppCompatActivity {
             authViewModel.initAuth();
         }
 
-        authViewModel.getUserMutableLiveData().observe(this, accountEntity -> doIntent(accountEntity));
+
+
+        authViewModel.getUserMutableLiveData().observe(this, this::savePreference);
 
         authViewModel.toastGetMessage().observe(this, aBoolean -> {
             if (aBoolean) {
@@ -136,23 +145,48 @@ public class LoginActivity extends AppCompatActivity {
     private void login() {
         connManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         executor.execute(() -> {
-            AccountEntity accountEntity = accountDao.getAccountEntity();
-            if (accountEntity != null) {
+
+            User accountEntity = loadPreference();
+            if (accountEntity.access_token != null && accountEntity.access_token.length() > 2) {
                 doIntent(accountEntity);
             } else {
-
-                loginBtn.setOnClickListener(v -> {
-                    if (connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                            connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-                        loginBtn.startAnimation();
-                        authViewModel.getInformation();
-                    } else
-                        Toast.makeText(this, "Отсутствует подключение к интернету", Toast.LENGTH_SHORT).show();
-                    hideSoftKeyboard();
-                });
+                    loginBtn.setOnClickListener(v -> {
+                        if (connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                                connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                            loginBtn.startAnimation();
+                            authViewModel.getInformation();
+                        } else {
+                            Toast.makeText(this, "Отсутствует подключение к интернету", Toast.LENGTH_SHORT).show();
+                        }
+                        hideSoftKeyboard();
+                    });
             }
         });
     }
+
+
+    public void savePreference(User accountEntity){
+        sPref = getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putString("MyToken", accountEntity.access_token);
+        editor.putString("Username", accountEntity.username);
+        editor.putString("FullName", accountEntity.fullName);
+        editor.apply();
+        doIntent(accountEntity);
+    }
+
+
+    public User loadPreference(){
+        sPref = getSharedPreferences("MyPref", MODE_PRIVATE);
+        //Log.d("taggg", "loadPreference: "+"asdfff");
+        String savedToken = sPref.getString("MyToken", "");
+        String userName = sPref.getString("Username","");
+        String fullName = sPref.getString("FullName","");
+        User user = new User(savedToken, userName, fullName);
+        return user;
+    }
+
+
 
     @Override
     protected void onPostResume() {
@@ -169,16 +203,18 @@ public class LoginActivity extends AppCompatActivity {
         psw.setSelection(psw.getText().toString().length());
     }
 
-
-    void doIntent(AccountEntity accountEntity){
-        Storage.getInstance().setToken(accountEntity.getAccess_token());
-        Storage.getInstance().setAccountFullName(accountEntity.getFullName());
-        Storage.getInstance().setUsername(accountEntity.getUsername());
+    void doIntent(User accountEntity){
+        Storage.getInstance().setToken(accountEntity.access_token);
+        Storage.getInstance().setAccountFullName(accountEntity.fullName);
+        Storage.getInstance().setUsername(accountEntity.username);
         Intent intent_name = new Intent(getApplicationContext(), HomeActivity.class);
         intent_name.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent_name);
         finish();
     }
+
+//
+
 
     private void revertBtn(){
         loginBtn.revertAnimation();

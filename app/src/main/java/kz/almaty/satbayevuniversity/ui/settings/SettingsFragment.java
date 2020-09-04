@@ -25,6 +25,7 @@ import com.google.gson.JsonSyntaxException;
 import kz.almaty.satbayevuniversity.AuthViewModel;
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.entity.Language;
+import kz.almaty.satbayevuniversity.data.entity.admission.education_info.Settings;
 import kz.almaty.satbayevuniversity.databinding.FragmentSettingsBinding;
 import kz.almaty.satbayevuniversity.ui.HomeActivity;
 import kz.almaty.satbayevuniversity.ui.LoginActivity;
@@ -42,6 +43,8 @@ public class SettingsFragment extends Fragment {
     public SettingsFragment(Context context) {
         this.context = context;
     }
+
+    public SettingsFragment () {}
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

@@ -1,5 +1,8 @@
 package kz.almaty.satbayevuniversity.data.network;
 
+import android.content.SharedPreferences;
+
+import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.utils.Storage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,15 +17,16 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class KaznituRetrofit {
     private static Retrofit retrofit;
     private static final String BASE_URL = "http://ssomobile.satbayev.university/";
+    private SharedPreferences sPref;
 
     public static MyApi getApi(){
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+        Gson gson = new GsonBuilder().setLenient().create();
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -33,7 +37,7 @@ public class KaznituRetrofit {
                     @Override
                     public okhttp3.Response intercept(Chain chain) throws IOException {
                         Request newRequest = chain.request().newBuilder()
-                                .addHeader("Authorization", "Bearer " + Storage.getInstance().getToken())
+                                .addHeader("Authorization", "Bearer " + App.getContext().getSharedPreferences("MyPref", MODE_PRIVATE).getString("MyToken",""))
                                 .build();
                         return chain.proceed(newRequest);
                     }

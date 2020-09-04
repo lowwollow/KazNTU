@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
@@ -33,6 +34,7 @@ import org.threeten.bp.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Objects;
 
 import kz.almaty.satbayevuniversity.AuthViewModel;
 import kz.almaty.satbayevuniversity.R;
@@ -58,12 +60,12 @@ public class ScheduleFragment extends Fragment implements Cloneable{
     private RecyclerView recyclerView;
     private ConstraintLayout emptyConstraint;
     FragmentScheduleBinding scheduleFragmentBinding;
-    private int i=0;
+    private int i = 0;
 
     private DateTimeFormatter dayOfMonthFormatter = DateTimeFormatter.ofPattern("d");
     private DateTimeFormatter dayOfWeekFormatter = DateTimeFormatter.ofPattern("EE");
-    public ScheduleFragment() {
-    }
+
+    public ScheduleFragment() {}
 
     public static ScheduleFragment newInstance() {
         return new ScheduleFragment();
@@ -76,7 +78,6 @@ public class ScheduleFragment extends Fragment implements Cloneable{
         View view = scheduleFragmentBinding.getRoot();
         emptyConstraint = view.findViewById(R.id.emptyConstraint);
         calendarView =  view.findViewById(R.id.weekCalendar);
-
         return view;
     }
 
@@ -98,8 +99,12 @@ public class ScheduleFragment extends Fragment implements Cloneable{
 
         mViewModel.getSchedule();
         setDateSchedule(currentDay);
-
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.schedule);
+//        if (getActivity().getActionBar() != null) {
+//            Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getActionBar()).setTitle(R.string.schedule);
+//        }
+        if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.schedule);
+        }
         scheduleFragmentBinding.scheduleRecyclerView.setNestedScrollingEnabled(false);
 
         //swipe weekCalendar
@@ -114,6 +119,7 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                 calendarView.notifyDateChanged(selectedDate);
                 calendarView.scrollToDate(currentDay);
             }
+
             public void onSwipeLeft() {
                 oldDate = currentDay;
                 currentDay = currentDay.plusDays(1);

@@ -9,6 +9,7 @@ public class AccountEntity {
     private String access_token;
     private String username;
     private String fullName;
+
     @PrimaryKey
     private int entrantId;
     private String language;

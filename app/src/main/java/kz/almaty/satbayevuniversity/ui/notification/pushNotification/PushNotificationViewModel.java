@@ -3,6 +3,7 @@ package kz.almaty.satbayevuniversity.ui.notification.pushNotification;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.LiveData;
@@ -21,6 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PushNotificationViewModel extends ViewModel {
+
     public ObservableBoolean loadRv = new ObservableBoolean();
     public ObservableBoolean isEmpty = new ObservableBoolean();
     MutableLiveData<List<PushNotification>> pushNotificationList = new MutableLiveData<>();
@@ -28,6 +30,7 @@ public class PushNotificationViewModel extends ViewModel {
 
     private ConnectivityManager connManager = (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
+
     public void getPushNotification(){
         loadRv.set(true);
         isEmpty.set(false);
@@ -43,12 +46,14 @@ public class PushNotificationViewModel extends ViewModel {
             @Override
             public void onResponse(Call<List<PushNotification>> call, Response<List<PushNotification>> response) {
                 listOfPushNotification = response.body();
-                assert listOfPushNotification != null;
-                isEmpty.set(listOfPushNotification.isEmpty());
-                pushNotificationList.setValue(listOfPushNotification);
-                loadRv.set(false);
-            }
+                //Changed
+                if (listOfPushNotification != null) {
+                        isEmpty.set(listOfPushNotification.isEmpty());
+                        pushNotificationList.setValue(listOfPushNotification);
+                        loadRv.set(false);
+                }
 
+            }
             @Override
             public void onFailure(Call<List<PushNotification>> call, Throwable t) {
                 loadRv.set(false);
@@ -62,7 +67,6 @@ public class PushNotificationViewModel extends ViewModel {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 loadRv.set(false);
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 loadRv.set(false);

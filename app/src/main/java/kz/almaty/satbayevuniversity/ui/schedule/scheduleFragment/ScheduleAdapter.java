@@ -27,9 +27,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     private List<Schedule> scheduleList = new ArrayList<>();
     private ItemScheduleBinding scheduleItemBinding;
     private int[] colors = App.getContext().getResources().getIntArray(R.array.colors);
-    Context context ;
+    private Context context;
     private ConnectivityManager connManager = (ConnectivityManager)App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
+
+    public ScheduleAdapter () {}
     public ScheduleAdapter(Context context) {
         this.context = context;
     }

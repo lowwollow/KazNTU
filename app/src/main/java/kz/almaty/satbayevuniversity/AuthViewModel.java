@@ -1,5 +1,6 @@
 package kz.almaty.satbayevuniversity;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -24,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 import kz.almaty.satbayevuniversity.data.AccountDao;
 import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.data.AppDatabase;
+import kz.almaty.satbayevuniversity.data.User;
 import kz.almaty.satbayevuniversity.data.entity.AccountEntity;
 import kz.almaty.satbayevuniversity.data.entity.LoginFields;
 import kz.almaty.satbayevuniversity.data.network.KaznituRetrofit;
@@ -34,11 +36,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class AuthViewModel extends ViewModel {
+
     public ObservableField<String> password = new ObservableField<>();
     public ObservableField<String> username = new ObservableField<>();
 
-    private MutableLiveData<AccountEntity> userMutableLiveData;
+    private MutableLiveData<User> userMutableLiveData;
     private MutableLiveData<Bitmap> drawableMutableLiveData;
     private MutableLiveData<Boolean> getMessage = new MutableLiveData<>();
     private MutableLiveData<Integer> handleError;
@@ -69,41 +74,39 @@ public class AuthViewModel extends ViewModel {
             getMessage.setValue(true);
         }
         else {
-        LoginFields loginFields = new LoginFields(username.get(), password.get());
-        final RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("username", loginFields.getUsername())
-                .addFormDataPart("password", loginFields.getPassword()).build();
+            LoginFields loginFields = new LoginFields(username.get(), password.get());
+            final RequestBody requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("username", loginFields.getUsername())
+                    .addFormDataPart("password", loginFields.getPassword()).build();
 
-        KaznituRetrofit.getApi().onLogin(requestBody).enqueue(new Callback<AccountEntity>() {
-            @Override
-            public void onResponse(Call<AccountEntity> call, final Response<AccountEntity> response) {
-                switch (response.code()) {
-                    case 200:
-                        handleError.setValue(200);
-                        addAccount(response.body());
-                        userMutableLiveData.setValue(response.body());
-                        break;
-                    case 404:
-                        handleError.setValue(404);
-                        break;
-                    case 400:
-                        handleError.setValue(400);
-                        break;
-                    case 500:
-                        handleError.setValue(500);
-                        break;
+            KaznituRetrofit.getApi().onLogin(requestBody).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, final Response<User> response) {
+                    switch (response.code()) {
+                        case 200:
+                            handleError.setValue(200);
+                            //addAccount(response.body());
+                            userMutableLiveData.setValue(response.body());
+                            break;
+                        case 404:
+                            handleError.setValue(404);
+                            break;
+                        case 400:
+                            handleError.setValue(400);
+                            break;
+                        case 500:
+                            handleError.setValue(500);
+                            break;
+                    }
                 }
-            }
 
             @Override
-            public void onFailure(Call<AccountEntity> call, Throwable t) {
-                if (t instanceof SocketTimeoutException)
-                {
+            public void onFailure(Call<User> call, Throwable t) {
+                if (t instanceof SocketTimeoutException) {
                     handleTimeout.setValue(1);
                 }
-                else if (t instanceof IOException)
-                {
+                else if (t instanceof IOException) {
                     handleTimeout.setValue(2);
                 }
                 else if (t instanceof UnknownHostException){
@@ -115,7 +118,7 @@ public class AuthViewModel extends ViewModel {
 
     }
 
-    public MutableLiveData<AccountEntity> getUserMutableLiveData(){
+    public MutableLiveData<User> getUserMutableLiveData(){
         if(userMutableLiveData == null){
             userMutableLiveData = new MutableLiveData<>();
         }
@@ -170,12 +173,13 @@ public class AuthViewModel extends ViewModel {
                 .into(imageView);
     }
 
-    private void addAccount(AccountEntity accountEntity){
-        executor.execute(() -> accountDao.insert(accountEntity));
-    }
+//    private void addAccount(User accountEntity){
+//        executor.execute(() -> accountDao.insert(accountEntity));
+//    }
 
     public void clearDB() {
         Runnable r = () -> {
+            clearSharedPreferences();
             accountDao.deleteResponseJournal();
             accountDao.delete();
             accountDao.deleteSchedule();
@@ -186,6 +190,14 @@ public class AuthViewModel extends ViewModel {
             accountDao.deleteNotification();
         };
         executor.execute(r);
+    }
+    public void clearSharedPreferences() {
+        SharedPreferences sPref = App.getInstance().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putString("MyToken", "");
+        editor.putString("Username", "");
+        editor.putString("FullName", "");
+        editor.apply();
     }
 
 }

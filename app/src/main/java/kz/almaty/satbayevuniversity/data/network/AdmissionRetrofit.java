@@ -45,8 +45,9 @@ public class AdmissionRetrofit {
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }
-        return (url==1? retrofit1.create(AdmissionApi.class) : retrofit2.create(AdmissionApi.class));
+        return (url == 1 ? retrofit1.create(AdmissionApi.class) : retrofit2.create(AdmissionApi.class));
     }
+
     private static OkHttpClient getOkHttpClient(int url){
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -57,7 +58,7 @@ public class AdmissionRetrofit {
                     String language = sharedPreferences.getString("language","ru");
 
                     Request newRequest = chain.request().newBuilder()
-                            .addHeader("Cookie",url==1 ? String.format("_culture=%s",language) : Storage.getInstance().getCookies())
+                            .addHeader("Cookie",url == 1 ? String.format("_culture=%s",language) : Storage.getInstance().getCookies())
                             .build();
                     return chain.proceed(newRequest);
                 })

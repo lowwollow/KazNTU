@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import java.util.Objects;
+
 import kz.almaty.satbayevuniversity.AuthViewModel;
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.databinding.FragmentAcademicBinding;
@@ -62,7 +64,11 @@ public class AcademicFragment extends Fragment {
         authViewModel = ViewModelProviders.of(this).get(AuthViewModel.class);
         academicFragmentBinding.setAcademicViewModel(mViewModel);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.journal);
+        // Изменил это
+        if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.journal);
+        }
+
 
 //        mViewModel.registerPlayerId();
 

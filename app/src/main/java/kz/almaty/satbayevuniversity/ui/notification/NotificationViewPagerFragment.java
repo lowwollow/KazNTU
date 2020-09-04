@@ -25,12 +25,14 @@ public class NotificationViewPagerFragment extends Fragment {
     public static NotificationViewPagerFragment newInstance() {
         return new NotificationViewPagerFragment();
     }
+
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState){
         View view = layoutInflater.inflate(R.layout.fragment_view_pager_schedule,container,false);
         viewPager = view.findViewById(R.id.viewPagerSchedule);
         tabLayout = view.findViewById(R.id.tabLayoutSchedule);
         return view;
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -57,7 +59,8 @@ public class NotificationViewPagerFragment extends Fragment {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onPageScrollStateChanged(int state){
+
             }
         });
     }

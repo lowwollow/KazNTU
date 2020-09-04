@@ -48,8 +48,6 @@ public class PushNotificationFragment extends Fragment {
             fragmentPushNotificationBinding.pushNotificationRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
             fragmentPushNotificationBinding.pushNotificationRecyclerView.setAdapter(pushNotificationAdapter);
 
-
-
             pushNotificationViewModel.getPushNotification();
             pushNotificationViewModel.getNotificationLiveData().observe(this, new Observer<List<PushNotification>>() {
                 @Override

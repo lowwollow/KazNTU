@@ -32,23 +32,24 @@ public class StudentsListFragment extends DialogFragment {
     StudentListAdapter studentListAdapter;
     StudentsListViewModel viewModel;
     Schedule schedule;
+
     public StudentsListFragment(Schedule schedule){
         this.schedule = schedule;
     }
-    @NonNull
 
+    public StudentsListFragment () {}
 
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         fragmentStudentsListBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()),R.layout.fragment_students_list,null,false);
         fragmentStudentsListBinding.setSchedule(schedule);
         fragmentStudentsListBinding.closeImageView.setOnClickListener(v -> {
-            if(getDialog() !=null){
+            if(getDialog() != null){
                 getDialog().dismiss();
             }
         });
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View view = fragmentStudentsListBinding.getRoot();
         studentListAdapter = new StudentListAdapter(getActivity());
         fragmentStudentsListBinding.studentListRecyclerView.setAdapter(studentListAdapter);
