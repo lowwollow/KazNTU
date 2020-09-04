@@ -34,6 +34,7 @@ public class App extends Application {
         instance = this;
         database = Room.databaseBuilder(this, AppDatabase.class, "database")
                 .setJournalMode(RoomDatabase.JournalMode.AUTOMATIC)
+                .fallbackToDestructiveMigration()
                 .build();
 
         mContext = getApplicationContext();
