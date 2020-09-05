@@ -228,7 +228,7 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                     currentDay = day.getDate();
                     setDateSchedule(currentDay);
                     calendarView.notifyDateChanged(selectedDate);
-                    if(oldDate != null)
+                    if (oldDate != null)
                         calendarView.notifyDateChanged(oldDate);
                 });
             }

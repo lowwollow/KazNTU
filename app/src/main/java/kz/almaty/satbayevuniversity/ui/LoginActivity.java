@@ -140,7 +140,6 @@ public class LoginActivity extends AppCompatActivity {
             if (accountEntity != null) {
                 doIntent(accountEntity);
             } else {
-
                 loginBtn.setOnClickListener(v -> {
                     if (connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                             connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
@@ -163,8 +162,10 @@ public class LoginActivity extends AppCompatActivity {
     private void showPassword(boolean isSet){
         if (isSet){
             psw.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            img.setImageResource(R.drawable.ic_visibility_off_24px);
         }else{
             psw.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            img.setImageResource(R.drawable.ic_visibility_24px);
         }
         psw.setSelection(psw.getText().toString().length());
     }
