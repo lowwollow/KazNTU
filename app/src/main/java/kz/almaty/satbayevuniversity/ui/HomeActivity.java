@@ -90,6 +90,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     public void getMenuText(){
         Menu menu = navigationView.getMenu();
+
         MenuItem academicProgress = menu.findItem(R.id.academicProgress);
         academicProgress.setTitle(R.string.academicProgress);
 
@@ -117,7 +118,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Point size = new Point();
         display.getSize(size);
         int height = size.y;
-        params.topMargin = height/6;
+        params.topMargin = height / 6;
 
         navHeaderBinding.headerLayout.setLayoutParams(params);
 
@@ -143,6 +144,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 activityHomeBinding.fragmentContainer.setScaleY(1 - (slideOffset / scaleFactor));
             }
         };
+
         drawer.setDrawerElevation(0f);
         drawer.addDrawerListener(actionBarDrawerToggle);
 
@@ -190,19 +192,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(container, newFragment).commit();
     }
+
     boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        } else{
             if (doubleBackToExitPressedOnce) {
                 super.onBackPressed();
                 return;
             }
             this.doubleBackToExitPressedOnce = true;
             Toast.makeText(this, getResources().getString(R.string.click_back_again), Toast.LENGTH_SHORT).show();
-
             new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, 2000);
         }
     }
@@ -210,6 +213,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void OpenToggleNavMenu() {
         drawer.openDrawer(GravityCompat.START);
     }
+
     private void showWeSettedPushNoficationDialog(){
         SharedPreferences sharedPreferences = getSharedPreferences("FIRST_RUN",MODE_PRIVATE);
         boolean first_run = sharedPreferences.getBoolean("FIRST_RUN",false);

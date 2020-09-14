@@ -29,14 +29,11 @@ public class KaznituRetrofit {
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public okhttp3.Response intercept(Chain chain) throws IOException {
-                        Request newRequest = chain.request().newBuilder()
-                                .addHeader("Authorization", "Bearer " + Storage.getInstance().getToken())
-                                .build();
-                        return chain.proceed(newRequest);
-                    }
+                .addInterceptor(chain -> {
+                    Request newRequest = chain.request().newBuilder()
+                            .addHeader("Authorization", "Bearer " + Storage.getInstance().getToken())
+                            .build();
+                    return chain.proceed(newRequest);
                 })
                 .callTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(11, TimeUnit.SECONDS)

@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.umkd;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -52,7 +53,7 @@ public class UmkdAdapter extends RecyclerView.Adapter<UmkdAdapter.ViewHolder> im
 
     @Override
     public void umkdClicked(Umkd umkd) {
-        FileFragment fileFragment= new FileFragment();
+        FileFragment fileFragment = new FileFragment();
         Storage.getInstance().setCourseCode(umkd.getCourseCode());
         Storage.getInstance().setInstructorID(String.valueOf(umkd.getInstructorId()));
         HomeActivity activity = (HomeActivity) context;

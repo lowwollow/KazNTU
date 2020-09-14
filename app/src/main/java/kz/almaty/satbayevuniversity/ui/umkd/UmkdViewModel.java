@@ -3,6 +3,7 @@ package kz.almaty.satbayevuniversity.ui.umkd;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
@@ -63,7 +64,7 @@ public class UmkdViewModel extends ViewModel {
                     getEmptyBoolean.set(umkdList.isEmpty());
                     loadRv.set(false);
                 }
-             }
+            }
         });
     }
     public void getUmkdListFromServer(){
@@ -76,7 +77,7 @@ public class UmkdViewModel extends ViewModel {
                     loadRv.set(false);
                     if (!umkdList.equals(umkdListDB)) {
                         new Thread(() -> {
-                            update(umkdList);
+                                update(umkdList);
                         }).start();
                         umkdMutableLiveData.postValue(umkdList);
                     }

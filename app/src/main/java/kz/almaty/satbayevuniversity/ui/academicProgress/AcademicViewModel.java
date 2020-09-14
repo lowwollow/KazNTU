@@ -55,6 +55,7 @@ public class AcademicViewModel extends ViewModel {
             TimeUnit.SECONDS, queue);
     private ConnectivityManager connManager = (ConnectivityManager)App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
+
     void getJournal() {
         loadRv.set(true);
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
@@ -120,8 +121,6 @@ public class AcademicViewModel extends ViewModel {
                      if (t instanceof SocketTimeoutException) {
                          exception();
                      } else if (t instanceof IOException) {
-                         exception();
-                     } else if (t instanceof SocketException) {
                          exception();
                      }
                  }

@@ -43,7 +43,7 @@ public class StudentsListFragment extends DialogFragment {
         fragmentStudentsListBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()),R.layout.fragment_students_list,null,false);
         fragmentStudentsListBinding.setSchedule(schedule);
         fragmentStudentsListBinding.closeImageView.setOnClickListener(v -> {
-            if(getDialog() !=null){
+            if(getDialog() != null){
                 getDialog().dismiss();
             }
         });
@@ -60,7 +60,8 @@ public class StudentsListFragment extends DialogFragment {
 
         viewModel = ViewModelProviders.of(this).get(StudentsListViewModel.class);
 
-        viewModel.getStudentList(schedule.getClassId(),"ru");
+        if (viewModel != null)
+            viewModel.getStudentList(schedule.getClassId(),"ru");
 
         viewModel.getLiveData().observe(this, students -> {
             Collections.sort(students, new Comparator<Student>() {

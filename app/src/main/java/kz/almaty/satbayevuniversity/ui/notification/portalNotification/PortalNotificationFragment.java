@@ -44,7 +44,8 @@ public class PortalNotificationFragment extends Fragment {
         fragmentNotificationBinding.setNotification(mViewModel);
         mViewModel.getNotification();
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.notifications);
+        if (getActivity().getSupportFragmentManager() != null)
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.notifications);
 
         fragmentNotificationBinding.notificationRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         fragmentNotificationBinding.notificationRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));

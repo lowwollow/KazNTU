@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.umkd.filefragment.fileDataFragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import java.util.List;
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.entity.umkd.Course;
 import kz.almaty.satbayevuniversity.databinding.FragmentFileDataBinding;
+import kz.almaty.satbayevuniversity.ui.umkd.filefragment.FileViewModel;
 
 public class FileDataFragment extends Fragment {
 
@@ -29,6 +31,7 @@ public class FileDataFragment extends Fragment {
     private FragmentFileDataBinding fileDataFragmentBinding;
     private FileDataAdapter fileAdapter;
     private List<Course> courseList = new ArrayList<>();
+    private Course course = new Course();
     private Toolbar toolbar;
 
     public static FileDataFragment newInstance() {
@@ -42,7 +45,6 @@ public class FileDataFragment extends Fragment {
         View view = fileDataFragmentBinding.getRoot();
         toolbar = view.findViewById(R.id.toolbarFileData);
         getToolbar();
-
         return view;
     }
 
@@ -77,6 +79,7 @@ public class FileDataFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(FileDataViewModel.class);
 
         Bundle bundle = this.getArguments();
+
         if (bundle != null) {
             courseList = (List<Course>) bundle.getSerializable("FileDataFragment");
         }
@@ -84,12 +87,9 @@ public class FileDataFragment extends Fragment {
         fileDataFragmentBinding.recyclerFileDataFragment.setHasFixedSize(true);
         fileDataFragmentBinding.recyclerFileDataFragment.setLayoutManager(new LinearLayoutManager(getActivity()));
         fileDataFragmentBinding.recyclerFileDataFragment.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
-
         toolbar.setNavigationOnClickListener(v -> getFragmentManager().popBackStackImmediate());
-
         fileAdapter = new FileDataAdapter(getActivity());
         fileDataFragmentBinding.recyclerFileDataFragment.setAdapter(fileAdapter);
-        System.out.println("#####courseList: " + courseList);
         fileAdapter.setFileDataList(courseList);
     }
 }

@@ -10,7 +10,7 @@ public class Course implements Serializable {
 	private String fileName;
 
 	@SerializedName("children")
-	private List<Object> children;
+	private List<Course> children;
 
 	@SerializedName("categoryTitle")
 	private String categoryTitle;
@@ -35,11 +35,11 @@ public class Course implements Serializable {
 		return fileName;
 	}
 
-	public void setChildren(List<Object> children){
+	public void setChildren(List<Course> children){
 		this.children = children;
 	}
 
-	public List<Object> getChildren(){
+	public List<Course> getChildren(){
 		return children;
 	}
 

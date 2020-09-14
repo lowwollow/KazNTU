@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.umkd.filefragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ public class FileFragment extends Fragment {
     private FileFragmentBinding fileFragmentBinding;
     private FileAdapter fileAdapter;
     private Toolbar toolbar;
+
     public static FileFragment newInstance() {
         return new FileFragment();
     }
@@ -49,7 +51,6 @@ public class FileFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener((view, i, keyEvent) -> {
@@ -83,7 +84,6 @@ public class FileFragment extends Fragment {
     private void updateFile() {
         mViewModel.getFileMutableLiveData().observe(this, files -> {
             fileAdapter.setFilelList(files);
-            System.out.println("#####files: " + files);
         });
     }
 

@@ -2,6 +2,7 @@ package kz.almaty.satbayevuniversity.ui.umkd.filefragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -43,7 +44,8 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ViewHolder> im
 
     @Override
     public int getItemCount() {
-        return (fileList == null) ? 0 : fileList.size();}
+        return (fileList == null) ? 0 : fileList.size();
+    }
 
     void setFilelList(List<File> filelList) {
         this.fileList = filelList;
@@ -52,17 +54,17 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ViewHolder> im
 
     @Override
     public void FileClick(File file) {
-        FileDataFragment fileDataFragment= new FileDataFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("FileDataFragment", (Serializable) file.getChildren());
-        fileDataFragment.setArguments(bundle);
-        HomeActivity activity = (HomeActivity) context;
-        activity.getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                        R.anim.enter_from_left, R.anim.exit_to_right)
-                .replace(R.id.fragment_container, fileDataFragment, "fileDataFragment")
-                .addToBackStack("")
-                .commit();
+            FileDataFragment fileDataFragment = new FileDataFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("FileDataFragment", (Serializable) file.getChildren());
+            fileDataFragment.setArguments(bundle);
+            HomeActivity activity = (HomeActivity) context;
+            activity.getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                            R.anim.enter_from_left, R.anim.exit_to_right)
+                    .replace(R.id.fragment_container, fileDataFragment, "fileDataFragment")
+                    .addToBackStack("")
+                    .commit();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

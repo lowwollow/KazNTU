@@ -64,8 +64,6 @@ public class App extends Application {
         return mContext;
     }
 
-
-
     public AppDatabase getDatabase() {
         return database;
     }

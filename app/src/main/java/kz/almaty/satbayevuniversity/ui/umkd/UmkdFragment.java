@@ -79,8 +79,8 @@ public class UmkdFragment extends Fragment {
         toolbar.setNavigationOnClickListener(v -> {
             ((HomeActivity)getActivity()).OpenToggleNavMenu();
         });
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mViewModel.getUmkd();
 
         mViewModel.getUmkdMutableLiveData().observe(this, umkds -> {

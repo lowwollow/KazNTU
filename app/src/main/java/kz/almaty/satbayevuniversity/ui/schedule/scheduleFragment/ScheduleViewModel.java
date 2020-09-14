@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -21,6 +22,7 @@ import kz.almaty.satbayevuniversity.data.network.KaznituRetrofit;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -56,7 +58,7 @@ public class ScheduleViewModel extends ViewModel {
 
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
         if(onlyServer){
-            if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected() ){
+            if(connManager.getActiveNetworkInfo() != null && Objects.requireNonNull(connManager.getActiveNetworkInfo()).isAvailable() && activeNetwork.isConnected() ){
                 getScheduleListFromServer();
             }
         }else{
@@ -65,11 +67,11 @@ public class ScheduleViewModel extends ViewModel {
                     loadRv.set(false);
                     scheduleListFromDb = accountDao.getSchedule();
                     scheduleLiveData.postValue(scheduleListFromDb);
-                    if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected() ){
+                    if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()){
                         getScheduleListFromServer();
                     }
                 }else{
-                    if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected() ){
+                    if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()){
                         getScheduleListFromServer();
                     }else{
                         loadRv.set(false);
@@ -83,7 +85,7 @@ public class ScheduleViewModel extends ViewModel {
     private void getScheduleListFromServer(){
             KaznituRetrofit.getApi().updateSchedule().enqueue(new Callback<List<Schedule>>() {
                 @Override
-                public void onResponse(Call<List<Schedule>> call, Response<List<Schedule>> response) {
+                public void onResponse(@NonNull Call<List<Schedule>> call, @NonNull Response<List<Schedule>> response) {
                     switch (response.code()) {
                         case 200:
                             loadRv.set(false);
@@ -110,7 +112,7 @@ public class ScheduleViewModel extends ViewModel {
                     }
                 }
                 @Override
-                public void onFailure(Call<List<Schedule>> call, Throwable t) {
+                public void onFailure(@NonNull Call<List<Schedule>> call, Throwable t) {
                 }
             });
 
@@ -119,7 +121,7 @@ public class ScheduleViewModel extends ViewModel {
 
 
     MutableLiveData<List<Schedule>> getScheduleLiveData(){
-        if(scheduleLiveData==null){
+        if(scheduleLiveData == null){
             scheduleLiveData = new MutableLiveData<>();
         }
         return scheduleLiveData;

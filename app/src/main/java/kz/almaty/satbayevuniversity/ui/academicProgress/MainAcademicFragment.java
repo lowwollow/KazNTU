@@ -22,6 +22,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Objects;
+
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.ui.HomeActivity;
@@ -46,6 +48,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         firstTime = true;
+
         View view = inflater.inflate(R.layout.fragment_main_academic, container, false);
         toolbar = view.findViewById(R.id.mainToolbar);
         navigation = view.findViewById(R.id.bottomNavigation);
@@ -53,24 +56,25 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         navigation.setOnNavigationItemSelectedListener(this);
 
         int notification_type_id = sharedPreferences.getInt("typeId",1);
+
         if(notification_type_id == 1){
             navigation.setSelectedItemId(R.id.academicProgressFragment);
         }else if(notification_type_id == 3){
             navigation.setSelectedItemId(R.id.grade);
         }
-        sharedPreferences.edit().putInt("typeId",1).commit();
-
+        sharedPreferences.edit().putInt("typeId",1).apply();
         return view;
     }
     @Override
     public void onResume(){
         super.onResume();
 
-        getView().setFocusableInTouchMode(true);
+        Objects.requireNonNull(getView()).setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener((view, i, keyEvent) -> {
             if(i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP){
-                    if(getFragmentManager().findFragmentById(R.id.main_academic_fragment_container) instanceof AcademicFragment){
+                assert getFragmentManager() != null;
+                if(getFragmentManager().findFragmentById(R.id.main_academic_fragment_container) instanceof AcademicFragment){
                         return false;
                     }else{
                         onNavigationItemSelected(navigation.getMenu().getItem(0));
@@ -87,11 +91,10 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         super.onActivityCreated(savedInstanceState);
 //        getToolbar();
         // TODO: Use the ViewModel
-
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.journal);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_menu);
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(R.string.journal);
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         toolbar.setNavigationOnClickListener(v -> {
             ((HomeActivity)getActivity()).OpenToggleNavMenu();
@@ -103,7 +106,8 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
         imageView.setOnClickListener(v -> {
-            if( connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+            assert activeNetwork != null;
+            if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
                 editor.putBoolean(getString(R.string.only_server),true);
                 editor.apply();
                 if(toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.journal))) {
@@ -142,18 +146,20 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
                 firstTime = false;
                 replaceFragment(NotificationViewPagerFragment.newInstance());
                 return true;
-
         }
-
         return false;
     };
+
     private void replaceFragmentBackStack(Fragment newFragment, String tag, int container) {
+        assert getFragmentManager() != null;
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(container, newFragment, tag)
                 .addToBackStack(tag)
                 .commit();
     }
+
     private void replaceFragment(Fragment newFragment) {
+        assert getFragmentManager() != null;
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.main_academic_fragment_container, newFragment)
                 .commit();

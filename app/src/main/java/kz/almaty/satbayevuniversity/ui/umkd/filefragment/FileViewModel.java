@@ -3,6 +3,7 @@ package kz.almaty.satbayevuniversity.ui.umkd.filefragment;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
@@ -20,6 +21,7 @@ import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.data.AppDatabase;
 import kz.almaty.satbayevuniversity.data.entity.umkd.File;
 import kz.almaty.satbayevuniversity.data.network.KaznituRetrofit;
+import kz.almaty.satbayevuniversity.ui.umkd.filefragment.fileDataFragment.FileDataAdapter;
 import kz.almaty.satbayevuniversity.utils.Storage;
 import retrofit2.Call;
 import retrofit2.Callback;
