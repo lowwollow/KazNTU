@@ -28,8 +28,8 @@ android {
         applicationId "kz.almaty.satbayevuniversity"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 14
-        versionName "2.4"
+        versionCode 18
+        versionName "2.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 onesignal_app_id: 'bc1b547b-9758-4e43-8d2b-f6011cf458ba',
