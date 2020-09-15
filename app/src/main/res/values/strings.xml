@@ -10,7 +10,7 @@
     <string name="academicProgress">Успеваемость</string>
     <string name="umkd">УМКД</string>
     <string name="settings">Настройки</string>
-    <string name="logout">Выход</string>
+    <string name="logout">Выход (v2.8)</string>
     <string name="journal">Журнал</string>
     <string name="exam">Экзамены</string>
     <string name="schedule">Расписание</string>

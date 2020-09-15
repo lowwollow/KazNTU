@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import kz.almaty.satbayevuniversity.R;
@@ -78,18 +79,32 @@ public class FileDataAdapter  extends RecyclerView.Adapter<FileDataAdapter.ViewH
 
     @Override
     public void FileDataClick(Course course) {
-        WebViewFragment webViewFragment= new WebViewFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("WebViewFragment", course);
-        Storage.getInstance().setCourseId(course.getId());
-        Storage.getInstance().setFileName(course.getFileName());
-        webViewFragment.setArguments(bundle);
-        HomeActivity activity = (HomeActivity) context;
-        activity.getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_up, R.anim.slide_down, R.anim.slide_up, R.anim.slide_down)
-                .replace(R.id.fragment_container, webViewFragment)
-                .addToBackStack("")
-                .commit();
+        if (course.getChildren().size() == 0) {
+            WebViewFragment webViewFragment = new WebViewFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("WebViewFragment", course);
+            Storage.getInstance().setCourseId(course.getId());
+            Storage.getInstance().setFileName(course.getFileName());
+            webViewFragment.setArguments(bundle);
+            HomeActivity activity = (HomeActivity) context;
+            activity.getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.slide_up, R.anim.slide_down, R.anim.slide_up, R.anim.slide_down)
+                    .replace(R.id.fragment_container, webViewFragment)
+                    .addToBackStack("")
+                    .commit();
+        }else{
+            FileDataFragment fileDataFragment = new FileDataFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("FileDataFragment", (Serializable) course.getChildren());
+            Storage.getInstance().setCourseId(course.getId());
+            Storage.getInstance().setFileName(course.getFileName());
+            fileDataFragment.setArguments(bundle);
+            HomeActivity activity = (HomeActivity) context;
+            activity.getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, fileDataFragment, "fileDataFragment")
+                    .addToBackStack("")
+                    .commit();
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

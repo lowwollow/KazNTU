@@ -98,7 +98,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             settings.setTitle(R.string.settings);
 
             MenuItem logout = menu.findItem(R.id.logout);
-            logout.setTitle(getString(R.string.btn_login_exit) + " (v2.4)");
+            logout.setTitle(getString(R.string.btn_login_exit));
         }
     }
 
