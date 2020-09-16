@@ -178,7 +178,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public User loadPreference(){
         sPref = getSharedPreferences("MyPref", MODE_PRIVATE);
-        //Log.d("taggg", "loadPreference: "+"asdfff");
         String savedToken = sPref.getString("MyToken", "");
         String userName = sPref.getString("Username","");
         String fullName = sPref.getString("FullName","");
@@ -197,8 +196,10 @@ public class LoginActivity extends AppCompatActivity {
     private void showPassword(boolean isSet){
         if (isSet){
             psw.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            img.setImageResource(R.drawable.ic_visibility_off_24px);
         }else{
             psw.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            img.setImageResource(R.drawable.ic_visibility_24px);
         }
         psw.setSelection(psw.getText().toString().length());
     }

@@ -121,7 +121,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navHeaderBinding.headerLayout.setLayoutParams(params);
 
         navHeaderBinding.setAccountEntity(Storage.getInstance());
-        //Log.d("main window", "setupBindings: " + Storage.getInstance());
         authViewModel.getImageUrl();
 
         drawer = findViewById(R.id.drawer);
