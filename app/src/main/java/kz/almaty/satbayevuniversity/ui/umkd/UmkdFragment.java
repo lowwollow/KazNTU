@@ -29,6 +29,7 @@ public class UmkdFragment extends Fragment {
     private View view;
     public Toolbar toolbar;
     private static final String TAG = "UmkdFragment";
+
     public static UmkdFragment newInstance() {
         return new UmkdFragment();
     }

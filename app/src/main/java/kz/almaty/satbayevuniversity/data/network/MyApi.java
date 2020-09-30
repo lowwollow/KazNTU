@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import kz.almaty.satbayevuniversity.data.User;
-import kz.almaty.satbayevuniversity.data.entity.AccountEntity;
 import kz.almaty.satbayevuniversity.data.entity.academic.ResponseJournal;
 import kz.almaty.satbayevuniversity.data.entity.grade.attestation.Attestation;
 import kz.almaty.satbayevuniversity.data.entity.grade.transcript.ResponseTranscript;
@@ -15,6 +14,8 @@ import kz.almaty.satbayevuniversity.data.entity.schedule.Schedule;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Student;
 import kz.almaty.satbayevuniversity.data.entity.umkd.File;
 import kz.almaty.satbayevuniversity.data.entity.umkd.Umkd;
+import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineGroup;
+import kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDisciplineGroup;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -24,6 +25,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface MyApi {
+
 
     @POST("token")
     Call<User> onLogin(@Body RequestBody requestBody);
@@ -39,6 +41,12 @@ public interface MyApi {
 
     @GET("api/Attestation")
     Call<List<Attestation>> updateAttestation();
+
+    @GET("api/iup")
+    Call<DeferedDisciplineGroup> updateDeferedDiscipline();
+
+    @GET("api/iup")
+    Call<ChosenDisciplineGroup> updateChosenDiscipline();
 
     @GET("api/Transcript")
     Call<ResponseTranscript> updateTranscript();

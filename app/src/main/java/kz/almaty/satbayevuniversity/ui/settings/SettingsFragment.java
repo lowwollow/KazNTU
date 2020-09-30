@@ -40,6 +40,10 @@ public class SettingsFragment extends Fragment {
     public Toolbar toolbar;
     private Context context;
 
+    public static SettingsFragment newInstance(){
+        return new SettingsFragment();
+    }
+
     public SettingsFragment(Context context) {
         this.context = context;
     }

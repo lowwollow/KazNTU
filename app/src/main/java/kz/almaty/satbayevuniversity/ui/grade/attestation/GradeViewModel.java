@@ -35,7 +35,7 @@ import retrofit2.Response;
 public class GradeViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     SharedPreferences sharedPreferences = App.getContext().getSharedPreferences("shared_preferences",Context.MODE_PRIVATE);
-    private MutableLiveData<List<Attestation>> attestationLiveDate = new MutableLiveData<>();
+    private MutableLiveData<List<Attestation>> attestationLiveData = new MutableLiveData<>();
     private List<Attestation> attestationList = new ArrayList<>();
     private List<Attestation> attestationListDB = new ArrayList<>();
 
@@ -66,7 +66,7 @@ public class GradeViewModel extends ViewModel {
                 if(!accountDao.getAttestation().isEmpty()){
                     loadRv.set(false);
                     attestationListDB = accountDao.getAttestation();
-                    attestationLiveDate.postValue(attestationListDB);
+                    attestationLiveData.postValue(attestationListDB);
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
                         getGradeListFromServer();
                     }
@@ -88,7 +88,7 @@ public class GradeViewModel extends ViewModel {
             KaznituRetrofit.getApi().updateAttestation().enqueue(new Callback<List<Attestation>>() {
                 @Override
                 public void onResponse(Call<List<Attestation>> call, Response<List<Attestation>> response) {
-                    if (response.isSuccessful()) {
+                        if (response.isSuccessful()) {
                         loadRv.set(false);
                         attestationList = response.body();
                         getEmptyBoolean.set(attestationList.isEmpty());
@@ -96,7 +96,8 @@ public class GradeViewModel extends ViewModel {
                             new Thread(() -> {
                                 update(attestationList);
                             }).start();
-                            attestationLiveDate.postValue(attestationList);
+                            attestationLiveData.postValue(attestationList);
+                            // post value sets value from the background thread
                         }
                     }
                 }
@@ -114,10 +115,10 @@ public class GradeViewModel extends ViewModel {
     }
 
         MutableLiveData<List<Attestation>> getAttestationLiveDate () {
-            if (attestationLiveDate == null) {
-                attestationLiveDate = new MutableLiveData<>();
+            if (attestationLiveData == null) {
+                attestationLiveData = new MutableLiveData<>();
             }
-            return attestationLiveDate;
+            return attestationLiveData;
         }
 
         MutableLiveData<Boolean> getHandleTimeout () {
@@ -129,14 +130,14 @@ public class GradeViewModel extends ViewModel {
 
 
     private void update(List<Attestation> attestationList) {
-        executor.execute(() -> {
+        executor.execute(() -> { // lambda
             accountDao.deleteAttestation();
             accountDao.insertAttestation(attestationList);
         });
     }
 
-    private void exception(){
-        loadRv.set(false);
-        handleTimeout.setValue(true);
-    }
+        private void exception(){
+            loadRv.set(false);
+            handleTimeout.setValue(true);
+        }
     }

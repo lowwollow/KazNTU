@@ -54,7 +54,6 @@ public class GradeFragment extends Fragment {
         mViewModel.getAttestation();
         mViewModel.getAttestationLiveDate().observe(this, attestations -> {
             attestationAdapter.setAttestationList(attestations);
-            System.out.println("###### "+attestations.size());
          });
         mViewModel.getHandleTimeout().observe(this, aBoolean -> {
             if (aBoolean) {

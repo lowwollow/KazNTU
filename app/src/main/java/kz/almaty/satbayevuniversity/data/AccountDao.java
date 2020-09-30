@@ -108,7 +108,7 @@ public interface AccountDao {
 
     //Language
     @Query("SELECT * FROM Language")
-     Language getLanguage();
+    Language getLanguage();
 
     @Insert
     void insertLanguage(Language language);

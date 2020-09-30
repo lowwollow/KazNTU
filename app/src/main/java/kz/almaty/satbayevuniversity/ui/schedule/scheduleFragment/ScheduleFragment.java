@@ -176,7 +176,7 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                 }
             }
             function:
-            for (int i=0;i<localScheduleList.size();i++) {
+                for (int i=0;i<localScheduleList.size();i++) {
                 for (int j=0;j<result.size();j++) {
                     if(i == localScheduleList.size()-1 && localScheduleList.get(i).getStartTimeId() == result.get(j).getStartTimeId() ){
                         continue function;

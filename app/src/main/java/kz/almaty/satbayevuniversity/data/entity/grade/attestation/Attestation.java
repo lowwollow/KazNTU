@@ -79,17 +79,20 @@ public class Attestation implements Serializable {
 		}
 		else return "0";
 	}
+
 	public String getExam(){
 		if(attestationDetail.getExamGrade() != null){
 			return String.valueOf(attestationDetail.getExamGrade());
 		}
 		else return "0";
 	}
+
 	public String getTotal(){
 		if(attestationDetail.getTotalGrade() != null){
 			return String.valueOf(attestationDetail.getTotalGrade());
 		}
-		else return "0.0";
+		else
+			return "0.0";
 	}
 
 	@Override

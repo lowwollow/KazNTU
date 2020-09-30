@@ -53,8 +53,7 @@ public class AcademicFragment extends Fragment {
         academicFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_academic, container, false);
         academicFragmentBinding.emptyImage.setVisibility(View.INVISIBLE);
         academicFragmentBinding.emptyTextView.setVisibility(View.INVISIBLE);
-        View view = academicFragmentBinding.getRoot();
-        return view;
+        return academicFragmentBinding.getRoot();
     }
 
     @Override
@@ -64,19 +63,15 @@ public class AcademicFragment extends Fragment {
         authViewModel = ViewModelProviders.of(this).get(AuthViewModel.class);
         academicFragmentBinding.setAcademicViewModel(mViewModel);
 
-        // Изменил это
         if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.journal);
         }
 
 
-//        mViewModel.registerPlayerId();
-
         academicFragmentBinding.journalRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         academicFragmentBinding.journalRecyclerView.setHasFixedSize(true);
 
         academicAdapterResponse = new AcademicAdapterResponse(getActivity());
-
         academicFragmentBinding.journalRecyclerView.setAdapter(academicAdapterResponse);
 
         mViewModel.getJournal();

@@ -44,14 +44,10 @@ public class PushNotificationAdapter  extends RecyclerView.Adapter<PushNotificat
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-
         PushNotification pushNotification = listOfPushNotification.get(position);
         holder.pushNotificationItemBinding.setPushNotification(pushNotification);
-
         holder.pushNotificationItemBinding.setLanguage(getCurrentLanguageFromApp());
-
-        if(pushNotification.getTextRus().contains("посещаемость") || pushNotification.getTextRus().contains("пропуск")){
+        if (pushNotification.getTextRus().contains("посещаемость") || pushNotification.getTextRus().contains("пропуск")){
             holder.pushNotificationItemImageView.setImageResource(R.drawable.running_orange);
         }else{
             holder.pushNotificationItemImageView.setImageResource(R.drawable.point);
@@ -89,9 +85,7 @@ public class PushNotificationAdapter  extends RecyclerView.Adapter<PushNotificat
         final PushNotification pushNotification = listOfPushNotification.get(position);
         if (!itemsPendingRemoval.contains(pushNotification)) {
             itemsPendingRemoval.add(pushNotification);
-            // this will redraw row in "undo" state
             notifyItemChanged(position);
-            // let's create, store and post a runnable to remove the item
             Runnable pendingRemovalRunnable = new Runnable() {
                 @Override
                 public void run() {
@@ -113,7 +107,7 @@ public class PushNotificationAdapter  extends RecyclerView.Adapter<PushNotificat
 
             int pushId = pushNotification.getId();
             pushNotificationViewModel.removeItem(pushId);
-            if(listOfPushNotification.isEmpty()){
+            if (listOfPushNotification.isEmpty()){
                 pushNotificationViewModel.isEmpty.set(true);
             }
 
@@ -124,7 +118,6 @@ public class PushNotificationAdapter  extends RecyclerView.Adapter<PushNotificat
         ImageView pushNotificationItemImageView;
         public ViewHolder(ItemPushNotificationBinding pushNotificationItemBinding) {
             super(pushNotificationItemBinding.getRoot());
-
             this.pushNotificationItemBinding = pushNotificationItemBinding;
             pushNotificationItemImageView = pushNotificationItemBinding.pushNotificationItemImageView;
         }

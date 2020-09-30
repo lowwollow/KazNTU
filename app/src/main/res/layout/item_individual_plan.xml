@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="individual_plan_item"
+            type="kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDiscipline" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4"
+            app:layout_constraintStart_toEndOf="@id/semesterCourseTitle" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7"/>
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/semesterCourseTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:ems="6"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="@{individual_plan_item.title}"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="CSE1222 Компьютерные сети" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/component"
+            android:text="@{individual_plan_item.disciplineTypeTitle}"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/cipher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{individual_plan_item.code}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline2"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

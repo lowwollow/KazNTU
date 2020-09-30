@@ -212,4 +212,11 @@
     <string name="university">ВУЗ</string>
     <string name="continue_registration_text">Ваши данные сохранены!В дальнейшем Вы можете продолжить заполнение, используя Ваш логин и пароль.Вам осталось заполнить формы:</string>
     <string name="change_language">Изменить язык</string>
+    <string name="individualPlan">ИУП</string>
+    <string name="general_education">Ge</string>
+    <string name="elective">El</string>
+    <string name="component">Component</string>
+    <string name="cypher">Cypher</string>
+    <string name="delayed">Отложенные</string>
+    <string name="chosen">Выбранные</string>
 </resources>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="kz.almaty.satbayevuniversity.ui.individualPlan.individualPlan.individualPlanFragment">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="individualPlan"
+            type="kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDisciplineFragment" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="45dp"
+        android:background="@color/colorWhite">
+
+
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{individualPlan.loadRv ? View.VISIBLE : View.GONE}"
+            android:indeterminateDrawable="@drawable/progress"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/individualPlanRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layoutAnimation="@anim/layout_animation_fall_down"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline9"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="-16dp"
+            android:visibility="@{individualPlan.loadRv ? View.GONE : View.VISIBLE}"
+            tools:listitem="@layout/item_individual_plan"/>
+
+        <TextView
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
+            android:id="@+id/CourseTitleId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="5dp"
+            android:visibility="@{individualPlan.loadRv ? View.GONE : View.VISIBLE}"
+            android:text="Дисциплина"/>
+
+        <TextView
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
+            android:id="@+id/Component"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/guideline1"
+            app:layout_constraintStart_toEndOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{individualPlan.loadRv ? View.GONE : View.VISIBLE}"
+            android:text="Компонент"/>
+
+        <TextView
+            android:id="@+id/Cypher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Шрифт"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline2"
+            android:visibility="@{individualPlan.loadRv ? View.GONE : View.VISIBLE}"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
+            app:layout_constraintGuide_percent="0.4"
+            android:visibility ="@{individualPlan.loadRv ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toEndOf="@id/CourseTitleId"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
+            android:visibility="@{individualPlan.loadRv ? View.GONE : View.VISIBLE}"
+            app:layout_constraintGuide_percent="0.7"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="@{individualPlan.loadRv ? View.GONE : View.VISIBLE}"
+            app:layout_constraintGuide_begin="29dp"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            android:id="@+id/emptyImage"
+            android:src="@drawable/empty"
+            app:layout_constraintWidth_percent="0.6"
+            android:visibility="@{individualPlan.getEmptyBoolean ? View.VISIBLE : View.GONE}"
+            app:layout_constraintHeight_percent="0.4"/>
+
+        <TextView
+            android:id="@+id/emptyTextView"
+            app:layout_constraintTop_toBottomOf="@+id/emptyImage"
+            app:layout_constraintStart_toStartOf="@id/emptyImage"
+            app:layout_constraintEnd_toEndOf="@id/emptyImage"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:fontFamily="@font/open_sans_semibold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/data"
+            android:visibility="@{individualPlan.getEmptyBoolean ? View.VISIBLE : View.GONE}"
+            tools:text="К сожалению, данные по данному запросу отсутствуют..."/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

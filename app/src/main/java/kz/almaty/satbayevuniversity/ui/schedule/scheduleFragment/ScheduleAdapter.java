@@ -31,7 +31,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     private ConnectivityManager connManager = (ConnectivityManager)App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
-    public ScheduleAdapter () {}
     public ScheduleAdapter(Context context) {
         this.context = context;
     }
@@ -72,8 +71,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             holder.scheduleItemBinding.constraintOfScheduleItem.setBackgroundColor(Color.TRANSPARENT);
             holder.scheduleItemBinding.listOfStudentsLayout.setVisibility(View.GONE);
         }
-
-
     }
 
     @Override

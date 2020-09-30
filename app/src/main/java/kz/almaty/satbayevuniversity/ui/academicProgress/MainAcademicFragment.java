@@ -26,6 +26,7 @@ import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.ui.HomeActivity;
 import kz.almaty.satbayevuniversity.ui.grade.ViewPagerFragment;
+import kz.almaty.satbayevuniversity.ui.individualPlan.ViewPagerIndividualPlan;
 import kz.almaty.satbayevuniversity.ui.notification.NotificationViewPagerFragment;
 import kz.almaty.satbayevuniversity.ui.schedule.ViewPagerSchedule;
 
@@ -53,19 +54,18 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         navigation.setOnNavigationItemSelectedListener(this);
 
         int notification_type_id = sharedPreferences.getInt("typeId",1);
-        if(notification_type_id == 1){
+
+        if (notification_type_id == 1){
             navigation.setSelectedItemId(R.id.academicProgressFragment);
         }else if(notification_type_id == 3){
             navigation.setSelectedItemId(R.id.grade);
         }
-        sharedPreferences.edit().putInt("typeId",1).commit();
-
+        sharedPreferences.edit().putInt("typeId",1).apply();
         return view;
     }
     @Override
     public void onResume(){
         super.onResume();
-
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener((view, i, keyEvent) -> {
@@ -103,7 +103,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
         imageView.setOnClickListener(v -> {
-            if( connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+            if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
                 editor.putBoolean(getString(R.string.only_server),true);
                 editor.apply();
                 if(toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.journal))) {
@@ -114,12 +114,13 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
                     replaceFragment(ViewPagerFragment.newInstance());
                 }else if(toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.notifications))){
                     replaceFragment(NotificationViewPagerFragment.newInstance());
+                }else if(toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.individualPlan))){
+                    replaceFragment(ViewPagerIndividualPlan.newInstance());
                 }
-
-            } else Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
-
+            } else {
+                Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
+            }
         });
-
     }
 
     @Override
@@ -142,21 +143,26 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
                 firstTime = false;
                 replaceFragment(NotificationViewPagerFragment.newInstance());
                 return true;
-
+            case R.id.individualPlanFragment:
+                firstTime = false;
+                replaceFragment(ViewPagerIndividualPlan.newInstance());
+                return true;
         }
-
         return false;
     };
+
     private void replaceFragmentBackStack(Fragment newFragment, String tag, int container) {
+        assert getFragmentManager() != null;
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(container, newFragment, tag)
                 .addToBackStack(tag)
                 .commit();
     }
+
     private void replaceFragment(Fragment newFragment) {
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.main_academic_fragment_container, newFragment)
-                .commit();
+        assert getFragmentManager() != null;
+        FragmentTransaction ft = getFragmentManager().beginTransaction().replace(R.id.main_academic_fragment_container, newFragment);
+        ft.commit();
     }
 
 

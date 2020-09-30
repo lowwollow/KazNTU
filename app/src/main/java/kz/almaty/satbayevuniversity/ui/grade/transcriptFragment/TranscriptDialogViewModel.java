@@ -16,5 +16,4 @@ public class TranscriptDialogViewModel extends ViewModel {
         semestersItemObservableField.set(Storage.getInstance().getSemestersItem());
         semestersItemObservableField.notifyChange();
     }
-
 }

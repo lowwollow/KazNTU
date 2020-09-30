@@ -10,7 +10,6 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,6 +56,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public ActivityHomeBinding activityHomeBinding;
     private NavHeaderBinding navHeaderBinding;
     public SharedPreferences sPref;
+
     public HomeActivity() {
     }
 
@@ -86,20 +86,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void getMenuText(){
+        // боковое меню
         Menu menu = navigationView.getMenu();
-        if (menu != null) {
-            MenuItem academicProgress = menu.findItem(R.id.academicProgress);
-            academicProgress.setTitle(R.string.academicProgress);
+        MenuItem academicProgress = menu.findItem(R.id.academicProgress);
+        academicProgress.setTitle(R.string.academicProgress);
+//
+//        MenuItem individualPlan = menu.findItem(R.id.individualPlan);
+//        individualPlan.setTitle(R.string.individualPlan);
 
-            MenuItem umkd = menu.findItem(R.id.umkd);
-            umkd.setTitle(R.string.umkd);
+        MenuItem umkd = menu.findItem(R.id.umkd);
+        umkd.setTitle(R.string.umkd);
 
-            MenuItem settings = menu.findItem(R.id.settings);
-            settings.setTitle(R.string.settings);
+        MenuItem settings = menu.findItem(R.id.settings);
+        settings.setTitle(R.string.settings);
 
-            MenuItem logout = menu.findItem(R.id.logout);
-            logout.setTitle(getString(R.string.btn_login_exit));
-        }
+        MenuItem logout = menu.findItem(R.id.logout);
+        logout.setTitle(getString(R.string.btn_login_exit));
     }
 
     private void setupBindings(Bundle savedInstanceState) {
@@ -108,6 +110,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         navHeaderBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.nav_header,
                 activityHomeBinding.navigationView, false);
+
         activityHomeBinding.navigationView.addHeaderView(navHeaderBinding.getRoot());
 
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) navHeaderBinding.headerLayout.getLayoutParams();
@@ -168,13 +171,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(UmkdFragment.newInstance(),R.id.fragment_container);
                 break;
             case R.id.settings:
-                replaceFragment(new SettingsFragment(getApplicationContext()),R.id.fragment_container);
+                replaceFragment(SettingsFragment.newInstance(),R.id.fragment_container);
                 break;
             case R.id.logout:
                 exit();
                 break;
         }
-
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -186,6 +188,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
         finish();
     }
+
     public void clearSharedPreferences() {
         sPref = getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sPref.edit();

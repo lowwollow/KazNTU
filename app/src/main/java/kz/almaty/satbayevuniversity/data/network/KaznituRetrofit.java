@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.data.network;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.utils.Storage;
@@ -13,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -35,10 +37,11 @@ public class KaznituRetrofit {
                 .addInterceptor(interceptor)
                 .addInterceptor(new Interceptor() {
                     @Override
-                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                    public Response intercept(Chain chain) throws IOException {
                         Request newRequest = chain.request().newBuilder()
                                 .addHeader("Authorization", "Bearer " + App.getContext().getSharedPreferences("MyPref", MODE_PRIVATE).getString("MyToken",""))
                                 .build();
+                        Log.d("wtf", "intercept: " + newRequest);
                         return chain.proceed(newRequest);
                     }
                 })

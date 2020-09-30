@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.grade.transcriptFragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,13 +57,12 @@ public class TranscriptFragment extends Fragment {
         transcriptFragmentBinding.transcriptRecyclerView.setAdapter(transcriptAdapter);
 
         mViewModel.getTranscriptLiveData().observe(this, semestersItems -> {
-
             ArrayList<Object> objects = new ArrayList<>(semestersItems.size() * 8);
             for (SemestersItem semestersItem: semestersItems){
                 objects.add(semestersItem);
                 objects.addAll(semestersItem.getCourses());
             }
-                transcriptAdapter.setSemestersItemsList(objects);
+            transcriptAdapter.setSemestersItemsList(objects);
         });
         mViewModel.getHandleTimeout().observe(this, aBoolean -> {
             if (aBoolean) {

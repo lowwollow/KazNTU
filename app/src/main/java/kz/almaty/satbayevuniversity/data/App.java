@@ -12,6 +12,8 @@ import androidx.room.RoomDatabase;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
+import com.yandex.metrica.YandexMetrica;
+import com.yandex.metrica.YandexMetricaConfig;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +28,7 @@ public class App extends Application {
     private static Context mContext;
 
     private AppDatabase database;
-
+    private  String API_key = "321bf830-687a-4da9-825e-656b760e5bba";
     @Override
     public void onCreate() {
         super.onCreate();
@@ -44,6 +46,10 @@ public class App extends Application {
         builder.setNotificationOpenedHandler(new NotificationHandler());
         builder.init();
 
+        YandexMetricaConfig config = YandexMetricaConfig.newConfigBuilder(API_key).build();
+        YandexMetrica.activate(getApplicationContext(), config);
+        YandexMetrica.enableActivityAutoTracking(this);
+
 
         SentryAndroid.init(this, options -> {
             // Add a callback that will be used before the event is sent to Sentry.
@@ -55,28 +61,18 @@ public class App extends Application {
                     return event;
             });
         });
-//        createPushNotification("test notification");
-
     }
 
     public static App getInstance() {
         return instance;
     }
-
     public static Context getContext() {
         return mContext;
     }
-
-
-
     public AppDatabase getDatabase() {
         return database;
     }
 
-//    @Override
-//    protected void attachBaseContext(Context base) {
-//        super.attachBaseContext(LocaleHelper.onAttach(base, "ru"));
-//    }
     class NotificationHandler implements OneSignal.NotificationOpenedHandler{
 
         @Override

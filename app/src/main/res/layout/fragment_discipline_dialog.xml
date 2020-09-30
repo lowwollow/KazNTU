@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineDialogFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="chosenDiscipline"
+            type="kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDiscipline" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="17dp"
+            android:background="@drawable/transcript_dialog_gradient">
+
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                android:layout_margin="3dp"
+                android:fontFamily="@font/open_sans_light"
+                android:id="@+id/code"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/readingChairTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{`Шифр: ` + chosenDiscipline.code}"/>
+
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:layout_margin="3dp"
+                android:fontFamily="@font/open_sans_light"
+                android:id="@+id/readingChairTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                android:text="@{`Кафедра: ` +chosenDiscipline.readingChairTitle}" />
+
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:id="@+id/title"
+                android:fontFamily="@font/open_sans_light"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/readingChairTitle"
+                android:layout_margin="3dp"
+                app:layout_constraintBottom_toTopOf="@+id/cycleTitle"
+                android:text="@{`Дисциплина: ` + chosenDiscipline.title}"/>
+
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:id="@+id/cycleTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/open_sans_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                android:text="@{`Компонент: ` + chosenDiscipline.cycleTitle}" />
+
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:id="@+id/disciplineTypeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_light"
+                android:text="@{`Цикл: ` + chosenDiscipline.disciplineTypeTitle}"
+                app:layout_constraintBottom_toTopOf="@id/totalCredits"
+                app:layout_constraintTop_toBottomOf="@id/cycleTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="3dp" />
+
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:id="@+id/totalCredits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_light"
+                android:text="@{`Ак. занятие: ` + chosenDiscipline.totalCredits}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/totalRowCount"
+                app:layout_constraintTop_toBottomOf="@+id/disciplineTypeTitle"
+                android:layout_margin="3dp" />
+
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:id="@+id/totalRowCount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/open_sans_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                app:layout_constraintTop_toBottomOf="@+id/totalCredits"
+                android:text="@{`Ак. кредиты: ` + chosenDiscipline.totalRowCount}" />
+
+
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:id="@+id/prerequisites"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/open_sans_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                app:layout_constraintTop_toBottomOf="@+id/totalRowCount"
+                android:text="@{`Пререквизиты: ` + chosenDiscipline.prerequisites}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

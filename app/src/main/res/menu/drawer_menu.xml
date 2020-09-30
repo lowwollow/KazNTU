@@ -20,5 +20,4 @@
             android:title="@string/logout"
             android:icon="@drawable/running"/>
     </group>
-
 </menu>

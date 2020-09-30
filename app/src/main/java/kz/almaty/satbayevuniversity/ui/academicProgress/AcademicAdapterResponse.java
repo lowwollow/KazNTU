@@ -55,12 +55,12 @@ import java.util.List;
     }
 
     @Override
-    public void cardClicked(ResponseJournal f) {
+    public void cardClicked(ResponseJournal responseJournal) {
         DetailFragment detailFragment = new DetailFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("detail", (Serializable) f.getDates());
+        bundle.putSerializable("detail", (Serializable) responseJournal.getDates());
         detailFragment.setArguments(bundle);
-        Storage.getInstance().setResponseJournal(f);
+        Storage.getInstance().setResponseJournal(responseJournal);
         HomeActivity activity = (HomeActivity) context;
         detailFragment.show(activity.getSupportFragmentManager(), "Dialog");
     }

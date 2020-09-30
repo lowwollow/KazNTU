@@ -107,17 +107,12 @@ public class PushNotificationFragment extends Fragment {
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 View itemView = viewHolder.itemView;
-
-                // not sure why, but this method get's called for viewholder that are already swiped away
                 if (viewHolder.getAdapterPosition() == -1) {
-                    // not interested in those
                     return;
                 }
-
                 if (!initiated) {
                     init();
                 }
-                // draw red background
                 background.setBounds(itemView.getRight() + (int) dX, itemView.getTop(), itemView.getRight(), itemView.getBottom());
                 background.draw(c);
                 // draw x mark
@@ -130,16 +125,14 @@ public class PushNotificationFragment extends Fragment {
                 int xMarkTop = itemView.getTop() + (itemHeight - intrinsicHeight) / 2;
                 int xMarkBottom = xMarkTop + intrinsicHeight;
                 xMark.setBounds(xMarkLeft, xMarkTop, xMarkRight, xMarkBottom);
-
                 xMark.draw(c);
-
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
-
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(fragmentPushNotificationBinding.pushNotificationRecyclerView);
     }
+
     private void setUpAnimationDecoratorHelper() {
         fragmentPushNotificationBinding.pushNotificationRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             // we want to cache this and not allocate anything repeatedly in the onDraw method

@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.grade.transcriptFragment;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -47,7 +48,6 @@ public class TranscriptAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case 1:
                 ItemTranscriptDetailBinding transcript2 = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                         R.layout.item_transcript_detail, parent, false);
-
                 return new ViewHolder2(transcript2);
         }
         return null;
@@ -80,7 +80,7 @@ public class TranscriptAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void transcriptClicked(SemestersItem semestersItem) {
         TranscriptDialogFragment transcriptDialogFragment = new TranscriptDialogFragment();
-        Storage.getInstance().setSemestersItem(semestersItem); //исправить на bundle, но пока лень
+        Storage.getInstance().setSemestersItem(semestersItem);
         HomeActivity activity = (HomeActivity) context;
         transcriptDialogFragment.show(activity.getSupportFragmentManager(), "transcriptDialogFragment");
     }

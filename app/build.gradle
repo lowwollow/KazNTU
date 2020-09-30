@@ -149,4 +149,5 @@ dependencies {
     //espresso testing
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
+    implementation 'com.yandex.android:mobmetricalib:3.15.0'
 }
