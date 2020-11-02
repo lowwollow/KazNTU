@@ -2,11 +2,14 @@ package kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.data.entity.grade.transcript.SemestersItem;
 import kz.almaty.satbayevuniversity.data.network.KaznituRetrofit;
 import kz.almaty.satbayevuniversity.databinding.ChosenDisciplineItemBinding;
@@ -43,7 +47,8 @@ public class ChosenDisciplineFragment extends Fragment {
     private SharedPreferences sPref;
     private List<ChosenDiscipline> list = new ArrayList<>();
     private final String SAVED_OBJECT = "saved_object";
-
+    private ConnectivityManager connManager = (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
 
     @Nullable
@@ -51,6 +56,9 @@ public class ChosenDisciplineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         individualPlanBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_chosen_disciplines_individual_plan,container,false);
         View view = individualPlanBinding.getRoot();
+        individualPlanBinding.emptyImage.setVisibility(view.INVISIBLE);
+        individualPlanBinding.emptyTextView.setVisibility(view.INVISIBLE);
+        loadRv.set(true);
         return view;
     }
 
@@ -62,25 +70,30 @@ public class ChosenDisciplineFragment extends Fragment {
         individualPlanBinding.chosenDisciplineRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         chosenDisciplineAdapter = new ChosenDisciplineAdapter(getActivity());
         individualPlanBinding.chosenDisciplineRecyclerView.setAdapter(chosenDisciplineAdapter);
-
-        KaznituRetrofit.getApi().updateChosenDiscipline().enqueue(new Callback<ChosenDisciplineGroup>(){
-            @Override
-            public void onResponse(Call<ChosenDisciplineGroup> call, Response<ChosenDisciplineGroup> response) {
-                if (response.isSuccessful()){
-                    List<Object> list = new ArrayList<>(response.body().chosenDisciplineList.size() * 2);
-                    for (int i = 0; i < response.body().getChosenDisciplineList().size(); i++){
-                        list.add(response.body().getChosenDisciplineList().get(i));
-                        list.addAll(response.body().getChosenDisciplineList().get(i).getChosenDisciplineList());
+        if (activeNetwork != null) {
+            if (connManager.getActiveNetworkInfo() != null && activeNetwork.isConnected()) {
+                KaznituRetrofit.getApi().updateChosenDiscipline().enqueue(new Callback<ChosenDisciplineGroup>() {
+                    @Override
+                    public void onResponse(Call<ChosenDisciplineGroup> call, Response<ChosenDisciplineGroup> response) {
+                        if (response.isSuccessful()) {
+                            List<Object> list = new ArrayList<>(response.body().chosenDisciplineList.size() * 2);
+                            for (int i = 0; i < response.body().getChosenDisciplineList().size(); i++) {
+                                list.add(response.body().getChosenDisciplineList().get(i));
+                                list.addAll(response.body().getChosenDisciplineList().get(i).getChosenDisciplineList());
+                            }
+                            chosenDisciplineAdapter.setChosenDisciplines(list);
+                        }
                     }
-                    chosenDisciplineAdapter.setChosenDisciplines(list);
-                }
-            }
 
-            @Override
-            public void onFailure(Call<ChosenDisciplineGroup> call, Throwable t) {
-
+                    @Override
+                    public void onFailure(Call<ChosenDisciplineGroup> call, Throwable t) {
+                    }
+                });
+            } else {
+                getEmptyBoolean.set(true);
+                Toast.makeText(getActivity(), "Нет доступа к сети", Toast.LENGTH_LONG).show();
             }
-        });
+        }
 
     }
 

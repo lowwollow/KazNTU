@@ -28,8 +28,8 @@ android {
         applicationId "kz.almaty.satbayevuniversity"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 19
-        versionName "2.8"
+        versionCode 20
+        versionName "2.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 onesignal_app_id: 'bc1b547b-9758-4e43-8d2b-f6011cf458ba',
@@ -84,7 +84,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'

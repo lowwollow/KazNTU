@@ -1,0 +1,108 @@
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineDialogFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="estimateTeacher"
+            type="kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDiscipline" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/layout_toolbar"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:textSize="25dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:layout_width="wrap_content"
+            android:text="Name"
+            android:layout_height="wrap_content"/>
+
+        <RatingBar
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <FrameLayout
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/ratingBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:padding="10dp"
+            android:background="@drawable/borders_style"
+            android:id="@+id/comment"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+            <EditText
+                android:hint="Напишите комментарий"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:id="@+id/ln_layout"
+            app:layout_constraintTop_toBottomOf="@id/comment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:gravity="right"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="false"
+                android:textSize="20dp"
+                android:text="Анонимно"/>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_ok"
+            android:text="Готово"
+            android:background="@color/colorAccent"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/ln_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="100dp"
+            android:layout_height="30dp"/>
+
+        <ImageView
+            android:id="@+id/image"
+            android:src="@drawable/review"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/button_ok"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:alpha="0.4"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

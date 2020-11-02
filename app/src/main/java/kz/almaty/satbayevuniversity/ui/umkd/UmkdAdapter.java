@@ -1,11 +1,15 @@
 package kz.almaty.satbayevuniversity.ui.umkd;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -14,6 +18,7 @@ import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.entity.umkd.Umkd;
 import kz.almaty.satbayevuniversity.databinding.ItemUmkdBinding;
 import kz.almaty.satbayevuniversity.ui.HomeActivity;
+import kz.almaty.satbayevuniversity.ui.umkd.estimateteacher.EstimateTeacherBottomShitDialog;
 import kz.almaty.satbayevuniversity.ui.umkd.filefragment.FileFragment;
 import kz.almaty.satbayevuniversity.utils.Storage;
 
@@ -52,15 +57,20 @@ public class UmkdAdapter extends RecyclerView.Adapter<UmkdAdapter.ViewHolder> im
 
     @Override
     public void umkdClicked(Umkd umkd) {
-        FileFragment fileFragment= new FileFragment();
-        Storage.getInstance().setCourseCode(umkd.getCourseCode());
-        Storage.getInstance().setInstructorID(String.valueOf(umkd.getInstructorId()));
-        HomeActivity activity = (HomeActivity) context;
-        activity.getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_up, R.anim.slide_down,  R.anim.slide_up, R.anim.slide_down)
-                .replace(R.id.fragment_container, fileFragment, "fileFragment")
-                .addToBackStack("")
-                .commit();
+        // open dialog
+        EstimateTeacherBottomShitDialog estimateTeacherBottomShitDialog = new EstimateTeacherBottomShitDialog();
+        estimateTeacherBottomShitDialog.show(((FragmentActivity)context).getSupportFragmentManager(), "");
+        // wtf
+
+//        FileFragment fileFragment = new FileFragment();
+//        Storage.getInstance().setCourseCode(umkd.getCourseCode());
+//        Storage.getInstance().setInstructorID(String.valueOf(umkd.getInstructorId()));
+//        HomeActivity activity = (HomeActivity) context;
+//        activity.getSupportFragmentManager().beginTransaction()
+//                .setCustomAnimations(R.anim.slide_up, R.anim.slide_down,  R.anim.slide_up, R.anim.slide_down)
+//                .replace(R.id.fragment_container, fileFragment, "fileFragment")
+//                .addToBackStack("")
+//                .commit();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,7 +78,6 @@ public class UmkdAdapter extends RecyclerView.Adapter<UmkdAdapter.ViewHolder> im
         public ViewHolder(@NonNull ItemUmkdBinding umkdItemBinding) {
             super(umkdItemBinding.getRoot());
             this.umkdItemBinding = umkdItemBinding;
-
         }
     }
 

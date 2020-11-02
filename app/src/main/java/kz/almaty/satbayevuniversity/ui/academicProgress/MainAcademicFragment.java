@@ -143,7 +143,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
                 firstTime = false;
                 replaceFragment(NotificationViewPagerFragment.newInstance());
                 return true;
-            case R.id.individualPlanFragment:
+            case R.id.individualPlan:
                 firstTime = false;
                 replaceFragment(ViewPagerIndividualPlan.newInstance());
                 return true;

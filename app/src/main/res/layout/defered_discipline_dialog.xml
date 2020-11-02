@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplines.DeferedDisciplineDialogFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="deferedDiscipline"
+            type="kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDiscipline" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/transcript_dialog_gradient"
+            android:padding="17dp"
+            app:layout_constraintBottom_toBottomOf="@+id/cycleTitle"
+            app:layout_constraintTop_toBottomOf="@+id/cycleTitle">
+
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Шрифт:"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:layout_weight="2"
+                    android:id="@+id/code_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@{deferedDiscipline.code}"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintBottom_toTopOf="@+id/readingChairTitle_text"
+                    tools:text="123123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/l1">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/readingChairTitle"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Кафедра:"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:layout_weight="2"
+                    android:id="@+id/readingChairTitle_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@{deferedDiscipline.readingChairTitle}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/l2">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Дисциплина:"
+                    android:textColor="@color/colorWhite" />
+
+
+                <TextView
+                    android:id="@+id/title_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@{deferedDiscipline.title}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/l3">
+
+                <TextView
+                    android:id="@+id/cycleTitle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Компонент:"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/cycleTitle_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="@{deferedDiscipline.cycleTitle}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/l4">
+
+                <TextView
+                    android:id="@+id/disciplineTypeTitle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Цикл:"
+                    android:textColor="@color/colorWhite" />
+
+
+                <TextView
+                    android:id="@+id/disciplineTypeTitle_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="@{deferedDiscipline.disciplineTypeTitle}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/l6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/l5">
+
+                <TextView
+                    android:id="@+id/totalCredits"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Ак. занятие:"
+                    android:textColor="@color/colorWhite" />
+
+
+                <TextView
+                    android:id="@+id/totalCredits_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="@{Integer.toString(deferedDiscipline.totalCredits)}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/l7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/l6">
+
+                <TextView
+                    android:id="@+id/totalRowCount"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Ак. кредиты:"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/totalRowCount_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="@{Integer.toString(deferedDiscipline.totalRowCount)}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/l8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/l7">
+
+                <TextView
+                    android:id="@+id/credits"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Лк/Лаб/Пр:"
+                    android:textColor="@color/colorWhite" />
+
+
+                <TextView
+                    android:id="@+id/credits_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="@{Integer.toString(deferedDiscipline.lectureCredits) + '/' + Integer.toString(deferedDiscipline.labCredits) + '/' + Integer.toString(deferedDiscipline.practiceCredits)}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/l9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/l8">
+
+                <TextView
+                    android:id="@+id/prerequisites"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Пререквизиты:"
+                    android:textColor="@color/colorWhite" />
+
+
+                <TextView
+                    android:id="@+id/prerequisites_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="@{deferedDiscipline.prerequisites}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

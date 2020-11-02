@@ -2,6 +2,7 @@ package kz.almaty.satbayevuniversity.ui.umkd.filefragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -52,7 +53,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ViewHolder> im
 
     @Override
     public void FileClick(File file) {
-        FileDataFragment fileDataFragment= new FileDataFragment();
+        FileDataFragment fileDataFragment = new FileDataFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("FileDataFragment", (Serializable) file.getChildren());
         fileDataFragment.setArguments(bundle);

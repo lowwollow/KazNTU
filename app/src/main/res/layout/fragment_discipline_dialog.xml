@@ -15,121 +15,305 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.9"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/transcript_dialog_gradient"
             android:padding="17dp"
-            android:background="@drawable/transcript_dialog_gradient">
+            app:layout_constraintBottom_toBottomOf="@+id/cycleTitle"
+            app:layout_constraintTop_toBottomOf="@+id/cycleTitle">
 
-            <TextView
-                android:gravity="center"
-                android:textColor="@color/colorWhite"
-                android:layout_margin="3dp"
-                android:fontFamily="@font/open_sans_light"
-                android:id="@+id/code"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/readingChairTitle"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{`Шифр: ` + chosenDiscipline.code}"/>
-
-            <TextView
-                android:textColor="@color/colorWhite"
-                android:layout_margin="3dp"
-                android:fontFamily="@font/open_sans_light"
-                android:id="@+id/readingChairTitle"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/title"
-                android:text="@{`Кафедра: ` +chosenDiscipline.readingChairTitle}" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:textColor="@color/colorWhite"
-                android:id="@+id/title"
-                android:fontFamily="@font/open_sans_light"
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Шрифт:"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:layout_weight="2"
+                    android:id="@+id/code_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@{chosenDiscipline.code}"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintBottom_toTopOf="@+id/readingChairTitle_text"
+                    tools:text="123123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/readingChairTitle"
-                android:layout_margin="3dp"
-                app:layout_constraintBottom_toTopOf="@+id/cycleTitle"
-                android:text="@{`Дисциплина: ` + chosenDiscipline.title}"/>
+                app:layout_constraintTop_toBottomOf="@+id/l1">
 
-            <TextView
-                android:textColor="@color/colorWhite"
-                android:id="@+id/cycleTitle"
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/readingChairTitle"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Кафедра:"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:layout_weight="2"
+                    android:id="@+id/readingChairTitle_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@{chosenDiscipline.readingChairTitle}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:fontFamily="@font/open_sans_light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                app:layout_constraintTop_toBottomOf="@+id/title"
-                android:text="@{`Компонент: ` + chosenDiscipline.cycleTitle}" />
+                app:layout_constraintTop_toBottomOf="@+id/l2">
 
-            <TextView
-                android:textColor="@color/colorWhite"
-                android:id="@+id/disciplineTypeTitle"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Дисциплина:"
+                    android:textColor="@color/colorWhite" />
+
+
+                <TextView
+                    android:id="@+id/title_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@{chosenDiscipline.title}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l4"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_light"
-                android:text="@{`Цикл: ` + chosenDiscipline.disciplineTypeTitle}"
-                app:layout_constraintBottom_toTopOf="@id/totalCredits"
-                app:layout_constraintTop_toBottomOf="@id/cycleTitle"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_margin="3dp" />
+                app:layout_constraintTop_toBottomOf="@+id/l3">
 
-            <TextView
-                android:textColor="@color/colorWhite"
-                android:id="@+id/totalCredits"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/cycleTitle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Компонент:"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/cycleTitle_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="@{chosenDiscipline.cycleTitle}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l5"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_light"
-                android:text="@{`Ак. занятие: ` + chosenDiscipline.totalCredits}"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/totalRowCount"
-                app:layout_constraintTop_toBottomOf="@+id/disciplineTypeTitle"
-                android:layout_margin="3dp" />
+                app:layout_constraintTop_toBottomOf="@+id/l4">
 
-            <TextView
-                android:textColor="@color/colorWhite"
-                android:id="@+id/totalRowCount"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:fontFamily="@font/open_sans_light"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/disciplineTypeTitle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Цикл:"
+                    android:textColor="@color/colorWhite" />
+
+
+                <TextView
+                    android:id="@+id/disciplineTypeTitle_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="@{chosenDiscipline.disciplineTypeTitle}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/l6"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                app:layout_constraintTop_toBottomOf="@+id/totalCredits"
-                android:text="@{`Ак. кредиты: ` + chosenDiscipline.totalRowCount}" />
-
-
-            <TextView
-                android:textColor="@color/colorWhite"
-                android:id="@+id/prerequisites"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:fontFamily="@font/open_sans_light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                app:layout_constraintTop_toBottomOf="@+id/totalRowCount"
-                android:text="@{`Пререквизиты: ` + chosenDiscipline.prerequisites}" />
+                app:layout_constraintTop_toBottomOf="@+id/l5">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/totalCredits"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Ак. занятие:"
+                    android:textColor="@color/colorWhite" />
+
+
+                <TextView
+                    android:id="@+id/totalCredits_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="@{Integer.toString(chosenDiscipline.totalCredits)}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/l7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/l6">
+
+                <TextView
+                    android:id="@+id/totalRowCount"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Ак. кредиты:"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/totalRowCount_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="@{Integer.toString(chosenDiscipline.totalRowCount)}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/l8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/l7">
+
+                <TextView
+                    android:id="@+id/credits"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Лк/Лаб/Пр:"
+                    android:textColor="@color/colorWhite" />
+
+
+                <TextView
+                    android:id="@+id/credits_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="@{Integer.toString(chosenDiscipline.lectureCredits) + '/' + Integer.toString(chosenDiscipline.labCredits) + '/' + Integer.toString(chosenDiscipline.practiceCredits)}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/l9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/l8">
+
+                <TextView
+                    android:id="@+id/prerequisites"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Пререквизиты:"
+                    android:textColor="@color/colorWhite" />
+
+
+                <TextView
+                    android:id="@+id/prerequisites_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="@{chosenDiscipline.prerequisites}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="123123" />
+            </LinearLayout>
+
+
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

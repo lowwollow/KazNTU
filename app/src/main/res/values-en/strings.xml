@@ -8,6 +8,7 @@
     <string name="doctor">Postgraduate education - PhD</string>
     <string name="inital_data_filling">Initial data filling</string>
     <string name="login">"Login "</string>
+    <string name="logout">Выход (v2.9)</string>
     <string name="et_login_hint">LOGIN</string>
     <string name="et_password_hint">PASSWORD</string>
     <string name="btn_login">Login</string>

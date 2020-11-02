@@ -41,6 +41,8 @@ import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.databinding.ActivityHomeBinding;
 import kz.almaty.satbayevuniversity.databinding.NavHeaderBinding;
 import kz.almaty.satbayevuniversity.ui.academicProgress.MainAcademicFragment;
+import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDiscipline;
+import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineFragment;
 import kz.almaty.satbayevuniversity.ui.settings.SettingsFragment;
 import kz.almaty.satbayevuniversity.ui.umkd.UmkdFragment;
 import kz.almaty.satbayevuniversity.utils.Storage;
@@ -90,9 +92,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Menu menu = navigationView.getMenu();
         MenuItem academicProgress = menu.findItem(R.id.academicProgress);
         academicProgress.setTitle(R.string.academicProgress);
-//
-//        MenuItem individualPlan = menu.findItem(R.id.individualPlan);
-//        individualPlan.setTitle(R.string.individualPlan);
 
         MenuItem umkd = menu.findItem(R.id.umkd);
         umkd.setTitle(R.string.umkd);

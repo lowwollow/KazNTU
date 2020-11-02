@@ -28,6 +28,38 @@ public class ChosenDiscipline implements Serializable {
     int totalRowCount;
 
     //лк/ лаб/ пр
+    @SerializedName("lectureCredits")
+    int lectureCredits;
+
+    @SerializedName("practiceCredits")
+    int practiceCredits;
+
+    @SerializedName("labCredits")
+    int labCredits;
+
+    public int getLabCredits() {
+        return labCredits;
+    }
+
+    public void setLabCredits(int labCredits) {
+        this.labCredits = labCredits;
+    }
+
+    public int getLectureCredits() {
+        return lectureCredits;
+    }
+
+    public void setLectureCredits(int lectureCredits) {
+        this.lectureCredits = lectureCredits;
+    }
+
+    public int getPracticeCredits() {
+        return practiceCredits;
+    }
+
+    public void setPracticeCredits(int practiceCredits) {
+        this.practiceCredits = practiceCredits;
+    }
 
     @SerializedName("prerequisites")
     String prerequisites;

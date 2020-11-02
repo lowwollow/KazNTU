@@ -55,7 +55,6 @@ public class TranscriptViewModel extends ViewModel {
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
     public void getTranscript(){
-        loadRv.set(true);
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
         if(onlyServer){
             if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {

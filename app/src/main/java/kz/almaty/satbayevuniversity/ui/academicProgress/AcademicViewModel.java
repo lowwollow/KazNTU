@@ -165,10 +165,11 @@ public class AcademicViewModel extends ViewModel {
     }
     public void registerPlayerId(){
         String playerId = OneSignal.getPermissionSubscriptionState().getSubscriptionStatus().getUserId();
-        KaznituRetrofit.getApi().registerPlayerId(playerId,"android","3.0").enqueue(new Callback<ResponseBody>() {
+        KaznituRetrofit.getApi().registerPlayerId(playerId,"android","4.0").enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
+
                 }
             }
 

@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="individual_plan_item"
+            name="deferedDiscipline"
             type="kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDiscipline" />
+        <variable
+            name="clickListener"
+            type="kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDisciplineEventListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:onClick="@{()->clickListener.deferedDisciplineClicked(deferedDiscipline)}"
+        >
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"
@@ -38,7 +42,7 @@
             android:layout_margin="5dp"
             android:ems="6"
             android:fontFamily="@font/open_sans_semibold"
-            android:text="@{individual_plan_item.title}"
+            android:text="@{deferedDiscipline.title}"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/component"
-            android:text="@{individual_plan_item.disciplineTypeTitle}"
+            android:text="@{deferedDiscipline.disciplineTypeTitle}"
             app:layout_constraintStart_toStartOf="@id/guideline1"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
@@ -60,7 +64,7 @@
             android:id="@+id/cipher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{individual_plan_item.code}"
+            android:text="@{deferedDiscipline.code}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
