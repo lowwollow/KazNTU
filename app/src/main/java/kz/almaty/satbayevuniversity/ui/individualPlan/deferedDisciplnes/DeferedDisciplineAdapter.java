@@ -15,6 +15,7 @@ import java.util.List;
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.databinding.ItemIndividualPlanBinding;
 import kz.almaty.satbayevuniversity.ui.HomeActivity;
+import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineAdapter;
 
 public class DeferedDisciplineAdapter extends RecyclerView.Adapter<DeferedDisciplineAdapter.MyViewHolder> implements DeferedDisciplineEventListener{
 
@@ -34,6 +35,7 @@ public class DeferedDisciplineAdapter extends RecyclerView.Adapter<DeferedDiscip
     @Override
     public void onBindViewHolder(@NonNull DeferedDisciplineAdapter.MyViewHolder holder, int position) {
         DeferedDiscipline deferedDiscipline = deferedDisciplineList.get(position);
+        holder.individualPlanBinding.setClickListener(this);
         holder.individualPlanBinding.setDeferedDiscipline(deferedDiscipline);
     }
 
@@ -59,7 +61,7 @@ public class DeferedDisciplineAdapter extends RecyclerView.Adapter<DeferedDiscip
     }
 
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder{
         private ItemIndividualPlanBinding individualPlanBinding;
         public MyViewHolder(@NonNull ItemIndividualPlanBinding individualPlanBinding){
             super(individualPlanBinding.getRoot());

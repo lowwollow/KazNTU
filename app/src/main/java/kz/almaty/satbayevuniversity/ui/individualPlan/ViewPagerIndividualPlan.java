@@ -45,7 +45,7 @@ public class ViewPagerIndividualPlan extends Fragment {
     }
 
     private void setupViewPager(ViewPager viewPager){
-        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         viewPagerAdapter.addFragment(new ChosenDisciplineFragment(), getString(R.string.chosen));
         viewPagerAdapter.addFragment(new DeferedDisciplineFragment(), getString(R.string.delayed));
         viewPager.setAdapter(viewPagerAdapter);

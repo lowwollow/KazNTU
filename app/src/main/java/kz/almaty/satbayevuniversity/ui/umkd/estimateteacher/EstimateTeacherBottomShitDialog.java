@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -20,6 +21,13 @@ import kz.almaty.satbayevuniversity.ui.umkd.UmkdAdapter;
 import kz.almaty.satbayevuniversity.ui.umkd.UmkdFragment;
 
 public class EstimateTeacherBottomShitDialog extends BottomSheetDialogFragment {
+    private Context context;
+    public EstimateTeacherBottomShitDialog(){}
+    public EstimateTeacherBottomShitDialog(Context context) {this.context = context;}
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Nullable
     @Override
@@ -27,12 +35,16 @@ public class EstimateTeacherBottomShitDialog extends BottomSheetDialogFragment {
         View v = inflater.inflate(R.layout.modal_bottom_sheet, container, false);
         Button btn1 = v.findViewById(R.id.files);
         Button btn2 = v.findViewById(R.id.estimate);
+        Bundle extras = getActivity().getIntent().getExtras();
+        Log.d("intentVal", "onCreateView: " + extras);
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // to do
+
             }
         });
+
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

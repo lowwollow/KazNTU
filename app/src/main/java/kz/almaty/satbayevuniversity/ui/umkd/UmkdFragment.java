@@ -1,5 +1,6 @@
 package kz.almaty.satbayevuniversity.ui.umkd;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -37,8 +38,6 @@ public class UmkdFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "Fragment2 onCreateView");
-
         umkdFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_umkd, container, false);
         view = umkdFragmentBinding.getRoot();
         toolbar = view.findViewById(R.id.umkd_toolbar);
@@ -70,7 +69,7 @@ public class UmkdFragment extends Fragment {
         umkdFragmentBinding.umkdRecyclerView.setHasFixedSize(true);
         umkdFragmentBinding.umkdRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
 
-        umkdAdapter = new UmkdAdapter(getActivity());
+        umkdAdapter = new UmkdAdapter(getContext());
         umkdFragmentBinding.umkdRecyclerView.setAdapter(umkdAdapter);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);

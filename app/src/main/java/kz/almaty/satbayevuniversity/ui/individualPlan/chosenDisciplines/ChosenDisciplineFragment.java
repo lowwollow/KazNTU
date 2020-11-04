@@ -56,8 +56,8 @@ public class ChosenDisciplineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         individualPlanBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_chosen_disciplines_individual_plan,container,false);
         View view = individualPlanBinding.getRoot();
-        individualPlanBinding.emptyImage.setVisibility(view.INVISIBLE);
-        individualPlanBinding.emptyTextView.setVisibility(view.INVISIBLE);
+        individualPlanBinding.emptyImage.setVisibility(view.GONE);
+        individualPlanBinding.emptyTextView.setVisibility(view.GONE);
         loadRv.set(true);
         return view;
     }

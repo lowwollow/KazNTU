@@ -89,7 +89,7 @@ public class ChosenDisciplineAdapter extends RecyclerView.Adapter<RecyclerView.V
         disciplineDialogFragment.show(homeActivity.getSupportFragmentManager(), "chosenDisciplineDialogFragment");
     }
 
-    class ViewHolderHeader extends RecyclerView.ViewHolder {
+    public class ViewHolderHeader extends RecyclerView.ViewHolder {
         ChosenDisciplineHeaderBinding chosenDisciplineItemBinding;
         ViewHolderHeader(@NonNull ChosenDisciplineHeaderBinding chosenDisciplineItemBinding) {
             super(chosenDisciplineItemBinding.getRoot());
@@ -97,7 +97,7 @@ public class ChosenDisciplineAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    class ViewHolderBody extends RecyclerView.ViewHolder{
+    public class ViewHolderBody extends RecyclerView.ViewHolder{
         ChosenDisciplineItemBinding chosenDisciplineItemBinding;
         public ViewHolderBody(@NonNull ChosenDisciplineItemBinding chosenDisciplineItemBinding) {
             super(chosenDisciplineItemBinding.getRoot());

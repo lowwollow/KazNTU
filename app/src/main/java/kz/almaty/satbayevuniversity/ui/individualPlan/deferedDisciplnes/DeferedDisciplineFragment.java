@@ -46,20 +46,20 @@ public class DeferedDisciplineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         individualPlanBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_defered_disciplines_individual_plan, container, false);
         View view = individualPlanBinding.getRoot();
-        individualPlanBinding.emptyImage.setVisibility(view.INVISIBLE);
-        individualPlanBinding.emptyTextView.setVisibility(view.INVISIBLE);
+        individualPlanBinding.emptyImage.setVisibility(view.GONE);
+        individualPlanBinding.emptyTextView.setVisibility(view.GONE);
+        loadRv.set(true);
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        individualPlanAdapter = new DeferedDisciplineAdapter(getActivity());
-
         individualPlanBinding.individualPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         individualPlanBinding.individualPlanRecyclerView.setHasFixedSize(true);
         individualPlanBinding.individualPlanRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
+        individualPlanAdapter = new DeferedDisciplineAdapter(getActivity());
         individualPlanBinding.individualPlanRecyclerView.setAdapter(individualPlanAdapter);
         if (connManager != null) {
             if (connManager.getActiveNetworkInfo() != null && activeNetwork.isConnected()) {

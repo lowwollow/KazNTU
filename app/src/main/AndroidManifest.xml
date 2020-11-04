@@ -50,6 +50,8 @@
         </activity>
         <activity android:name=".ui.admission.registration.RegistrationActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.umkd.estimateteacher.EstimateTeacherBottomShitDialog"
+            tools:ignore="Instantiatable" />
         <activity android:name=".ui.admission.bachelor.BachelorActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.admission.master.MasterActivity"

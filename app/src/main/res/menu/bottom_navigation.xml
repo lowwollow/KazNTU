@@ -6,12 +6,6 @@
         android:title="@string/journal"
         android:icon="@drawable/attendance" />
 
-
-    <item
-        android:id="@+id/individualPlan"
-        android:title="@string/individualPlan"
-        android:icon="@drawable/ic_settings_24px" />
-
     <item
         android:id="@+id/schedule"
         android:title="@string/schedule"
@@ -27,4 +21,9 @@
         android:title="@string/notifications"
         android:icon="@drawable/notificatoin"
         />
+
+    <item
+        android:id="@+id/individualPlan"
+        android:title="@string/individualPlan"
+        android:icon="@drawable/ic_settings_24px" />
 </menu>
