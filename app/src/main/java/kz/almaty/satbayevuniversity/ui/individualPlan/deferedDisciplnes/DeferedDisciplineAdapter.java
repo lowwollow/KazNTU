@@ -53,7 +53,6 @@ public class DeferedDisciplineAdapter extends RecyclerView.Adapter<DeferedDiscip
 
     @Override
     public void deferedDisciplineClicked(DeferedDiscipline deferedDiscipline) {
-        Log.d("defDecClicked", "deferedDisciplineClicked: ");
         DeferedDisciplineDialogFragment deferedDisciplineDialogFragment = new DeferedDisciplineDialogFragment();
         deferedDisciplineDialogFragment.setDeferedDiscipline(deferedDiscipline);
         HomeActivity homeActivity = (HomeActivity) context;

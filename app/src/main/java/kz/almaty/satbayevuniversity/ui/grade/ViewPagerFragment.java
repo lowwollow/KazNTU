@@ -33,7 +33,6 @@ public class ViewPagerFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view_pager, container, false);
-
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager = view.findViewById(R.id.viewPager);
         return view;
@@ -43,10 +42,8 @@ public class ViewPagerFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.grade);
-
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     private void setupViewPager(ViewPager viewPager){

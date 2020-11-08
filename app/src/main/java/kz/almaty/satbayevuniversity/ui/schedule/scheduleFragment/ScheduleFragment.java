@@ -3,6 +3,7 @@ package kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,7 +86,7 @@ public class ScheduleFragment extends Fragment implements Cloneable{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        Log.d("lk", "onActivityCreated: schedule");
         mViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
         authViewModel = ViewModelProviders.of(this).get(AuthViewModel.class);
         scheduleFragmentBinding.setSchedule(mViewModel);
@@ -262,5 +263,11 @@ public class ScheduleFragment extends Fragment implements Cloneable{
         DayOfWeek firstDayOfWeek = DayOfWeek.MONDAY;
         calendarView.setup(firstMonth, lastMonth, firstDayOfWeek);
         calendarView.scrollToDate(LocalDate.now());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("Schedule", "onPause: Schedule");
     }
 }

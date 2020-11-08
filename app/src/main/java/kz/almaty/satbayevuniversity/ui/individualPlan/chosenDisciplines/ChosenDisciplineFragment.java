@@ -1,5 +1,6 @@
 package kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -16,11 +17,17 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableBoolean;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.savedstate.SavedStateRegistry;
+import androidx.savedstate.SavedStateRegistryOwner;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +44,7 @@ import retrofit2.Response;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
-public class ChosenDisciplineFragment extends Fragment {
+public class ChosenDisciplineFragment extends Fragment{
 
     private FragmentChosenDisciplinesIndividualPlanBinding individualPlanBinding;
     private ChosenDisciplineAdapter chosenDisciplineAdapter;
@@ -46,10 +53,10 @@ public class ChosenDisciplineFragment extends Fragment {
     private Context context;
     private SharedPreferences sPref;
     private List<ChosenDiscipline> list = new ArrayList<>();
-    private final String SAVED_OBJECT = "saved_object";
+    private final String SAVED_OBJECTS = "saved_objects";
     private ConnectivityManager connManager = (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
-
+    private boolean firstTime = true;
 
     @Nullable
     @Override
@@ -58,10 +65,15 @@ public class ChosenDisciplineFragment extends Fragment {
         View view = individualPlanBinding.getRoot();
         individualPlanBinding.emptyImage.setVisibility(view.GONE);
         individualPlanBinding.emptyTextView.setVisibility(view.GONE);
-        loadRv.set(true);
         return view;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -82,6 +94,7 @@ public class ChosenDisciplineFragment extends Fragment {
                                 list.addAll(response.body().getChosenDisciplineList().get(i).getChosenDisciplineList());
                             }
                             chosenDisciplineAdapter.setChosenDisciplines(list);
+                            SaveDiscipline(list);
                         }
                     }
 
@@ -94,24 +107,75 @@ public class ChosenDisciplineFragment extends Fragment {
                 Toast.makeText(getActivity(), "Нет доступа к сети", Toast.LENGTH_LONG).show();
             }
         }
+}
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: ");
     }
 
-    public void SaveDiscipline(ChosenDiscipline chosenDiscipline){
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: ");
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d(TAG, "onSaveInstanceState: ");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: ");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "onDestroyView: ");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d(TAG, "onDetach: ");
+    }
+
+
+    public void SaveDiscipline(List<Object> chosenDisciplines){
         sPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
         Gson gson = new Gson();
-        String gson_to_string = gson.toJson(chosenDiscipline);
-        ed.putString(SAVED_OBJECT,gson_to_string);
+        String gson_to_string = gson.toJson(chosenDisciplines);
+        ed.putString(SAVED_OBJECTS,gson_to_string);
         ed.apply();
     }
 
-    public ChosenDiscipline GetDiscipline(){
+    public List<Object> GetDisciplines(){
         Gson gson = new Gson();
-        String gson_string = sPref.getString(SAVED_OBJECT, "");
-        ChosenDiscipline discipline = gson.fromJson(gson_string,ChosenDiscipline.class);
-        return discipline;
+        String gson_string = sPref.getString(SAVED_OBJECTS, "");
+        Type type = new TypeToken<List<Object>>(){}.getType();
+        List<Object> disciplines = gson.fromJson(gson_string,type);
+        return disciplines;
     }
 
-    public ChosenDisciplineFragment getChosenDisciplineFragment() {return new ChosenDisciplineFragment();}
+    public static ChosenDisciplineFragment getInstance() {return new ChosenDisciplineFragment();}
+
 }

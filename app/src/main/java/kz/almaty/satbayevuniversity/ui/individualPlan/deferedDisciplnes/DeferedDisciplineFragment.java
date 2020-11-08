@@ -42,13 +42,19 @@ public class DeferedDisciplineFragment extends Fragment {
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
     private List<DeferedDiscipline> list = new ArrayList<>();
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         individualPlanBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_defered_disciplines_individual_plan, container, false);
         View view = individualPlanBinding.getRoot();
+        individualPlanBinding.notifyChange();
         individualPlanBinding.emptyImage.setVisibility(view.GONE);
         individualPlanBinding.emptyTextView.setVisibility(view.GONE);
-        loadRv.set(true);
         return view;
     }
 
@@ -82,6 +88,5 @@ public class DeferedDisciplineFragment extends Fragment {
             }
         }
     }
-
-    public static DeferedDisciplineFragment newInstance() { return new DeferedDisciplineFragment(); }
-}
+    public static DeferedDisciplineFragment getInstance() { return new DeferedDisciplineFragment(); }
+}   

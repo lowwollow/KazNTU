@@ -1,5 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.individualPlan;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import com.google.android.material.tabs.TabLayout;
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineFragment;
 import kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDisciplineFragment;
+import kz.almaty.satbayevuniversity.ui.schedule.exams.ExamsFragment;
+import kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment.ScheduleFragment;
 import kz.almaty.satbayevuniversity.ui.viewPager.ViewPagerAdapter;
 
 public class ViewPagerIndividualPlan extends Fragment {
@@ -40,14 +44,28 @@ public class ViewPagerIndividualPlan extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.individualPlan);
-        setupViewPager(viewPager);
+//        setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    private void setupViewPager(ViewPager viewPager){
-        viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
-        viewPagerAdapter.addFragment(new ChosenDisciplineFragment(), getString(R.string.chosen));
-        viewPagerAdapter.addFragment(new DeferedDisciplineFragment(), getString(R.string.delayed));
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        Log.d("TAG", "onActivityCreated: viewpager");
+        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        viewPagerAdapter.addFragment(ChosenDisciplineFragment.getInstance(), getString(R.string.chosen));
+        viewPagerAdapter.addFragment(DeferedDisciplineFragment.getInstance(), getString(R.string.delayed));
         viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+    }
+
+    private void setupViewPager(ViewPager viewPager){
+//        viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
+//        viewPagerAdapter.addFragment(ChosenDisciplineFragment.getInstance(), getString(R.string.chosen));
+//        viewPagerAdapter.addFragment(DeferedDisciplineFragment.getInstance(), getString(R.string.delayed));
+//        viewPager.setAdapter(viewPagerAdapter);
     }
 }

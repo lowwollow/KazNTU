@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -63,6 +64,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         sharedPreferences.edit().putInt("typeId",1).apply();
         return view;
     }
+
     @Override
     public void onResume(){
         super.onResume();
@@ -97,11 +99,9 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
             ((HomeActivity)getActivity()).OpenToggleNavMenu();
         });
 
-        ConnectivityManager connManager =
-                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-
+        ConnectivityManager connManager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
-
+        // update button
         imageView.setOnClickListener(v -> {
             if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
                 editor.putBoolean(getString(R.string.only_server),true);
@@ -165,5 +165,9 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         ft.commit();
     }
 
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: Main");
+    }
 }

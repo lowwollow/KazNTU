@@ -31,6 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ScheduleViewModel extends ViewModel {
+    private static final String TAG = "ScheduleViewModel";
     SharedPreferences sharedPreferences = App.getContext().getSharedPreferences("shared_preferences",Context.MODE_PRIVATE);
     private List<Schedule> scheduleList = new ArrayList<>();
     private List<Schedule> scheduleListFromDb = new ArrayList<>();
