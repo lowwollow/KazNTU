@@ -1,29 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLinear_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:gravity="center_horizontal"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    >
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView_action"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="Выберите действие" />-->
+
     <TextView
+        android:id="@+id/textView_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Выберите действие"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        />
+        android:textStyle="bold" />
 
-    <Button
+    <LinearLayout
         android:id="@+id/files"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Файлы"/>
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:clickable="true">
 
-    <Button
+        <ImageView
+            android:id="@+id/imageView_files"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            app:srcCompat="@drawable/ic_baseline_sticky_note_2_24" />
+
+        <TextView
+            android:id="@+id/textView_files"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Файлы" />
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/estimate"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Оценить"/>
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/imageView_estimate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            app:srcCompat="@drawable/ic_outline_rule_24" />
+
+        <TextView
+            android:id="@+id/textView_estimate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Оценить преподавателя" />
+    </LinearLayout>
 
 </LinearLayout>

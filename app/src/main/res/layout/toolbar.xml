@@ -25,7 +25,8 @@
             app:layout_constraintHeight_percent="0.5"
             app:layout_constraintWidth_percent="0.8"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/reload_white" />
+            android:src="@drawable/reload_white"
+            android:layout_marginRight="10dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -37,6 +37,7 @@
             android:name="kz.almaty.satbayevuniversity.ui.HomeActivity"
             android:configChanges="locale"
             android:screenOrientation="portrait"/>
+        <activity android:name="kz.almaty.satbayevuniversity.ui.umkd.estimateteacher.EstimateTeacherActivity"/>
         <activity
             android:name="kz.almaty.satbayevuniversity.ui.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"

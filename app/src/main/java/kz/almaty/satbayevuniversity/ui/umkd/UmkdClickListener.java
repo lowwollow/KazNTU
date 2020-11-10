@@ -4,4 +4,6 @@ import kz.almaty.satbayevuniversity.data.entity.umkd.Umkd;
 
 public interface UmkdClickListener {
     void umkdClicked(Umkd umkd);
+    void saveUmkd(Umkd umkd);
+    Umkd getUmkd();
 }

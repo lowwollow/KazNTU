@@ -7,23 +7,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.entity.umkd.Umkd;
+import kz.almaty.satbayevuniversity.ui.HomeActivity;
 import kz.almaty.satbayevuniversity.ui.umkd.UmkdAdapter;
-import kz.almaty.satbayevuniversity.ui.umkd.UmkdFragment;
+import kz.almaty.satbayevuniversity.ui.umkd.filefragment.FileFragment;
+import kz.almaty.satbayevuniversity.utils.Storage;
 
 public class EstimateTeacherBottomShitDialog extends BottomSheetDialogFragment {
     private Context context;
     public EstimateTeacherBottomShitDialog(){}
     public EstimateTeacherBottomShitDialog(Context context) {this.context = context;}
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,25 +35,35 @@ public class EstimateTeacherBottomShitDialog extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.modal_bottom_sheet, container, false);
-        Button btn1 = v.findViewById(R.id.files);
-        Button btn2 = v.findViewById(R.id.estimate);
-        Bundle extras = getActivity().getIntent().getExtras();
-        Log.d("intentVal", "onCreateView: " + extras);
-
-        btn1.setOnClickListener(new View.OnClickListener() {
+        LinearLayout files = (LinearLayout) v.findViewById(R.id.files);
+        LinearLayout estimate = (LinearLayout) v.findViewById(R.id.estimate);
+        files.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                UmkdAdapter temp = new UmkdAdapter();
+                Umkd umkd = temp.getUmkd();
+                FileFragment fileFragment = new FileFragment();
+                Storage.getInstance().setCourseCode(umkd.getCourseCode());
+                Storage.getInstance().setInstructorID(String.valueOf(umkd.getInstructorId()));
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fileFragment, "fileFragment")
+                        .addToBackStack("")
+                        .commit();
+                hideDialog();
             }
         });
-
-        btn2.setOnClickListener(new View.OnClickListener() {
+        estimate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // to do
+                Intent in = new Intent(getActivity(), EstimateTeacherActivity.class);
+                startActivity(in);
+                hideDialog();
             }
         });
         return v;
     }
 
+    private void hideDialog(){
+        this.dismiss();
+    }
 }

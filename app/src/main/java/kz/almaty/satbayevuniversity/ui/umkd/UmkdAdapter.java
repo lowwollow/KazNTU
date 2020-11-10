@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,7 @@ import kz.almaty.satbayevuniversity.utils.Storage;
 public class UmkdAdapter extends RecyclerView.Adapter<UmkdAdapter.ViewHolder> implements UmkdClickListener{
     private List<Umkd> umkdList;
     private Context context;
+    private static Umkd umkd;
 
     public UmkdAdapter(Context context) {
         this.context = context;
@@ -61,24 +63,21 @@ public class UmkdAdapter extends RecyclerView.Adapter<UmkdAdapter.ViewHolder> im
 
     @Override
     public void umkdClicked(Umkd umkd) {
-        // open dialog
-//        EstimateTeacherBottomShitDialog estimateTeacherBottomShitDialog = new EstimateTeacherBottomShitDialog();
-//        estimateTeacherBottomShitDialog.show(((AppCompatActivity)context).getSupportFragmentManager(), "");
-//
-//        Intent i = new Intent(context, EstimateTeacherBottomShitDialog.class);
-//        //i.putExtra("asd", "test");
-//        ((Activity)(context)).startActivity(i);
-
-        FileFragment fileFragment = new FileFragment();
-        Storage.getInstance().setCourseCode(umkd.getCourseCode());
-        Storage.getInstance().setInstructorID(String.valueOf(umkd.getInstructorId()));
-        HomeActivity activity = (HomeActivity) context;
-        activity.getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_up, R.anim.slide_down,  R.anim.slide_up, R.anim.slide_down)
-                .replace(R.id.fragment_container, fileFragment, "fileFragment")
-                .addToBackStack("")
-                .commit();
+        saveUmkd(umkd);
+        EstimateTeacherBottomShitDialog estimateTeacherBottomShitDialog = new EstimateTeacherBottomShitDialog();
+        estimateTeacherBottomShitDialog.show(((AppCompatActivity)context).getSupportFragmentManager(), "");
     }
+
+    @Override
+    public void saveUmkd(Umkd umkd) {
+        this.umkd = umkd;
+    }
+
+    @Override
+    public Umkd getUmkd() {
+        return this.umkd;
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemUmkdBinding umkdItemBinding;
@@ -87,5 +86,6 @@ public class UmkdAdapter extends RecyclerView.Adapter<UmkdAdapter.ViewHolder> im
             this.umkdItemBinding = umkdItemBinding;
         }
     }
+
 
 }
