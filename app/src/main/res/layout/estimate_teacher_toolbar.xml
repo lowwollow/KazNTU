@@ -1,0 +1,18 @@
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbarFromMain"
+    style="@style/Theme.AppCompat.NoActionBar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/primary"
+    android:theme="@style/AppThemeActionBar"
+    app:titleTextAppearance="@style/textSize"
+    app:titleTextColor="@color/colorWhite">
+
+    <TextView
+        style="@style/AppTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Оцените преподавателя" />
+
+</androidx.appcompat.widget.Toolbar>

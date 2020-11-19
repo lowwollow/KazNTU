@@ -38,29 +38,15 @@ public class App extends Application {
                 .setJournalMode(RoomDatabase.JournalMode.AUTOMATIC)
                 .fallbackToDestructiveMigration()
                 .build();
-
         mContext = getApplicationContext();
         OneSignal.Builder builder = OneSignal.startInit(this);
         builder.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification);
         builder.unsubscribeWhenNotificationsAreDisabled(true);
         builder.setNotificationOpenedHandler(new NotificationHandler());
         builder.init();
-
         YandexMetricaConfig config = YandexMetricaConfig.newConfigBuilder(API_key).build();
         YandexMetrica.activate(getApplicationContext(), config);
         YandexMetrica.enableActivityAutoTracking(this);
-
-
-        SentryAndroid.init(this, options -> {
-            // Add a callback that will be used before the event is sent to Sentry.
-            // With this callback, you can modify the event or, when returning null, also discard the event.
-            options.setBeforeSend((event, hint) -> {
-                if (SentryLevel.DEBUG.equals(event.getLevel()))
-                    return null;
-                else
-                    return event;
-            });
-        });
     }
 
     public static App getInstance() {

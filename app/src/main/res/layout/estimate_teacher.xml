@@ -4,14 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.umkd.estimateteacher.EstimateTeacherActivity">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="observableFields"
+            type="kz.almaty.satbayevuniversity.ui.umkd.estimateteacher.EstimateTeacherActivity" />
+
+    </data>
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
+
         <include
             android:id="@+id/toolbar"
-            layout="@layout/layout_toolbar" />
+            layout="@layout/empty_toolbar"
+            app:layout_constraintTop_toBottomOf="parent"/>
 
         <TextView
             android:id="@+id/name"
@@ -33,7 +44,8 @@
             android:id="@+id/ratingBar"
             style="?android:attr/ratingBarStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            />
 
 
         <FrameLayout
@@ -49,6 +61,8 @@
             android:layout_width="match_parent"
             android:layout_height="200dp">
             <EditText
+                android:id="@+id/editText"
+                android:imeOptions="actionDone"
                 android:hint="Напишите комментарий"
                 android:background="@null"
                 android:layout_width="wrap_content"
@@ -67,6 +81,8 @@
             android:layout_marginRight="15dp"
             android:orientation="horizontal">
             <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchMaterial"
+                style="@style/Widget.AppCompat.CompoundButton.Switch"
                 android:gravity="right"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -78,7 +94,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_ok"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@color/colorAccent"

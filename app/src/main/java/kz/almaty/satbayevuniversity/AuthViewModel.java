@@ -141,7 +141,6 @@ public class AuthViewModel extends ViewModel {
                     drawableMutableLiveData.setValue(bmp);
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
             }

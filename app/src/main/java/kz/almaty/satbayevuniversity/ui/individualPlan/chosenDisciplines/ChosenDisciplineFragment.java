@@ -94,7 +94,6 @@ public class ChosenDisciplineFragment extends Fragment{
                                 list.addAll(response.body().getChosenDisciplineList().get(i).getChosenDisciplineList());
                             }
                             chosenDisciplineAdapter.setChosenDisciplines(list);
-                            SaveDiscipline(list);
                         }
                     }
 

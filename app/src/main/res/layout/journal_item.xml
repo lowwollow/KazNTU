@@ -28,18 +28,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/cardView"
-        app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
+        app:cardElevation="4dp"
         app:cardPreventCornerOverlap="false"
         app:cardCornerRadius="4dp"
-        android:layout_gravity="center_horizontal"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/courseImg"
@@ -93,7 +92,8 @@
                 app:layout_constraintStart_toStartOf="@+id/textViewMissed"
                 app:layout_constraintTop_toTopOf="@+id/missedPercentNumber"
                 app:layout_constraintVertical_bias="1.0"
-                tools:text="0" />
+                tools:text="0"
+                android:layout_marginLeft="5dp" />
 
             <TextView
                 android:textColor="@color/black"
@@ -108,7 +108,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/textViewMissed"
                 app:layout_constraintStart_toEndOf="@+id/missedNumber"
                 app:layout_constraintTop_toBottomOf="@+id/teacherName"
-                tools:text="(1%)" />
+                tools:text="(1%)"
+                android:layout_marginLeft="5dp" />
 
             <TextView
                 android:textColor="@color/black"
@@ -122,7 +123,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/teacherName"
                 app:layout_constraintTop_toBottomOf="@+id/missedNumber"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp" />
 
             <TextView
                 android:textColor="@color/black"
@@ -150,7 +152,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline13"
                 app:layout_constraintTop_toBottomOf="@+id/missedNumber"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="52dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline12"

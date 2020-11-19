@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
@@ -77,7 +78,7 @@ public class AcademicFragment extends Fragment {
 
         mViewModel.getAcademicData().observe(this, responseJournals -> {
             academicAdapterResponse.setResponseJournalList(responseJournals);
-            });
+        });
 
 
         mViewModel.getHandleTimeout().observe(this, integer -> {

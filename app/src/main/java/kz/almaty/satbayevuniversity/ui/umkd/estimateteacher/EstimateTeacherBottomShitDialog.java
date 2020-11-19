@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.SharedPrefCache;
 import kz.almaty.satbayevuniversity.data.entity.umkd.Umkd;
 import kz.almaty.satbayevuniversity.ui.HomeActivity;
 import kz.almaty.satbayevuniversity.ui.umkd.UmkdAdapter;
@@ -55,9 +57,22 @@ public class EstimateTeacherBottomShitDialog extends BottomSheetDialogFragment {
         estimate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getActivity(), EstimateTeacherActivity.class);
-                startActivity(in);
-                hideDialog();
+                UmkdAdapter adapter = new UmkdAdapter();
+                int instructorId = adapter.getUmkd().getInstructorId();
+                EstimateTeacherActivity es = new EstimateTeacherActivity();
+                es.getRating(instructorId);
+                es.getMutableData().observe(getActivity(), data->{
+                    //Log.d("testLivedata", "onClick: " + data.get(0).getDescription());
+                    //String desc = data.get(0).getDescription();
+                    //double rating = data.get(0).getRating();
+                    if (!data.isEmpty()){
+                        Toast.makeText(getContext(), "Вы уже оценили данного преподавателя", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Intent in = new Intent(getActivity(), EstimateTeacherActivity.class);
+                        startActivity(in);
+                        hideDialog();
+                    }
+                });
             }
         });
         return v;

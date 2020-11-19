@@ -77,22 +77,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         showPassword(showPsw);
-
-
-//        try {
-//            throw new Exception("This is a test.");
-//        } catch (Exception e) {
-//            Sentry.captureException(e);
-//        }
-
         loginBtn = activityLoginBinding.loginBtn;
-
         if (savedInstanceState == null) {
             authViewModel.initAuth();
         }
-
-
-
         authViewModel.getUserMutableLiveData().observe(this, this::savePreference);
 
         authViewModel.toastGetMessage().observe(this, aBoolean -> {

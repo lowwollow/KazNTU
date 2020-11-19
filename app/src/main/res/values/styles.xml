@@ -9,8 +9,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="AppThemeActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -30,10 +33,10 @@
     <!-- styles.xml -->
     <style name="Theme.AppCompat.NoActionBar" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:fontFamily">@font/open_sans_light</item>
-        <item name="android:textAlignment">center</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:gravity">center</item>
     </style>
+
     <style name="textSize" parent="@style/Base.TextAppearance.AppCompat.Title">
         <item name="android:textSize">17sp</item>
     </style>

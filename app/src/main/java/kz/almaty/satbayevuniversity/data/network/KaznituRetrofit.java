@@ -29,19 +29,17 @@ public class KaznituRetrofit {
     public static MyApi getApi(){
 
         Gson gson = new GsonBuilder().setLenient().create();
-
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
+                        Log.d("token", "intercept: " + "Bearer " + App.getContext().getSharedPreferences("MyPref", MODE_PRIVATE).getString("MyToken",""));
                         Request newRequest = chain.request().newBuilder()
                                 .addHeader("Authorization", "Bearer " + App.getContext().getSharedPreferences("MyPref", MODE_PRIVATE).getString("MyToken",""))
                                 .build();
-                        Log.d("wtf", "intercept: " + newRequest);
                         return chain.proceed(newRequest);
                     }
                 })

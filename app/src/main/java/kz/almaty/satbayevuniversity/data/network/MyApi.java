@@ -14,6 +14,7 @@ import kz.almaty.satbayevuniversity.data.entity.schedule.Schedule;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Student;
 import kz.almaty.satbayevuniversity.data.entity.umkd.File;
 import kz.almaty.satbayevuniversity.data.entity.umkd.Umkd;
+import kz.almaty.satbayevuniversity.ui.umkd.estimateteacher.InstructorBody;
 import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineGroup;
 import kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDisciplineGroup;
 import okhttp3.RequestBody;
@@ -22,10 +23,10 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface MyApi {
-
 
     @POST("token")
     Call<User> onLogin(@Body RequestBody requestBody);
@@ -66,9 +67,6 @@ public interface MyApi {
     @GET("/api/File/Download")
     Call<ResponseBody> downloadFileCourse(@Query("fileID") String courseCode);
 
-    @POST("/api/Complaint/Save")
-    Call<ResponseBody> sendComplaint(@Body Map<String, String> body);
-
     @GET("api/schedule/students")
     Call<List<Student>> getStudentList(@Query("classid") Integer clasid, @Query("language") String language);
 
@@ -80,4 +78,13 @@ public interface MyApi {
 
     @POST("api/Notification/Register")
     Call<ResponseBody> registerPlayerId(@Query("playerId") String playerId, @Query("device") String device, @Query("appversion") String appversion);
+
+    @POST("/api/Complaint/Save")
+    Call<ResponseBody> sendComplaint(@Body Map<String, String> body);
+
+    @POST("/api/instructorrating")
+    Call<ResponseBody>sendRating(@Body Map<String, Object> body);
+
+    @GET("/api/instructorrating/{instructorId}")
+    Call<List<InstructorBody>> getRating(@Path("instructorId") int instructorId);
 }
