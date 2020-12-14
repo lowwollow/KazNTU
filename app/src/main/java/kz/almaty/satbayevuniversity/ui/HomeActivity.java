@@ -111,7 +111,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 activityHomeBinding.navigationView, false);
 
         activityHomeBinding.navigationView.addHeaderView(navHeaderBinding.getRoot());
-
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) navHeaderBinding.headerLayout.getLayoutParams();
 
         Display display = getWindowManager().getDefaultDisplay();
@@ -229,7 +228,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("FIRST_RUN",true);
             editor.commit();
-
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
             AlertDialog alertDialog = builder.create();

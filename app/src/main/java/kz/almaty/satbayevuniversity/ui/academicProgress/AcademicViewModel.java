@@ -17,6 +17,7 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -47,15 +48,16 @@ public class AcademicViewModel extends ViewModel {
     private MutableLiveData<Integer> handleError = new MutableLiveData<>();
     private MutableLiveData<Integer> handleTimeout = new MutableLiveData<>();
 
-    private AppDatabase db = App.getInstance().getDatabase();
-    private AccountDao accountDao = db.accountDao();
+    private final AppDatabase db = App.getInstance().getDatabase();
+    private final AccountDao accountDao = db.accountDao();
 
-    private BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(3);
-    private ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 1, 1,
+    private final BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(3);
+    private final ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 1, 1,
             TimeUnit.SECONDS, queue);
-    private ConnectivityManager connManager = (ConnectivityManager)App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-    private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
-    void getJournal() {
+    private final ConnectivityManager connManager = (ConnectivityManager)App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    private final NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
+
+    public void getJournal() {
         loadRv.set(true);
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
         if(onlyServer){
@@ -68,11 +70,11 @@ public class AcademicViewModel extends ViewModel {
                     loadRv.set(false);
                     responseJournalListForDB = accountDao.getResponseJournal();
                     academicData.postValue(responseJournalListForDB);
-                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && Objects.requireNonNull(activeNetwork).isConnected()) {
                         getJournalListFromServer();
                     }
                 }else {
-                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && Objects.requireNonNull(activeNetwork).isConnected()) {
                         getJournalListFromServer();
                     } else {
                         loadRv.set(false);
@@ -91,6 +93,7 @@ public class AcademicViewModel extends ViewModel {
                          case 200:
                              loadRv.set(false);
                              responseJournalList = response.body();
+                             assert responseJournalList != null;
                              getEmptyBoolean.set(responseJournalList.isEmpty());
                              if(!responseJournalList.equals(responseJournalListForDB)){
                                  new Thread(() -> {
@@ -150,8 +153,6 @@ public class AcademicViewModel extends ViewModel {
         return handleError;
     }
 
-
-
     private void update(List<ResponseJournal> responseJournals) {
         executor.execute(() -> {
                 accountDao.deleteResponseJournal();
@@ -163,18 +164,20 @@ public class AcademicViewModel extends ViewModel {
         loadRv.set(false);
         handleTimeout.setValue(1);
     }
+
     public void registerPlayerId(){
         String playerId = OneSignal.getPermissionSubscriptionState().getSubscriptionStatus().getUserId();
         KaznituRetrofit.getApi().registerPlayerId(playerId,"android","4.0").enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()){
 
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+
             }
         });
     }

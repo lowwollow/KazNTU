@@ -164,10 +164,4 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         FragmentTransaction ft = getFragmentManager().beginTransaction().replace(R.id.main_academic_fragment_container, newFragment);
         ft.commit();
     }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause: Main");
-    }
 }

@@ -23,7 +23,7 @@ import java.util.List;
         implements ResponseEventListener {
 
     private List<ResponseJournal> responseJournalList;
-    private Context context;
+    private final Context context;
 
     public AcademicAdapterResponse(Context context) {
         this.context = context;
@@ -65,12 +65,12 @@ import java.util.List;
         detailFragment.show(activity.getSupportFragmentManager(), "Dialog");
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
-        private JournalItemBinding journalItemBinding;
+    static class ViewHolder extends RecyclerView.ViewHolder{
+        private final JournalItemBinding journalItemBinding;
         ViewHolder(@NonNull JournalItemBinding journalItemBinding) {
             super(journalItemBinding.getRoot());
             this.journalItemBinding = journalItemBinding;
-            }
+        }
     }
 }
 

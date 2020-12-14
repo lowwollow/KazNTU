@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.academicProgress;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,8 +39,8 @@ public class AcademicFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -62,8 +63,8 @@ public class AcademicFragment extends Fragment {
         authViewModel = ViewModelProviders.of(this).get(AuthViewModel.class);
         academicFragmentBinding.setAcademicViewModel(mViewModel);
 
-        if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
-            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.journal);
+        if (((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar() != null) {
+            Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(R.string.journal);
         }
 
         mViewModel.registerPlayerId();
@@ -79,7 +80,6 @@ public class AcademicFragment extends Fragment {
         mViewModel.getAcademicData().observe(this, responseJournals -> {
             academicAdapterResponse.setResponseJournalList(responseJournals);
         });
-
 
         mViewModel.getHandleTimeout().observe(this, integer -> {
             if (integer == 1) {

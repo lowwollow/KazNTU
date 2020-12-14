@@ -39,7 +39,6 @@ public class DetailFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         fragmentDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false);
         view = fragmentDetailBinding.getRoot();
         imageView = view.findViewById(R.id.close_img);

@@ -133,7 +133,6 @@ public class LoginActivity extends AppCompatActivity {
     private void login() {
         connManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         executor.execute(() -> {
-
             User accountEntity = loadPreference();
             if (accountEntity.access_token != null && accountEntity.access_token.length() > 2) {
                 doIntent(accountEntity);

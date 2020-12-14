@@ -70,8 +70,7 @@ public class AuthViewModel extends ViewModel {
         String name = username.get();
         String psw = password.get();
         if ((name == null || name.isEmpty()) || (psw == null || psw.isEmpty())) {
-            Log.d("test", "doIntent: " + name + " " + psw);
-            getMessage.setValue(true);
+             getMessage.setValue(true);
         }
         else {
             LoginFields loginFields = new LoginFields(username.get(), password.get());
@@ -108,9 +107,6 @@ public class AuthViewModel extends ViewModel {
                 }
                 else if (t instanceof IOException) {
                     handleTimeout.setValue(2);
-                }
-                else if (t instanceof UnknownHostException){
-                    handleTimeout.setValue(3);
                 }
             }
         });
