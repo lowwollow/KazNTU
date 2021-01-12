@@ -4,17 +4,17 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class DeferedDisciplineGroup1 {
+public class DeferredDisciplineGroup1 {
 
     @SerializedName("deferedDisciplines")
-    List<DeferedDiscipline1> deferedDiscipline1List;
+    List<DeferredDiscipline1> deferredDiscipline1List;
 
-    public List<DeferedDiscipline1> getIndividualPlanList() {
-        return deferedDiscipline1List;
+    public List<DeferredDiscipline1> getIndividualPlanList() {
+        return deferredDiscipline1List;
     }
 
-    public void setIndividualPlanList(List<DeferedDiscipline1> deferedDiscipline1List) {
-        this.deferedDiscipline1List = deferedDiscipline1List;
+    public void setIndividualPlanList(List<DeferredDiscipline1> deferredDiscipline1List) {
+        this.deferredDiscipline1List = deferredDiscipline1List;
     }
 
 }

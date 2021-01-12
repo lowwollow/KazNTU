@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.databinding.ObservableBoolean;
@@ -61,23 +62,8 @@ public class TranscriptViewModel extends ViewModel {
                 getSemesterItemListFromServer();
             }
         }else{
-            executor.execute(() ->{
-                if(!accountDao.getSemestersItem().isEmpty()){
-                    loadRv.set(false);
-                    semestersItemsDB = accountDao.getSemestersItem();
-                    transcriptLiveData.postValue(semestersItemsDB);
-                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                        getSemesterItemListFromServer();
-                    }
-                }else{
-                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                        getSemesterItemListFromServer();
-                    }else{
-                        loadRv.set(false);
-                        getEmptyBoolean.set(true);
-                    }
-                }
-            });
+            MyTask task = new MyTask();
+            task.execute();
         }
     }
 
@@ -137,5 +123,34 @@ public class TranscriptViewModel extends ViewModel {
     private void exception(){
         loadRv.set(false);
         handleTimeout.setValue(true);
+    }
+
+    private class MyTask extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
+                TimeUnit.SECONDS.sleep(1);
+                if(!accountDao.getSemestersItem().isEmpty()){
+                    loadRv.set(false);
+                    semestersItemsDB = accountDao.getSemestersItem();
+                    transcriptLiveData.postValue(semestersItemsDB);
+                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+                        getSemesterItemListFromServer();
+                    }
+                }else{
+                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+                        getSemesterItemListFromServer();
+                    }else{
+                        loadRv.set(false);
+                        getEmptyBoolean.set(true);
+                    }
+                }
+
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }

@@ -13,6 +13,9 @@ import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.data.entity.academic.ResponseJournal;
 import kz.almaty.satbayevuniversity.data.entity.grade.attestation.Attestation;
 import kz.almaty.satbayevuniversity.data.entity.grade.transcript.SemestersItem;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDiscipline1;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDisciplineGroup1;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDiscipline1;
 import kz.almaty.satbayevuniversity.data.entity.notification.Notification;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Exam;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Schedule;
@@ -116,7 +119,7 @@ public interface AccountDao {
     @Query("DELETE FROM Language")
     void deleteLanguage();
 
-    //News
+    //Notification
     @Query("SELECT * FROM Notification")
     List<Notification> getNews();
 
@@ -128,4 +131,24 @@ public interface AccountDao {
 
     @Update
     void updateNews(List<Notification> notifications);
+
+    // Chosen discipline
+    @Query("SELECT * FROM ChosenDiscipline1")
+    List<ChosenDisciplineGroup1> getChosenDiscipline1();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertChosenDiscipline1(List<ChosenDisciplineGroup1> choosenDisciplines);
+
+    @Query("DELETE FROM ChosenDiscipline1")
+    void deleteChosenDiscipline1();
+
+    // Deferred discipline
+    @Query("SELECT * FROM DeferredDiscipline1")
+    List<DeferredDiscipline1> getDeferredDiscipline1();
+
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    void insertDeferredDiscipline1(List<DeferredDiscipline1> deferredDisciplines);
+
+    @Query("DELETE FROM DeferredDiscipline1")
+    void deleteDeferredDiscipline1();
 }

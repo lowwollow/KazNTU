@@ -47,20 +47,20 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ScheduleAdapter.ViewHolder holder, int position) {
         Schedule currentSchedule = scheduleList.get(position);
-        String clasTypeString="";
+        String classTypeString="";
         switch (currentSchedule.getClassType()){
             case 1:
-                clasTypeString = "(Лаб)";
+                classTypeString = "(Лаб)";
                 break;
             case 2:
-                clasTypeString = "(Практика)";
+                classTypeString = "(Практика)";
                 break;
             case 3:
-                clasTypeString = "(Лекция)";
+                classTypeString = "(Лекция)";
                 break;
         }
 
-        holder.scheduleItemBinding.setClassType(clasTypeString);
+        holder.scheduleItemBinding.setClassType(classTypeString);
         holder.scheduleItemBinding.setSchedule(currentSchedule);
         holder.scheduleItemBinding.setScheduleListener(this);
         if(currentSchedule.getDayOfWeekId() != 0){

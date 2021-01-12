@@ -7,6 +7,7 @@ import kz.almaty.satbayevuniversity.data.User;
 import kz.almaty.satbayevuniversity.data.entity.academic.ResponseJournal;
 import kz.almaty.satbayevuniversity.data.entity.grade.attestation.Attestation;
 import kz.almaty.satbayevuniversity.data.entity.grade.transcript.ResponseTranscript;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDisciplineGroup1;
 import kz.almaty.satbayevuniversity.data.entity.notification.Notification;
 import kz.almaty.satbayevuniversity.data.entity.notification.PushNotification;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Exam;
@@ -47,7 +48,7 @@ public interface MyApi {
     Call<DeferedDisciplineGroup> updateDeferedDiscipline();
 
     @GET("api/iup")
-    Call<ChosenDisciplineGroup> updateChosenDiscipline();
+    Call<ChosenDisciplineGroup1> updateChosenDiscipline();
 
     @GET("api/Transcript")
     Call<ResponseTranscript> updateTranscript();

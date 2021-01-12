@@ -82,30 +82,30 @@ public class ChosenDisciplineFragment extends Fragment{
         individualPlanBinding.chosenDisciplineRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         chosenDisciplineAdapter = new ChosenDisciplineAdapter(getActivity());
         individualPlanBinding.chosenDisciplineRecyclerView.setAdapter(chosenDisciplineAdapter);
-        if (activeNetwork != null) {
-            if (connManager.getActiveNetworkInfo() != null && activeNetwork.isConnected()) {
-                KaznituRetrofit.getApi().updateChosenDiscipline().enqueue(new Callback<ChosenDisciplineGroup>() {
-                    @Override
-                    public void onResponse(Call<ChosenDisciplineGroup> call, Response<ChosenDisciplineGroup> response) {
-                        if (response.isSuccessful()) {
-                            List<Object> list = new ArrayList<>(response.body().chosenDisciplineList.size() * 2);
-                            for (int i = 0; i < response.body().getChosenDisciplineList().size(); i++) {
-                                list.add(response.body().getChosenDisciplineList().get(i));
-                                list.addAll(response.body().getChosenDisciplineList().get(i).getChosenDisciplineList());
-                            }
-                            chosenDisciplineAdapter.setChosenDisciplines(list);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ChosenDisciplineGroup> call, Throwable t) {
-                    }
-                });
-            } else {
-                getEmptyBoolean.set(true);
-                Toast.makeText(getActivity(), "Нет доступа к сети", Toast.LENGTH_LONG).show();
-            }
-        }
+//        if (activeNetwork != null) {
+//            if (connManager.getActiveNetworkInfo() != null && activeNetwork.isConnected()) {
+//                KaznituRetrofit.getApi().updateChosenDiscipline().enqueue(new Callback<ChosenDisciplineGroup>() {
+//                    @Override
+//                    public void onResponse(Call<ChosenDisciplineGroup> call, Response<ChosenDisciplineGroup> response) {
+//                        if (response.isSuccessful()) {
+//                            List<Object> list = new ArrayList<>(response.body().chosenDisciplineList.size() * 2);
+//                            for (int i = 0; i < response.body().getChosenDisciplineList().size(); i++) {
+//                                list.add(response.body().getChosenDisciplineList().get(i));
+//                                list.addAll(response.body().getChosenDisciplineList().get(i).getChosenDisciplineList());
+//                            }
+//                            chosenDisciplineAdapter.setChosenDisciplines(list);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ChosenDisciplineGroup> call, Throwable t) {
+//                    }
+//                });
+//            } else {
+//                getEmptyBoolean.set(true);
+//                Toast.makeText(getActivity(), "Нет доступа к сети", Toast.LENGTH_LONG).show();
+//            }
+//        }
 }
 
 

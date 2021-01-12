@@ -13,15 +13,19 @@
 
         <FrameLayout
             android:id="@+id/main_academic_fragment_container"
-            app:layout_constraintTop_toBottomOf="@+id/mainToolbar"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/colorWhite" />
+            android:background="@color/colorWhite"
+            app:layout_constraintTop_toBottomOf="@+id/mainToolbar"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"/>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+
+
+
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

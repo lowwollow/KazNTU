@@ -12,7 +12,7 @@ import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDi
 
 
 @Entity
-public class Semesters implements Serializable {
+public class Semesters1 implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int primaryId;

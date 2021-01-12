@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 @Entity
-public class DeferedDiscipline1 implements Serializable {
+public class DeferredDiscipline1 implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int primaryId;
@@ -46,6 +46,14 @@ public class DeferedDiscipline1 implements Serializable {
 
     @SerializedName("labCredits")
     int labCredits;
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getId(){
+        return id;
+    }
 
     public int getLabCredits() {
         return labCredits;

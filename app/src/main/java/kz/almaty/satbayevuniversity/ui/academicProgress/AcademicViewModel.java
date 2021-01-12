@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
 
 import com.onesignal.OneSignal;
@@ -51,11 +54,17 @@ public class AcademicViewModel extends ViewModel {
     private final AppDatabase db = App.getInstance().getDatabase();
     private final AccountDao accountDao = db.accountDao();
 
-    private final BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(3);
+    private final BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(1);
     private final ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 1, 1,
             TimeUnit.SECONDS, queue);
     private final ConnectivityManager connManager = (ConnectivityManager)App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private final NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
+
+    private SavedStateHandle state;
+
+    //public AcademicViewModel(SavedStateHandle savedStateHandle){
+        //state = savedStateHandle;
+    //}
 
     public void getJournal() {
         loadRv.set(true);
@@ -65,23 +74,8 @@ public class AcademicViewModel extends ViewModel {
                 getJournalListFromServer();
             }
         }else{
-            executor.execute(() ->{
-                if(!accountDao.getResponseJournal().isEmpty()){
-                    loadRv.set(false);
-                    responseJournalListForDB = accountDao.getResponseJournal();
-                    academicData.postValue(responseJournalListForDB);
-                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && Objects.requireNonNull(activeNetwork).isConnected()) {
-                        getJournalListFromServer();
-                    }
-                }else {
-                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && Objects.requireNonNull(activeNetwork).isConnected()) {
-                        getJournalListFromServer();
-                    } else {
-                        loadRv.set(false);
-                        getEmptyBoolean.set(true);
-                    }
-                }
-            });
+            MyTask task = new MyTask();
+            task.execute();
         }
     }
 
@@ -181,4 +175,35 @@ public class AcademicViewModel extends ViewModel {
             }
         });
     }
+
+    private class MyTask extends AsyncTask<Void, Void, Void>{
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
+                TimeUnit.SECONDS.sleep(1);
+                if(!accountDao.getResponseJournal().isEmpty()){
+                    loadRv.set(false);
+                    responseJournalListForDB = accountDao.getResponseJournal();
+                    academicData.postValue(responseJournalListForDB);
+                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && Objects.requireNonNull(activeNetwork).isConnected()) {
+                        getJournalListFromServer();
+                    }
+                }else {
+                    // при первом вхождении
+                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && Objects.requireNonNull(activeNetwork).isConnected()) {
+                        getJournalListFromServer();
+                    } else {
+                        loadRv.set(false);
+                        getEmptyBoolean.set(true);
+                    }
+
+                }
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+    }
 }
+

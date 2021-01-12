@@ -1,5 +1,8 @@
 package kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -7,12 +10,23 @@ import java.util.List;
 
 import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.Semesters;
 
-public class ChoosenDisciplineGroup implements Serializable {
+
+@Entity
+public class ChosenDisciplineGroup1 implements Serializable {
+
+    @PrimaryKey(autoGenerate = true)
+    int primaryId;
+
     @SerializedName("title")
     String title;
 
     @SerializedName("disciplineSemesters")
-    List<Semesters> chosenDisciplineList;
+    List<Semesters1> chosenDisciplineList;
+
+
+    public int getPrimaryId(){
+        return primaryId;
+    }
 
     public String getTitle() {
         return title;
@@ -22,11 +36,11 @@ public class ChoosenDisciplineGroup implements Serializable {
         this.title = title;
     }
 
-    public List<Semesters> getChosenDisciplineList() {
+    public List<Semesters1> getChosenDisciplineList() {
         return chosenDisciplineList;
     }
 
-    public void setChosenDisciplineList(List<Semesters> chosenDisciplineList) {
+    public void setChosenDisciplineList(List<Semesters1> chosenDisciplineList) {
         this.chosenDisciplineList = chosenDisciplineList;
     }
 }

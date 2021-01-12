@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.SavedStateHandle;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +36,7 @@ public class AcademicFragment extends Fragment {
     private AcademicAdapterResponse academicAdapterResponse;
     private FragmentAcademicBinding academicFragmentBinding;
 
+
     public static AcademicFragment newInstance() {
         return new AcademicFragment();
     }
@@ -51,9 +54,15 @@ public class AcademicFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         academicFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_academic, container, false);
-        academicFragmentBinding.emptyImage.setVisibility(View.INVISIBLE);
-        academicFragmentBinding.emptyTextView.setVisibility(View.INVISIBLE);
+        academicFragmentBinding.emptyImage.setVisibility(View.GONE);
+        academicFragmentBinding.emptyTextView.setVisibility(View.GONE);
         return academicFragmentBinding.getRoot();
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        mViewModel = new ViewModelProvider(this).get(AcademicViewModel.class);
     }
 
     @Override
@@ -95,5 +104,7 @@ public class AcademicFragment extends Fragment {
                 getActivity().finish();
             }
         });
+
+
     }
 }

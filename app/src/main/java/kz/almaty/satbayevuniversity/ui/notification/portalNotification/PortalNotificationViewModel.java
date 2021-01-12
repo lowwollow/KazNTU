@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
@@ -58,24 +59,9 @@ public class PortalNotificationViewModel extends ViewModel {
                 getNotificationListFromServer();
             }
         }else{
-            executor.execute(() ->{
-                if(!accountDao.getNews().isEmpty()){
-                    loadRv.set(false);
-                    listOfNewsFromDB = accountDao.getNews();
-                    notificationMutableLiveData.postValue(listOfNewsFromDB);
-                    if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                        getNotificationListFromServer();
-                    }
-                }else{
-                    if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                        getNotificationListFromServer();
-                    }else{
-                        loadRv.set(false);
-                        isEmpty.set(true);
-                    }
-                }
-            });
-        }
+                MyTask task = new MyTask();
+                task.execute();
+            }
         }
 
     private void getNotificationListFromServer(){
@@ -134,5 +120,34 @@ public class PortalNotificationViewModel extends ViewModel {
             accountDao.insertNews(news);
             System.out.println("####### update News");
         });
+    }
+
+    private class MyTask extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
+                TimeUnit.SECONDS.sleep(1);
+                if(!accountDao.getNews().isEmpty()){
+                    loadRv.set(false);
+                    listOfNewsFromDB = accountDao.getNews();
+                    notificationMutableLiveData.postValue(listOfNewsFromDB);
+                    if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+                        getNotificationListFromServer();
+                    }
+                }else{
+                    if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+                        getNotificationListFromServer();
+                    }else{
+                        loadRv.set(false);
+                        isEmpty.set(true);
+                    }
+                }
+
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }

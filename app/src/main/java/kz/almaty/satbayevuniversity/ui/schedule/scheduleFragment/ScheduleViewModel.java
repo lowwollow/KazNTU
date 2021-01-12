@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -54,29 +55,14 @@ public class ScheduleViewModel extends ViewModel {
 
     public void getSchedule() {
         loadRv.set(true);
-
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
         if(onlyServer){
             if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected() ){
                 getScheduleListFromServer();
             }
         }else{
-            executor.execute(() ->{
-                if(!accountDao.getSchedule().isEmpty()){
-                    loadRv.set(false);
-                    scheduleListFromDb = accountDao.getSchedule();
-                    scheduleLiveData.postValue(scheduleListFromDb);
-                    if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected() ){
-                        getScheduleListFromServer();
-                    }
-                }else{
-                    if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected() ){
-                        getScheduleListFromServer();
-                    }else{
-                        loadRv.set(false);
-                    }
-                }
-            });
+            MyTask task = new MyTask();
+            task.execute();
         }
     }
 
@@ -145,6 +131,32 @@ public class ScheduleViewModel extends ViewModel {
             accountDao.deleteSchedule();
             accountDao.insertSchedule(scheduleList);
         });
+    }
+
+    private class MyTask extends AsyncTask<Void, Void, Void>{
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(30);
+                if (!accountDao.getSchedule().isEmpty()) {
+                    loadRv.set(false);
+                    scheduleListFromDb = accountDao.getSchedule();
+                    scheduleLiveData.postValue(scheduleListFromDb);
+                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+                        getScheduleListFromServer();
+                    }
+                } else {
+                    if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+                        getScheduleListFromServer();
+                    } else {
+                        loadRv.set(false);
+                    }
+                }
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
 }
