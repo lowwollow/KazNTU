@@ -7,7 +7,9 @@ import kz.almaty.satbayevuniversity.data.User;
 import kz.almaty.satbayevuniversity.data.entity.academic.ResponseJournal;
 import kz.almaty.satbayevuniversity.data.entity.grade.attestation.Attestation;
 import kz.almaty.satbayevuniversity.data.entity.grade.transcript.ResponseTranscript;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDiscipline1;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDisciplineGroup1;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDiscipline1;
 import kz.almaty.satbayevuniversity.data.entity.notification.Notification;
 import kz.almaty.satbayevuniversity.data.entity.notification.PushNotification;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Exam;
@@ -15,6 +17,7 @@ import kz.almaty.satbayevuniversity.data.entity.schedule.Schedule;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Student;
 import kz.almaty.satbayevuniversity.data.entity.umkd.File;
 import kz.almaty.satbayevuniversity.data.entity.umkd.Umkd;
+import kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDiscipline;
 import kz.almaty.satbayevuniversity.ui.umkd.estimateteacher.InstructorBody;
 import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineGroup;
 import kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDisciplineGroup;
@@ -48,7 +51,10 @@ public interface MyApi {
     Call<DeferedDisciplineGroup> updateDeferedDiscipline();
 
     @GET("api/iup")
-    Call<ChosenDisciplineGroup1> updateChosenDiscipline();
+    Call<ChosenDisciplineGroup> updateChosenDiscipline();
+
+    @GET("api/iup")
+    Call<List<ChosenDiscipline1>> updateChosenDiscipline1();
 
     @GET("api/Transcript")
     Call<ResponseTranscript> updateTranscript();

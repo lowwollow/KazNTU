@@ -47,6 +47,11 @@ public class DeferredDiscipline1 implements Serializable {
     @SerializedName("labCredits")
     int labCredits;
 
+    public void setPrimaryId(int primaryId){
+        this.primaryId = primaryId;
+    }
+    public int getPrimaryId(){return primaryId;}
+
     public void setId(int id){
         this.id = id;
     }

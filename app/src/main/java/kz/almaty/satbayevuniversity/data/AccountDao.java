@@ -134,10 +134,10 @@ public interface AccountDao {
 
     // Chosen discipline
     @Query("SELECT * FROM ChosenDiscipline1")
-    List<ChosenDisciplineGroup1> getChosenDiscipline1();
+    List<ChosenDiscipline1> getChosenDiscipline1();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertChosenDiscipline1(List<ChosenDisciplineGroup1> choosenDisciplines);
+    void insertChosenDiscipline1(List<ChosenDiscipline1> choosenDisciplines);
 
     @Query("DELETE FROM ChosenDiscipline1")
     void deleteChosenDiscipline1();

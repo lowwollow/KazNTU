@@ -47,6 +47,15 @@ public class ChosenDiscipline1 implements Serializable {
     @SerializedName("labCredits")
     private int labCredits;
 
+
+    public int getPrimaryId() {
+        return primaryId;
+    }
+
+    public void setPrimaryId(int primaryId) {
+        this.primaryId = primaryId;
+    }
+
     public void setId(int id){
         this.id = id;
     }

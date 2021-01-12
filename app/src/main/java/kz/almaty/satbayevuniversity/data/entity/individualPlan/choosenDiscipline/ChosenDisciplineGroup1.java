@@ -11,22 +11,13 @@ import java.util.List;
 import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.Semesters;
 
 
-@Entity
 public class ChosenDisciplineGroup1 implements Serializable {
-
-    @PrimaryKey(autoGenerate = true)
-    int primaryId;
 
     @SerializedName("title")
     String title;
 
     @SerializedName("disciplineSemesters")
     List<Semesters1> chosenDisciplineList;
-
-
-    public int getPrimaryId(){
-        return primaryId;
-    }
 
     public String getTitle() {
         return title;

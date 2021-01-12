@@ -19,6 +19,7 @@ import androidx.databinding.ObservableBoolean;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.savedstate.SavedStateRegistry;
@@ -50,13 +51,10 @@ public class ChosenDisciplineFragment extends Fragment{
     private ChosenDisciplineAdapter chosenDisciplineAdapter;
     public ObservableBoolean getEmptyBoolean = new ObservableBoolean();
     public ObservableBoolean loadRv = new ObservableBoolean();
-    private Context context;
-    private SharedPreferences sPref;
-    private List<ChosenDiscipline> list = new ArrayList<>();
-    private final String SAVED_OBJECTS = "saved_objects";
     private ConnectivityManager connManager = (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
     private boolean firstTime = true;
+    private ChosenDisciplineViewModel mViewModel;
 
     @Nullable
     @Override
@@ -73,59 +71,21 @@ public class ChosenDisciplineFragment extends Fragment{
         super.onCreate(savedInstanceState);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(ChosenDisciplineViewModel.class);
+        individualPlanBinding.setChosenDiscipline(mViewModel);
+
         individualPlanBinding.chosenDisciplineRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         individualPlanBinding.chosenDisciplineRecyclerView.setHasFixedSize(true);
         individualPlanBinding.chosenDisciplineRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         chosenDisciplineAdapter = new ChosenDisciplineAdapter(getActivity());
         individualPlanBinding.chosenDisciplineRecyclerView.setAdapter(chosenDisciplineAdapter);
-//        if (activeNetwork != null) {
-//            if (connManager.getActiveNetworkInfo() != null && activeNetwork.isConnected()) {
-//                KaznituRetrofit.getApi().updateChosenDiscipline().enqueue(new Callback<ChosenDisciplineGroup>() {
-//                    @Override
-//                    public void onResponse(Call<ChosenDisciplineGroup> call, Response<ChosenDisciplineGroup> response) {
-//                        if (response.isSuccessful()) {
-//                            List<Object> list = new ArrayList<>(response.body().chosenDisciplineList.size() * 2);
-//                            for (int i = 0; i < response.body().getChosenDisciplineList().size(); i++) {
-//                                list.add(response.body().getChosenDisciplineList().get(i));
-//                                list.addAll(response.body().getChosenDisciplineList().get(i).getChosenDisciplineList());
-//                            }
-//                            chosenDisciplineAdapter.setChosenDisciplines(list);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ChosenDisciplineGroup> call, Throwable t) {
-//                    }
-//                });
-//            } else {
-//                getEmptyBoolean.set(true);
-//                Toast.makeText(getActivity(), "Нет доступа к сети", Toast.LENGTH_LONG).show();
-//            }
-//        }
+
+        mViewModel.getChosenDiscipline();
+        // TODO insert data to recycler view
 }
-
-
-
-    public void SaveDiscipline(List<Object> chosenDisciplines){
-        sPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        Gson gson = new Gson();
-        String gson_to_string = gson.toJson(chosenDisciplines);
-        ed.putString(SAVED_OBJECTS,gson_to_string);
-        ed.apply();
-    }
-
-    public List<Object> GetDisciplines(){
-        Gson gson = new Gson();
-        String gson_string = sPref.getString(SAVED_OBJECTS, "");
-        Type type = new TypeToken<List<Object>>(){}.getType();
-        List<Object> disciplines = gson.fromJson(gson_string,type);
-        return disciplines;
-    }
 
     public static ChosenDisciplineFragment getInstance() {return new ChosenDisciplineFragment();}
 

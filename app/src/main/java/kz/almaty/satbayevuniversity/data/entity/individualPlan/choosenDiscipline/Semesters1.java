@@ -10,12 +10,7 @@ import java.util.List;
 
 import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDiscipline;
 
-
-@Entity
 public class Semesters1 implements Serializable {
-
-    @PrimaryKey(autoGenerate = true)
-    private int primaryId;
 
     @SerializedName("title")
     String title;

@@ -10,7 +10,7 @@
         <import type="android.view.View"/>
         <variable
             name="chosenDiscipline"
-            type="kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineFragment" />
+            type="kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

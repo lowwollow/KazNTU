@@ -25,6 +25,7 @@ import kz.almaty.satbayevuniversity.data.entity.grade.transcript.SemestersItem;
 import kz.almaty.satbayevuniversity.databinding.FragmentTranscriptBinding;
 
 public class TranscriptFragment extends Fragment {
+
     private FragmentTranscriptBinding transcriptFragmentBinding;
     private TranscriptAdapter transcriptAdapter;
     private AppDatabase db = App.getInstance().getDatabase();
