@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDiscipline1;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.Semesters1;
 import kz.almaty.satbayevuniversity.databinding.ChosenDisciplineHeaderBinding;
 import kz.almaty.satbayevuniversity.databinding.ChosenDisciplineItemBinding;
 import kz.almaty.satbayevuniversity.databinding.FragmentChosenDisciplinesIndividualPlanBinding;
@@ -30,10 +32,11 @@ public class ChosenDisciplineAdapter extends RecyclerView.Adapter<RecyclerView.V
     public ChosenDisciplineAdapter(Context context) {
         this.context = context;
     }
+    public ChosenDisciplineAdapter(){}
 
     @Override
     public int getItemViewType(int position) {
-        if (chosenDisciplines.get(position) instanceof Semesters)
+        if (chosenDisciplines.get(position) instanceof Semesters1)
             return 0;
         return 1;
     }
@@ -64,13 +67,13 @@ public class ChosenDisciplineAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (holder.getItemViewType() == 0){
             ViewHolderHeader viewHolderHeader = (ViewHolderHeader) holder;
             Object chosenDiscipline = chosenDisciplines.get(position);
-            viewHolderHeader.chosenDisciplineItemBinding.setDescipline((Semesters) chosenDiscipline);
+            viewHolderHeader.chosenDisciplineItemBinding.setDescipline((Semesters1) chosenDiscipline);
         }else{
             ViewHolderBody viewHolderBody = (ViewHolderBody) holder;
             Object chosenDiscipline = chosenDisciplines.get(position);
             viewHolderBody.chosenDisciplineItemBinding.getClickListener();
             viewHolderBody.chosenDisciplineItemBinding.setClickListener(this);
-            viewHolderBody.chosenDisciplineItemBinding.setChosenDisciplineItem((ChosenDiscipline)chosenDiscipline);
+            viewHolderBody.chosenDisciplineItemBinding.setChosenDisciplineItem((ChosenDiscipline1)chosenDiscipline);
         }
     }
 
@@ -82,7 +85,7 @@ public class ChosenDisciplineAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @Override
-    public void choseDisciplineClicked(ChosenDiscipline chosenDiscipline) {
+    public void choseDisciplineClicked(ChosenDiscipline1 chosenDiscipline) {
         ChosenDisciplineDialogFragment disciplineDialogFragment = new ChosenDisciplineDialogFragment();
         disciplineDialogFragment.setChosenDisciplineDialog(chosenDiscipline);
         HomeActivity homeActivity = (HomeActivity) context;

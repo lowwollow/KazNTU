@@ -13,13 +13,14 @@ import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.DialogFragment;
 
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDiscipline1;
 import kz.almaty.satbayevuniversity.databinding.ChosenDisciplineItemBinding;
 import kz.almaty.satbayevuniversity.databinding.FragmentDisciplineDialogBinding;
 
 public class ChosenDisciplineDialogFragment extends DialogFragment {
 
     private FragmentDisciplineDialogBinding chosenDisciplineDialog;
-    private ChosenDiscipline chosenDiscipline;
+    private ChosenDiscipline1 chosenDiscipline;
 
     @Nullable
     @Override
@@ -35,7 +36,7 @@ public class ChosenDisciplineDialogFragment extends DialogFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    public void setChosenDisciplineDialog(ChosenDiscipline chosenDiscipline){
+    public void setChosenDisciplineDialog(ChosenDiscipline1 chosenDiscipline){
         this.chosenDiscipline = chosenDiscipline;
     }
 }

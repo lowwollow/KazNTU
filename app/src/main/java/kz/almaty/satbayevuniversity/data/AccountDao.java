@@ -15,6 +15,7 @@ import kz.almaty.satbayevuniversity.data.entity.grade.attestation.Attestation;
 import kz.almaty.satbayevuniversity.data.entity.grade.transcript.SemestersItem;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDiscipline1;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDisciplineGroup1;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.Semesters1;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDiscipline1;
 import kz.almaty.satbayevuniversity.data.entity.notification.Notification;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Exam;
@@ -133,13 +134,13 @@ public interface AccountDao {
     void updateNews(List<Notification> notifications);
 
     // Chosen discipline
-    @Query("SELECT * FROM ChosenDiscipline1")
-    List<ChosenDiscipline1> getChosenDiscipline1();
+    @Query("SELECT * FROM Semesters1")
+    List<Semesters1> getChosenDiscipline1();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertChosenDiscipline1(List<ChosenDiscipline1> choosenDisciplines);
+    void insertChosenDiscipline1(List<Semesters1> choosenDisciplines);
 
-    @Query("DELETE FROM ChosenDiscipline1")
+    @Query("DELETE FROM Semesters1")
     void deleteChosenDiscipline1();
 
     // Deferred discipline
@@ -151,4 +152,5 @@ public interface AccountDao {
 
     @Query("DELETE FROM DeferredDiscipline1")
     void deleteDeferredDiscipline1();
+
 }

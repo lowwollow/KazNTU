@@ -31,10 +31,13 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.data.entity.grade.transcript.SemestersItem;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDiscipline1;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.Semesters1;
 import kz.almaty.satbayevuniversity.data.network.KaznituRetrofit;
 import kz.almaty.satbayevuniversity.databinding.ChosenDisciplineItemBinding;
 import kz.almaty.satbayevuniversity.databinding.FragmentChosenDisciplinesIndividualPlanBinding;
@@ -84,7 +87,17 @@ public class ChosenDisciplineFragment extends Fragment{
         individualPlanBinding.chosenDisciplineRecyclerView.setAdapter(chosenDisciplineAdapter);
 
         mViewModel.getChosenDiscipline();
-        // TODO insert data to recycler view
+
+        mViewModel.getChosenDisciplinesData().observe(this, chosenDiscipline1s -> {
+            ArrayList<Object> list = new ArrayList<>(chosenDiscipline1s.size() * 8);
+            for (Semesters1 x : chosenDiscipline1s){
+
+                list.add(x);
+                list.addAll(x.getChosenDisciplineList());
+                //Log.d("TESTING", "onActivityCreated: " + x.getTitle());
+            }
+            chosenDisciplineAdapter.setChosenDisciplines(list);
+        });
 }
 
     public static ChosenDisciplineFragment getInstance() {return new ChosenDisciplineFragment();}

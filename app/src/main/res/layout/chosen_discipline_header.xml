@@ -4,7 +4,7 @@
     <data>
         <variable
             name="descipline"
-            type="kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.Semesters" />
+            type="kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.Semesters1" />
         <variable
             name="imageClickListener"
             type="kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineEventListener" />

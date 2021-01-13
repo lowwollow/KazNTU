@@ -5,7 +5,7 @@
     <data>
         <variable
             name="chosen_discipline_item"
-            type="kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDiscipline" />
+            type="kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDiscipline1" />
 
         <variable
             name="clickListener"

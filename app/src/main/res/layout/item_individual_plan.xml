@@ -5,7 +5,7 @@
     <data>
         <variable
             name="deferedDiscipline"
-            type="kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDiscipline" />
+            type="kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDiscipline1" />
         <variable
             name="clickListener"
             type="kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDisciplineEventListener" />

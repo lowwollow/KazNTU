@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +22,8 @@ import java.util.List;
 
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.App;
-import kz.almaty.satbayevuniversity.data.network.KaznituRetrofit;
 import kz.almaty.satbayevuniversity.databinding.FragmentDeferedDisciplinesIndividualPlanBinding;
-import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDiscipline;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+import kz.almaty.satbayevuniversity.ui.grade.attestation.GradeViewModel;
 
 public class DeferedDisciplineFragment extends Fragment {
 
@@ -41,7 +34,7 @@ public class DeferedDisciplineFragment extends Fragment {
     private ConnectivityManager connManager = (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
     private List<DeferedDiscipline> list = new ArrayList<>();
-
+    private DeferredDisciplineViewModel mViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,32 +54,20 @@ public class DeferedDisciplineFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(DeferredDisciplineViewModel.class);
+
         individualPlanBinding.individualPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         individualPlanBinding.individualPlanRecyclerView.setHasFixedSize(true);
         individualPlanBinding.individualPlanRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
         individualPlanAdapter = new DeferedDisciplineAdapter(getActivity());
         individualPlanBinding.individualPlanRecyclerView.setAdapter(individualPlanAdapter);
-        if (connManager != null) {
-            if (connManager.getActiveNetworkInfo() != null && activeNetwork.isConnected()) {
-                KaznituRetrofit.getApi().updateDeferedDiscipline().enqueue(new Callback<DeferedDisciplineGroup>() {
-                    @Override
-                    public void onResponse(Call<DeferedDisciplineGroup> call, Response<DeferedDisciplineGroup> response) {
-                        if (response.isSuccessful()) {
-                            individualPlanAdapter.setIndividualPlanList(response.body().getIndividualPlanList());
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(Call<DeferedDisciplineGroup> call, Throwable t) {
-                        // need process the fail
-                    }
-                });
+        mViewModel.getDeferredDiscipline();
 
-            } else {
-                getEmptyBoolean.set(true);
-            }
-        }
+        mViewModel.getDeferredDisciplineLiveData().observe(this, deferredDiscipline1s -> {
+            individualPlanAdapter.setIndividualPlanList(deferredDiscipline1s);
+        });
     }
     public static DeferedDisciplineFragment getInstance() { return new DeferedDisciplineFragment(); }
 }   

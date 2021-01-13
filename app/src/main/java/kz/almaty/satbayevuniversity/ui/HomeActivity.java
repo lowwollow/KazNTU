@@ -86,7 +86,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             setLocale(language1.getLanguageCode());
             getMenuText();
         } catch (IllegalStateException | JsonSyntaxException ignored){}
-
+        Log.d("db", "db path: " +  getDatabasePath("database").getTotalSpace());
         showWeSettedPushNoficationDialog();
     }
 

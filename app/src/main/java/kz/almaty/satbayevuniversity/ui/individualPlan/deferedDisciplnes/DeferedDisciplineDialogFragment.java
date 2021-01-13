@@ -11,11 +11,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDiscipline1;
 import kz.almaty.satbayevuniversity.databinding.DeferedDisciplineDialogBinding;
 
 public class DeferedDisciplineDialogFragment extends DialogFragment {
     private DeferedDisciplineDialogBinding deferedDisciplineDialogFragment;
-    private DeferedDiscipline deferedDiscipline;
+    private DeferredDiscipline1 deferedDiscipline;
 
 
     @Nullable
@@ -32,7 +33,7 @@ public class DeferedDisciplineDialogFragment extends DialogFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    public void setDeferedDiscipline(DeferedDiscipline deferedDiscipline){
+    public void setDeferedDiscipline(DeferredDiscipline1 deferedDiscipline){
         this.deferedDiscipline = deferedDiscipline;
     }
 }

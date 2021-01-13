@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDiscipline1;
 import kz.almaty.satbayevuniversity.databinding.ItemIndividualPlanBinding;
 import kz.almaty.satbayevuniversity.ui.HomeActivity;
 import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineAdapter;
 
 public class DeferedDisciplineAdapter extends RecyclerView.Adapter<DeferedDisciplineAdapter.MyViewHolder> implements DeferedDisciplineEventListener{
 
-    List<DeferedDiscipline> deferedDisciplineList = new ArrayList<>();
+    List<DeferredDiscipline1> deferedDisciplineList = new ArrayList<>();
     private Context context;
     public DeferedDisciplineAdapter(Context context) {
         this.context = context;
@@ -34,7 +35,7 @@ public class DeferedDisciplineAdapter extends RecyclerView.Adapter<DeferedDiscip
 
     @Override
     public void onBindViewHolder(@NonNull DeferedDisciplineAdapter.MyViewHolder holder, int position) {
-        DeferedDiscipline deferedDiscipline = deferedDisciplineList.get(position);
+        DeferredDiscipline1 deferedDiscipline = deferedDisciplineList.get(position);
         holder.individualPlanBinding.setClickListener(this);
         holder.individualPlanBinding.setDeferedDiscipline(deferedDiscipline);
     }
@@ -46,13 +47,13 @@ public class DeferedDisciplineAdapter extends RecyclerView.Adapter<DeferedDiscip
         return 0;
     }
 
-    public void setIndividualPlanList(List<DeferedDiscipline> deferedDisciplineList){
+    public void setIndividualPlanList(List<DeferredDiscipline1> deferedDisciplineList){
         this.deferedDisciplineList = deferedDisciplineList;
         notifyDataSetChanged();
     }
 
     @Override
-    public void deferedDisciplineClicked(DeferedDiscipline deferedDiscipline) {
+    public void deferedDisciplineClicked(DeferredDiscipline1 deferedDiscipline) {
         DeferedDisciplineDialogFragment deferedDisciplineDialogFragment = new DeferedDisciplineDialogFragment();
         deferedDisciplineDialogFragment.setDeferedDiscipline(deferedDiscipline);
         HomeActivity homeActivity = (HomeActivity) context;

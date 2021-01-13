@@ -7,11 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-@Entity
 public class ChosenDiscipline1 implements Serializable {
-
-    @PrimaryKey(autoGenerate = true)
-    private int primaryId;
 
     @SerializedName("id")
     private int id;
@@ -47,14 +43,8 @@ public class ChosenDiscipline1 implements Serializable {
     @SerializedName("labCredits")
     private int labCredits;
 
-
-    public int getPrimaryId() {
-        return primaryId;
-    }
-
-    public void setPrimaryId(int primaryId) {
-        this.primaryId = primaryId;
-    }
+    @SerializedName("prerequisites")
+    String prerequisites;
 
     public void setId(int id){
         this.id = id;
@@ -87,9 +77,6 @@ public class ChosenDiscipline1 implements Serializable {
     public void setPracticeCredits(int practiceCredits) {
         this.practiceCredits = practiceCredits;
     }
-
-    @SerializedName("prerequisites")
-    String prerequisites;
 
     public String getReadingChairTitle() {
         return readingChairTitle;

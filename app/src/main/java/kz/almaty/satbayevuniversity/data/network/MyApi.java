@@ -9,7 +9,9 @@ import kz.almaty.satbayevuniversity.data.entity.grade.attestation.Attestation;
 import kz.almaty.satbayevuniversity.data.entity.grade.transcript.ResponseTranscript;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDiscipline1;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDisciplineGroup1;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.Semesters1;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDiscipline1;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDisciplineGroup1;
 import kz.almaty.satbayevuniversity.data.entity.notification.Notification;
 import kz.almaty.satbayevuniversity.data.entity.notification.PushNotification;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Exam;
@@ -48,13 +50,10 @@ public interface MyApi {
     Call<List<Attestation>> updateAttestation();
 
     @GET("api/iup")
-    Call<DeferedDisciplineGroup> updateDeferedDiscipline();
+    Call<DeferredDisciplineGroup1> updateDeferedDiscipline();
 
     @GET("api/iup")
-    Call<ChosenDisciplineGroup> updateChosenDiscipline();
-
-    @GET("api/iup")
-    Call<List<ChosenDiscipline1>> updateChosenDiscipline1();
+    Call<ChosenDisciplineGroup1> updateChosenDiscipline1();
 
     @GET("api/Transcript")
     Call<ResponseTranscript> updateTranscript();

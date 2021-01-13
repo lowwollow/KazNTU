@@ -30,6 +30,7 @@ import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.data.AppDatabase;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDiscipline1;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDisciplineGroup1;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.Semesters1;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Schedule;
 import kz.almaty.satbayevuniversity.data.network.KaznituRetrofit;
 import okhttp3.ResponseBody;
@@ -40,9 +41,9 @@ import retrofit2.Response;
 public class ChosenDisciplineViewModel extends ViewModel {
     private static final String TAG = "ChosenDisciplineViewModel";
     SharedPreferences sharedPreferences = App.getContext().getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
-    private List<ChosenDiscipline1> chosenDisciplines = new ArrayList<>();
-    private List<ChosenDiscipline1> chosenDisciplinesFromDb = new ArrayList<>();
-    private MutableLiveData<List<ChosenDiscipline1>> chosenDisciplinesLiveData = new MutableLiveData<>();
+    private List<Semesters1> chosenDisciplines = new ArrayList<>();
+    private List<Semesters1> chosenDisciplinesFromDb = new ArrayList<>();
+    private MutableLiveData<List<Semesters1>> chosenDisciplinesLiveData = new MutableLiveData<>();
 
     public ObservableBoolean loadRv = new ObservableBoolean();
     public ObservableBoolean getEmptyBoolean = new ObservableBoolean();
@@ -75,13 +76,13 @@ public class ChosenDisciplineViewModel extends ViewModel {
     }
 
     public void getChosenDisciplineListFromServer() {
-        KaznituRetrofit.getApi().updateChosenDiscipline1().enqueue(new Callback<List<ChosenDiscipline1>>(){
+        KaznituRetrofit.getApi().updateChosenDiscipline1().enqueue(new Callback<ChosenDisciplineGroup1>(){
             @Override
-            public void onResponse(Call<List<ChosenDiscipline1>> call, Response<List<ChosenDiscipline1>> response) {
+            public void onResponse(Call<ChosenDisciplineGroup1> call, Response<ChosenDisciplineGroup1> response) {
                 if (response.code() == 200) {
                     loadRv.set(false);
-                    chosenDisciplines = response.body();
-                    Log.d("TEST", "onResponse: " + chosenDisciplines.toString());
+                    chosenDisciplines = response.body().getChosenDisciplineList();
+                    //Log.d("TEST", "onResponse: " + chosenDisciplines.toString());
                     if (!chosenDisciplines.equals(chosenDisciplinesFromDb)) {
                         new Thread(() -> {
                             update(chosenDisciplines);
@@ -99,7 +100,7 @@ public class ChosenDisciplineViewModel extends ViewModel {
                     handleError.setValue(500);
             }
             @Override
-            public void onFailure(Call<List<ChosenDiscipline1>> call, Throwable t) {
+            public void onFailure(Call<ChosenDisciplineGroup1> call, Throwable t) {
                 exception();
             }
         });
@@ -136,7 +137,7 @@ public class ChosenDisciplineViewModel extends ViewModel {
 
     }
 
-    private void update(List<ChosenDiscipline1> chosenDisciplines) {
+    private void update(List<Semesters1> chosenDisciplines) {
         executor.execute(() -> {
             accountDao.deleteChosenDiscipline1();
             accountDao.insertChosenDiscipline1(chosenDisciplines);
@@ -172,7 +173,7 @@ public class ChosenDisciplineViewModel extends ViewModel {
         return handleTimeout;
     }
 
-    MutableLiveData<List<ChosenDiscipline1>> getChosenDisciplinesData(){
+    MutableLiveData<List<Semesters1>> getChosenDisciplinesData(){
         if(chosenDisciplines == null){
             chosenDisciplinesLiveData = new MutableLiveData<>();
         }
