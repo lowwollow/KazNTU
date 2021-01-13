@@ -94,7 +94,6 @@ public class ChosenDisciplineFragment extends Fragment{
 
                 list.add(x);
                 list.addAll(x.getChosenDisciplineList());
-                //Log.d("TESTING", "onActivityCreated: " + x.getTitle());
             }
             chosenDisciplineAdapter.setChosenDisciplines(list);
         });

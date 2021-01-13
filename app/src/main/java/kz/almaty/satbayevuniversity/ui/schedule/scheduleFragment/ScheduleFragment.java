@@ -86,7 +86,6 @@ public class ScheduleFragment extends Fragment implements Cloneable{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.d("lk", "onActivityCreated: schedule");
         mViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
         authViewModel = ViewModelProviders.of(this).get(AuthViewModel.class);
         scheduleFragmentBinding.setSchedule(mViewModel);
@@ -100,9 +99,7 @@ public class ScheduleFragment extends Fragment implements Cloneable{
 
         mViewModel.getSchedule();
         setDateSchedule(currentDay);
-//        if (getActivity().getActionBar() != null) {
-//            Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getActionBar()).setTitle(R.string.schedule);
-//        }
+
         if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.schedule);
         }
@@ -170,7 +167,6 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                     new Schedule("19:30", "20:20", 23),
                     new Schedule("20:30", "21:20", 25),
                     new Schedule("21:30", "22:20", 27)));
-
             for (Schedule schedule : scheduleList) {
                 if (schedule.getDayOfWeekId() == date.getDayOfWeek().getValue()) {
                     result.add(Schedule.copy(schedule));
@@ -253,7 +249,6 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                     }else{
                         dayOfMonth.setBackground(null);
                         dayOfMonth.setTextColor(getResources().getColor(R.color.black));
-
                     }
             }
         });
@@ -263,11 +258,5 @@ public class ScheduleFragment extends Fragment implements Cloneable{
         DayOfWeek firstDayOfWeek = DayOfWeek.MONDAY;
         calendarView.setup(firstMonth, lastMonth, firstDayOfWeek);
         calendarView.scrollToDate(LocalDate.now());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d("Schedule", "onPause: Schedule");
     }
 }

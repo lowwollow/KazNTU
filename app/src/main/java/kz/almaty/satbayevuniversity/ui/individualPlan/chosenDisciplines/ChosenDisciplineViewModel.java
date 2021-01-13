@@ -82,7 +82,6 @@ public class ChosenDisciplineViewModel extends ViewModel {
                 if (response.code() == 200) {
                     loadRv.set(false);
                     chosenDisciplines = response.body().getChosenDisciplineList();
-                    //Log.d("TEST", "onResponse: " + chosenDisciplines.toString());
                     if (!chosenDisciplines.equals(chosenDisciplinesFromDb)) {
                         new Thread(() -> {
                             update(chosenDisciplines);
@@ -120,7 +119,6 @@ public class ChosenDisciplineViewModel extends ViewModel {
                         getChosenDisciplineListFromServer();
                     }
                 }else {
-                    // при первом вхождении
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && Objects.requireNonNull(activeNetwork).isConnected()) {
                         getChosenDisciplineListFromServer();
                     } else {
@@ -165,26 +163,10 @@ public class ChosenDisciplineViewModel extends ViewModel {
             }
         });
     }
-
-    MutableLiveData<Integer> getHandleTimeout(){
-        if (handleTimeout == null){
-            handleTimeout = new MutableLiveData<>();
-        }
-        return handleTimeout;
-    }
-
     MutableLiveData<List<Semesters1>> getChosenDisciplinesData(){
         if(chosenDisciplines == null){
             chosenDisciplinesLiveData = new MutableLiveData<>();
         }
         return chosenDisciplinesLiveData;
     }
-
-    MutableLiveData<Integer> getHandleError(){
-        if(handleError == null){
-            handleError = new MutableLiveData<>();
-        }
-        return handleError;
-    }
-
 }
