@@ -14,6 +14,7 @@ import java.util.List;
 
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDiscipline1;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDisciplineGroup1;
 import kz.almaty.satbayevuniversity.databinding.ItemIndividualPlanBinding;
 import kz.almaty.satbayevuniversity.ui.HomeActivity;
 import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineAdapter;

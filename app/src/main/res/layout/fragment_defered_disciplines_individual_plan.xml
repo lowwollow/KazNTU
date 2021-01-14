@@ -43,6 +43,7 @@
             android:visibility="@{individualPlan.loadRv ? View.GONE : View.VISIBLE}"
             tools:listitem="@layout/item_individual_plan"/>
 
+
         <TextView
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@id/guideline9"

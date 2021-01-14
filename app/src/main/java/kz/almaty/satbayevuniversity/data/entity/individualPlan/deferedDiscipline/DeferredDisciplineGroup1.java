@@ -2,19 +2,21 @@ package kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDisciplin
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class DeferredDisciplineGroup1 {
+public class DeferredDisciplineGroup1 implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int primaryId;
 
-
     @SerializedName("deferedDisciplines")
+    @TypeConverters({DeferredDisciplineConverter.class})
     List<DeferredDiscipline1> deferredDiscipline1List;
 
     public int getPrimaryId() {

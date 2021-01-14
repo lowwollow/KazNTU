@@ -21,10 +21,6 @@
             app:layout_constraintTop_toBottomOf="@+id/mainToolbar"
             app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"/>
 
-
-
-
-
             <com.google.android.material.bottomnavigation.BottomNavigationView
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

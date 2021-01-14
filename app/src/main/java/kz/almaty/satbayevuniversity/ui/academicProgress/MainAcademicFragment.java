@@ -2,6 +2,7 @@ package kz.almaty.satbayevuniversity.ui.academicProgress;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
     public Toolbar toolbar;
     public ImageView imageView;
     boolean firstTime = false;
+    private AnimationDrawable animationDrawable;
 
     public static MainAcademicFragment newInstance() {
         return new MainAcademicFragment();
@@ -82,6 +84,12 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
             }
             return false;
         });
+    }
+
+    @Override
+    public void onStart() {
+        // animations
+        super.onStart();
     }
 
     @Override

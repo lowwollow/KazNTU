@@ -15,22 +15,22 @@ public class ChosenDisciplineConverter implements Serializable {
     Gson gson = new Gson();
 
     @TypeConverter
-    public String fromChosenDisciplineList(List<ChosenDiscipline1> chosenDisciplines) {
-        if (chosenDisciplines == null) {
+    public String fromChosenDisciplineList(List<ChosenDiscipline1> deferredDisciplines) {
+        if (deferredDisciplines == null) {
             return null;
         }
         Type type = new TypeToken<List<ChosenDiscipline1>>() {}.getType();
-        String json = gson.toJson(chosenDisciplines, type);
+        String json = gson.toJson(deferredDisciplines, type);
         return json;
     }
 
     @TypeConverter
-    public List<ChosenDiscipline1> toChosenDisciplineList(String chosenDiscipilineItemString) {
-        if (chosenDiscipilineItemString == null) {
+    public List<ChosenDiscipline1> toChosenDisciplineList(String deferredDiscipilineItemString) {
+        if (deferredDiscipilineItemString == null) {
             return null;
         }
         Type type = new TypeToken<List<ChosenDiscipline1>>() {}.getType();
-        List<ChosenDiscipline1> chosenDisciplines = gson.fromJson(chosenDiscipilineItemString, type);
+        List<ChosenDiscipline1> chosenDisciplines = gson.fromJson(deferredDiscipilineItemString, type);
         return chosenDisciplines;
     }
 }

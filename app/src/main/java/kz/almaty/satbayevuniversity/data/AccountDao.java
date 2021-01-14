@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.TypeConverters;
 import androidx.room.Update;
 
 import java.util.List;
@@ -17,6 +18,8 @@ import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDisciplineGroup1;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.Semesters1;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDiscipline1;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDisciplineConverter;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.DeferredDisciplineGroup1;
 import kz.almaty.satbayevuniversity.data.entity.notification.Notification;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Exam;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Schedule;
@@ -145,6 +148,7 @@ public interface AccountDao {
 
     // Deferred discipline
     @Query("SELECT * FROM DeferredDiscipline1")
+    @TypeConverters({DeferredDisciplineConverter.class})
     List<DeferredDiscipline1> getDeferredDiscipline1();
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
@@ -152,5 +156,8 @@ public interface AccountDao {
 
     @Query("DELETE FROM DeferredDiscipline1")
     void deleteDeferredDiscipline1();
+
+    @Update
+    void updateDeferredDiscipline(List<DeferredDiscipline1> deferredDiscipline1s);
 
 }
