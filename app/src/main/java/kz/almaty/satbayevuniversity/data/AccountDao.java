@@ -147,9 +147,8 @@ public interface AccountDao {
     void deleteChosenDiscipline1();
 
     // Deferred discipline
-    @Query("SELECT * FROM DeferredDiscipline1")
-    @TypeConverters({DeferredDisciplineConverter.class})
-    List<DeferredDiscipline1> getDeferredDiscipline1();
+    @Query("SELECT * FROM DeferredDisciplineGroup1")
+    List<DeferredDisciplineGroup1> getDeferredDiscipline1();
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     void insertDeferredDiscipline1(List<DeferredDiscipline1> deferredDisciplines);
@@ -158,6 +157,6 @@ public interface AccountDao {
     void deleteDeferredDiscipline1();
 
     @Update
-    void updateDeferredDiscipline(List<DeferredDiscipline1> deferredDiscipline1s);
+    void updateDeferredDiscipline(DeferredDisciplineGroup1 deferredDiscipline1s);
 
 }

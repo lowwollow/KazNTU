@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class DeferredDiscipline1 implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    private int primaryKey;
+    private int primary_key;
 
     @SerializedName("id")
     private int id;
@@ -46,14 +46,6 @@ public class DeferredDiscipline1 implements Serializable {
 
     @SerializedName("labCredits")
     int labCredits;
-
-    public int getPrimaryKey() {
-        return primaryKey;
-    }
-
-    public void setPrimaryKey(int primaryKey) {
-        this.primaryKey = primaryKey;
-    }
 
     public void setId(int id){
         this.id = id;
@@ -152,5 +144,12 @@ public class DeferredDiscipline1 implements Serializable {
 
     public void setDisciplineTypeTitle(String disciplineTypeTitle) {
         this.disciplineTypeTitle = disciplineTypeTitle;
+    }
+    public int getPrimary_key() {
+        return primary_key;
+    }
+
+    public void setPrimary_key(int primary_key) {
+        this.primary_key = primary_key;
     }
 }

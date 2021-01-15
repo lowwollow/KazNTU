@@ -91,7 +91,6 @@ public class ChosenDisciplineFragment extends Fragment{
         mViewModel.getChosenDisciplinesData().observe(this, chosenDiscipline1s -> {
             ArrayList<Object> list = new ArrayList<>(chosenDiscipline1s.size() * 8);
             for (Semesters1 x : chosenDiscipline1s){
-
                 list.add(x);
                 list.addAll(x.getChosenDisciplineList());
             }

@@ -54,17 +54,14 @@ public class DeferedDisciplineFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(DeferredDisciplineViewModel.class);
-
         individualPlanBinding.individualPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         individualPlanBinding.individualPlanRecyclerView.setHasFixedSize(true);
         individualPlanBinding.individualPlanRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
         individualPlanAdapter = new DeferedDisciplineAdapter(getActivity());
         individualPlanBinding.individualPlanRecyclerView.setAdapter(individualPlanAdapter);
-
+        mViewModel = ViewModelProviders.of(this).get(DeferredDisciplineViewModel.class);
         mViewModel.getDeferredDiscipline();
-
         mViewModel.getDeferredDisciplineLiveData().observe(this, deferredDiscipline1s -> {
             individualPlanAdapter.setIndividualPlanList(deferredDiscipline1s);
         });

@@ -219,4 +219,5 @@
     <string name="cypher">Cypher</string>
     <string name="delayed">Отложенные</string>
     <string name="chosen">Выбранные</string>
+    <string name="references">Справки</string>
 </resources>

@@ -16,6 +16,10 @@
             android:title="@string/settings"
             android:icon="@drawable/waitin"/>
         <item
+            android:id="@+id/references"
+            android:title="@string/references"
+            android:icon="@drawable/references"/>
+        <item
             android:id="@+id/logout"
             android:title="@string/logout"
             android:icon="@drawable/running"/>

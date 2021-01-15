@@ -18,7 +18,7 @@ import kz.almaty.satbayevuniversity.data.entity.schedule.Schedule;
 import kz.almaty.satbayevuniversity.data.entity.umkd.Umkd;
 import kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDiscipline;
 
-@Database(entities = {AccountEntity.class, ResponseJournal.class, Schedule.class, Exam.class, Attestation.class, SemestersItem.class, Umkd.class, Language.class, Notification.class, Semesters1.class, DeferredDiscipline1.class}, version = 14, exportSchema = false)
+@Database(entities = {AccountEntity.class, ResponseJournal.class, Schedule.class, Exam.class, Attestation.class, SemestersItem.class, Umkd.class, Language.class, Notification.class, Semesters1.class, DeferredDisciplineGroup1.class, DeferredDiscipline1.class}, version = 16, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract AccountDao accountDao();
 }
