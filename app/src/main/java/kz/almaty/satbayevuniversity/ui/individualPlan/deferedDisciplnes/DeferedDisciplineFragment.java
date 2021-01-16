@@ -61,10 +61,12 @@ public class DeferedDisciplineFragment extends Fragment {
         individualPlanAdapter = new DeferedDisciplineAdapter(getActivity());
         individualPlanBinding.individualPlanRecyclerView.setAdapter(individualPlanAdapter);
         mViewModel = ViewModelProviders.of(this).get(DeferredDisciplineViewModel.class);
+
         mViewModel.getDeferredDiscipline();
+
         mViewModel.getDeferredDisciplineLiveData().observe(this, deferredDiscipline1s -> {
             individualPlanAdapter.setIndividualPlanList(deferredDiscipline1s);
         });
     }
     public static DeferedDisciplineFragment getInstance() { return new DeferedDisciplineFragment(); }
-}   
+}

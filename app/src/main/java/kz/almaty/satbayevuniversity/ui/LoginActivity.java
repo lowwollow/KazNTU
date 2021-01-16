@@ -90,6 +90,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //Toast.makeText(this, "WELCOME ALIYOUNGPROG", Toast.LENGTH_SHORT).show();
+
+
         authViewModel.getHandleError().observe(this, integer -> {
             switch (integer) {
                 case 1:

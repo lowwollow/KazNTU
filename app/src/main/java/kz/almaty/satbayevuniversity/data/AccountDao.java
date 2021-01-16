@@ -147,8 +147,8 @@ public interface AccountDao {
     void deleteChosenDiscipline1();
 
     // Deferred discipline
-    @Query("SELECT * FROM DeferredDisciplineGroup1")
-    List<DeferredDisciplineGroup1> getDeferredDiscipline1();
+    @Query("SELECT * FROM DeferredDiscipline1")
+    List<DeferredDiscipline1> getDeferredDiscipline1();
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     void insertDeferredDiscipline1(List<DeferredDiscipline1> deferredDisciplines);

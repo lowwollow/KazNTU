@@ -116,7 +116,6 @@ public class ChosenDisciplineViewModel extends ViewModel {
                     loadRv.set(false);
                     chosenDisciplinesFromDb = accountDao.getChosenDiscipline1();
                     chosenDisciplinesLiveData.postValue(chosenDisciplinesFromDb);
-                    Log.d("TESTING", "onResponse: TTEESSTT" + chosenDisciplinesFromDb.get(0).getTitle());
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && Objects.requireNonNull(activeNetwork).isConnected()) {
                         getChosenDisciplineListFromServer();
                     }

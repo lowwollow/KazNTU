@@ -36,7 +36,7 @@ public class DeferredDisciplineViewModel extends ViewModel {
     SharedPreferences sharedPreferences = App.getContext().getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
     private MutableLiveData<List<DeferredDiscipline1>> deferredDisciplineLiveData = new MutableLiveData<>();
     private List<DeferredDiscipline1> deferredDisciplineList = new ArrayList<>();
-    private List<DeferredDisciplineGroup1> deferredDisciplineListDB = new ArrayList<>();
+    private List<DeferredDiscipline1> deferredDisciplineListDB = new ArrayList<>();
     private AppDatabase db = App.getInstance().getDatabase();
     private AccountDao accountDao = db.accountDao();
 
@@ -58,9 +58,11 @@ public class DeferredDisciplineViewModel extends ViewModel {
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server), false);
             if (onlyServer) {
                 if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+                    Log.d("TESTING", "getDeferredDiscipline: ONLYSERVER");
                     getDeferredDisciplineFromServer();
                 }
             } else {
+                Log.d("TESTING", "getDeferredDiscipline: ELSESERVER");
                 MyTask task = new MyTask();
                 task.execute();
             }
@@ -76,13 +78,12 @@ public class DeferredDisciplineViewModel extends ViewModel {
                     deferredDisciplineList = response.body().getDeferredDiscipline1List();
                     Log.d("TESTING", "onResponse: DEFERRED: " + deferredDisciplineList.size() + " " + deferredDisciplineListDB.size());
                     if (!deferredDisciplineList.equals(deferredDisciplineListDB)) {
+                        Log.d("UPDATE", "onResponse: ");
                         new Thread(() -> {
                             update(deferredDisciplineList);
                         }).start();
                     }
-                    for (int i = 0; i < deferredDisciplineListDB.size(); i++){
-                        deferredDisciplineLiveData.postValue(deferredDisciplineListDB.get(i).getDeferredDiscipline1List());
-                    }
+                    deferredDisciplineLiveData.setValue(deferredDisciplineList);
                 }
             }
 
@@ -100,9 +101,9 @@ public class DeferredDisciplineViewModel extends ViewModel {
             if (!accountDao.getDeferredDiscipline1().isEmpty()) {
                 loadRv.set(false);
                 deferredDisciplineListDB = accountDao.getDeferredDiscipline1();
-                for (int i = 0; i < deferredDisciplineListDB.size(); i++){
-                    deferredDisciplineLiveData.postValue(deferredDisciplineListDB.get(i).getDeferredDiscipline1List());
-                }
+                //for (int i = 0; i < deferredDisciplineListDB.size(); i++){
+                deferredDisciplineLiveData.postValue(deferredDisciplineListDB);
+                //}
                 Log.d("TESTING", "doInBackground: " + deferredDisciplineListDB.size());
                 if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
                     getDeferredDisciplineFromServer();
@@ -110,7 +111,7 @@ public class DeferredDisciplineViewModel extends ViewModel {
             } else {
                 Log.d("TESTING", "doInBackground2: " + accountDao.getDeferredDiscipline1().size());
                 if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                    getDeferredDisciplineFromServer();
+                    getDeferredDisciplineFromServer(); // fix
                 } else {
                     loadRv.set(false);
                     getEmptyBoolean.set(true);
