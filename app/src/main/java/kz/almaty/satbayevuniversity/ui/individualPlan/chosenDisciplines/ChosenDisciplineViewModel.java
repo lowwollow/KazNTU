@@ -141,7 +141,6 @@ public class ChosenDisciplineViewModel extends ViewModel {
         executor.execute(() -> {
             accountDao.deleteChosenDiscipline1();
             accountDao.insertChosenDiscipline1(chosenDisciplines);
-            //accountDao.updateChosenDiscipline(chosenDisciplines);
         });
     }
 

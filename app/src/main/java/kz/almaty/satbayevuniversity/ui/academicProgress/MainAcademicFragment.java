@@ -1,5 +1,6 @@
 package kz.almaty.satbayevuniversity.ui.academicProgress;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
@@ -22,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import kz.almaty.satbayevuniversity.R;
@@ -41,6 +43,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
     public ImageView imageView;
     boolean firstTime = false;
     private AnimationDrawable animationDrawable;
+    private LottieAnimationView lottieAnimationView;
 
     public static MainAcademicFragment newInstance() {
         return new MainAcademicFragment();
@@ -55,6 +58,11 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         navigation = view.findViewById(R.id.bottomNavigation);
         imageView = view.findViewById(R.id.updateData);
         navigation.setOnNavigationItemSelectedListener(this);
+        lottieAnimationView = view.findViewById(R.id.updateData);
+
+        // fix animation
+        lottieAnimationView.pauseAnimation();
+
 
         int notification_type_id = sharedPreferences.getInt("typeId",1);
 
@@ -105,6 +113,28 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
 
         toolbar.setNavigationOnClickListener(v -> {
             ((HomeActivity)getActivity()).OpenToggleNavMenu();
+        });
+
+        lottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+                animator.start();
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
         });
 
         ConnectivityManager connManager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
