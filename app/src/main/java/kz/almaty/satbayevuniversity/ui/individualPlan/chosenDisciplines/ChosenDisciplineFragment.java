@@ -66,6 +66,12 @@ public class ChosenDisciplineFragment extends Fragment{
         View view = individualPlanBinding.getRoot();
         individualPlanBinding.emptyImage.setVisibility(view.GONE);
         individualPlanBinding.emptyTextView.setVisibility(view.GONE);
+
+        individualPlanBinding.chosenDisciplineRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        individualPlanBinding.chosenDisciplineRecyclerView.setHasFixedSize(true);
+        individualPlanBinding.chosenDisciplineRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        chosenDisciplineAdapter = new ChosenDisciplineAdapter(getActivity());
+
         return view;
     }
 
@@ -79,12 +85,8 @@ public class ChosenDisciplineFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(ChosenDisciplineViewModel.class);
         individualPlanBinding.setChosenDiscipline(mViewModel);
-
-        individualPlanBinding.chosenDisciplineRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        individualPlanBinding.chosenDisciplineRecyclerView.setHasFixedSize(true);
-        individualPlanBinding.chosenDisciplineRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        chosenDisciplineAdapter = new ChosenDisciplineAdapter(getActivity());
         individualPlanBinding.chosenDisciplineRecyclerView.setAdapter(chosenDisciplineAdapter);
+
 
         mViewModel.getChosenDiscipline();
 
@@ -96,8 +98,12 @@ public class ChosenDisciplineFragment extends Fragment{
             }
             chosenDisciplineAdapter.setChosenDisciplines(list);
         });
+
+        mViewModel.getHandleTimeout().observe(this, aBoolean -> {
+            if (aBoolean) {
+                Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
+            }
+        });
 }
-
     public static ChosenDisciplineFragment getInstance() {return new ChosenDisciplineFragment();}
-
 }

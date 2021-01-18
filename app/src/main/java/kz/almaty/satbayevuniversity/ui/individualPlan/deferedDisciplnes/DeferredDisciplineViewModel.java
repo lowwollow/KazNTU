@@ -82,8 +82,8 @@ public class DeferredDisciplineViewModel extends ViewModel {
                         new Thread(() -> {
                             update(deferredDisciplineList);
                         }).start();
+                        deferredDisciplineLiveData.setValue(deferredDisciplineList);
                     }
-                    deferredDisciplineLiveData.setValue(deferredDisciplineList);
                 }
             }
 

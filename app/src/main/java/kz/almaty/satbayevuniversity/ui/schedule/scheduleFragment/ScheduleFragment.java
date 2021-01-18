@@ -1,7 +1,10 @@
 package kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,6 +66,9 @@ public class ScheduleFragment extends Fragment implements Cloneable{
     FragmentScheduleBinding scheduleFragmentBinding;
     private int i = 0;
 
+    private ConnectivityManager connManager = (ConnectivityManager)App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
+
     private DateTimeFormatter dayOfMonthFormatter = DateTimeFormatter.ofPattern("d");
     private DateTimeFormatter dayOfWeekFormatter = DateTimeFormatter.ofPattern("EE");
 
@@ -99,6 +105,7 @@ public class ScheduleFragment extends Fragment implements Cloneable{
 
         mViewModel.getSchedule();
         setDateSchedule(currentDay);
+
 
         if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.schedule);

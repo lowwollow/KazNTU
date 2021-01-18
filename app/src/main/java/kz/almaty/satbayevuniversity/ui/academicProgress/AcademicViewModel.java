@@ -180,7 +180,7 @@ public class AcademicViewModel extends ViewModel {
         @Override
         protected Void doInBackground(Void... voids) {
             try{
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(150);
                 if(!accountDao.getResponseJournal().isEmpty()){
                     loadRv.set(false);
                     responseJournalListForDB = accountDao.getResponseJournal();

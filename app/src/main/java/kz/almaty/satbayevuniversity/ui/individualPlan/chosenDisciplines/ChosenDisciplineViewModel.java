@@ -48,7 +48,7 @@ public class ChosenDisciplineViewModel extends ViewModel {
     public ObservableBoolean loadRv = new ObservableBoolean();
     public ObservableBoolean getEmptyBoolean = new ObservableBoolean();
 
-    private MutableLiveData<Integer> handleTimeout = new MutableLiveData<>();
+    private MutableLiveData<Boolean> handleTimeout = new MutableLiveData<>();
 
     private MutableLiveData<Integer> handleError = new MutableLiveData<>();
 
@@ -76,13 +76,14 @@ public class ChosenDisciplineViewModel extends ViewModel {
     }
 
     public void getChosenDisciplineListFromServer() {
-        KaznituRetrofit.getApi().updateChosenDiscipline1().enqueue(new Callback<ChosenDisciplineGroup1>(){
+        KaznituRetrofit.getApi().updateChosenDiscipline().enqueue(new Callback<ChosenDisciplineGroup1>(){
             @Override
             public void onResponse(Call<ChosenDisciplineGroup1> call, Response<ChosenDisciplineGroup1> response) {
                 if (response.code() == 200) {
                     loadRv.set(false);
+                    assert response.body() != null;
                     chosenDisciplines = response.body().getChosenDisciplineList();
-                    Log.d("TESTING", "onResponse: CHOSEN   " + chosenDisciplinesFromDb.size() + " " + chosenDisciplines.size());
+
                     if (!chosenDisciplines.equals(chosenDisciplinesFromDb)) {
                         new Thread(() -> {
                             update(chosenDisciplines);
@@ -111,7 +112,7 @@ public class ChosenDisciplineViewModel extends ViewModel {
         @Override
         protected Void doInBackground(Void... voids) {
             try{
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(150);
                 if(!accountDao.getChosenDiscipline1().isEmpty()){
                     loadRv.set(false);
                     chosenDisciplinesFromDb = accountDao.getChosenDiscipline1();
@@ -140,12 +141,13 @@ public class ChosenDisciplineViewModel extends ViewModel {
         executor.execute(() -> {
             accountDao.deleteChosenDiscipline1();
             accountDao.insertChosenDiscipline1(chosenDisciplines);
+            //accountDao.updateChosenDiscipline(chosenDisciplines);
         });
     }
 
     private void exception(){
         loadRv.set(false);
-        handleTimeout.setValue(1);
+        handleTimeout.setValue(true);
     }
 
     public void registerPlayerId(){
@@ -169,5 +171,11 @@ public class ChosenDisciplineViewModel extends ViewModel {
             chosenDisciplinesLiveData = new MutableLiveData<>();
         }
         return chosenDisciplinesLiveData;
+    }
+    MutableLiveData<Boolean> getHandleTimeout(){
+        if (handleTimeout == null){
+            handleTimeout = new MutableLiveData<>();
+        }
+        return handleTimeout;
     }
 }

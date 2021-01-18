@@ -127,7 +127,7 @@ public class PortalNotificationViewModel extends ViewModel {
         @Override
         protected Void doInBackground(Void... voids) {
             try{
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(150);
                 if(!accountDao.getNews().isEmpty()){
                     loadRv.set(false);
                     listOfNewsFromDB = accountDao.getNews();

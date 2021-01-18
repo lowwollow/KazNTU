@@ -130,7 +130,7 @@ public class TranscriptViewModel extends ViewModel {
         @Override
         protected Void doInBackground(Void... voids) {
             try{
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(150);
                 if(!accountDao.getSemestersItem().isEmpty()){
                     loadRv.set(false);
                     semestersItemsDB = accountDao.getSemestersItem();

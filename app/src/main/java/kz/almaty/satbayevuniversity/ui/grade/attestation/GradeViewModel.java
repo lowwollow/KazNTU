@@ -132,7 +132,7 @@ public class GradeViewModel extends ViewModel {
             @Override
             protected Void doInBackground(Void... voids) {
                 try{
-                    TimeUnit.SECONDS.sleep(1);
+                    TimeUnit.MILLISECONDS.sleep(150);
                     if(!accountDao.getAttestation().isEmpty()){
                         loadRv.set(false);
                         attestationListDB = accountDao.getAttestation();

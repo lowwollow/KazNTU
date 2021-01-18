@@ -56,6 +56,7 @@ public class ScheduleViewModel extends ViewModel {
     public void getSchedule() {
         loadRv.set(true);
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
+
         if(onlyServer){
             if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected() ){
                 getScheduleListFromServer();

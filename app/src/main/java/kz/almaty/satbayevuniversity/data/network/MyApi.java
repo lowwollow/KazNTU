@@ -53,7 +53,7 @@ public interface MyApi {
     Call<DeferredDisciplineGroup1> updateDeferedDiscipline();
 
     @GET("api/iup")
-    Call<ChosenDisciplineGroup1> updateChosenDiscipline1();
+    Call<ChosenDisciplineGroup1> updateChosenDiscipline();
 
     @GET("api/Transcript")
     Call<ResponseTranscript> updateTranscript();

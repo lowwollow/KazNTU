@@ -37,9 +37,9 @@
             android:layout_height="match_parent"
             android:id="@+id/journalRecyclerView"
             tools:listitem="@layout/journal_item"
+            android:layoutAnimation="@anim/layout_animation_fall_down"
             android:visibility="@{academicViewModel.loadRv ? View.GONE : View.VISIBLE}"/>
 
-<!--        android:layoutAnimation="@anim/layout_animation_fall_down"-->
 
         <ImageView
             android:layout_width="0dp"

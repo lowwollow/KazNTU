@@ -25,5 +25,5 @@
     <item
         android:id="@+id/individualPlan"
         android:title="@string/individualPlan"
-        android:icon="@drawable/ic_settings_24px" />
+        android:icon="@drawable/ic_baseline_inbox_24" />
 </menu>
