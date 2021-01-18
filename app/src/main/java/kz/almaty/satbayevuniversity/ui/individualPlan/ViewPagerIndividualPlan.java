@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.entity.individualPlan.deferedDiscipline.Deferred;
 import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineFragment;
 import kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes.DeferedDisciplineFragment;
 import kz.almaty.satbayevuniversity.ui.schedule.exams.ExamsFragment;
@@ -29,7 +30,6 @@ public class ViewPagerIndividualPlan extends Fragment {
     public static ViewPagerIndividualPlan newInstance(){
         return new ViewPagerIndividualPlan();
     }
-
 
     @Nullable
     @Override
@@ -55,11 +55,10 @@ public class ViewPagerIndividualPlan extends Fragment {
 
         Log.d("TAG", "onActivityCreated: viewpager");
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
-        viewPagerAdapter.addFragment(ChosenDisciplineFragment.getInstance(), getString(R.string.chosen));
         viewPagerAdapter.addFragment(DeferedDisciplineFragment.getInstance(), getString(R.string.delayed));
+        viewPagerAdapter.addFragment(ChosenDisciplineFragment.getInstance(), getString(R.string.chosen));
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     private void setupViewPager(ViewPager viewPager){
