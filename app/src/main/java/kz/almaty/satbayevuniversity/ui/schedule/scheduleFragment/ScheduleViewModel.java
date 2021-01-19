@@ -39,7 +39,7 @@ public class ScheduleViewModel extends ViewModel {
     private MutableLiveData<List<Schedule>> scheduleLiveData = new MutableLiveData<>();
 
     public ObservableBoolean loadRv = new ObservableBoolean();
-
+    public ObservableBoolean emptyImage = new ObservableBoolean();
     private MutableLiveData<Integer> handleTimeout = new MutableLiveData<>();
 
     private MutableLiveData<Integer> handleError = new MutableLiveData<>();
@@ -76,6 +76,8 @@ public class ScheduleViewModel extends ViewModel {
                         case 200:
                             loadRv.set(false);
                             scheduleList = response.body();
+                            if (scheduleList.isEmpty())
+                                emptyImage.set(true);
                             if(!scheduleList.equals(scheduleListFromDb)){
                                 new Thread(() -> {
                                     update(scheduleList);

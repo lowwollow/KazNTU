@@ -25,6 +25,7 @@ import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Schedule;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Student;
 import kz.almaty.satbayevuniversity.databinding.FragmentStudentsListBinding;
+import kz.almaty.satbayevuniversity.utils.LocaleHelper;
 
 public class StudentsListFragment extends DialogFragment {
     FragmentStudentsListBinding fragmentStudentsListBinding;
@@ -61,7 +62,7 @@ public class StudentsListFragment extends DialogFragment {
 
         viewModel = ViewModelProviders.of(this).get(StudentsListViewModel.class);
 
-        viewModel.getStudentList(schedule.getClassId(),"ru");
+        viewModel.getStudentList(schedule.getClassId(),LocaleHelper.getLanguage(getContext()));
 
         viewModel.getLiveData().observe(this, students -> {
             Collections.sort(students, new Comparator<Student>() {

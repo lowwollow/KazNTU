@@ -20,6 +20,7 @@ import kz.almaty.satbayevuniversity.data.entity.admission.IdAndTitle;
 import kz.almaty.satbayevuniversity.ui.admission.bachelor.ImageDialog;
 
 public  class Utils {
+
     public static String parseDate(String date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd.MM.yyyy");
@@ -31,6 +32,7 @@ public  class Utils {
         }
         return simpleDateFormat2.format(date1);
     }
+
     public static IdAndTitle getIdAndTitleFromListById(List<IdAndTitle> list, int id){
         for(IdAndTitle idAndTitle : list){
             if(idAndTitle.getId() == id){
@@ -39,6 +41,7 @@ public  class Utils {
         }
         return null;
     }
+
     public static  void openFullImage(Bitmap bitmap, Context context){
         ImageDialog imageDialog = new ImageDialog(bitmap);
         imageDialog.show(((AppCompatActivity)context).getSupportFragmentManager(),"imageDialog");

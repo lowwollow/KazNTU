@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.Observable;
 import androidx.databinding.ObservableBoolean;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -45,9 +47,6 @@ public class DeferedDisciplineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         individualPlanBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_defered_disciplines_individual_plan, container, false);
         View view = individualPlanBinding.getRoot();
-        individualPlanBinding.notifyChange();
-        individualPlanBinding.emptyImage.setVisibility(view.GONE);
-        individualPlanBinding.emptyTextView.setVisibility(view.GONE);
         return view;
     }
 
@@ -61,8 +60,10 @@ public class DeferedDisciplineFragment extends Fragment {
         individualPlanAdapter = new DeferedDisciplineAdapter(getActivity());
         individualPlanBinding.individualPlanRecyclerView.setAdapter(individualPlanAdapter);
         mViewModel = ViewModelProviders.of(this).get(DeferredDisciplineViewModel.class);
+        individualPlanBinding.setIndividualPlan(mViewModel);
 
         mViewModel.getDeferredDiscipline();
+
 
         mViewModel.getDeferredDisciplineLiveData().observe(this, deferredDiscipline1s -> {
             individualPlanAdapter.setIndividualPlanList(deferredDiscipline1s);

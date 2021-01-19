@@ -90,6 +90,7 @@ public class ChosenDisciplineViewModel extends ViewModel {
                         }).start();
                         chosenDisciplinesLiveData.setValue(chosenDisciplines);
                     }
+                    if (chosenDisciplines.isEmpty()) getEmptyBoolean.set(true);
                 }
                 else if (response.code() == 404)
                     handleError.setValue(404);

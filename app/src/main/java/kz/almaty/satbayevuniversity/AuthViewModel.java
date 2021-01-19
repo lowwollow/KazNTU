@@ -58,8 +58,6 @@ public class AuthViewModel extends ViewModel {
             TimeUnit.SECONDS, queue);
 
 
-
-
     public void initAuth(){
         userMutableLiveData = new MutableLiveData<>();
         drawableMutableLiveData = new MutableLiveData<>();

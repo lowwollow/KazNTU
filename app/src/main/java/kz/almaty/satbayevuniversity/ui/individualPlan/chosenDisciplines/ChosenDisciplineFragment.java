@@ -87,7 +87,6 @@ public class ChosenDisciplineFragment extends Fragment{
         individualPlanBinding.setChosenDiscipline(mViewModel);
         individualPlanBinding.chosenDisciplineRecyclerView.setAdapter(chosenDisciplineAdapter);
 
-
         mViewModel.getChosenDiscipline();
 
         mViewModel.getChosenDisciplinesData().observe(this, chosenDiscipline1s -> {

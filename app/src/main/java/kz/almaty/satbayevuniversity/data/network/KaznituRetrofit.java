@@ -36,7 +36,6 @@ public class KaznituRetrofit {
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
-                        Log.d("token", "intercept: " + "Bearer " + App.getContext().getSharedPreferences("MyPref", MODE_PRIVATE).getString("MyToken",""));
                         Request newRequest = chain.request().newBuilder()
                                 .addHeader("Authorization", "Bearer " + App.getContext().getSharedPreferences("MyPref", MODE_PRIVATE).getString("MyToken",""))
                                 .build();
