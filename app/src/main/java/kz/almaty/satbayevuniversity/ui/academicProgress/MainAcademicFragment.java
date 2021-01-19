@@ -14,6 +14,11 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -46,10 +51,10 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
     private AnimationDrawable animationDrawable;
     private LottieAnimationView lottieAnimationView;
 
+
     public static MainAcademicFragment newInstance() {
         return new MainAcademicFragment();
     }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -92,7 +97,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
             return false;
         });
     }
-    
+
 
     @Override
     public void onStart() {
@@ -115,16 +120,13 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
             ((HomeActivity)getActivity()).OpenToggleNavMenu();
         });
 
-
         ConnectivityManager connManager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
+
         // update button
         imageView.setOnClickListener(v -> {
             if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                imageView.setVisibility(View.GONE);
-                lottieAnimationView.setVisibility(View.VISIBLE);
-                lottieAnimationView.playAnimation();
-                if (lottieAnimationView.isActivated())
+                changeAnimations();
                 editor.putBoolean(getString(R.string.only_server),true);
                 editor.apply();
                 if(toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.journal))) {
@@ -176,17 +178,44 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         return false;
     };
 
-    private void replaceFragmentBackStack(Fragment newFragment, String tag, int container) {
-        assert getFragmentManager() != null;
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(container, newFragment, tag)
-                .addToBackStack(tag)
-                .commit();
-    }
-
     private void replaceFragment(Fragment newFragment) {
         assert getFragmentManager() != null;
         FragmentTransaction ft = getFragmentManager().beginTransaction().replace(R.id.main_academic_fragment_container, newFragment);
         ft.commit();
+    }
+
+    private void changeAnimations(){
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator());
+        fadeOut.setStartOffset(125);
+        fadeOut.setDuration(250);
+        imageView.startAnimation(fadeOut);
+        imageView.setVisibility(View.GONE);
+        lottieAnimationView.setVisibility(View.VISIBLE);
+        lottieAnimationView.playAnimation();
+        lottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Animation fadeIn = new AlphaAnimation(0, 1);
+                fadeIn.setInterpolator(new DecelerateInterpolator());
+                fadeIn.setStartOffset(125);
+                fadeIn.setDuration(250);
+                imageView.startAnimation(fadeIn);
+                imageView.setVisibility(View.VISIBLE);
+                lottieAnimationView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+            }
+        });
     }
 }
