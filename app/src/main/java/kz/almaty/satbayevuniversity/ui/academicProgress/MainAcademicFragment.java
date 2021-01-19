@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.academicProgress;
 
 import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
@@ -57,12 +58,9 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         toolbar = view.findViewById(R.id.mainToolbar);
         navigation = view.findViewById(R.id.bottomNavigation);
         imageView = view.findViewById(R.id.updateData);
+        imageView.setVisibility(View.VISIBLE);
         navigation.setOnNavigationItemSelectedListener(this);
-        lottieAnimationView = view.findViewById(R.id.updateData);
-
-        // fix animation
-        lottieAnimationView.pauseAnimation();
-
+        lottieAnimationView = view.findViewById(R.id.updateData_lottie);
 
         int notification_type_id = sharedPreferences.getInt("typeId",1);
 
@@ -80,6 +78,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         super.onResume();
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
+
         getView().setOnKeyListener((view, i, keyEvent) -> {
             if(i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP){
                     if(getFragmentManager().findFragmentById(R.id.main_academic_fragment_container) instanceof AcademicFragment){
@@ -93,6 +92,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
             return false;
         });
     }
+    
 
     @Override
     public void onStart() {
@@ -115,33 +115,16 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
             ((HomeActivity)getActivity()).OpenToggleNavMenu();
         });
 
-        lottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-                animator.start();
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
 
         ConnectivityManager connManager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
         // update button
         imageView.setOnClickListener(v -> {
             if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+                imageView.setVisibility(View.GONE);
+                lottieAnimationView.setVisibility(View.VISIBLE);
+                lottieAnimationView.playAnimation();
+                if (lottieAnimationView.isActivated())
                 editor.putBoolean(getString(R.string.only_server),true);
                 editor.apply();
                 if(toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.journal))) {
@@ -159,7 +142,11 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
                 Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
             }
         });
+        if (!lottieAnimationView.isActivated()){
+            lottieAnimationView.setVisibility(View.GONE);
+        }
     }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
