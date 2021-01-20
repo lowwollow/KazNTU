@@ -22,10 +22,14 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.util.Objects;
 
 import kz.almaty.satbayevuniversity.AuthViewModel;
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.SharedPrefCache;
+import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.databinding.FragmentAcademicBinding;
 import kz.almaty.satbayevuniversity.ui.LoginActivity;
 
@@ -85,7 +89,16 @@ public class AcademicFragment extends Fragment {
         academicAdapterResponse = new AcademicAdapterResponse(getActivity());
         academicFragmentBinding.journalRecyclerView.setAdapter(academicAdapterResponse);
 
-        mViewModel.getJournal();
+
+        SharedPrefCache cache = new SharedPrefCache();
+        String lang = cache.getStr("language", getContext());
+        Gson gson = new Gson();
+        Language language = gson.fromJson(lang, Language.class);
+        if (language.getLanguage().equals("Казахский"))
+            mViewModel.getJournal("kz");
+        else{
+            mViewModel.getJournal("ru");
+        }
 
         mViewModel.getAcademicData().observe(this, responseJournals -> {
             academicAdapterResponse.setResponseJournalList(responseJournals);

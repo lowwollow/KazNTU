@@ -62,16 +62,9 @@ public class StudentsListFragment extends DialogFragment {
 
         viewModel = ViewModelProviders.of(this).get(StudentsListViewModel.class);
 
-        viewModel.getStudentList(schedule.getClassId(),LocaleHelper.getLanguage(getContext()));
+        viewModel.getStudentList(schedule.getClassId(), LocaleHelper.getLanguage(getContext()));
 
         viewModel.getLiveData().observe(this, students -> {
-            Collections.sort(students, new Comparator<Student>() {
-                Collator collator = Collator.getInstance(new Locale("kk"));
-                        @Override
-                        public int compare(Student student1, Student student2) {
-                            return collator.compare(student1.getFullName(),student2.getFullName());
-                        }
-                    });
             studentListAdapter.setStudentList(students);
         });
         fragmentStudentsListBinding.setViewModel(viewModel);

@@ -55,20 +55,20 @@ public class TranscriptViewModel extends ViewModel {
     private ConnectivityManager connManager = (ConnectivityManager)App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
-    public void getTranscript(){
+    public void getTranscript(String lang){
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
         if(onlyServer){
             if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                getSemesterItemListFromServer();
+                getSemesterItemListFromServer(lang);
             }
         }else{
-            MyTask task = new MyTask();
+            MyTask task = new MyTask(lang);
             task.execute();
         }
     }
 
-    private void getSemesterItemListFromServer() {
-            KaznituRetrofit.getApi().updateTranscript().enqueue(new Callback<ResponseTranscript>() {
+    private void getSemesterItemListFromServer(String lang) {
+            KaznituRetrofit.getApi().updateTranscript(lang).enqueue(new Callback<ResponseTranscript>() {
                 @Override
                 public void onResponse(Call<ResponseTranscript> call, Response<ResponseTranscript> response) {
                     if (response.isSuccessful()) {
@@ -127,6 +127,10 @@ public class TranscriptViewModel extends ViewModel {
 
     private class MyTask extends AsyncTask<Void, Void, Void>{
 
+        String lang = new String();
+        public MyTask(String lang){
+            this.lang = lang;
+        }
         @Override
         protected Void doInBackground(Void... voids) {
             try{
@@ -136,11 +140,11 @@ public class TranscriptViewModel extends ViewModel {
                     semestersItemsDB = accountDao.getSemestersItem();
                     transcriptLiveData.postValue(semestersItemsDB);
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                        getSemesterItemListFromServer();
+                        getSemesterItemListFromServer(lang);
                     }
                 }else{
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                        getSemesterItemListFromServer();
+                        getSemesterItemListFromServer(lang);
                     }else{
                         loadRv.set(false);
                         getEmptyBoolean.set(true);

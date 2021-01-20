@@ -41,25 +41,25 @@ public interface MyApi {
     Call<ResponseBody> updatePhoto();
 
     @GET("api/Journal")
-    Call<List<ResponseJournal>> updateJournal();
+    Call<List<ResponseJournal>> updateJournal(@Query("language") String language);
 
     @GET("api/Schedule")
-    Call<List<Schedule>> updateSchedule();
+    Call<List<Schedule>> updateSchedule(@Query("language") String language);
 
     @GET("api/Attestation")
-    Call<List<Attestation>> updateAttestation();
+    Call<List<Attestation>> updateAttestation(@Query("language") String language);
 
     @GET("api/iup")
-    Call<DeferredDisciplineGroup1> updateDeferedDiscipline();
+    Call<DeferredDisciplineGroup1> updateDeferedDiscipline(@Query("language") String language);
 
     @GET("api/iup")
-    Call<ChosenDisciplineGroup1> updateChosenDiscipline();
+    Call<ChosenDisciplineGroup1> updateChosenDiscipline(@Query("language") String language);
 
     @GET("api/Transcript")
-    Call<ResponseTranscript> updateTranscript();
+    Call<ResponseTranscript> updateTranscript(@Query("language") String language);
 
     @GET("api/ExamSchedule")
-    Call<List<Exam>> updateExam();
+    Call<List<Exam>> updateExam(@Query("language") String language);
 
     @GET("api/News/Short")
     Call<List<Notification>> updateNotification();
@@ -77,7 +77,7 @@ public interface MyApi {
     Call<List<Student>> getStudentList(@Query("classid") Integer clasid, @Query("language") String language);
 
     @GET("api/notification/all")
-    Call<List<PushNotification>> getPushNotificationList();
+    Call<List<PushNotification>> getPushNotificationList(@Query("language") String language);
 
     @POST("api/Notification/Read")
     Call<ResponseBody> removePushNotification(@Query("pushId") int pushId);

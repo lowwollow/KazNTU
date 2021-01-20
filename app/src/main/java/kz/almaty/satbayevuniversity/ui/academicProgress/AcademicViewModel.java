@@ -30,6 +30,7 @@ import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.AccountDao;
 import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.data.AppDatabase;
+import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.data.entity.academic.ResponseJournal;
 import kz.almaty.satbayevuniversity.data.network.KaznituRetrofit;
 import okhttp3.ResponseBody;
@@ -66,21 +67,21 @@ public class AcademicViewModel extends ViewModel {
         //state = savedStateHandle;
     //}
 
-    public void getJournal() {
+    public void getJournal(String lang) {
         loadRv.set(true);
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
         if(onlyServer){
             if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                getJournalListFromServer();
+                getJournalListFromServer(lang);
             }
         }else{
-            MyTask task = new MyTask();
+            MyTask task = new MyTask(lang);
             task.execute();
         }
     }
 
-     private void getJournalListFromServer() {
-             KaznituRetrofit.getApi().updateJournal().enqueue(new Callback<List<ResponseJournal>>() {
+     private void getJournalListFromServer(String lang) {
+             KaznituRetrofit.getApi().updateJournal(lang).enqueue(new Callback<List<ResponseJournal>>() {
                  @Override
                  public void onResponse(Call<List<ResponseJournal>> call, Response<List<ResponseJournal>> response) {
                      switch (response.code()) {
@@ -177,6 +178,10 @@ public class AcademicViewModel extends ViewModel {
     }
 
     private class MyTask extends AsyncTask<Void, Void, Void>{
+        String lang = new String();
+        public MyTask(String lang){
+            this.lang = lang;
+        }
         @Override
         protected Void doInBackground(Void... voids) {
             try{
@@ -186,12 +191,12 @@ public class AcademicViewModel extends ViewModel {
                     responseJournalListForDB = accountDao.getResponseJournal();
                     academicData.postValue(responseJournalListForDB);
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && Objects.requireNonNull(activeNetwork).isConnected()) {
-                        getJournalListFromServer();
+                        getJournalListFromServer(lang);
                     }
                 }else {
                     // при первом вхождении
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && Objects.requireNonNull(activeNetwork).isConnected()) {
-                        getJournalListFromServer();
+                        getJournalListFromServer(lang);
                     } else {
                         loadRv.set(false);
                         getEmptyBoolean.set(true);

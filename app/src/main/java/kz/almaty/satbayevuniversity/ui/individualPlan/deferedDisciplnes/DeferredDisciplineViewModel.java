@@ -53,20 +53,25 @@ public class DeferredDisciplineViewModel extends ViewModel {
 
 
 
-    void getDeferredDiscipline() {
+    void getDeferredDiscipline(String lang) {
         loadRv.set(true);
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server), false);
             if (onlyServer) {
                 if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                    getDeferredDisciplineFromServer();
+                    getDeferredDisciplineFromServer(lang);
                 }
             } else {
-                MyTask task = new MyTask();
+                MyTask task = new MyTask(lang);
                 task.execute();
             }
     }
 
     private class MyTask extends AsyncTask<Void, Void, Void> {
+
+        String lang = new String();
+        public MyTask(String lang){
+            this.lang = lang;
+        }
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -75,11 +80,11 @@ public class DeferredDisciplineViewModel extends ViewModel {
                 deferredDisciplineListDB = accountDao.getDeferredDiscipline1();
                 deferredDisciplineLiveData.postValue(deferredDisciplineListDB);
                 if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                    getDeferredDisciplineFromServer();
+                    getDeferredDisciplineFromServer(lang);
                 }
             } else {
                 if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                    getDeferredDisciplineFromServer();
+                    getDeferredDisciplineFromServer(lang);
                 } else {
                     loadRv.set(false);
                 }
@@ -88,8 +93,8 @@ public class DeferredDisciplineViewModel extends ViewModel {
         }
     }
 
-    private void getDeferredDisciplineFromServer() {
-        KaznituRetrofit.getApi().updateDeferedDiscipline().enqueue(new Callback<DeferredDisciplineGroup1>() {
+    private void getDeferredDisciplineFromServer(String lang) {
+        KaznituRetrofit.getApi().updateDeferedDiscipline(lang).enqueue(new Callback<DeferredDisciplineGroup1>() {
             @Override
             public void onResponse(Call<DeferredDisciplineGroup1> call, Response<DeferredDisciplineGroup1> response) {
                 if (response.isSuccessful()) {

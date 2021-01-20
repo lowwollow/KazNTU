@@ -35,6 +35,8 @@ import java.util.Objects;
 
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.App;
+import kz.almaty.satbayevuniversity.data.SharedPrefCache;
+import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.data.entity.grade.transcript.SemestersItem;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.ChosenDiscipline1;
 import kz.almaty.satbayevuniversity.data.entity.individualPlan.choosenDiscipline.Semesters1;
@@ -87,7 +89,15 @@ public class ChosenDisciplineFragment extends Fragment{
         individualPlanBinding.setChosenDiscipline(mViewModel);
         individualPlanBinding.chosenDisciplineRecyclerView.setAdapter(chosenDisciplineAdapter);
 
-        mViewModel.getChosenDiscipline();
+        SharedPrefCache cache = new SharedPrefCache();
+        String lang = cache.getStr("language", getContext());
+        Gson gson = new Gson();
+        Language language = gson.fromJson(lang, Language.class);
+        if (language.getLanguage().equals("Казахский"))
+            mViewModel.getChosenDiscipline("kz");
+        else{
+            mViewModel.getChosenDiscipline("ru");
+        }
 
         mViewModel.getChosenDisciplinesData().observe(this, chosenDiscipline1s -> {
             ArrayList<Object> list = new ArrayList<>(chosenDiscipline1s.size() * 8);

@@ -55,23 +55,23 @@ public class GradeViewModel extends ViewModel {
     private ConnectivityManager connManager = (ConnectivityManager)App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
-    void getAttestation() {
+    void getAttestation(String lang) {
         loadRv.set(true);
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
         if(onlyServer){
             if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                getGradeListFromServer();
+                getGradeListFromServer(lang);
             }
         }else{
-            MyTask task = new MyTask();
+            MyTask task = new MyTask(lang);
             task.execute();
         }
 
 
     }
 
-    private void getGradeListFromServer() {
-            KaznituRetrofit.getApi().updateAttestation().enqueue(new Callback<List<Attestation>>() {
+    private void getGradeListFromServer(String lang) {
+            KaznituRetrofit.getApi().updateAttestation(lang).enqueue(new Callback<List<Attestation>>() {
                 @Override
                 public void onResponse(Call<List<Attestation>> call, Response<List<Attestation>> response) {
                         if (response.isSuccessful()) {
@@ -129,7 +129,12 @@ public class GradeViewModel extends ViewModel {
 
         private class MyTask extends AsyncTask<Void, Void, Void>{
 
-            @Override
+        String lang = new String();
+        public MyTask(String lang){
+            this.lang = lang;
+        }
+
+        @Override
             protected Void doInBackground(Void... voids) {
                 try{
                     TimeUnit.MILLISECONDS.sleep(150);
@@ -138,11 +143,11 @@ public class GradeViewModel extends ViewModel {
                         attestationListDB = accountDao.getAttestation();
                         attestationLiveData.postValue(attestationListDB);
                         if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                            getGradeListFromServer();
+                            getGradeListFromServer(lang);
                         }
                     }else{
                         if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                            getGradeListFromServer();
+                            getGradeListFromServer(lang);
                         }else{
                             loadRv.set(false);
                             getEmptyBoolean.set(true);

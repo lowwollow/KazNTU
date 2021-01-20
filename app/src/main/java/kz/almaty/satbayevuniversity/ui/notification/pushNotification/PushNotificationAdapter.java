@@ -56,12 +56,12 @@ public class PushNotificationAdapter  extends RecyclerView.Adapter<PushNotificat
     }
     public String getCurrentLanguageFromApp(){
         Locale locale;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-             locale = context.getResources().getConfiguration().getLocales().get(0);
-        }else{
-             locale = context.getResources().getConfiguration().locale;
-        }
-        return locale.getDefault().toString();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                 locale = context.getResources().getConfiguration().getLocales().get(0);
+            }else{
+                 locale = context.getResources().getConfiguration().locale;
+            }
+        return locale.getLanguage();
     }
     @Override
     public int getItemCount() {

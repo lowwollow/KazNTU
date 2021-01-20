@@ -62,21 +62,21 @@ public class ChosenDisciplineViewModel extends ViewModel {
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
 
-    public void getChosenDiscipline(){
+    public void getChosenDiscipline(String lang){
         loadRv.set(true);
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
         if(onlyServer){
             if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                getChosenDisciplineListFromServer();
+                getChosenDisciplineListFromServer(lang);
             }
         }else{
-            MyTask task = new MyTask();
+            MyTask task = new MyTask(lang);
             task.execute();
         }
     }
 
-    public void getChosenDisciplineListFromServer() {
-        KaznituRetrofit.getApi().updateChosenDiscipline().enqueue(new Callback<ChosenDisciplineGroup1>(){
+    public void getChosenDisciplineListFromServer(String lang) {
+        KaznituRetrofit.getApi().updateChosenDiscipline(lang).enqueue(new Callback<ChosenDisciplineGroup1>(){
             @Override
             public void onResponse(Call<ChosenDisciplineGroup1> call, Response<ChosenDisciplineGroup1> response) {
                 if (response.code() == 200) {
@@ -110,6 +110,11 @@ public class ChosenDisciplineViewModel extends ViewModel {
 
 
     private class MyTask extends AsyncTask<Void, Void, Void> {
+
+        String lang = new String();
+        public MyTask(String lang) {
+            this.lang = lang;
+        }
         @Override
         protected Void doInBackground(Void... voids) {
             try{
@@ -119,11 +124,11 @@ public class ChosenDisciplineViewModel extends ViewModel {
                     chosenDisciplinesFromDb = accountDao.getChosenDiscipline1();
                     chosenDisciplinesLiveData.postValue(chosenDisciplinesFromDb);
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && Objects.requireNonNull(activeNetwork).isConnected()) {
-                        getChosenDisciplineListFromServer();
+                        getChosenDisciplineListFromServer(lang);
                     }
                 }else {
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && Objects.requireNonNull(activeNetwork).isConnected()) {
-                        getChosenDisciplineListFromServer();
+                        getChosenDisciplineListFromServer(lang);
                     } else {
                         loadRv.set(false);
                         getEmptyBoolean.set(true);

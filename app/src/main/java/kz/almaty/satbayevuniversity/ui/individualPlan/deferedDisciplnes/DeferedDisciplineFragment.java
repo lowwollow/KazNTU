@@ -19,11 +19,15 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.App;
+import kz.almaty.satbayevuniversity.data.SharedPrefCache;
+import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.databinding.FragmentDeferedDisciplinesIndividualPlanBinding;
 import kz.almaty.satbayevuniversity.ui.grade.attestation.GradeViewModel;
 
@@ -62,8 +66,15 @@ public class DeferedDisciplineFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(DeferredDisciplineViewModel.class);
         individualPlanBinding.setIndividualPlan(mViewModel);
 
-        mViewModel.getDeferredDiscipline();
-
+        SharedPrefCache cache = new SharedPrefCache();
+        String lang = cache.getStr("language", getContext());
+        Gson gson = new Gson();
+        Language language = gson.fromJson(lang, Language.class);
+        if (language.getLanguage().equals("Казахский"))
+            mViewModel.getDeferredDiscipline("kz");
+        else{
+            mViewModel.getDeferredDiscipline("ru");
+        }
 
         mViewModel.getDeferredDisciplineLiveData().observe(this, deferredDiscipline1s -> {
             individualPlanAdapter.setIndividualPlanList(deferredDiscipline1s);

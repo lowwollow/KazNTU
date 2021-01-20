@@ -20,9 +20,13 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.SharedPrefCache;
+import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.data.entity.notification.PushNotification;
 import kz.almaty.satbayevuniversity.databinding.FragmentPushNotificationBinding;
 
@@ -48,7 +52,16 @@ public class PushNotificationFragment extends Fragment {
             fragmentPushNotificationBinding.pushNotificationRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
             fragmentPushNotificationBinding.pushNotificationRecyclerView.setAdapter(pushNotificationAdapter);
 
-            pushNotificationViewModel.getPushNotification();
+            SharedPrefCache cache = new SharedPrefCache();
+            String lang = cache.getStr("language", getContext());
+            Gson gson = new Gson();
+            Language language = gson.fromJson(lang, Language.class);
+            if (language.getLanguage().equals("Казахский"))
+                pushNotificationViewModel.getPushNotification("kz");
+            else{
+                pushNotificationViewModel.getPushNotification("ru");
+            }
+
             pushNotificationViewModel.getNotificationLiveData().observe(this, new Observer<List<PushNotification>>() {
                 @Override
                 public void onChanged(List<PushNotification> pushNotifications) {

@@ -14,7 +14,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.Gson;
+
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.SharedPrefCache;
+import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.databinding.FragmentGradeBinding;
 
 public class GradeFragment extends Fragment {
@@ -51,7 +55,16 @@ public class GradeFragment extends Fragment {
         attestationAdapter = new AttestationAdapter();
         gradeFragmentBinding.gradeRecyclerView.setAdapter(attestationAdapter);
 
-        mViewModel.getAttestation();
+        SharedPrefCache cache = new SharedPrefCache();
+        String lang = cache.getStr("language", getContext());
+        Gson gson = new Gson();
+        Language language = gson.fromJson(lang, Language.class);
+        if (language.getLanguage().equals("Казахский"))
+            mViewModel.getAttestation("kz");
+        else{
+            mViewModel.getAttestation("ru");
+        }
+
         mViewModel.getAttestationLiveDate().observe(this, attestations -> {
             attestationAdapter.setAttestationList(attestations);
          });

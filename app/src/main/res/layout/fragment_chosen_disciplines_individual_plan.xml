@@ -49,7 +49,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="5dp"
             android:visibility="@{chosenDiscipline.loadRv ? View.GONE : View.VISIBLE}"
-            android:text="Дисциплина"/>
+            android:text="@string/individual_plan_discipline"/>
 
         <TextView
             android:textColor="@color/black"
@@ -61,13 +61,13 @@
             app:layout_constraintStart_toEndOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="@{chosenDiscipline.loadRv ? View.GONE : View.VISIBLE}"
-            android:text="Компонент"/>
+            android:text="@string/individual_plan_component"/>
 
         <TextView
             android:id="@+id/Cypher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Шрифт"
+            android:text="@string/individual_plan_cypher"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@id/guideline9"
             app:layout_constraintEnd_toEndOf="parent"

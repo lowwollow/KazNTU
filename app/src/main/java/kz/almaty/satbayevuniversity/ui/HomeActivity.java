@@ -104,7 +104,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         settings.setTitle(R.string.settings);
 
         MenuItem logout = menu.findItem(R.id.logout);
-        logout.setTitle(getString(R.string.btn_login_exit));
+        logout.setTitle(getString(R.string.logout));
     }
 
     private void setupBindings(Bundle savedInstanceState) {

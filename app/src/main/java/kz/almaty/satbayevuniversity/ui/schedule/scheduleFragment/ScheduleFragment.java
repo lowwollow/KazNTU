@@ -25,6 +25,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.kizitonwose.calendarview.CalendarView;
 import com.kizitonwose.calendarview.model.CalendarDay;
 import com.kizitonwose.calendarview.ui.DayBinder;
@@ -38,6 +40,7 @@ import org.threeten.bp.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Objects;
 
 import kz.almaty.satbayevuniversity.AuthViewModel;
@@ -45,9 +48,12 @@ import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.AccountDao;
 import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.data.AppDatabase;
+import kz.almaty.satbayevuniversity.data.SharedPrefCache;
+import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.data.entity.schedule.Schedule;
 import kz.almaty.satbayevuniversity.databinding.FragmentScheduleBinding;
 import kz.almaty.satbayevuniversity.ui.LoginActivity;
+import kz.almaty.satbayevuniversity.utils.LocaleHelper;
 import kz.almaty.satbayevuniversity.utils.OnSwipeTouchListener;
 
 public class ScheduleFragment extends Fragment implements Cloneable{
@@ -97,24 +103,30 @@ public class ScheduleFragment extends Fragment implements Cloneable{
         scheduleFragmentBinding.setSchedule(mViewModel);
         scheduleFragmentBinding.scheduleRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         scheduleFragmentBinding.scheduleRecyclerView.setHasFixedSize(true);
-        scheduleFragmentBinding.scheduleRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        scheduleFragmentBinding.scheduleRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         scheduleAdapter = new ScheduleAdapter(getActivity());
         scheduleFragmentBinding.scheduleRecyclerView.setAdapter(scheduleAdapter);
         scheduleFragmentBinding.scheduleRecyclerView.setItemAnimator(null);
 
-        mViewModel.getSchedule();
-        setDateSchedule(currentDay);
+        SharedPrefCache cache = new SharedPrefCache();
+        String lang = cache.getStr("language", getContext());
+        Gson gson = new Gson();
+        Language language = gson.fromJson(lang, Language.class);
+        if (language.getLanguage().equals("Казахский"))
+            mViewModel.getSchedule("kz");
+        else{
+            mViewModel.getSchedule("ru");
+        }
 
+        setDateSchedule(currentDay);
 
         if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.schedule);
         }
         scheduleFragmentBinding.scheduleRecyclerView.setNestedScrollingEnabled(false);
-
         //swipe weekCalendar
         scheduleFragmentBinding.scheduleRecyclerView.setOnTouchListener(new OnSwipeTouchListener(getContext()) {
-
             public void onSwipeRight() {
                 oldDate = currentDay;
                 currentDay = currentDay.minusDays(1);
@@ -151,7 +163,6 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                 getActivity().finish();
             }
         });
-
         setCalendar();
     }
 
@@ -204,7 +215,6 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                 if (schedule.getDayOfWeekId() == 0){
                     i++;
                 }
-                System.out.println(schedule);
             }
             if(i==14){
                 emptyConstraint.setVisibility(View.VISIBLE);

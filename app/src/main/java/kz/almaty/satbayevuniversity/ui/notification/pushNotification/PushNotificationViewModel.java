@@ -31,18 +31,18 @@ public class PushNotificationViewModel extends ViewModel {
     private ConnectivityManager connManager = (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
-    public void getPushNotification(){
+    public void getPushNotification(String lang){
         loadRv.set(true);
         isEmpty.set(false);
         if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-            getPushNotificationFromServer();
+            getPushNotificationFromServer(lang);
         }else{
             loadRv.set(false);
             isEmpty.set(true);
         }
     }
-    private void getPushNotificationFromServer(){
-        KaznituRetrofit.getApi().getPushNotificationList().enqueue(new Callback<List<PushNotification>>() {
+    private void getPushNotificationFromServer(String lang){
+        KaznituRetrofit.getApi().getPushNotificationList(lang).enqueue(new Callback<List<PushNotification>>() {
             @Override
             public void onResponse(Call<List<PushNotification>> call, Response<List<PushNotification>> response) {
                 listOfPushNotification = response.body();

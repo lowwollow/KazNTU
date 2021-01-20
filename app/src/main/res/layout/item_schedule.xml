@@ -80,21 +80,21 @@
             android:id="@+id/list_of_students_layout"
             android:layout_width="80dp"
             android:layout_height="60dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:onClick="@{() -> scheduleListener.scheduleClicked(schedule)}"
             android:visibility="gone"
-            >
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_list_black"
-                app:layout_constraintVertical_bias="0.8"
+                android:src="@drawable/ic_baseline_list_alt_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.Guideline

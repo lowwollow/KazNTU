@@ -219,5 +219,8 @@
     <string name="estimate_teacher_comments">Пікір жазыңыз</string>
     <string name="estimate_teacher_anonymous">Жасырын</string>
     <string name="estimate_teacher_done">Дайын</string>
+    <string name="individual_plan_discipline">Пән</string>
+    <string name="individual_plan_component">Құрамдас бөлігі</string>
+    <string name="individual_plan_cypher">Код</string>
 
 </resources>

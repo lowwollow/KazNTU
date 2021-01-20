@@ -1,5 +1,6 @@
 package kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -22,11 +23,13 @@ import kz.almaty.satbayevuniversity.data.network.KaznituRetrofit;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import kz.almaty.satbayevuniversity.utils.LocaleHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,6 +43,7 @@ public class ScheduleViewModel extends ViewModel {
 
     public ObservableBoolean loadRv = new ObservableBoolean();
     public ObservableBoolean emptyImage = new ObservableBoolean();
+    public ObservableBoolean fullEmptyImage = new ObservableBoolean();
     private MutableLiveData<Integer> handleTimeout = new MutableLiveData<>();
 
     private MutableLiveData<Integer> handleError = new MutableLiveData<>();
@@ -53,31 +57,30 @@ public class ScheduleViewModel extends ViewModel {
     private ConnectivityManager connManager = (ConnectivityManager)App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
-    public void getSchedule() {
+    public void getSchedule(String lang) {
         loadRv.set(true);
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
 
         if(onlyServer){
             if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected() ){
-                getScheduleListFromServer();
+                getScheduleListFromServer(lang);
             }
         }else{
-            MyTask task = new MyTask();
+            MyTask task = new MyTask(lang);
             task.execute();
         }
     }
 
 
-    private void getScheduleListFromServer(){
-            KaznituRetrofit.getApi().updateSchedule().enqueue(new Callback<List<Schedule>>() {
+    private void getScheduleListFromServer(String lang){
+            KaznituRetrofit.getApi().updateSchedule(lang).enqueue(new Callback<List<Schedule>>() {
                 @Override
                 public void onResponse(Call<List<Schedule>> call, Response<List<Schedule>> response) {
                     switch (response.code()) {
                         case 200:
                             loadRv.set(false);
                             scheduleList = response.body();
-                            if (scheduleList.isEmpty())
-                                emptyImage.set(true);
+                            Log.d("TESTING", "onResponse: SCHEDULE" + scheduleList.size());
                             if(!scheduleList.equals(scheduleListFromDb)){
                                 new Thread(() -> {
                                     update(scheduleList);
@@ -137,6 +140,12 @@ public class ScheduleViewModel extends ViewModel {
     }
 
     private class MyTask extends AsyncTask<Void, Void, Void>{
+        String lang = new String();
+
+        public MyTask(String lang){
+            this.lang = lang;
+        }
+
         @Override
         protected Void doInBackground(Void... voids) {
             try {
@@ -146,13 +155,14 @@ public class ScheduleViewModel extends ViewModel {
                     scheduleListFromDb = accountDao.getSchedule();
                     scheduleLiveData.postValue(scheduleListFromDb);
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                        getScheduleListFromServer();
+                        getScheduleListFromServer(lang);
                     }
                 } else {
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                        getScheduleListFromServer();
+                        getScheduleListFromServer(lang);
                     } else {
                         loadRv.set(false);
+                        emptyImage.set(true);
                     }
                 }
             }catch(InterruptedException e){

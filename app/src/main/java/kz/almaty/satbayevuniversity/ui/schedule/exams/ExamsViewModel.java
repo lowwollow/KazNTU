@@ -48,12 +48,12 @@ public class ExamsViewModel extends ViewModel {
 
     private ConnectivityManager connManager = (ConnectivityManager)App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
-    public void getExam(){
+    public void getExam(String lang){
 
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
         if(onlyServer){
             if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                getExamListFromServer();
+                getExamListFromServer(lang);
             }
         }else{
             executor.execute(() ->{
@@ -62,11 +62,11 @@ public class ExamsViewModel extends ViewModel {
                     examLiveData.postValue(examListDB);
                     getEmptyBoolean.set(examListDB.isEmpty());
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                        getExamListFromServer();
+                        getExamListFromServer(lang);
                     }
                 }else{
                     if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-                        getExamListFromServer();
+                        getExamListFromServer(lang);
                     }else{
                         getEmptyBoolean.set(true);
                     }
@@ -75,8 +75,8 @@ public class ExamsViewModel extends ViewModel {
         }
     }
 
-    private void getExamListFromServer() {
-            KaznituRetrofit.getApi().updateExam().enqueue(new Callback<List<Exam>>() {
+    private void getExamListFromServer(String lang) {
+            KaznituRetrofit.getApi().updateExam(lang).enqueue(new Callback<List<Exam>>() {
                 @Override
                 public void onResponse(Call<List<Exam>> call, Response<List<Exam>> response) {
                     if (response.body() != null) {

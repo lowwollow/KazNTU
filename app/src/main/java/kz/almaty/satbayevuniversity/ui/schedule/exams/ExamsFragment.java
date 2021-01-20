@@ -12,7 +12,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.Gson;
+
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.SharedPrefCache;
+import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.databinding.FragmentExamsBinding;
 
 
@@ -45,7 +49,16 @@ public class ExamsFragment extends Fragment {
         examAdapter = new ExamAdapter();
         examsFragmentBinding.examRecyclerView.setAdapter(examAdapter);
 
-        mViewModel.getExam();
+        SharedPrefCache cache = new SharedPrefCache();
+        String lang = cache.getStr("language", getContext());
+        Gson gson = new Gson();
+        Language language = gson.fromJson(lang, Language.class);
+
+        if (language.getLanguage().equals("Казахский"))
+            mViewModel.getExam("kz");
+        else{
+            mViewModel.getExam("ru");
+        }
 
         mViewModel.getExamLiveData().observe(this, examList -> {
             System.out.println(examList.size() + " :size");

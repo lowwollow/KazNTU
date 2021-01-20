@@ -15,12 +15,16 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.AccountDao;
 import kz.almaty.satbayevuniversity.data.App;
 import kz.almaty.satbayevuniversity.data.AppDatabase;
+import kz.almaty.satbayevuniversity.data.SharedPrefCache;
+import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.data.entity.grade.transcript.SemestersItem;
 import kz.almaty.satbayevuniversity.databinding.FragmentTranscriptBinding;
 
@@ -49,7 +53,15 @@ public class TranscriptFragment extends Fragment {
         TranscriptViewModel mViewModel = ViewModelProviders.of(this).get(TranscriptViewModel.class);
         transcriptFragmentBinding.setTranscript(mViewModel);
 
-        mViewModel.getTranscript();
+        SharedPrefCache cache = new SharedPrefCache();
+        String lang = cache.getStr("language", getContext());
+        Gson gson = new Gson();
+        Language language = gson.fromJson(lang, Language.class);
+        if (language.getLanguage().equals("Казахский"))
+            mViewModel.getTranscript("kz");
+        else{
+            mViewModel.getTranscript("ru");
+        }
 
         transcriptFragmentBinding.transcriptRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         transcriptFragmentBinding.transcriptRecyclerView.setHasFixedSize(true);
