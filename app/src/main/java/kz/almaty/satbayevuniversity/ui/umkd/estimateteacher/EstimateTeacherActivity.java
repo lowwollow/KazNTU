@@ -87,7 +87,7 @@ public class EstimateTeacherActivity extends AppCompatActivity {
         this.setSupportActionBar(toolbar);
         this.getSupportActionBar().setHomeAsUpIndicator(R.drawable.close_file_icon);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.getSupportActionBar().setTitle("Оценить преподавателя");
+        this.getSupportActionBar().setTitle(R.string.rate_teacher);
     }
 
     private String getTextFrom(){

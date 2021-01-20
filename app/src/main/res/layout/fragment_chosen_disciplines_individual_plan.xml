@@ -18,6 +18,7 @@
         android:layout_height="match_parent"
         android:paddingBottom="45dp"
         android:background="@color/colorWhite">
+
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="40dp"

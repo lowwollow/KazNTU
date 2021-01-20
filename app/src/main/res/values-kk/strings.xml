@@ -209,6 +209,15 @@
     <string name="university">ЖОО</string>
     <string name="continue_registration_text">Сіздің мәліметтеріңіз сақталды! Логин мен құпия сөзіңізді пайдалана отырып, Сіз одан әрі толтыруды жалғастыра аласыз. Сізге келесі формаларды толтыру қалды:</string>
     <string name="change_language">Тілді өзгерту</string>
-
+    <string name="delayed">Кешіктірілген</string>
+    <string name="chosen">Таңдалған</string>
+    <string name="already_appreciated">Сіз бұл нұсқаушыны бағалап үлгердіңіз</string>
+    <string name="rate_teacher">Мұғалімі бағалау</string>
+    <string name="bottom_shit_dialog_action">Әрекетті таңдаңыз</string>
+    <string name="bottom_shit_dialog_rating">Мұғалімі бағалау</string>
+    <string name="bottom_shit_dialog_failes">Файлдар</string>
+    <string name="estimate_teacher_comments">Пікір жазыңыз</string>
+    <string name="estimate_teacher_anonymous">Жасырын</string>
+    <string name="estimate_teacher_done">Дайын</string>
 
 </resources>

@@ -212,12 +212,20 @@
     <string name="university">ВУЗ</string>
     <string name="continue_registration_text">Ваши данные сохранены!В дальнейшем Вы можете продолжить заполнение, используя Ваш логин и пароль.Вам осталось заполнить формы:</string>
     <string name="change_language">Изменить язык</string>
-    <string name="individualPlan">ИУП</string>
-    <string name="general_education">Ge</string>
-    <string name="elective">El</string>
+    <string name="individualPlan" translatable="false">ИУП</string>
+    <string name="general_education" translatable="false">Ge</string>
+    <string name="elective" translatable="false">El</string>
     <string name="component">Component</string>
     <string name="cypher">Cypher</string>
     <string name="delayed">Отложенные</string>
     <string name="chosen">Выбранные</string>
     <string name="references">Справки</string>
+    <string name="already_appreciated">Вы уже оценили данного преподавателя</string>
+    <string name="rate_teacher">Оценить преподавателя</string>
+    <string name="bottom_shit_dialog_action">Выберите действие</string>
+    <string name="bottom_shit_dialog_rating">Оценить преподавателя</string>
+    <string name="bottom_shit_dialog_failes">Файлы</string>
+    <string name="estimate_teacher_comments">Напишите комментарий</string>
+    <string name="estimate_teacher_anonymous">Анонимно</string>
+    <string name="estimate_teacher_done">Готово</string>
 </resources>

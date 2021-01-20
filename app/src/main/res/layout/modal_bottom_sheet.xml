@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Выберите действие"
+        android:text="@string/bottom_shit_dialog_action"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Файлы" />
+            android:text="@string/bottom_shit_dialog_failes" />
     </LinearLayout>
 
 
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Оценить преподавателя" />
+            android:text="@string/bottom_shit_dialog_rating" />
     </LinearLayout>
 
 </LinearLayout>

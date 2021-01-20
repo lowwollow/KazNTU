@@ -63,7 +63,7 @@
             <EditText
                 android:id="@+id/editText"
                 android:imeOptions="actionDone"
-                android:hint="Напишите комментарий"
+                android:hint="@string/estimate_teacher_comments"
                 android:background="@null"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -89,7 +89,7 @@
                 android:layout_height="match_parent"
                 android:checked="false"
                 android:textSize="20dp"
-                android:text="Анонимно"/>
+                android:text="@string/estimate_teacher_anonymous"/>
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@color/colorAccent"
-            android:text="Готово"
+            android:text="@string/estimate_teacher_done"
             android:textColor="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
