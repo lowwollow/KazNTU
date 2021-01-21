@@ -1,5 +1,6 @@
 package kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -45,7 +46,7 @@ public class ScheduleViewModel extends ViewModel {
     public ObservableBoolean emptyImage = new ObservableBoolean();
     public ObservableBoolean fullEmptyImage = new ObservableBoolean();
     private MutableLiveData<Integer> handleTimeout = new MutableLiveData<>();
-
+    public MutableLiveData<Boolean> loadRv1 = new MutableLiveData<>();
     private MutableLiveData<Integer> handleError = new MutableLiveData<>();
 
     private AppDatabase db = App.getInstance().getDatabase();
@@ -59,8 +60,8 @@ public class ScheduleViewModel extends ViewModel {
 
     public void getSchedule(String lang) {
         loadRv.set(true);
+        loadRv1.setValue(true);
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
-
         if(onlyServer){
             if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected() ){
                 getScheduleListFromServer(lang);
@@ -68,6 +69,8 @@ public class ScheduleViewModel extends ViewModel {
         }else{
             MyTask task = new MyTask(lang);
             task.execute();
+            //loadRv1.setValue(false);
+
         }
     }
 
@@ -79,8 +82,8 @@ public class ScheduleViewModel extends ViewModel {
                     switch (response.code()) {
                         case 200:
                             loadRv.set(false);
+                            loadRv1.setValue(false);
                             scheduleList = response.body();
-                            Log.d("TESTING", "onResponse: SCHEDULE" + scheduleList.size());
                             if(!scheduleList.equals(scheduleListFromDb)){
                                 new Thread(() -> {
                                     update(scheduleList);
@@ -132,6 +135,14 @@ public class ScheduleViewModel extends ViewModel {
         return handleTimeout;
     }
 
+    public MutableLiveData<Boolean> getSubscriber(){
+        if (loadRv1 == null){
+            loadRv1 = new MutableLiveData<>();
+        }
+        return loadRv1;
+    }
+
+
     private void update(List<Schedule> scheduleList) {
         executor.execute(() -> {
             accountDao.deleteSchedule();
@@ -146,6 +157,7 @@ public class ScheduleViewModel extends ViewModel {
             this.lang = lang;
         }
 
+       // @SuppressLint("WrongThread")
         @Override
         protected Void doInBackground(Void... voids) {
             try {

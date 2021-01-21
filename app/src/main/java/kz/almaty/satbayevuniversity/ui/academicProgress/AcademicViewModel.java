@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.academicProgress;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -39,7 +40,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AcademicViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
     SharedPreferences sharedPreferences = App.getContext().getSharedPreferences("shared_preferences",Context.MODE_PRIVATE);
 
     private MutableLiveData<List<ResponseJournal>> academicData = new MutableLiveData<>();
@@ -61,11 +61,6 @@ public class AcademicViewModel extends ViewModel {
     private final ConnectivityManager connManager = (ConnectivityManager)App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     private final NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
-    private SavedStateHandle state;
-
-    //public AcademicViewModel(SavedStateHandle savedStateHandle){
-        //state = savedStateHandle;
-    //}
 
     public void getJournal(String lang) {
         loadRv.set(true);
@@ -126,7 +121,6 @@ public class AcademicViewModel extends ViewModel {
              });
      }
 
-
     MutableLiveData<Integer> getHandleTimeout(){
         if (handleTimeout == null){
             handleTimeout = new MutableLiveData<>();
@@ -147,6 +141,8 @@ public class AcademicViewModel extends ViewModel {
         }
         return handleError;
     }
+
+
 
     private void update(List<ResponseJournal> responseJournals) {
         executor.execute(() -> {
@@ -201,14 +197,12 @@ public class AcademicViewModel extends ViewModel {
                         loadRv.set(false);
                         getEmptyBoolean.set(true);
                     }
-
                 }
             }catch (InterruptedException e){
                 e.printStackTrace();
             }
             return null;
         }
-
     }
 }
 

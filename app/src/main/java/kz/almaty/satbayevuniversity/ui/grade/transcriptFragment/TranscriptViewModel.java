@@ -34,7 +34,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TranscriptViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
     SharedPreferences sharedPreferences = App.getContext().getSharedPreferences("shared_preferences",Context.MODE_PRIVATE);
     private List<SemestersItem> semestersItems = new ArrayList<>();
     private List<SemestersItem> semestersItemsDB = new ArrayList<>();

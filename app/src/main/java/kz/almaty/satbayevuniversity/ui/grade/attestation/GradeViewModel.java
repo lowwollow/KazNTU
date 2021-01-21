@@ -34,7 +34,6 @@ import retrofit2.Response;
 
 
 public class GradeViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
     SharedPreferences sharedPreferences = App.getContext().getSharedPreferences("shared_preferences",Context.MODE_PRIVATE);
     private MutableLiveData<List<Attestation>> attestationLiveData = new MutableLiveData<>();
     private List<Attestation> attestationList = new ArrayList<>();

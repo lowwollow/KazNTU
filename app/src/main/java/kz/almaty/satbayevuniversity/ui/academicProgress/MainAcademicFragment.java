@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,6 +40,7 @@ import kz.almaty.satbayevuniversity.ui.grade.ViewPagerFragment;
 import kz.almaty.satbayevuniversity.ui.individualPlan.ViewPagerIndividualPlan;
 import kz.almaty.satbayevuniversity.ui.notification.NotificationViewPagerFragment;
 import kz.almaty.satbayevuniversity.ui.schedule.ViewPagerSchedule;
+import kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment.ScheduleViewModel;
 
 public class MainAcademicFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener  {
     SharedPreferences.Editor editor = App.getContext().getSharedPreferences("shared_preferences",Context.MODE_PRIVATE).edit();
@@ -101,15 +103,12 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
 
     @Override
     public void onStart() {
-        // animations
         super.onStart();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        getToolbar();
-        // TODO: Use the ViewModel
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
@@ -123,7 +122,8 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         ConnectivityManager connManager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
-        // update button
+        //TODO : get info from ViewModels
+
         imageView.setOnClickListener(v -> {
             if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
                 changeAnimations();
@@ -144,11 +144,13 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
                 Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
             }
         });
+
         if (!lottieAnimationView.isActivated()){
             lottieAnimationView.setVisibility(View.GONE);
         }
     }
 
+    // TODO
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -218,4 +220,5 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
             }
         });
     }
+
 }

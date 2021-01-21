@@ -76,7 +76,6 @@ public class FileFragment extends Fragment {
         fileAdapter = new FileAdapter(getActivity());
         fileFragmentBinding.fileRecyclerView.setAdapter(fileAdapter);
         toolbar.setNavigationOnClickListener(v -> getFragmentManager().popBackStackImmediate());
-        // TODO: Use the ViewModel
         updateFile();
     }
 

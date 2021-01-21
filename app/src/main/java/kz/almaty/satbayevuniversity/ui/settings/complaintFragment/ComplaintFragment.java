@@ -41,7 +41,6 @@ public class ComplaintFragment extends DialogFragment {
         mViewModel = ViewModelProviders.of(this).get(ComplaintViewModel.class);
         comlaintFragmentBinding.setViewModel(mViewModel);
 
-        // TODO: Use the ViewModel
         mViewModel.getComplaintMutableLiveData().observe(this, integer -> {
             switch (integer){
                 case 200:

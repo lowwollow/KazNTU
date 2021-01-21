@@ -9,7 +9,6 @@ import kz.almaty.satbayevuniversity.data.entity.grade.transcript.SemestersItem;
 
 
 public class TranscriptDialogViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
     public ObservableField<SemestersItem> semestersItemObservableField = new ObservableField<>();
 
     public TranscriptDialogViewModel() {

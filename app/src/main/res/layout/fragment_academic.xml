@@ -29,6 +29,9 @@
             android:indeterminateDrawable="@drawable/progress"
             android:visibility="@{academicViewModel.loadRv ? View.VISIBLE : View.GONE}"/>
 
+
+
+
         <androidx.recyclerview.widget.RecyclerView
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

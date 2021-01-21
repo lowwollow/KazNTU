@@ -52,6 +52,7 @@
             android:indeterminateDrawable="@drawable/progress"
             android:visibility="@{schedule.loadRv ? View.VISIBLE : View.GONE}"/>
 
+
             <androidx.recyclerview.widget.RecyclerView
                 app:layout_constraintTop_toBottomOf="@+id/weekCalendar"
                 app:layout_constraintStart_toStartOf="parent"

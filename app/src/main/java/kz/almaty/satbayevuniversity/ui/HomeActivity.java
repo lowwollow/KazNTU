@@ -83,7 +83,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Gson gson = new Gson();
         try{
             Language language1 = gson.fromJson(sharedString, Language.class);
-            Log.d("TESTING", "onCreate: " + language1.getLanguage());
             setLocale(language1.getLanguageCode());
             getMenuText();
         } catch (IllegalStateException | JsonSyntaxException ignored){}

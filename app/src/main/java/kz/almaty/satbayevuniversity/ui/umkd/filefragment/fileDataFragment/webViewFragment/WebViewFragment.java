@@ -142,8 +142,6 @@ public class WebViewFragment extends Fragment {
         });
 
         toolbar.setNavigationOnClickListener(v -> getFragmentManager().popBackStackImmediate());
-
-        // TODO: Use the ViewModel
         load();
     }
 

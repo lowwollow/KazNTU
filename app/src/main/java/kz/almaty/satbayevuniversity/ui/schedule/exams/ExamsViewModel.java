@@ -30,7 +30,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ExamsViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
     SharedPreferences sharedPreferences = App.getContext().getSharedPreferences("shared_preferences",Context.MODE_PRIVATE);
     private MutableLiveData<List<Exam>> examLiveData = new MutableLiveData<>();
     private List<Exam> examList = new ArrayList<>();

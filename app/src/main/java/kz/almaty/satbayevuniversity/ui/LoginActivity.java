@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                 showPassword(showPsw);
             }
         });
+
         showPassword(showPsw);
         loginBtn = activityLoginBinding.loginBtn;
         if (savedInstanceState == null) {

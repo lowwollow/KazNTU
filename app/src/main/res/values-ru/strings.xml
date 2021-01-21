@@ -31,8 +31,6 @@
     <string name="complaintShort">Коротко опишите проблему</string>
     <string name="ready">Готово</string>
     <string name="beta_version">BETA VERSION</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="att_1">Att.1</string>
     <string name="att_2">Att.2</string>

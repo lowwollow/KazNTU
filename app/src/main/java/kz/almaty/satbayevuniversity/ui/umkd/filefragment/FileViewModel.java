@@ -26,7 +26,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FileViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
     private MutableLiveData<List<File>> fileMutableLiveData = new MutableLiveData<>();
     public ObservableBoolean getEmptyBoolean = new ObservableBoolean();
     private List<File> listOfFilesFromServer = new ArrayList<>();

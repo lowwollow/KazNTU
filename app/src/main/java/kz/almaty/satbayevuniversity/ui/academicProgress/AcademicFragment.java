@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModelProvider;
@@ -61,6 +62,7 @@ public class AcademicFragment extends Fragment {
         academicFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_academic, container, false);
         academicFragmentBinding.emptyImage.setVisibility(View.GONE);
         academicFragmentBinding.emptyTextView.setVisibility(View.GONE);
+
         return academicFragmentBinding.getRoot();
     }
 
@@ -118,7 +120,5 @@ public class AcademicFragment extends Fragment {
                 getActivity().finish();
             }
         });
-
-
     }
 }
