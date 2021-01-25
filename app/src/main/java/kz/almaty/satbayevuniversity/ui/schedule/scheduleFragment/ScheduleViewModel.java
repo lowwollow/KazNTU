@@ -174,7 +174,7 @@ public class ScheduleViewModel extends ViewModel {
                         getScheduleListFromServer(lang);
                     } else {
                         loadRv.set(false);
-                        emptyImage.set(true);
+                        //emptyImage.set(true);
                     }
                 }
             }catch(InterruptedException e){

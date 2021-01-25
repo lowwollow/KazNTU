@@ -70,18 +70,20 @@ public class DeferedDisciplineFragment extends Fragment {
         SharedPrefCache cache = new SharedPrefCache();
         String lang = cache.getStr("language", getContext());
         Gson gson = new Gson();
-//        try {
-//            Language language = gson.fromJson(lang, Language.class);
-//            if (language.getLanguage().equals("Казахский"))
-//                mViewModel.getDeferredDiscipline("kz");
-//            else {
-//
-//            }
-//        }catch (IllegalStateException | JsonSyntaxException ignored){}
+        if (lang == "DNF"){
+            mViewModel.getDeferredDiscipline("ru");
+        }else {
+            try {
+                Language language = gson.fromJson(lang, Language.class);
+                if (language.getLanguage().equals("Казахский"))
+                    mViewModel.getDeferredDiscipline("kz");
+                else {
+                    mViewModel.getDeferredDiscipline("ru");
+                }
+            } catch (IllegalStateException | JsonSyntaxException ignored) {}
+        }
 
-        mViewModel.getDeferredDiscipline("ru");
-
-        mViewModel.getDeferredDisciplineLiveData().observe(this, deferredDiscipline1s -> {
+        mViewModel.getDeferredDisciplineLiveData().observe(getViewLifecycleOwner(), deferredDiscipline1s -> {
             individualPlanAdapter.setIndividualPlanList(deferredDiscipline1s);
         });
     }

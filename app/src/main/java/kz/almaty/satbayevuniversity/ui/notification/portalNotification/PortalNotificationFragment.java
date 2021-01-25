@@ -53,7 +53,7 @@ public class PortalNotificationFragment extends Fragment {
         fragmentNotificationBinding.notificationRecyclerView.setAdapter(notificationAdapter);
         getNotification();
 
-        mViewModel.getHandleTimeout().observe(this, aBoolean -> {
+        mViewModel.getHandleTimeout().observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
                 Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
             }
@@ -61,7 +61,7 @@ public class PortalNotificationFragment extends Fragment {
     }
 
     private void getNotification() {
-        mViewModel.getNotificationMutableLiveData().observe(this, notifications -> {
+        mViewModel.getNotificationMutableLiveData().observe(getViewLifecycleOwner(), notifications -> {
             notificationAdapter.setResponseNotificationList(notifications);
         });
     }

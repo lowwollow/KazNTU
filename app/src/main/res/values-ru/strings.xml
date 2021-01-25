@@ -4,13 +4,13 @@
     <string name="et_login_hint">ЛОГИН</string>
     <string name="et_password_hint">ПАРОЛЬ</string>
     <string name="btn_login">Войти</string>
-    <string name="btn_login_exit">Выйти (v3.1)</string>
+    <string name="btn_login_exit">Выйти (v3.2)</string>
     <string name="open">opened</string>
     <string name="close">closed</string>
     <string name="academicProgress">Успеваемость</string>
     <string name="umkd">УМКД</string>
     <string name="settings">Настройки</string>
-    <string name="logout">Выход (v3.1)</string>
+    <string name="logout">Выход (v3.2)</string>
     <string name="journal">Журнал</string>
     <string name="schedule">Расписание</string>
     <string name="exam">Экзамены</string>

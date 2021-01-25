@@ -3,6 +3,7 @@ package kz.almaty.satbayevuniversity.ui.academicProgress;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,12 +36,15 @@ import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.databinding.FragmentAcademicBinding;
 import kz.almaty.satbayevuniversity.ui.LoginActivity;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class AcademicFragment extends Fragment {
     private static final String LOG_TAG = "AcademicFragment";
     private AcademicViewModel mViewModel;
     private AuthViewModel authViewModel;
 
     private AcademicAdapterResponse academicAdapterResponse;
+
     private FragmentAcademicBinding academicFragmentBinding;
 
 
@@ -91,20 +95,26 @@ public class AcademicFragment extends Fragment {
         academicAdapterResponse = new AcademicAdapterResponse(getActivity());
         academicFragmentBinding.journalRecyclerView.setAdapter(academicAdapterResponse);
 
-
         SharedPrefCache cache = new SharedPrefCache();
         String lang = cache.getStr("language", getContext());
         Gson gson = new Gson();
-//        try {
-//            Language language = gson.fromJson(lang, Language.class);
-//            if (language.getLanguage().equals("Казахский")) {
-//                mViewModel.getJournal("kz");
-//            }
-//            else{
-//
-//            }
-//        }catch (IllegalStateException | JsonSyntaxException ignored){}
-        mViewModel.getJournal("ru");
+        // need fix
+        if (lang == "DNF"){
+            mViewModel.getJournal("ru");
+            Log.d("TESTING", "onActivityCreated: CURRENT LANG ");
+
+        }else {
+            try {
+                Language language = gson.fromJson(lang, Language.class);
+                if (language.getLanguage().equals("Казахский")) {
+                    mViewModel.getJournal("kz");
+                } else {
+                    mViewModel.getJournal("ru");
+                }
+            } catch (IllegalStateException | JsonSyntaxException ignored) {
+                Log.d("TESTING", "onActivityCreated: CURRENT LANG " + ignored.getMessage());
+            }
+        }
 
         mViewModel.getAcademicData().observe(getViewLifecycleOwner(), responseJournals -> {
             academicAdapterResponse.setResponseJournalList(responseJournals);

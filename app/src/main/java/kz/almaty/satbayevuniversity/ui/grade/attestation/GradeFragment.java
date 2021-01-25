@@ -59,19 +59,24 @@ public class GradeFragment extends Fragment {
         SharedPrefCache cache = new SharedPrefCache();
         String lang = cache.getStr("language", getContext());
         Gson gson = new Gson();
-//        try{
-//            Language language = gson.fromJson(lang, Language.class);
-//            if (language.getLanguage().equals("Казахский"))
-//                mViewModel.getAttestation("kz");
-//            else{
-//
-//            }
-//        }catch (IllegalStateException | JsonSyntaxException ignored){}
-        mViewModel.getAttestation("ru");
-        mViewModel.getAttestationLiveDate().observe(this, attestations -> {
+
+        if (lang == "DNF"){
+            mViewModel.getAttestation("ru");
+        }else{
+            try{
+                Language language = gson.fromJson(lang, Language.class);
+                if (language.getLanguage().equals("Казахский"))
+                    mViewModel.getAttestation("kz");
+                else{
+                    mViewModel.getAttestation("ru");
+                }
+            }catch (IllegalStateException | JsonSyntaxException ignored){}
+        }
+
+        mViewModel.getAttestationLiveDate().observe(getViewLifecycleOwner(), attestations -> {
             attestationAdapter.setAttestationList(attestations);
          });
-        mViewModel.getHandleTimeout().observe(this, aBoolean -> {
+        mViewModel.getHandleTimeout().observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
                 Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
             }

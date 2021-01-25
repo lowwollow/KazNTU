@@ -93,18 +93,21 @@ public class ChosenDisciplineFragment extends Fragment{
         SharedPrefCache cache = new SharedPrefCache();
         String lang = cache.getStr("language", getContext());
         Gson gson = new Gson();
-//        try {
-//            Language language = gson.fromJson(lang, Language.class);
-//            if (language.getLanguage().equals("Казахский"))
-//                mViewModel.getChosenDiscipline("kz");
-//            else {
-//
-//            }
-//        }catch (IllegalStateException | JsonSyntaxException ignored){}
 
-        mViewModel.getChosenDiscipline("ru");
+        if (lang == "DNF"){
+            mViewModel.getChosenDiscipline("ru");
+        }else {
+            try {
+                Language language = gson.fromJson(lang, Language.class);
+                if (language.getLanguage().equals("Казахский"))
+                    mViewModel.getChosenDiscipline("kz");
+                else {
+                    mViewModel.getChosenDiscipline("ru");
+                }
+            } catch (IllegalStateException | JsonSyntaxException ignored) {}
+        }
 
-        mViewModel.getChosenDisciplinesData().observe(this, chosenDiscipline1s -> {
+        mViewModel.getChosenDisciplinesData().observe(getViewLifecycleOwner(), chosenDiscipline1s -> {
             ArrayList<Object> list = new ArrayList<>(chosenDiscipline1s.size() * 8);
             for (Semesters1 x : chosenDiscipline1s){
                 list.add(x);
@@ -113,7 +116,7 @@ public class ChosenDisciplineFragment extends Fragment{
             chosenDisciplineAdapter.setChosenDisciplines(list);
         });
 
-        mViewModel.getHandleTimeout().observe(this, aBoolean -> {
+        mViewModel.getHandleTimeout().observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
                 Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
             }

@@ -87,6 +87,7 @@ public class DeferredDisciplineViewModel extends ViewModel {
                     getDeferredDisciplineFromServer(lang);
                 } else {
                     loadRv.set(false);
+                    getEmptyBoolean.set(true);
                 }
             }
             return null;

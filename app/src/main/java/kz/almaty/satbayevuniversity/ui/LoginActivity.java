@@ -82,8 +82,8 @@ public class LoginActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             authViewModel.initAuth();
         }
-        authViewModel.getUserMutableLiveData().observe(this, this::savePreference);
 
+        authViewModel.getUserMutableLiveData().observe(this, this::savePreference);
         authViewModel.toastGetMessage().observe(this, aBoolean -> {
             if (aBoolean) {
                 Toast.makeText(this, "Заполните пустые поля", Toast.LENGTH_SHORT).show();
@@ -221,7 +221,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    // пока не нужно
     public void startAdmissionLoginActivity(View view){
         Intent intent = new Intent(this, kz.almaty.satbayevuniversity.ui.admission.login.LoginActivity.class);
         startActivity(intent);

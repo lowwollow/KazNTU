@@ -57,16 +57,18 @@ public class TranscriptFragment extends Fragment {
         SharedPrefCache cache = new SharedPrefCache();
         String lang = cache.getStr("language", getContext());
         Gson gson = new Gson();
-//        try {
-//            Language language = gson.fromJson(lang, Language.class);
-//            if (language.getLanguage().equals("Казахский"))
-//                mViewModel.getTranscript("kz");
-//            else {
-//
-//            }
-//        }catch (IllegalStateException | JsonSyntaxException ignored){}
-
-        mViewModel.getTranscript("ru");
+        if (lang == "DNF"){
+            mViewModel.getTranscript("ru");
+        }else {
+            try {
+                Language language = gson.fromJson(lang, Language.class);
+                if (language.getLanguage().equals("Казахский"))
+                    mViewModel.getTranscript("kz");
+                else {
+                    mViewModel.getTranscript("ru");
+                }
+            } catch (IllegalStateException | JsonSyntaxException ignored) {}
+        }
 
         transcriptFragmentBinding.transcriptRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         transcriptFragmentBinding.transcriptRecyclerView.setHasFixedSize(true);
@@ -74,7 +76,7 @@ public class TranscriptFragment extends Fragment {
         transcriptAdapter = new TranscriptAdapter(getActivity());
         transcriptFragmentBinding.transcriptRecyclerView.setAdapter(transcriptAdapter);
 
-        mViewModel.getTranscriptLiveData().observe(this, semestersItems -> {
+        mViewModel.getTranscriptLiveData().observe(getViewLifecycleOwner(), semestersItems -> {
             ArrayList<Object> objects = new ArrayList<>(semestersItems.size() * 8);
             for (SemestersItem semestersItem: semestersItems){
                 objects.add(semestersItem);
@@ -82,7 +84,7 @@ public class TranscriptFragment extends Fragment {
             }
             transcriptAdapter.setSemestersItemsList(objects);
         });
-        mViewModel.getHandleTimeout().observe(this, aBoolean -> {
+        mViewModel.getHandleTimeout().observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
                 Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
             }

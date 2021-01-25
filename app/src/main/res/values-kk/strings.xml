@@ -5,14 +5,14 @@
     <string name="et_login_hint">ЛОГИН</string>
     <string name="et_password_hint">КҰПИЯСӨЗ</string>
     <string name="btn_login">Кіру</string>
-    <string name="btn_login_exit">Шығу (v3.1)</string>
+    <string name="btn_login_exit">Шығу (v3.2)</string>
     <string name="open">opened</string>
     <string name="close">closed</string>
     <string name="exam">Емтихан кестесі</string>
     <string name="academicProgress">Үлгерім</string>
     <string name="umkd">УМКД</string>
     <string name="settings">Параметрлері</string>
-    <string name="logout">Шығу (v3.1)</string>
+    <string name="logout">Шығу (v3.2)</string>
     <string name="journal">Журнал</string>
     <string name="schedule">Кесте</string>
     <string name="grade">Бағалар</string>

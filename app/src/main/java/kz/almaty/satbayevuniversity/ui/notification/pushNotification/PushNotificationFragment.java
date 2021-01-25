@@ -56,18 +56,21 @@ public class PushNotificationFragment extends Fragment {
             SharedPrefCache cache = new SharedPrefCache();
             String lang = cache.getStr("language", getContext());
             Gson gson = new Gson();
-//            try {
-//                Language language = gson.fromJson(lang, Language.class);
-//                if (language.getLanguage().equals("Казахский"))
-//                    pushNotificationViewModel.getPushNotification("kz");
-//                else {
-//
-//                }
-//            }catch (IllegalStateException | JsonSyntaxException ignored){}
+            if (lang == "DNF"){
+                pushNotificationViewModel.getPushNotification("ru");
+            }else {
+                try {
+                    Language language = gson.fromJson(lang, Language.class);
+                    if (language.getLanguage().equals("Казахский"))
+                        pushNotificationViewModel.getPushNotification("kz");
+                    else {
+                        pushNotificationViewModel.getPushNotification("ru");
+                    }
+                } catch (IllegalStateException | JsonSyntaxException ignored) {}
+            }
 
-            pushNotificationViewModel.getPushNotification("ru");
 
-            pushNotificationViewModel.getNotificationLiveData().observe(this, new Observer<List<PushNotification>>() {
+            pushNotificationViewModel.getNotificationLiveData().observe(getViewLifecycleOwner(), new Observer<List<PushNotification>>() {
                 @Override
                 public void onChanged(List<PushNotification> pushNotifications) {
                     pushNotificationAdapter.setNotificationList(pushNotifications);

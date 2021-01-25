@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.YearMonth;
 import org.threeten.bp.format.DateTimeFormatter;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,6 +65,8 @@ public class ScheduleFragment extends Fragment implements Cloneable{
     private ScheduleViewModel mViewModel;
     private AuthViewModel authViewModel;
     private ScheduleAdapter scheduleAdapter;
+    private ImageView imageView;
+    private TextView textView;
     LocalDate currentDay = LocalDate.now();
 
     private AppDatabase db = App.getInstance().getDatabase();
@@ -112,17 +116,20 @@ public class ScheduleFragment extends Fragment implements Cloneable{
         SharedPrefCache cache = new SharedPrefCache();
         String lang = cache.getStr("language", getContext());
         Gson gson = new Gson();
-//        try {
-//            Language language = gson.fromJson(lang, Language.class);
-//            if (language.getLanguage().equals("Казахский"))
-//                mViewModel.getSchedule("kz");
-//            else {
-//
-//            }
-//        }catch (IllegalStateException | JsonSyntaxException ignored){}
+        if (lang == "DNF"){
+            mViewModel.getSchedule("ru");
+        }
+        else {
+            try {
+                Language language = gson.fromJson(lang, Language.class);
+                if (language.getLanguage().equals("Казахский"))
+                    mViewModel.getSchedule("kz");
+                else {
+                    mViewModel.getSchedule("ru");
+                }
+            } catch (IllegalStateException | JsonSyntaxException ignored) {}
+        }
 
-
-        mViewModel.getSchedule("ru");
         setDateSchedule(currentDay);
 
         if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
@@ -153,13 +160,13 @@ public class ScheduleFragment extends Fragment implements Cloneable{
         });
 
 
-        mViewModel.getHandleTimeout().observe(this, integer -> {
+        mViewModel.getHandleTimeout().observe(getViewLifecycleOwner(), integer -> {
             if (integer == 1) {
                 Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
             }
         });
 
-        mViewModel.getHandleError().observe(this, integer -> {
+        mViewModel.getHandleError().observe(getViewLifecycleOwner(), integer -> {
             if (integer == 401) {
                 authViewModel.clearDB();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -171,7 +178,7 @@ public class ScheduleFragment extends Fragment implements Cloneable{
     }
 
     private void setDateSchedule(LocalDate date) {
-        mViewModel.getScheduleLiveData().observe(this, scheduleList -> {
+        mViewModel.getScheduleLiveData().observe(getViewLifecycleOwner(), scheduleList -> {
 
             ArrayList<Schedule> result = new ArrayList<>();
             localScheduleList = new ArrayList<>(Arrays.asList(
@@ -227,7 +234,6 @@ public class ScheduleFragment extends Fragment implements Cloneable{
             }
             scheduleAdapter.setScheduleList(result);
             i = 0;
-
         });
 
     }
