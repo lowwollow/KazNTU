@@ -130,7 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="@{chosenDiscipline.getEmptyBoolean ? View.VISIBLE : View.GONE}"
-            tools:text="К сожалению, данные по данному запросу отсутствуют..."/>
+            android:text="@string/data"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -28,6 +28,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -52,7 +54,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
     boolean firstTime = false;
     private AnimationDrawable animationDrawable;
     private LottieAnimationView lottieAnimationView;
-
+    private AcademicViewModel academicViewModel;
 
     public static MainAcademicFragment newInstance() {
         return new MainAcademicFragment();
@@ -68,8 +70,9 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         imageView.setVisibility(View.VISIBLE);
         navigation.setOnNavigationItemSelectedListener(this);
         lottieAnimationView = view.findViewById(R.id.updateData_lottie);
-
         int notification_type_id = sharedPreferences.getInt("typeId",1);
+
+
 
         if (notification_type_id == 1){
             navigation.setSelectedItemId(R.id.academicProgressFragment);
@@ -112,17 +115,24 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.journal);
+        //((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.journal);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar.setNavigationOnClickListener(v -> {
             ((HomeActivity)getActivity()).OpenToggleNavMenu();
         });
 
+        //academicViewModel = new ViewModelProvider(this).get(AcademicViewModel.class);
+
+        //TODO : get info from ViewModels
+        //academicViewModel.getMutableLiveData().observe(getViewLifecycleOwner(), observer->{
+          //  Log.d("TESTING", "onActivityCreated: TESTING" + observer);
+        //});
+
+
         ConnectivityManager connManager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
-        //TODO : get info from ViewModels
 
         imageView.setOnClickListener(v -> {
             if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {

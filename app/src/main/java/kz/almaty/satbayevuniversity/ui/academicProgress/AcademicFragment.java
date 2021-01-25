@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.Objects;
 
@@ -62,7 +63,8 @@ public class AcademicFragment extends Fragment {
         academicFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_academic, container, false);
         academicFragmentBinding.emptyImage.setVisibility(View.GONE);
         academicFragmentBinding.emptyTextView.setVisibility(View.GONE);
-
+        // TODO : getParentFragment() need fix
+        mViewModel = ViewModelProviders.of(this).get(AcademicViewModel.class);
         return academicFragmentBinding.getRoot();
     }
 
@@ -75,11 +77,9 @@ public class AcademicFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(AcademicViewModel.class);
-        authViewModel = ViewModelProviders.of(this).get(AuthViewModel.class);
         academicFragmentBinding.setAcademicViewModel(mViewModel);
 
-        if (((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar() != null) {
+        if (((AppCompatActivity) requireActivity()).getSupportActionBar() != null) {
             Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(R.string.journal);
         }
 
@@ -95,24 +95,29 @@ public class AcademicFragment extends Fragment {
         SharedPrefCache cache = new SharedPrefCache();
         String lang = cache.getStr("language", getContext());
         Gson gson = new Gson();
-        Language language = gson.fromJson(lang, Language.class);
-        if (language.getLanguage().equals("Казахский"))
-            mViewModel.getJournal("kz");
-        else{
-            mViewModel.getJournal("ru");
-        }
+//        try {
+//            Language language = gson.fromJson(lang, Language.class);
+//            if (language.getLanguage().equals("Казахский")) {
+//                mViewModel.getJournal("kz");
+//            }
+//            else{
+//
+//            }
+//        }catch (IllegalStateException | JsonSyntaxException ignored){}
+        mViewModel.getJournal("ru");
 
-        mViewModel.getAcademicData().observe(this, responseJournals -> {
+        mViewModel.getAcademicData().observe(getViewLifecycleOwner(), responseJournals -> {
             academicAdapterResponse.setResponseJournalList(responseJournals);
         });
 
-        mViewModel.getHandleTimeout().observe(this, integer -> {
+        mViewModel.getHandleTimeout().observe(getViewLifecycleOwner(), integer -> {
             if (integer == 1) {
                 Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
             }
         });
 
-        mViewModel.getHandleError().observe(this, integer -> {
+
+        mViewModel.getHandleError().observe(getViewLifecycleOwner(), integer -> {
             if (integer == 401) {
                 authViewModel.clearDB();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);

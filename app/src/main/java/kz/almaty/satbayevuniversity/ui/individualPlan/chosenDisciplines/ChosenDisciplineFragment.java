@@ -26,6 +26,7 @@ import androidx.savedstate.SavedStateRegistry;
 import androidx.savedstate.SavedStateRegistryOwner;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -92,12 +93,16 @@ public class ChosenDisciplineFragment extends Fragment{
         SharedPrefCache cache = new SharedPrefCache();
         String lang = cache.getStr("language", getContext());
         Gson gson = new Gson();
-        Language language = gson.fromJson(lang, Language.class);
-        if (language.getLanguage().equals("Казахский"))
-            mViewModel.getChosenDiscipline("kz");
-        else{
-            mViewModel.getChosenDiscipline("ru");
-        }
+//        try {
+//            Language language = gson.fromJson(lang, Language.class);
+//            if (language.getLanguage().equals("Казахский"))
+//                mViewModel.getChosenDiscipline("kz");
+//            else {
+//
+//            }
+//        }catch (IllegalStateException | JsonSyntaxException ignored){}
+
+        mViewModel.getChosenDiscipline("ru");
 
         mViewModel.getChosenDisciplinesData().observe(this, chosenDiscipline1s -> {
             ArrayList<Object> list = new ArrayList<>(chosenDiscipline1s.size() * 8);

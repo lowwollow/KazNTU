@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.databinding.ObservableBoolean;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
@@ -51,6 +52,7 @@ public class AcademicViewModel extends ViewModel {
 
     private MutableLiveData<Integer> handleError = new MutableLiveData<>();
     private MutableLiveData<Integer> handleTimeout = new MutableLiveData<>();
+    public MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
 
     private final AppDatabase db = App.getInstance().getDatabase();
     private final AccountDao accountDao = db.accountDao();
@@ -64,6 +66,7 @@ public class AcademicViewModel extends ViewModel {
 
     public void getJournal(String lang) {
         loadRv.set(true);
+        mutableLiveData.setValue(true);
         boolean onlyServer = sharedPreferences.getBoolean(App.getContext().getString(R.string.only_server),false);
         if(onlyServer){
             if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
@@ -82,6 +85,7 @@ public class AcademicViewModel extends ViewModel {
                      switch (response.code()) {
                          case 200:
                              loadRv.set(false);
+                             mutableLiveData.setValue(false);
                              responseJournalList = response.body();
                              assert responseJournalList != null;
                              getEmptyBoolean.set(responseJournalList.isEmpty());
@@ -142,7 +146,12 @@ public class AcademicViewModel extends ViewModel {
         return handleError;
     }
 
-
+    //TODO : fix
+    LiveData<Boolean> getMutableLiveData(){
+        if (mutableLiveData==null)
+            mutableLiveData = new MutableLiveData<>();
+        return mutableLiveData;
+    }
 
     private void update(List<ResponseJournal> responseJournals) {
         executor.execute(() -> {

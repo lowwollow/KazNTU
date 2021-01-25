@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.SharedPrefCache;
@@ -58,13 +59,15 @@ public class GradeFragment extends Fragment {
         SharedPrefCache cache = new SharedPrefCache();
         String lang = cache.getStr("language", getContext());
         Gson gson = new Gson();
-        Language language = gson.fromJson(lang, Language.class);
-        if (language.getLanguage().equals("Казахский"))
-            mViewModel.getAttestation("kz");
-        else{
-            mViewModel.getAttestation("ru");
-        }
-
+//        try{
+//            Language language = gson.fromJson(lang, Language.class);
+//            if (language.getLanguage().equals("Казахский"))
+//                mViewModel.getAttestation("kz");
+//            else{
+//
+//            }
+//        }catch (IllegalStateException | JsonSyntaxException ignored){}
+        mViewModel.getAttestation("ru");
         mViewModel.getAttestationLiveDate().observe(this, attestations -> {
             attestationAdapter.setAttestationList(attestations);
          });

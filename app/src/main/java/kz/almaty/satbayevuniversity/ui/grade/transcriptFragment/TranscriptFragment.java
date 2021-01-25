@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.ArrayList;
 
@@ -56,12 +57,16 @@ public class TranscriptFragment extends Fragment {
         SharedPrefCache cache = new SharedPrefCache();
         String lang = cache.getStr("language", getContext());
         Gson gson = new Gson();
-        Language language = gson.fromJson(lang, Language.class);
-        if (language.getLanguage().equals("Казахский"))
-            mViewModel.getTranscript("kz");
-        else{
-            mViewModel.getTranscript("ru");
-        }
+//        try {
+//            Language language = gson.fromJson(lang, Language.class);
+//            if (language.getLanguage().equals("Казахский"))
+//                mViewModel.getTranscript("kz");
+//            else {
+//
+//            }
+//        }catch (IllegalStateException | JsonSyntaxException ignored){}
+
+        mViewModel.getTranscript("ru");
 
         transcriptFragmentBinding.transcriptRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         transcriptFragmentBinding.transcriptRecyclerView.setHasFixedSize(true);

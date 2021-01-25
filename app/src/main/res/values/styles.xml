@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -10,7 +10,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppThemeActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeActionBar" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
@@ -20,7 +20,7 @@
     </style>
 
 
-    <style name="AppThemeToolbar" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeToolbar" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

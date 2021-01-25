@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.List;
 
@@ -55,12 +56,16 @@ public class PushNotificationFragment extends Fragment {
             SharedPrefCache cache = new SharedPrefCache();
             String lang = cache.getStr("language", getContext());
             Gson gson = new Gson();
-            Language language = gson.fromJson(lang, Language.class);
-            if (language.getLanguage().equals("Казахский"))
-                pushNotificationViewModel.getPushNotification("kz");
-            else{
-                pushNotificationViewModel.getPushNotification("ru");
-            }
+//            try {
+//                Language language = gson.fromJson(lang, Language.class);
+//                if (language.getLanguage().equals("Казахский"))
+//                    pushNotificationViewModel.getPushNotification("kz");
+//                else {
+//
+//                }
+//            }catch (IllegalStateException | JsonSyntaxException ignored){}
+
+            pushNotificationViewModel.getPushNotification("ru");
 
             pushNotificationViewModel.getNotificationLiveData().observe(this, new Observer<List<PushNotification>>() {
                 @Override

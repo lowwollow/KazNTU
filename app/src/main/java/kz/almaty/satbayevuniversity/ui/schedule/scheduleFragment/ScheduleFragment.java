@@ -112,13 +112,17 @@ public class ScheduleFragment extends Fragment implements Cloneable{
         SharedPrefCache cache = new SharedPrefCache();
         String lang = cache.getStr("language", getContext());
         Gson gson = new Gson();
-        Language language = gson.fromJson(lang, Language.class);
-        if (language.getLanguage().equals("Казахский"))
-            mViewModel.getSchedule("kz");
-        else{
-            mViewModel.getSchedule("ru");
-        }
+//        try {
+//            Language language = gson.fromJson(lang, Language.class);
+//            if (language.getLanguage().equals("Казахский"))
+//                mViewModel.getSchedule("kz");
+//            else {
+//
+//            }
+//        }catch (IllegalStateException | JsonSyntaxException ignored){}
 
+
+        mViewModel.getSchedule("ru");
         setDateSchedule(currentDay);
 
         if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {

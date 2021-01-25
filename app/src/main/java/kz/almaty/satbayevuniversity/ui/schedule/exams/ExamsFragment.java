@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.SharedPrefCache;
@@ -52,13 +53,16 @@ public class ExamsFragment extends Fragment {
         SharedPrefCache cache = new SharedPrefCache();
         String lang = cache.getStr("language", getContext());
         Gson gson = new Gson();
-        Language language = gson.fromJson(lang, Language.class);
+//        try {
+//            Language language = gson.fromJson(lang, Language.class);
+//            if (language.getLanguage().equals("Казахский"))
+//                mViewModel.getExam("kz");
+//            else {
+//
+//            }
+//        }catch (IllegalStateException | JsonSyntaxException ignored){}
 
-        if (language.getLanguage().equals("Казахский"))
-            mViewModel.getExam("kz");
-        else{
-            mViewModel.getExam("ru");
-        }
+        mViewModel.getExam("ru");
 
         mViewModel.getExamLiveData().observe(this, examList -> {
             System.out.println(examList.size() + " :size");
