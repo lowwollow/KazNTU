@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         activityLoginBinding.setViewModel(authViewModel);
         psw = activityLoginBinding.etPassword;
         img = activityLoginBinding.showPassword;
-        lottieAnimationView = activityLoginBinding.lottieAnimation;
+        //lottieAnimationView = activityLoginBinding.lottieAnimation;
 
         img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,9 +149,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                                 connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
                             //TODO
-                            //loginBtn.startAnimation();
-                            lottieAnimationView.setVisibility(View.VISIBLE);
-                            lottieAnimationView.playAnimation();
+                            loginBtn.startAnimation();
+                            //lottieAnimationView.setVisibility(View.VISIBLE);
+                            //lottieAnimationView.playAnimation();
                             authViewModel.getInformation();
                         } else {
                             Toast.makeText(this, "Отсутствует подключение к интернету", Toast.LENGTH_SHORT).show();
