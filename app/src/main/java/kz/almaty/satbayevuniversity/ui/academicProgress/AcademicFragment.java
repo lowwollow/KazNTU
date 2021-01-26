@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import java.util.Locale;
 import java.util.Objects;
 
 import kz.almaty.satbayevuniversity.AuthViewModel;
@@ -95,26 +96,11 @@ public class AcademicFragment extends Fragment {
         academicAdapterResponse = new AcademicAdapterResponse(getActivity());
         academicFragmentBinding.journalRecyclerView.setAdapter(academicAdapterResponse);
 
-        SharedPrefCache cache = new SharedPrefCache();
-        String lang = cache.getStr("language", getContext());
-        Gson gson = new Gson();
         // need fix
-        if (lang == "DNF"){
-            mViewModel.getJournal("ru");
-            Log.d("TESTING", "onActivityCreated: CURRENT LANG ");
+        String lang = getResources().getConfiguration().locale.toString();
+        getFromServer(lang);
 
-        }else {
-            try {
-                Language language = gson.fromJson(lang, Language.class);
-                if (language.getLanguage().equals("Казахский")) {
-                    mViewModel.getJournal("kz");
-                } else {
-                    mViewModel.getJournal("ru");
-                }
-            } catch (IllegalStateException | JsonSyntaxException ignored) {
-                Log.d("TESTING", "onActivityCreated: CURRENT LANG " + ignored.getMessage());
-            }
-        }
+
 
         mViewModel.getAcademicData().observe(getViewLifecycleOwner(), responseJournals -> {
             academicAdapterResponse.setResponseJournalList(responseJournals);
@@ -135,5 +121,13 @@ public class AcademicFragment extends Fragment {
                 getActivity().finish();
             }
         });
+    }
+
+    private void getFromServer(String lang){
+        if (lang.equals("kk")){
+            mViewModel.getJournal("kz");
+        }else{
+            mViewModel.getJournal("ru");
+        }
     }
 }

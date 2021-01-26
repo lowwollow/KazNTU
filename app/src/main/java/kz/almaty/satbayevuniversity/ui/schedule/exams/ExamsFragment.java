@@ -50,24 +50,21 @@ public class ExamsFragment extends Fragment {
         examAdapter = new ExamAdapter();
         examsFragmentBinding.examRecyclerView.setAdapter(examAdapter);
 
-        SharedPrefCache cache = new SharedPrefCache();
-        String lang = cache.getStr("language", getContext());
-        Gson gson = new Gson();
-//        try {
-//            Language language = gson.fromJson(lang, Language.class);
-//            if (language.getLanguage().equals("Казахский"))
-//                mViewModel.getExam("kz");
-//            else {
-//
-//            }
-//        }catch (IllegalStateException | JsonSyntaxException ignored){}
+        String lang = getResources().getConfiguration().locale.toString();
+        getFromServer(lang);
 
-        mViewModel.getExam("ru");
-
-        mViewModel.getExamLiveData().observe(this, examList -> {
+        mViewModel.getExamLiveData().observe(getViewLifecycleOwner(), examList -> {
             System.out.println(examList.size() + " :size");
             examAdapter.setExamList(examList);
         });
+    }
+
+    private void getFromServer(String lang){
+        if (lang.equals("kk")){
+            mViewModel.getExam("kz");
+        }else {
+            mViewModel.getExam("ru");
+        }
     }
 
 }

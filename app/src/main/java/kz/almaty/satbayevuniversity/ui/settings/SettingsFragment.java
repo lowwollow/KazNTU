@@ -17,6 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.gson.Gson;
@@ -81,11 +82,11 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        AuthViewModel authViewModel = ViewModelProviders.of(this).get(AuthViewModel.class);
+        AuthViewModel authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
         settingsFragmentBinding.setAccountEntity(Storage.getInstance());
         settingsFragmentBinding.setSettings(new SettingsFragment(context));
         authViewModel.getImageUrl();
-        authViewModel.getDrawable().observe(this, bitmap -> {
+        authViewModel.getDrawable().observe(getViewLifecycleOwner(), bitmap -> {
             settingsFragmentBinding.setImageUrl(bitmap);
         });
         constraintLayout.setOnClickListener(v -> {

@@ -76,7 +76,7 @@ public class LanguageFragment extends Fragment implements LanguageAdapter.Langua
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.chooseLng);
 
-        toolbar.setNavigationOnClickListener(v -> getChildFragmentManager().popBackStackImmediate());
+        toolbar.setNavigationOnClickListener(v -> getFragmentManager().popBackStackImmediate());
 
     }
 

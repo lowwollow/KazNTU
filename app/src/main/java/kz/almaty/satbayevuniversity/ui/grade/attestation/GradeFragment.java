@@ -57,22 +57,8 @@ public class GradeFragment extends Fragment {
         attestationAdapter = new AttestationAdapter();
         gradeFragmentBinding.gradeRecyclerView.setAdapter(attestationAdapter);
 
-        SharedPrefCache cache = new SharedPrefCache();
-        String lang = cache.getStr("language", getContext());
-        Gson gson = new Gson();
-
-        if (lang == "DNF"){
-            mViewModel.getAttestation("ru");
-        }else{
-            try{
-                Language language = gson.fromJson(lang, Language.class);
-                if (language.getLanguage().equals("Казахский"))
-                    mViewModel.getAttestation("kz");
-                else{
-                    mViewModel.getAttestation("ru");
-                }
-            }catch (IllegalStateException | JsonSyntaxException ignored){}
-        }
+        String lang = getResources().getConfiguration().locale.toString();
+        getFromServer(lang);
 
         mViewModel.getAttestationLiveDate().observe(getViewLifecycleOwner(), attestations -> {
             attestationAdapter.setAttestationList(attestations);
@@ -82,6 +68,14 @@ public class GradeFragment extends Fragment {
                 Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void getFromServer(String lang){
+        if (lang.equals("kk")){
+            mViewModel.getAttestation("kz");
+        }else {
+            mViewModel.getAttestation("ru");
+        }
     }
 
 }

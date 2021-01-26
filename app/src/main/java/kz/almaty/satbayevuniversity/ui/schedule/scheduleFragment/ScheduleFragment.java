@@ -114,22 +114,8 @@ public class ScheduleFragment extends Fragment implements Cloneable{
         scheduleFragmentBinding.scheduleRecyclerView.setAdapter(scheduleAdapter);
         scheduleFragmentBinding.scheduleRecyclerView.setItemAnimator(null);
 
-        SharedPrefCache cache = new SharedPrefCache();
-        String lang = cache.getStr("language", getContext());
-        Gson gson = new Gson();
-        if (lang == "DNF"){
-            mViewModel.getSchedule("ru");
-        }
-        else {
-            try {
-                Language language = gson.fromJson(lang, Language.class);
-                if (language.getLanguage().equals("Казахский"))
-                    mViewModel.getSchedule("kz");
-                else {
-                    mViewModel.getSchedule("ru");
-                }
-            } catch (IllegalStateException | JsonSyntaxException ignored) {}
-        }
+        String lang = getResources().getConfiguration().locale.toString();
+        getFromServer(lang);
 
         setDateSchedule(currentDay);
 
@@ -286,5 +272,13 @@ public class ScheduleFragment extends Fragment implements Cloneable{
         DayOfWeek firstDayOfWeek = DayOfWeek.MONDAY;
         calendarView.setup(firstMonth, lastMonth, firstDayOfWeek);
         calendarView.scrollToDate(LocalDate.now());
+    }
+
+    private void getFromServer(String lang){
+        if (lang.equals("kk")){
+            mViewModel.getSchedule("kz");
+        }else {
+            mViewModel.getSchedule("ru");
+        }
     }
 }

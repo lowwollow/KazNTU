@@ -48,6 +48,7 @@ import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDi
 import kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment.ScheduleFragment;
 import kz.almaty.satbayevuniversity.ui.settings.SettingsFragment;
 import kz.almaty.satbayevuniversity.ui.umkd.UmkdFragment;
+import kz.almaty.satbayevuniversity.utils.LocaleHelper;
 import kz.almaty.satbayevuniversity.utils.Storage;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -81,17 +82,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         SharedPrefCache sharedPrefCache = new SharedPrefCache();
         String sharedString = sharedPrefCache.getStr("language",this);
         Gson gson = new Gson();
-
-        Log.d("HOMEACTIVITY", "onActivityCreated: HOMEACTIVITY " + sharedString);
         try{
             Language language1 = gson.fromJson(sharedString, Language.class);
-            Log.d("LANG", "onCreate: CURRENT LANG " + language1.getLanguageCode());
             setLocale(language1.getLanguageCode());
             getMenuText();
-        } catch (IllegalStateException | JsonSyntaxException ignored){
-            Log.d("LANG", "onCreate: CURRENT LANG" + ignored.getMessage());
-        }
-
+        } catch (IllegalStateException | JsonSyntaxException ignored){}
         showWeSettedPushNoficationDialog();
     }
 

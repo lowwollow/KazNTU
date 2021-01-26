@@ -63,7 +63,7 @@ public class App extends Application {
 
         @Override
         public void notificationOpened(OSNotificationOpenResult result) {
-            SharedPreferences.Editor editor = getSharedPreferences("one_signal_notification_handler",Context.MODE_PRIVATE).edit();
+            SharedPreferences.Editor editor = getSharedPreferences("one_signal_notification_handler", Context.MODE_PRIVATE).edit();
             JSONObject data = result.notification.payload.additionalData;
             if(data != null && data.has("typeId")){
                 editor.putInt("typeId",data.optInt("typeId"));
@@ -73,7 +73,6 @@ public class App extends Application {
             i.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
         }
-
 
     }
     public void createPushNotification(String text){

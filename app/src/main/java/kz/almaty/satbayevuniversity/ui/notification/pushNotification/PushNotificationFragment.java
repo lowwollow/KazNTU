@@ -54,21 +54,8 @@ public class PushNotificationFragment extends Fragment {
             fragmentPushNotificationBinding.pushNotificationRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
             fragmentPushNotificationBinding.pushNotificationRecyclerView.setAdapter(pushNotificationAdapter);
 
-            SharedPrefCache cache = new SharedPrefCache();
-            String lang = cache.getStr("language", getContext());
-            Gson gson = new Gson();
-            if (lang == "DNF"){
-                pushNotificationViewModel.getPushNotification("ru");
-            }else {
-                try {
-                    Language language = gson.fromJson(lang, Language.class);
-                    if (language.getLanguage().equals("Казахский"))
-                        pushNotificationViewModel.getPushNotification("kz");
-                    else {
-                        pushNotificationViewModel.getPushNotification("ru");
-                    }
-                } catch (IllegalStateException | JsonSyntaxException ignored) {}
-            }
+            String lang = getResources().getConfiguration().locale.toString();
+            getFromServer(lang);
 
 
             pushNotificationViewModel.getNotificationLiveData().observe(getViewLifecycleOwner(), new Observer<List<PushNotification>>() {
@@ -230,6 +217,14 @@ public class PushNotificationFragment extends Fragment {
             }
 
         });
+    }
+
+    private void getFromServer(String lang){
+        if (lang.equals("kk")){
+            pushNotificationViewModel.getPushNotification("kz");
+        }else {
+            pushNotificationViewModel.getPushNotification("ru");
+        }
     }
 
 }

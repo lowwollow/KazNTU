@@ -86,7 +86,7 @@ public class FileDataFragment extends Fragment {
         fileDataFragmentBinding.recyclerFileDataFragment.setLayoutManager(new LinearLayoutManager(getActivity()));
         fileDataFragmentBinding.recyclerFileDataFragment.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
 
-        toolbar.setNavigationOnClickListener(v -> getChildFragmentManager().popBackStackImmediate());
+        toolbar.setNavigationOnClickListener(v -> getFragmentManager().popBackStackImmediate());
 
         fileAdapter = new FileDataAdapter(getActivity());
         fileDataFragmentBinding.recyclerFileDataFragment.setAdapter(fileAdapter);

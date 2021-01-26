@@ -36,7 +36,7 @@ public class TranscriptFragment extends Fragment {
     private TranscriptAdapter transcriptAdapter;
     private AppDatabase db = App.getInstance().getDatabase();
     private AccountDao accountDao = db.accountDao();
-
+    private TranscriptViewModel mViewModel;
     public static TranscriptFragment newInstance() {
         return new TranscriptFragment();
     }
@@ -52,30 +52,20 @@ public class TranscriptFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        TranscriptViewModel mViewModel = new ViewModelProvider(this).get(TranscriptViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(TranscriptViewModel.class);
         transcriptFragmentBinding.setTranscript(mViewModel);
 
-        SharedPrefCache cache = new SharedPrefCache();
-        String lang = cache.getStr("language", getContext());
-        Gson gson = new Gson();
-        if (lang == "DNF"){
-            mViewModel.getTranscript("ru");
-        }else {
-            try {
-                Language language = gson.fromJson(lang, Language.class);
-                if (language.getLanguage().equals("Казахский"))
-                    mViewModel.getTranscript("kz");
-                else {
-                    mViewModel.getTranscript("ru");
-                }
-            } catch (IllegalStateException | JsonSyntaxException ignored) {}
-        }
 
         transcriptFragmentBinding.transcriptRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         transcriptFragmentBinding.transcriptRecyclerView.setHasFixedSize(true);
         transcriptFragmentBinding.transcriptRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         transcriptAdapter = new TranscriptAdapter(getActivity());
         transcriptFragmentBinding.transcriptRecyclerView.setAdapter(transcriptAdapter);
+
+
+        String lang = getResources().getConfiguration().locale.toString();
+        getFromServer(lang);
+
 
         mViewModel.getTranscriptLiveData().observe(getViewLifecycleOwner(), semestersItems -> {
             ArrayList<Object> objects = new ArrayList<>(semestersItems.size() * 8);
@@ -90,5 +80,12 @@ public class TranscriptFragment extends Fragment {
                 Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void getFromServer(String lang){
+        if (lang.equals("kk")){
+            mViewModel.getTranscript("kz");
+        }else {
+            mViewModel.getTranscript("ru");
+        }
     }
 }

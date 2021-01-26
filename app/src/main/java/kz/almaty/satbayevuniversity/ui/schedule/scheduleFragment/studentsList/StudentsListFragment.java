@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,25 +67,10 @@ public class StudentsListFragment extends DialogFragment {
         fragmentStudentsListBinding.studentListRecyclerView.setLayoutManager(llm);
         builder.setView(view);
 
-        viewModel = ViewModelProviders.of(this).get(StudentsListViewModel.class);
+        viewModel = new ViewModelProvider(this).get(StudentsListViewModel.class);
 
-
-        SharedPrefCache cache = new SharedPrefCache();
-        String lang = cache.getStr("language", getContext());
-        Gson gson = new Gson();
-        if (lang == "DNF"){
-            viewModel.getStudentList(schedule.getClassId(),"ru");
-        }
-        else {
-            try {
-                Language language = gson.fromJson(lang, Language.class);
-                if (language.getLanguage().equals("Казахский"))
-                    viewModel.getStudentList(schedule.getClassId(),"kz");
-                else {
-                    viewModel.getStudentList(schedule.getClassId(),"ru");
-                }
-            } catch (IllegalStateException | JsonSyntaxException ignored) {}
-        }
+        String lang = getResources().getConfiguration().locale.toString();
+        getFromServer(lang);
 
         viewModel.getLiveData().observe(this, students -> {
             studentListAdapter.setStudentList(students);
@@ -101,5 +87,13 @@ public class StudentsListFragment extends DialogFragment {
         int height = displayMetrics.heightPixels;
         getDialog().getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT,(height/10)*8);
 
+    }
+    private void getFromServer(String lang){
+        if (lang.equals("kk")){
+            //Log.d("ID", "getFromServer: " + schedule.getClassId());
+            viewModel.getStudentList(schedule.getClassId(), "kz");
+        }else {
+            viewModel.getStudentList(schedule.getClassId(), "ru");
+        }
     }
 }

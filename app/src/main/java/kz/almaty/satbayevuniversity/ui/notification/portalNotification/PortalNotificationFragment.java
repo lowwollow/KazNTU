@@ -61,6 +61,7 @@ public class PortalNotificationFragment extends Fragment {
         });
     }
 
+
     private void getNotification() {
         mViewModel.getNotificationMutableLiveData().observe(getViewLifecycleOwner(), notifications -> {
             notificationAdapter.setResponseNotificationList(notifications);

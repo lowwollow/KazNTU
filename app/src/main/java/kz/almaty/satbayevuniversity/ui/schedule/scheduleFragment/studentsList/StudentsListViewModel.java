@@ -39,7 +39,6 @@ public class StudentsListViewModel extends ViewModel {
         KaznituRetrofit.getApi().getStudentList(classid,language).enqueue(new Callback<List<Student>>() {
             @Override
             public void onResponse(Call<List<Student>> call, Response<List<Student>> response) {
-                Log.d("TESTING", "onResponse: " + response.body());
                 if(response.isSuccessful()){
                     loadRv.set(false);
                     liveData.setValue(response.body());

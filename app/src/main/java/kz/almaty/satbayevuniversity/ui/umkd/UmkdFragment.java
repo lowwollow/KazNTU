@@ -84,7 +84,7 @@ public class UmkdFragment extends Fragment {
 
         mViewModel.getUmkd();
 
-        mViewModel.getUmkdMutableLiveData().observe(this, umkds -> {
+        mViewModel.getUmkdMutableLiveData().observe(getViewLifecycleOwner(), umkds -> {
             umkdAdapter.setResponseUmkdList(umkds);
         });
     }

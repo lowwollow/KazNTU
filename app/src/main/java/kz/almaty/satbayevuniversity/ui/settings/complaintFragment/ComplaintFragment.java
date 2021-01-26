@@ -61,7 +61,7 @@ public class ComplaintFragment extends DialogFragment {
             }
         });
 
-        mViewModel.getMessageLD().observe(this, aBoolean -> {
+        mViewModel.getMessageLD().observe(getViewLifecycleOwner(), aBoolean -> {
             if(aBoolean){
                 Toast.makeText(getActivity(), R.string.writeComplaint, Toast.LENGTH_SHORT).show();
             }

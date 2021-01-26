@@ -91,22 +91,9 @@ public class ChosenDisciplineFragment extends Fragment{
         individualPlanBinding.setChosenDiscipline(mViewModel);
         individualPlanBinding.chosenDisciplineRecyclerView.setAdapter(chosenDisciplineAdapter);
 
-        SharedPrefCache cache = new SharedPrefCache();
-        String lang = cache.getStr("language", getContext());
-        Gson gson = new Gson();
 
-        if (lang == "DNF"){
-            mViewModel.getChosenDiscipline("ru");
-        }else {
-            try {
-                Language language = gson.fromJson(lang, Language.class);
-                if (language.getLanguage().equals("Казахский"))
-                    mViewModel.getChosenDiscipline("kz");
-                else {
-                    mViewModel.getChosenDiscipline("ru");
-                }
-            } catch (IllegalStateException | JsonSyntaxException ignored) {}
-        }
+        String lang = getResources().getConfiguration().locale.toString();
+        getFromServer(lang);
 
         mViewModel.getChosenDisciplinesData().observe(getViewLifecycleOwner(), chosenDiscipline1s -> {
             ArrayList<Object> list = new ArrayList<>(chosenDiscipline1s.size() * 8);
@@ -123,5 +110,12 @@ public class ChosenDisciplineFragment extends Fragment{
             }
         });
 }
+    private void getFromServer(String lang){
+        if (lang.equals("kk")){
+            mViewModel.getChosenDiscipline("kz");
+        }else {
+            mViewModel.getChosenDiscipline("ru");
+        }
+    }
     public static ChosenDisciplineFragment getInstance() {return new ChosenDisciplineFragment();}
 }
