@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -47,7 +48,7 @@ public class PushNotificationFragment extends Fragment {
         public void onActivityCreated(Bundle savedInstanceState){
             super.onActivityCreated(savedInstanceState);
 
-            pushNotificationViewModel = ViewModelProviders.of(this).get(PushNotificationViewModel.class);
+            pushNotificationViewModel = new ViewModelProvider(this).get(PushNotificationViewModel.class);
             pushNotificationAdapter = new PushNotificationAdapter(getContext(),pushNotificationViewModel);
             fragmentPushNotificationBinding.pushNotificationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             fragmentPushNotificationBinding.pushNotificationRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));

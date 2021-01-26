@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -51,7 +52,7 @@ public class TranscriptFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        TranscriptViewModel mViewModel = ViewModelProviders.of(this).get(TranscriptViewModel.class);
+        TranscriptViewModel mViewModel = new ViewModelProvider(this).get(TranscriptViewModel.class);
         transcriptFragmentBinding.setTranscript(mViewModel);
 
         SharedPrefCache cache = new SharedPrefCache();

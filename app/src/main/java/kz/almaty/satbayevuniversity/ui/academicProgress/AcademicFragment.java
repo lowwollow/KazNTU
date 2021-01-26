@@ -68,7 +68,7 @@ public class AcademicFragment extends Fragment {
         academicFragmentBinding.emptyImage.setVisibility(View.GONE);
         academicFragmentBinding.emptyTextView.setVisibility(View.GONE);
         // TODO : getParentFragment() need fix
-        mViewModel = ViewModelProviders.of(this).get(AcademicViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(AcademicViewModel.class);
         return academicFragmentBinding.getRoot();
     }
 

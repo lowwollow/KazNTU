@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.Observable;
 import androidx.databinding.ObservableBoolean;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -64,7 +65,7 @@ public class DeferedDisciplineFragment extends Fragment {
                 DividerItemDecoration.VERTICAL));
         individualPlanAdapter = new DeferedDisciplineAdapter(getActivity());
         individualPlanBinding.individualPlanRecyclerView.setAdapter(individualPlanAdapter);
-        mViewModel = ViewModelProviders.of(this).get(DeferredDisciplineViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(DeferredDisciplineViewModel.class);
         individualPlanBinding.setIndividualPlan(mViewModel);
 
         SharedPrefCache cache = new SharedPrefCache();

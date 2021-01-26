@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -63,7 +64,7 @@ public class UmkdFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d(TAG, "Fragment2 onActivityCreated");
-        mViewModel = ViewModelProviders.of(this).get(UmkdViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(UmkdViewModel.class);
         umkdFragmentBinding.setUmkdViewModel(mViewModel);
         umkdFragmentBinding.umkdRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         umkdFragmentBinding.umkdRecyclerView.setHasFixedSize(true);

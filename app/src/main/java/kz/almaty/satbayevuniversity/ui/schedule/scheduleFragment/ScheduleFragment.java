@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -102,8 +103,8 @@ public class ScheduleFragment extends Fragment implements Cloneable{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
-        authViewModel = ViewModelProviders.of(this).get(AuthViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ScheduleViewModel.class);
+        authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
         scheduleFragmentBinding.setSchedule(mViewModel);
         scheduleFragmentBinding.scheduleRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         scheduleFragmentBinding.scheduleRecyclerView.setHasFixedSize(true);

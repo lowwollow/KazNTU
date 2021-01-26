@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,7 +33,7 @@ public class FileFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(FileViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(FileViewModel.class);
         mViewModel.getFiles();
     }
 
@@ -54,8 +55,8 @@ public class FileFragment extends Fragment {
         getView().requestFocus();
         getView().setOnKeyListener((view, i, keyEvent) -> {
             if(i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP){
-                if (getFragmentManager().getBackStackEntryCount() > 0) {
-                    getFragmentManager().popBackStackImmediate();
+                if (getChildFragmentManager().getBackStackEntryCount() > 0) {
+                    getChildFragmentManager().popBackStackImmediate();
                 }else{
                     return false;
                 }
@@ -75,12 +76,12 @@ public class FileFragment extends Fragment {
 
         fileAdapter = new FileAdapter(getActivity());
         fileFragmentBinding.fileRecyclerView.setAdapter(fileAdapter);
-        toolbar.setNavigationOnClickListener(v -> getFragmentManager().popBackStackImmediate());
+        toolbar.setNavigationOnClickListener(v -> getChildFragmentManager().popBackStackImmediate());
         updateFile();
     }
 
     private void updateFile() {
-        mViewModel.getFileMutableLiveData().observe(this, files -> {
+        mViewModel.getFileMutableLiveData().observe(getViewLifecycleOwner(), files -> {
             fileAdapter.setFilelList(files);
             System.out.println("#####files: " + files);
         });

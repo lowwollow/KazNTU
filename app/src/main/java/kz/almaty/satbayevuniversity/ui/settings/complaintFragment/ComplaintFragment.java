@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import kz.almaty.satbayevuniversity.R;
@@ -38,10 +39,10 @@ public class ComplaintFragment extends DialogFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(ComplaintViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ComplaintViewModel.class);
         comlaintFragmentBinding.setViewModel(mViewModel);
 
-        mViewModel.getComplaintMutableLiveData().observe(this, integer -> {
+        mViewModel.getComplaintMutableLiveData().observe(getViewLifecycleOwner(), integer -> {
             switch (integer){
                 case 200:
                     Toast.makeText(getActivity(), R.string.thanks, Toast.LENGTH_SHORT).show();

@@ -48,8 +48,8 @@ public class LanguageFragment extends Fragment implements LanguageAdapter.Langua
         getView().requestFocus();
         getView().setOnKeyListener((view, i, keyEvent) -> {
             if(i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP){
-                if (getFragmentManager().getBackStackEntryCount() > 0) {
-                    getFragmentManager().popBackStackImmediate();
+                if (getChildFragmentManager().getBackStackEntryCount() > 0) {
+                    getChildFragmentManager().popBackStackImmediate();
                 }else{
                     return false;
                 }
@@ -76,7 +76,7 @@ public class LanguageFragment extends Fragment implements LanguageAdapter.Langua
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.chooseLng);
 
-        toolbar.setNavigationOnClickListener(v -> getFragmentManager().popBackStackImmediate());
+        toolbar.setNavigationOnClickListener(v -> getChildFragmentManager().popBackStackImmediate());
 
     }
 
