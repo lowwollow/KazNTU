@@ -100,8 +100,6 @@ public class AcademicFragment extends Fragment {
         String lang = getResources().getConfiguration().locale.toString();
         getFromServer(lang);
 
-
-
         mViewModel.getAcademicData().observe(getViewLifecycleOwner(), responseJournals -> {
             academicAdapterResponse.setResponseJournalList(responseJournals);
         });

@@ -20,8 +20,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.esotericsoftware.kryo.NotNull;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -57,17 +59,19 @@ public class LoginActivity extends AppCompatActivity {
     private ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 1, 1,
             TimeUnit.SECONDS, queue);
     private SharedPreferences sPref;
+    private LottieAnimationView lottieAnimationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ActivityLoginBinding activityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        authViewModel = ViewModelProviders.of(this).get(AuthViewModel.class);
+        authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
         activityLoginBinding.setLifecycleOwner(this);
         activityLoginBinding.setViewModel(authViewModel);
         psw = activityLoginBinding.etPassword;
         img = activityLoginBinding.showPassword;
+        lottieAnimationView = activityLoginBinding.lottieAnimation;
 
         img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +148,10 @@ public class LoginActivity extends AppCompatActivity {
                     loginBtn.setOnClickListener(v -> {
                         if (connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                                 connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-                            loginBtn.startAnimation();
+                            //TODO
+                            //loginBtn.startAnimation();
+                            lottieAnimationView.setVisibility(View.VISIBLE);
+                            lottieAnimationView.playAnimation();
                             authViewModel.getInformation();
                         } else {
                             Toast.makeText(this, "Отсутствует подключение к интернету", Toast.LENGTH_SHORT).show();
