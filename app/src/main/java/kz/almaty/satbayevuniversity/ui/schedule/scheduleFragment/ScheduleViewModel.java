@@ -112,6 +112,9 @@ public class ScheduleViewModel extends ViewModel {
 
     }
 
+    public ObservableBoolean isEmpty(){
+        return emptyImage;
+    }
 
 
     MutableLiveData<List<Schedule>> getScheduleLiveData(){

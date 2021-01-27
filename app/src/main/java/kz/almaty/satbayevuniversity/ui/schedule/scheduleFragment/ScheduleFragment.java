@@ -59,6 +59,8 @@ import kz.almaty.satbayevuniversity.ui.LoginActivity;
 import kz.almaty.satbayevuniversity.utils.LocaleHelper;
 import kz.almaty.satbayevuniversity.utils.OnSwipeTouchListener;
 
+import static android.content.ContentValues.TAG;
+
 public class ScheduleFragment extends Fragment implements Cloneable{
     LocalDate selectedDate,oldDate;
     CalendarView calendarView;
