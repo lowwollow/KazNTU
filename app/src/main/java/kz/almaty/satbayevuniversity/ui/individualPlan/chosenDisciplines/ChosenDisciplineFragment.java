@@ -92,8 +92,8 @@ public class ChosenDisciplineFragment extends Fragment{
         individualPlanBinding.chosenDisciplineRecyclerView.setAdapter(chosenDisciplineAdapter);
 
 
-        String lang = getResources().getConfiguration().locale.toString();
-        getFromServer(lang);
+        String lang1 = SharedPrefCache.getLang(getActivity());
+        getFromServer(lang1);
 
         mViewModel.getChosenDisciplinesData().observe(getViewLifecycleOwner(), chosenDiscipline1s -> {
             ArrayList<Object> list = new ArrayList<>(chosenDiscipline1s.size() * 8);

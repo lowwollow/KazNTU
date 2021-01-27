@@ -68,8 +68,8 @@ public class DeferedDisciplineFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(DeferredDisciplineViewModel.class);
         individualPlanBinding.setIndividualPlan(mViewModel);
 
-        String lang = getResources().getConfiguration().locale.toString();
-        getFromServer(lang);
+        String lang1 = SharedPrefCache.getLang(getActivity());
+        getFromServer(lang1);
 
         mViewModel.getDeferredDisciplineLiveData().observe(getViewLifecycleOwner(), deferredDiscipline1s -> {
             individualPlanAdapter.setIndividualPlanList(deferredDiscipline1s);

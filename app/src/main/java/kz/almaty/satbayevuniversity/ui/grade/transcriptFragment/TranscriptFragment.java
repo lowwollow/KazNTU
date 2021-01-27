@@ -63,8 +63,8 @@ public class TranscriptFragment extends Fragment {
         transcriptFragmentBinding.transcriptRecyclerView.setAdapter(transcriptAdapter);
 
 
-        String lang = getResources().getConfiguration().locale.toString();
-        getFromServer(lang);
+        String lang1 = SharedPrefCache.getLang(getActivity());
+        getFromServer(lang1);
 
 
         mViewModel.getTranscriptLiveData().observe(getViewLifecycleOwner(), semestersItems -> {

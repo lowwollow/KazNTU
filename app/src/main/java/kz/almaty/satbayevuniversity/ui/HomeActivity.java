@@ -82,11 +82,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setupBindings(savedInstanceState);
         SharedPrefCache sharedPrefCache = new SharedPrefCache();
         String sharedString = sharedPrefCache.getStr("language",this);
-        Log.d("sharedString", "onCreate: " + sharedString);
+        //Log.d("sharedString", "onCreate: " + sharedString);
         Gson gson = new Gson();
         try{
             Language language1 = gson.fromJson(sharedString, Language.class);
             setLocale(language1.getLanguageCode());
+            //Log.d("sharedString", "onCreate: " + language1.getLanguageCode());
             sharedPrefCache.setLang(language1, language1.getLanguageCode(), this);
             getMenuText();
         } catch (IllegalStateException | JsonSyntaxException ignored){}

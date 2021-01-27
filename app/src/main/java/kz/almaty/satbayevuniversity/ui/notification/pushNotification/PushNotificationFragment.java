@@ -55,8 +55,8 @@ public class PushNotificationFragment extends Fragment {
             fragmentPushNotificationBinding.pushNotificationRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
             fragmentPushNotificationBinding.pushNotificationRecyclerView.setAdapter(pushNotificationAdapter);
 
-            String lang = getResources().getConfiguration().locale.toString();
-            getFromServer(lang);
+            String lang1 = SharedPrefCache.getLang(getActivity());
+            getFromServer(lang1);
 
 
             pushNotificationViewModel.getNotificationLiveData().observe(getViewLifecycleOwner(), new Observer<List<PushNotification>>() {

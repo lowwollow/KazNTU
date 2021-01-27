@@ -99,7 +99,7 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
 
                 String json = gson.toJson(languageList.get(getAdapterPosition()));
                 sharedPrefCache.setStr("language",json,context);
-                System.out.println("shared: "+sharedPrefCache.getStr("language", context));
+
                 if (POSITION_1 != getAdapterPosition()) {
                     notifyItemChanged(POSITION_1);
                     POSITION_1 = getAdapterPosition();

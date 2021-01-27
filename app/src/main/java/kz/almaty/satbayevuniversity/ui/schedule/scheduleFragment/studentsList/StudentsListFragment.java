@@ -69,8 +69,8 @@ public class StudentsListFragment extends DialogFragment {
 
         viewModel = new ViewModelProvider(this).get(StudentsListViewModel.class);
 
-        String lang = getResources().getConfiguration().locale.toString();
-        getFromServer(lang);
+        String lang1 = SharedPrefCache.getLang(getActivity());
+        getFromServer(lang1);
 
         viewModel.getLiveData().observe(this, students -> {
             studentListAdapter.setStudentList(students);

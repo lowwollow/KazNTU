@@ -58,8 +58,8 @@ public class GradeFragment extends Fragment {
         attestationAdapter = new AttestationAdapter();
         gradeFragmentBinding.gradeRecyclerView.setAdapter(attestationAdapter);
 
-        String lang = getResources().getConfiguration().locale.toString();
-        getFromServer(lang);
+        String lang1 = SharedPrefCache.getLang(getActivity());
+        getFromServer(lang1);
 
         mViewModel.getAttestationLiveDate().observe(getViewLifecycleOwner(), attestations -> {
             attestationAdapter.setAttestationList(attestations);

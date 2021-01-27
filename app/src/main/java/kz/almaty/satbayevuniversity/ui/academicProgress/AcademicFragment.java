@@ -98,10 +98,10 @@ public class AcademicFragment extends Fragment {
         //String lang = getResources().getConfiguration().locale.toString();
         //getFromServer(lang);
 
-        SharedPrefCache sharedPrefCache = new SharedPrefCache();
-        String lang1 = sharedPrefCache.getLang(getActivity());
+        //SharedPrefCache sharedPrefCache = new SharedPrefCache();
+        String lang1 = SharedPrefCache.getLang(getActivity());
         getFromServer(lang1);
-        //log("TEST", "");
+        log("TEST", "LANG " + lang1);
 
         mViewModel.getAcademicData().observe(getViewLifecycleOwner(), responseJournals -> {
             academicAdapterResponse.setResponseJournalList(responseJournals);

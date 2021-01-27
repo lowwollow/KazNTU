@@ -116,8 +116,8 @@ public class ScheduleFragment extends Fragment implements Cloneable{
         scheduleFragmentBinding.scheduleRecyclerView.setAdapter(scheduleAdapter);
         scheduleFragmentBinding.scheduleRecyclerView.setItemAnimator(null);
 
-        String lang = getResources().getConfiguration().locale.toString();
-        getFromServer(lang);
+        String lang1 = SharedPrefCache.getLang(getActivity());
+        getFromServer(lang1);
 
         setDateSchedule(currentDay);
 
