@@ -82,6 +82,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setupBindings(savedInstanceState);
         SharedPrefCache sharedPrefCache = new SharedPrefCache();
         String sharedString = sharedPrefCache.getStr("language",this);
+        Log.d("sharedString", "onCreate: " + sharedString);
         Gson gson = new Gson();
         try{
             Language language1 = gson.fromJson(sharedString, Language.class);
@@ -232,7 +233,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if(!first_run){
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("FIRST_RUN",true);
-            editor.commit();
+            editor.apply();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
             AlertDialog alertDialog = builder.create();
