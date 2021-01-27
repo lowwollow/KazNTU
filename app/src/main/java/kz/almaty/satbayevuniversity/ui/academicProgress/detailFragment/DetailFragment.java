@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,5 +87,9 @@ public class DetailFragment extends DialogFragment {
     public void onDestroyView() {
         view = null;
         super.onDestroyView();
+    }
+
+    private void log(String tag, String text){
+        Log.d(tag, text);
     }
 }

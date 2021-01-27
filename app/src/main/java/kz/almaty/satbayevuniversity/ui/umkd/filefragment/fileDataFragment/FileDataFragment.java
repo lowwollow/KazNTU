@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.umkd.filefragment.fileDataFragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,5 +93,9 @@ public class FileDataFragment extends Fragment {
         fileDataFragmentBinding.recyclerFileDataFragment.setAdapter(fileAdapter);
         System.out.println("#####courseList: " + courseList);
         fileAdapter.setFileDataList(courseList);
+    }
+
+    private void log(String tag, String text){
+        Log.d(tag, text);
     }
 }

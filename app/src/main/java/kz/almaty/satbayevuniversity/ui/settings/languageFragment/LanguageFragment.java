@@ -1,6 +1,9 @@
 package kz.almaty.satbayevuniversity.ui.settings.languageFragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +24,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 
 import kz.almaty.satbayevuniversity.R;
+import kz.almaty.satbayevuniversity.data.SharedPrefCache;
 import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.ui.HomeActivity;
 
@@ -84,7 +88,13 @@ public class LanguageFragment extends Fragment implements LanguageAdapter.Langua
     public void langChanged(Language language, int position) {
         ((HomeActivity)getActivity()).setLocale(language.getLanguageCode());
         ((HomeActivity)getActivity()).getMenuText();
+        SharedPrefCache sharedPrefCache = new SharedPrefCache();
+        sharedPrefCache.setLang(language, language.getLanguageCode(), getActivity());
         Snackbar.make(getView(), R.string.getLng , Snackbar.LENGTH_LONG).show();
+    }
+
+    private void log(String tag, String text){
+        Log.d(tag, text);
     }
 }
 

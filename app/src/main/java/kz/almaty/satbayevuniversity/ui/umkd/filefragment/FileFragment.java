@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.umkd.filefragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,5 +99,9 @@ public class FileFragment extends Fragment {
     public void onDestroyView() {
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
         super.onDestroyView();
+    }
+
+    private void log(String tag, String text){
+        Log.d(tag, text);
     }
 }

@@ -231,4 +231,8 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         });
     }
 
+    private void log(String tag, String text){
+        Log.d(tag, text);
+    }
+
 }

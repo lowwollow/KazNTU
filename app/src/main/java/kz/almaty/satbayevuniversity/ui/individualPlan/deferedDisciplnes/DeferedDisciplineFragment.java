@@ -82,5 +82,8 @@ public class DeferedDisciplineFragment extends Fragment {
             mViewModel.getDeferredDiscipline("ru");
         }
     }
+    private void log(String tag, String text){
+        Log.d(tag, text);
+    }
     public static DeferedDisciplineFragment getInstance() { return new DeferedDisciplineFragment(); }
 }

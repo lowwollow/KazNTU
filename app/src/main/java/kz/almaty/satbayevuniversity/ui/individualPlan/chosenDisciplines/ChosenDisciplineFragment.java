@@ -117,5 +117,8 @@ public class ChosenDisciplineFragment extends Fragment{
             mViewModel.getChosenDiscipline("ru");
         }
     }
+    private void log(String tag, String text){
+        Log.d(tag, text);
+    }
     public static ChosenDisciplineFragment getInstance() {return new ChosenDisciplineFragment();}
 }

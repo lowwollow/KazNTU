@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.notification.portalNotification;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,10 @@ public class PortalNotificationFragment extends Fragment {
         mViewModel.getNotificationMutableLiveData().observe(getViewLifecycleOwner(), notifications -> {
             notificationAdapter.setResponseNotificationList(notifications);
         });
+    }
+
+    private void log(String tag, String text){
+        Log.d(tag, text);
     }
 
 

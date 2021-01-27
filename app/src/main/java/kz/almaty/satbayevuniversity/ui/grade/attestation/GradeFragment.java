@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.grade.attestation;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,10 @@ public class GradeFragment extends Fragment {
         }else {
             mViewModel.getAttestation("ru");
         }
+    }
+
+    private void log(String tag, String text){
+        Log.d(tag, text);
     }
 
 }

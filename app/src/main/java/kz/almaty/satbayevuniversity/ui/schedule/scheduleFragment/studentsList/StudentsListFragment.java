@@ -96,4 +96,8 @@ public class StudentsListFragment extends DialogFragment {
             viewModel.getStudentList(schedule.getClassId(), "ru");
         }
     }
+
+    private void log(String tag, String text){
+        Log.d(tag, text);
+    }
 }

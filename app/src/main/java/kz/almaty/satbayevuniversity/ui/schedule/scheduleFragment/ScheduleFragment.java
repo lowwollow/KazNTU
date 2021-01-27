@@ -283,4 +283,8 @@ public class ScheduleFragment extends Fragment implements Cloneable{
             mViewModel.getSchedule("ru");
         }
     }
+
+    private void log(String tag, String text){
+        Log.d(tag, text);
+    }
 }

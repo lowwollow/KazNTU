@@ -88,4 +88,8 @@ public class UmkdFragment extends Fragment {
             umkdAdapter.setResponseUmkdList(umkds);
         });
     }
+
+    private void log(String tag, String text){
+        Log.d(tag, text);
+    }
 }

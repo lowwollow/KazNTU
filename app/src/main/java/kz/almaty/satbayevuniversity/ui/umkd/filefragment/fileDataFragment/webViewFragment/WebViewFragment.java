@@ -165,4 +165,8 @@ public class WebViewFragment extends Fragment {
         mViewModel.getFileFromServer();
     }
 
+    private void log(String tag, String text){
+        Log.d(tag, text);
+    }
+
 }

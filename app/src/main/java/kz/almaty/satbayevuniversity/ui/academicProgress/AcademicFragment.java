@@ -68,7 +68,6 @@ public class AcademicFragment extends Fragment {
         academicFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_academic, container, false);
         academicFragmentBinding.emptyImage.setVisibility(View.GONE);
         academicFragmentBinding.emptyTextView.setVisibility(View.GONE);
-        // TODO : getParentFragment() need fix
         mViewModel = new ViewModelProvider(this).get(AcademicViewModel.class);
         return academicFragmentBinding.getRoot();
     }
@@ -96,9 +95,13 @@ public class AcademicFragment extends Fragment {
         academicAdapterResponse = new AcademicAdapterResponse(getActivity());
         academicFragmentBinding.journalRecyclerView.setAdapter(academicAdapterResponse);
 
-        // need fix
-        String lang = getResources().getConfiguration().locale.toString();
-        getFromServer(lang);
+        //String lang = getResources().getConfiguration().locale.toString();
+        //getFromServer(lang);
+
+        SharedPrefCache sharedPrefCache = new SharedPrefCache();
+        String lang1 = sharedPrefCache.getLang(getActivity());
+        getFromServer(lang1);
+        //log("TEST", "");
 
         mViewModel.getAcademicData().observe(getViewLifecycleOwner(), responseJournals -> {
             academicAdapterResponse.setResponseJournalList(responseJournals);
@@ -119,6 +122,7 @@ public class AcademicFragment extends Fragment {
                 getActivity().finish();
             }
         });
+
     }
 
     private void getFromServer(String lang){
@@ -127,5 +131,9 @@ public class AcademicFragment extends Fragment {
         }else{
             mViewModel.getJournal("ru");
         }
+    }
+
+    private void log(String tag, String text){
+        Log.d(tag, text);
     }
 }

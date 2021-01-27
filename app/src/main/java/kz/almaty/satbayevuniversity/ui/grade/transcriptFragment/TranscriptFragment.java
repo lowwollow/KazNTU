@@ -88,4 +88,7 @@ public class TranscriptFragment extends Fragment {
             mViewModel.getTranscript("ru");
         }
     }
+    private void log(String tag, String text){
+        Log.d(tag, text);
+    }
 }

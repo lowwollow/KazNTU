@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -85,6 +86,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         try{
             Language language1 = gson.fromJson(sharedString, Language.class);
             setLocale(language1.getLanguageCode());
+            sharedPrefCache.setLang(language1, language1.getLanguageCode(), this);
             getMenuText();
         } catch (IllegalStateException | JsonSyntaxException ignored){}
         showWeSettedPushNoficationDialog();
