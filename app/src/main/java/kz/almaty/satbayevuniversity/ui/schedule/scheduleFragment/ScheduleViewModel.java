@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.databinding.Observable;
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -40,17 +41,16 @@ public class ScheduleViewModel extends ViewModel {
     SharedPreferences sharedPreferences = App.getContext().getSharedPreferences("shared_preferences",Context.MODE_PRIVATE);
     private List<Schedule> scheduleList = new ArrayList<>();
     private List<Schedule> scheduleListFromDb = new ArrayList<>();
-    private MutableLiveData<List<Schedule>> scheduleLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Schedule>> scheduleLiveData;
 
     public ObservableBoolean loadRv = new ObservableBoolean();
-    public ObservableBoolean emptyImage = new ObservableBoolean();
-    public ObservableBoolean fullEmptyImage = new ObservableBoolean();
-    private MutableLiveData<Integer> handleTimeout = new MutableLiveData<>();
+    public MutableLiveData<Boolean> emptyImage = new MutableLiveData<>();;
     public MutableLiveData<Boolean> loadRv1 = new MutableLiveData<>();
-    private MutableLiveData<Integer> handleError = new MutableLiveData<>();
+    private MutableLiveData<Integer> handleError;
+    private MutableLiveData<Integer> handleTimeout;
 
-    private AppDatabase db = App.getInstance().getDatabase();
-    private AccountDao accountDao = db.accountDao();
+    private final AppDatabase db = App.getInstance().getDatabase();
+    private final AccountDao accountDao = db.accountDao();
 
     private BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(3);
     private ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 1, 1,
@@ -69,13 +69,12 @@ public class ScheduleViewModel extends ViewModel {
         }else{
             MyTask task = new MyTask(lang);
             task.execute();
-            //loadRv1.setValue(false);
-
         }
     }
 
 
     private void getScheduleListFromServer(String lang){
+        emptyImage.postValue(false);
             KaznituRetrofit.getApi().updateSchedule(lang).enqueue(new Callback<List<Schedule>>() {
                 @Override
                 public void onResponse(Call<List<Schedule>> call, Response<List<Schedule>> response) {
@@ -84,6 +83,7 @@ public class ScheduleViewModel extends ViewModel {
                             loadRv.set(false);
                             loadRv1.setValue(false);
                             scheduleList = response.body();
+                            if (scheduleList.size() == 0) emptyImage.postValue(true);
                             if(!scheduleList.equals(scheduleListFromDb)){
                                 new Thread(() -> {
                                     update(scheduleList);
@@ -112,7 +112,7 @@ public class ScheduleViewModel extends ViewModel {
 
     }
 
-    public ObservableBoolean isEmpty(){
+    public MutableLiveData<Boolean> getEmptyImage(){
         return emptyImage;
     }
 
@@ -138,14 +138,6 @@ public class ScheduleViewModel extends ViewModel {
         return handleTimeout;
     }
 
-    public MutableLiveData<Boolean> getSubscriber(){
-        if (loadRv1 == null){
-            loadRv1 = new MutableLiveData<>();
-        }
-        return loadRv1;
-    }
-
-
     private void update(List<Schedule> scheduleList) {
         executor.execute(() -> {
             accountDao.deleteSchedule();
@@ -153,8 +145,9 @@ public class ScheduleViewModel extends ViewModel {
         });
     }
 
+
     private class MyTask extends AsyncTask<Void, Void, Void>{
-        String lang = new String();
+        String lang;
 
         public MyTask(String lang){
             this.lang = lang;

@@ -61,7 +61,7 @@ import kz.almaty.satbayevuniversity.utils.OnSwipeTouchListener;
 
 import static android.content.ContentValues.TAG;
 
-public class ScheduleFragment extends Fragment implements Cloneable{
+public class ScheduleFragment extends Fragment{
     LocalDate selectedDate,oldDate;
     CalendarView calendarView;
     ArrayList<Schedule> localScheduleList;
@@ -70,7 +70,7 @@ public class ScheduleFragment extends Fragment implements Cloneable{
     private ScheduleAdapter scheduleAdapter;
     private ImageView imageView;
     private TextView textView;
-    LocalDate currentDay = LocalDate.now();
+    private LocalDate currentDay = LocalDate.now();
 
     private AppDatabase db = App.getInstance().getDatabase();
     private AccountDao accountDao = db.accountDao();
@@ -111,15 +111,12 @@ public class ScheduleFragment extends Fragment implements Cloneable{
         scheduleFragmentBinding.scheduleRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         scheduleFragmentBinding.scheduleRecyclerView.setHasFixedSize(true);
         scheduleFragmentBinding.scheduleRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-
         scheduleAdapter = new ScheduleAdapter(getActivity());
         scheduleFragmentBinding.scheduleRecyclerView.setAdapter(scheduleAdapter);
         scheduleFragmentBinding.scheduleRecyclerView.setItemAnimator(null);
 
         String lang1 = SharedPrefCache.getLang(getActivity());
         getFromServer(lang1);
-
-        setDateSchedule(currentDay);
 
         if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.schedule);
@@ -147,8 +144,6 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                 calendarView.scrollToDate(currentDay);
             }
         });
-
-
         mViewModel.getHandleTimeout().observe(getViewLifecycleOwner(), integer -> {
             if (integer == 1) {
                 Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
@@ -163,12 +158,23 @@ public class ScheduleFragment extends Fragment implements Cloneable{
                 getActivity().finish();
             }
         });
+        mViewModel.getEmptyImage().observe(getViewLifecycleOwner(), noData->{
+            if (noData) {
+                emptyConstraint.setVisibility(View.VISIBLE);
+            }
+        });
+
+        setDateSchedule(currentDay);
         setCalendar();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     private void setDateSchedule(LocalDate date) {
         mViewModel.getScheduleLiveData().observe(getViewLifecycleOwner(), scheduleList -> {
-
             ArrayList<Schedule> result = new ArrayList<>();
             localScheduleList = new ArrayList<>(Arrays.asList(
                     new Schedule("7:50", "8:40", 1),
@@ -224,7 +230,6 @@ public class ScheduleFragment extends Fragment implements Cloneable{
             scheduleAdapter.setScheduleList(result);
             i = 0;
         });
-
     }
     private void setCalendar(){
         class DayViewContainer extends ViewContainer {
