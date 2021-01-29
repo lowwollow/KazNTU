@@ -28,6 +28,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.navigation.NavigationView;
@@ -111,7 +112,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setupBindings(Bundle savedInstanceState) {
-        authViewModel = ViewModelProviders.of(this).get(AuthViewModel.class);
+        authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
         activityHomeBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
 
         navHeaderBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.nav_header,

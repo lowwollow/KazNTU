@@ -54,6 +54,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
     boolean firstTime = false;
     private AnimationDrawable animationDrawable;
     private LottieAnimationView lottieAnimationView;
+    private LottieAnimationView loaderLottie;
     private AcademicViewModel academicViewModel;
 
     public static MainAcademicFragment newInstance() {
@@ -70,6 +71,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         imageView.setVisibility(View.VISIBLE);
         navigation.setOnNavigationItemSelectedListener(this);
         lottieAnimationView = view.findViewById(R.id.updateData_lottie);
+        //loaderLottie = view.findViewById(R.id.lottie_loader);
         int notification_type_id = sharedPreferences.getInt("typeId",1);
 
 
@@ -88,7 +90,6 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         super.onResume();
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
-
         getView().setOnKeyListener((view, i, keyEvent) -> {
             if(i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP){
                     if(getFragmentManager().findFragmentById(R.id.main_academic_fragment_container) instanceof AcademicFragment){

@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
@@ -42,6 +43,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class AcademicFragment extends Fragment {
     private static final String LOG_TAG = "AcademicFragment";
     private AcademicViewModel mViewModel;
+    private LottieAnimationView lottieAnimationView;
     private AuthViewModel authViewModel;
 
     private AcademicAdapterResponse academicAdapterResponse;
@@ -69,6 +71,8 @@ public class AcademicFragment extends Fragment {
         academicFragmentBinding.emptyImage.setVisibility(View.GONE);
         academicFragmentBinding.emptyTextView.setVisibility(View.GONE);
         mViewModel = new ViewModelProvider(this).get(AcademicViewModel.class);
+        lottieAnimationView = academicFragmentBinding.lottieLoader;
+        lottieAnimationView.setVisibility(View.GONE);
         return academicFragmentBinding.getRoot();
     }
 
