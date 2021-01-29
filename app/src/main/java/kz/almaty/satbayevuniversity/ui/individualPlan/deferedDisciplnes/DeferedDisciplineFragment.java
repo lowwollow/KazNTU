@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +44,7 @@ public class DeferedDisciplineFragment extends Fragment {
     private NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
     private List<DeferedDiscipline> list = new ArrayList<>();
     private DeferredDisciplineViewModel mViewModel;
+    private ImageView img;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +55,8 @@ public class DeferedDisciplineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         individualPlanBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_defered_disciplines_individual_plan, container, false);
         View view = individualPlanBinding.getRoot();
+        img = individualPlanBinding.emptyImage;
+        img.setVisibility(View.GONE);
         return view;
     }
 

@@ -139,13 +139,13 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:textStyle="bold"
                     android:id="@+id/gradeNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLength="4"
                     android:text="@{String.valueOf(journal.grade != 0 ? journal.grade : @string/nullDoubleString)}"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     tools:text="0.0" />
 
                 <TextView
