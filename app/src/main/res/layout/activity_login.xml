@@ -61,13 +61,14 @@
                     android:id="@+id/tvHello"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans_bold"
+                    android:textStyle="bold"
                     android:gravity="center"
                     android:layout_marginTop="10dp"
                     android:text="@string/login_hello"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textSize="15sp"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/LoginConstraint"
