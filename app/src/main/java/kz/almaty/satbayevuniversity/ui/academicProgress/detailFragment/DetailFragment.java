@@ -59,12 +59,10 @@ public class DetailFragment extends DialogFragment {
         mViewModel = new ViewModelProvider(this).get(DetailViewModel.class);
         fragmentDetailBinding.setDetailViewModel(new DetailViewModel());
         int numberOfColumns = 4;
-
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             datesItems = (List<DatesItem>) bundle.getSerializable("detail");
         }
-
         fragmentDetailBinding.detailRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
         fragmentDetailBinding.detailRecyclerView.setHasFixedSize(true);
         detailAdapter = new DetailAdapter(datesItems, getActivity());

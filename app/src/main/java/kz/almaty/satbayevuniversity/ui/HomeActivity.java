@@ -236,16 +236,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("FIRST_RUN",true);
             editor.apply();
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(false);
-            AlertDialog alertDialog = builder.create();
-            View view = getLayoutInflater().inflate(R.layout.dialog_push_noficiation,null);
-            Button ok_button = view.findViewById(R.id.dialog_push_notification_button);
-            ok_button.setOnClickListener(v -> {
-                alertDialog.dismiss();
-            });
-            alertDialog.setView(view);
-            alertDialog.show();
+            //AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            //builder.setCancelable(false);
+            //AlertDialog alertDialog = builder.create();
+            //View view = getLayoutInflater().inflate(R.layout.dialog_push_noficiation,null);
+            //Button ok_button = view.findViewById(R.id.dialog_push_notification_button);
+            //ok_button.setOnClickListener(v -> {
+            //    alertDialog.dismiss();
+            //});
+            //alertDialog.setView(view);
+            //alertDialog.show();
         }
     }
 }

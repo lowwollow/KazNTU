@@ -89,5 +89,6 @@
         <item name="android:textColorPrimary">#FF4081</item>
     </style>
 
+
     <style name="Widget.MaterialComponents.BottomAppBar." parent="Theme.MaterialComponents.Light"/>
 </resources>

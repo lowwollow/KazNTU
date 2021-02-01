@@ -20,6 +20,7 @@
     <color name="schedule_item_textview">#2C2C2C</color>
     <color name="today_bg_color">#daedf4</color>
     <color name="admission_fragment_background_color">#336BFF</color>
+    <color name="rating_bar_color">#fdd835</color>
     <array name="colors">
         <item>#fff8dc</item>
         <item>#e6e6ff</item>

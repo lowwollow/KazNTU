@@ -16,8 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <include
             android:id="@+id/toolbar"
@@ -45,6 +44,9 @@
             style="?android:attr/ratingBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:progressTint="@color/rating_bar_color"
+            android:backgroundTint="@color/colorWhite"
+            android:rating="2.5"
             />
 
         <FrameLayout
@@ -82,12 +84,12 @@
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchMaterial"
                 style="@style/Widget.AppCompat.CompoundButton.Switch"
-                android:gravity="right"
+                android:gravity="end"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:checked="false"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="@string/estimate_teacher_anonymous"/>
         </LinearLayout>
 
@@ -103,8 +105,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ln_layout" />
 
-<!--        Fix image for avery size of image-->
-
         <ImageView
             android:id="@+id/image"
             android:src="@drawable/review"
@@ -114,7 +114,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:alpha="0.4"/>
+            android:alpha="0.5"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
