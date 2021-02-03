@@ -39,6 +39,7 @@ public class App extends Application {
                 .fallbackToDestructiveMigration()
                 .build();
         mContext = getApplicationContext();
+        //createPushNotification("TEST");
         OneSignal.Builder builder = OneSignal.startInit(this);
         builder.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification);
         builder.unsubscribeWhenNotificationsAreDisabled(true);
@@ -67,7 +68,7 @@ public class App extends Application {
             JSONObject data = result.notification.payload.additionalData;
             if(data != null && data.has("typeId")){
                 editor.putInt("typeId",data.optInt("typeId"));
-                editor.commit();
+                editor.apply();
             }
             Intent i = new Intent(getContext(), LoginActivity.class);
             i.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -77,6 +78,7 @@ public class App extends Application {
     }
     public void createPushNotification(String text){
         String UUID = OneSignal.getPermissionSubscriptionState().getSubscriptionStatus().getUserId();
+        Log.d("TEST", "createPushNotification: " + UUID);
         try {
             OneSignal.postNotification(new JSONObject("{'contents': {'en':'"+text+"'}, 'include_player_ids': ['"+UUID+"']}"),
                     new OneSignal.PostNotificationResponseHandler() {

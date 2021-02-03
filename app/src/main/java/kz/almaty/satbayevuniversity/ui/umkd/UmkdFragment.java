@@ -63,7 +63,6 @@ public class UmkdFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.d(TAG, "Fragment2 onActivityCreated");
         mViewModel = new ViewModelProvider(this).get(UmkdViewModel.class);
         umkdFragmentBinding.setUmkdViewModel(mViewModel);
         umkdFragmentBinding.umkdRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

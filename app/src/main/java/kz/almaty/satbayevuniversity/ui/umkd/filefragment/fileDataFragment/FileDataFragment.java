@@ -44,7 +44,6 @@ public class FileDataFragment extends Fragment {
         View view = fileDataFragmentBinding.getRoot();
         toolbar = view.findViewById(R.id.toolbarFileData);
         getToolbar();
-
         return view;
     }
 

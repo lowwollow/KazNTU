@@ -74,7 +74,6 @@ public class WebViewFragment extends Fragment {
 
         mWebView.setWebViewClient(new WebViewClient()
         {
-
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -94,7 +93,6 @@ public class WebViewFragment extends Fragment {
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
             }
-
 
         });
         return v;

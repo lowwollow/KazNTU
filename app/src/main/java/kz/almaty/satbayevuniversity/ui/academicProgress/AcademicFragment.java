@@ -44,7 +44,7 @@ public class AcademicFragment extends Fragment {
     private static final String LOG_TAG = "AcademicFragment";
     private AcademicViewModel mViewModel;
     private LottieAnimationView lottieAnimationView;
-    private AuthViewModel authViewModel;
+    private AuthViewModel authViewModel = new AuthViewModel();
 
     private AcademicAdapterResponse academicAdapterResponse;
 

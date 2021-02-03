@@ -36,18 +36,21 @@
                 android:layout_marginEnd="15dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/download" />
-
         </androidx.appcompat.widget.Toolbar>
 
-        <ProgressBar
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:layout_constraintTop_toTopOf="parent"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_loader"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:padding="-20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:indeterminateDrawable="@drawable/progress"
-            android:visibility="@{webView.loadPB ? View.VISIBLE : View.INVISIBLE}"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading_planet"
+            android:visibility="@{webView.loadPB ? View.VISIBLE : View.GONE}"/>
 
         <kz.almaty.satbayevuniversity.ui.umkd.filefragment.fileDataFragment.webViewFragment.LollipopFixedWebView
             app:layout_constraintTop_toBottomOf="@+id/toolbarWebView"
@@ -58,6 +61,7 @@
             android:layout_height="0dp"
             android:id="@+id/webViewFragment"
             android:visibility="@{webView.loadPB ? View.INVISIBLE : View.VISIBLE}"/>
+
 
         <ProgressBar
             android:id="@+id/web_view_progress_bar"
