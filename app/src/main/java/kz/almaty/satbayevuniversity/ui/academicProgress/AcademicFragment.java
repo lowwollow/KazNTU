@@ -44,7 +44,7 @@ public class AcademicFragment extends Fragment {
     private static final String LOG_TAG = "AcademicFragment";
     private AcademicViewModel mViewModel;
     private LottieAnimationView lottieAnimationView;
-    private AuthViewModel authViewModel = new AuthViewModel();
+    private AuthViewModel authViewModel;
 
     private AcademicAdapterResponse academicAdapterResponse;
 
@@ -71,6 +71,7 @@ public class AcademicFragment extends Fragment {
         academicFragmentBinding.emptyImage.setVisibility(View.GONE);
         academicFragmentBinding.emptyTextView.setVisibility(View.GONE);
         mViewModel = new ViewModelProvider(this).get(AcademicViewModel.class);
+        authViewModel = new AuthViewModel();
         lottieAnimationView = academicFragmentBinding.lottieLoader;
         lottieAnimationView.setVisibility(View.GONE);
         return academicFragmentBinding.getRoot();
@@ -79,7 +80,7 @@ public class AcademicFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        mViewModel = new ViewModelProvider(this).get(AcademicViewModel.class);
+
     }
 
     @Override
@@ -99,10 +100,7 @@ public class AcademicFragment extends Fragment {
         academicAdapterResponse = new AcademicAdapterResponse(getActivity());
         academicFragmentBinding.journalRecyclerView.setAdapter(academicAdapterResponse);
 
-        //String lang = getResources().getConfiguration().locale.toString();
-        //getFromServer(lang);
 
-        //SharedPrefCache sharedPrefCache = new SharedPrefCache();
         String lang1 = SharedPrefCache.getLang(getActivity());
         getFromServer(lang1);
 
@@ -120,10 +118,12 @@ public class AcademicFragment extends Fragment {
 
         mViewModel.getHandleError().observe(getViewLifecycleOwner(), integer -> {
             if (integer == 401) {
-                authViewModel.clearDB();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                if (authViewModel != null) {
+                    authViewModel.clearDB();
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
             }
         });
 
