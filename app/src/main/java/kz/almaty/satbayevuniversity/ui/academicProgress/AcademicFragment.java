@@ -71,7 +71,7 @@ public class AcademicFragment extends Fragment {
         academicFragmentBinding.emptyImage.setVisibility(View.GONE);
         academicFragmentBinding.emptyTextView.setVisibility(View.GONE);
         mViewModel = new ViewModelProvider(this).get(AcademicViewModel.class);
-        authViewModel = new AuthViewModel();
+        authViewModel =  new AuthViewModel();
         lottieAnimationView = academicFragmentBinding.lottieLoader;
         lottieAnimationView.setVisibility(View.GONE);
         return academicFragmentBinding.getRoot();
