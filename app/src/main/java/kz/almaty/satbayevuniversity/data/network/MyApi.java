@@ -74,7 +74,7 @@ public interface MyApi {
     Call<ResponseBody> downloadFileCourse(@Query("fileID") String courseCode);
 
     @GET("api/schedule/students")
-    Call<List<Student>> getStudentList(@Query("classid") Integer clasid, @Query("language") String language);
+    Call<List<Student>> getStudentList(@Query("classId") Integer classId, @Query("language") String language);
 
     @GET("api/notification/all")
     Call<List<PushNotification>> getPushNotificationList(@Query("language") String language);

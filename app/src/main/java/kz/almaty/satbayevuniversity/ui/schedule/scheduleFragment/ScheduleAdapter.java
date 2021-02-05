@@ -86,12 +86,13 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     @Override
     public void scheduleClicked(Schedule schedule) {
-            if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected() ) {
+
+        if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected() ) {
                 StudentsListFragment studentsListFragment = new StudentsListFragment(schedule);
                 studentsListFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "studentListFragment");
-            }else{
+        }else{
                 Toast.makeText(App.getContext(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
-            }
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

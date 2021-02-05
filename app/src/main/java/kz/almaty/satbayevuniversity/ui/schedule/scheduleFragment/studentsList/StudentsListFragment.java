@@ -52,7 +52,7 @@ public class StudentsListFragment extends DialogFragment {
         fragmentStudentsListBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()),R.layout.fragment_students_list,null,false);
         fragmentStudentsListBinding.setSchedule(schedule);
         fragmentStudentsListBinding.closeImageView.setOnClickListener(v -> {
-            if(getDialog() != null){
+            if (getDialog() != null){
                 getDialog().dismiss();
             }
         });
@@ -61,17 +61,13 @@ public class StudentsListFragment extends DialogFragment {
         View view = fragmentStudentsListBinding.getRoot();
         studentListAdapter = new StudentListAdapter(getActivity());
         fragmentStudentsListBinding.studentListRecyclerView.setAdapter(studentListAdapter);
-
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         fragmentStudentsListBinding.studentListRecyclerView.setLayoutManager(llm);
         builder.setView(view);
-
         viewModel = new ViewModelProvider(this).get(StudentsListViewModel.class);
-
         String lang1 = SharedPrefCache.getLang(getActivity());
         getFromServer(lang1);
-
         viewModel.getLiveData().observe(this, students -> {
             studentListAdapter.setStudentList(students);
         });
@@ -85,15 +81,16 @@ public class StudentsListFragment extends DialogFragment {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
-        getDialog().getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT,(height/10)*8);
-
+        getDialog().getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT,(height / 10)*8);
     }
     private void getFromServer(String lang){
         if (lang.equals("kk")){
             //Log.d("ID", "getFromServer: " + schedule.getClassId());
-            viewModel.getStudentList(schedule.getClassId(), "kz");
+            //if (schedule != null)
+                viewModel.getStudentList(schedule.getClassId(), "kz");
         }else {
-            viewModel.getStudentList(schedule.getClassId(), "ru");
+            //if (schedule != null)
+                viewModel.getStudentList(schedule.getClassId(), "ru");
         }
     }
 

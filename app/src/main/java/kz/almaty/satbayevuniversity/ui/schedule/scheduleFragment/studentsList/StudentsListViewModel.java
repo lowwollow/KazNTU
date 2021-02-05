@@ -27,16 +27,16 @@ public class StudentsListViewModel extends ViewModel {
     public ObservableBoolean loadRv = new ObservableBoolean();
     MutableLiveData<List<Student>> liveData = new MutableLiveData<>();
 
-    public void getStudentList(int classid, String language){
+    public void getStudentList(int classId, String language){
         if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
-            getStudentListFromServer(classid,language);
+            getStudentListFromServer(classId,language);
         }else{
             Toast.makeText(App.getContext(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
         }
     }
-    private void getStudentListFromServer(int classid, String language){
+    private void getStudentListFromServer(int classId, String language){
         loadRv.set(true);
-        KaznituRetrofit.getApi().getStudentList(classid,language).enqueue(new Callback<List<Student>>() {
+        KaznituRetrofit.getApi().getStudentList(classId,language).enqueue(new Callback<List<Student>>() {
             @Override
             public void onResponse(Call<List<Student>> call, Response<List<Student>> response) {
                 if(response.isSuccessful()){

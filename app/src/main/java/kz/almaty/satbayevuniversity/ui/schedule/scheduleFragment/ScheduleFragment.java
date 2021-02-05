@@ -249,7 +249,6 @@ public class ScheduleFragment extends Fragment{
             }
         }
         calendarView.setDayBinder(new DayBinder<DayViewContainer>(){
-
             @Override
             public DayViewContainer create(View view) {
                 return new DayViewContainer(view);
