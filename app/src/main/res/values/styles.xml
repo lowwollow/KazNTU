@@ -26,7 +26,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/open_sans_light</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">26sp</item>
     </style>
 
 
@@ -38,8 +38,9 @@
     </style>
 
     <style name="textSize" parent="@style/Base.TextAppearance.AppCompat.Title">
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
+
     <style name="CircularProgress" parent="Theme.MaterialComponents.Light">
         <item name="colorAccent">@color/colorPrimaryDark</item>
     </style>
@@ -58,7 +59,7 @@
     </style>
 
     <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="Widget.BottomNavigationView"
@@ -69,7 +70,7 @@
 
     <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:fontFamily">@font/open_sans_semibold</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
    <style name="autoscroll">
@@ -84,6 +85,7 @@
     <style name="TextAppearance">
         <item name="android:lines">2</item>
     </style>
+
     <style name="AlertDialogStyle" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="android:textColor">#FF4081</item>
         <item name="android:textColorPrimary">#FF4081</item>

@@ -123,12 +123,6 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
             ((HomeActivity)getActivity()).OpenToggleNavMenu();
         });
 
-        //academicViewModel = new ViewModelProvider(this).get(AcademicViewModel.class);
-
-        //TODO : get info from ViewModels
-        //academicViewModel.getMutableLiveData().observe(getViewLifecycleOwner(), observer->{
-          //  Log.d("TESTING", "onActivityCreated: TESTING" + observer);
-        //});
 
 
         ConnectivityManager connManager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);

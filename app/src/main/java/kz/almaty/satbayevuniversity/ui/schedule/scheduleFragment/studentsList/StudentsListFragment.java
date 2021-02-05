@@ -42,10 +42,10 @@ public class StudentsListFragment extends DialogFragment {
     Schedule schedule;
 
     public StudentsListFragment(Schedule schedule){
+        if (this.schedule == null)
+            this.schedule = new Schedule();
         this.schedule = schedule;
     }
-
-    public StudentsListFragment () {}
 
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -81,12 +81,13 @@ public class StudentsListFragment extends DialogFragment {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
-        getDialog().getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT,(height / 10)*8);
+        getDialog().getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT,(height / 10) * 8);
     }
     private void getFromServer(String lang){
         if (lang.equals("kk")){
             //Log.d("ID", "getFromServer: " + schedule.getClassId());
             //if (schedule != null)
+            Log.d("TESTING", "getFromServer: " + schedule);
                 viewModel.getStudentList(schedule.getClassId(), "kz");
         }else {
             //if (schedule != null)
