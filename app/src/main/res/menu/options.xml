@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_job"
+        android:title="@string/referense_for_job"/>
+    <item
+        android:id="@+id/item_school"
+        android:title="@string/referense_for_school"/>
+    <item
+        android:id="@+id/item_benefit"
+        android:title="@string/referense_for_benefit"/>
+</menu>

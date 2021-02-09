@@ -17,9 +17,6 @@ import com.yandex.metrica.YandexMetricaConfig;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import io.sentry.android.core.SentryAndroid;
-import io.sentry.core.SentryLevel;
 import kz.almaty.satbayevuniversity.ui.LoginActivity;
 
 public class App extends Application {

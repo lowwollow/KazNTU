@@ -1,7 +1,6 @@
 package kz.almaty.satbayevuniversity.ui.academicProgress;
 
 import android.animation.Animator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
@@ -17,7 +16,6 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -28,9 +26,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -42,7 +37,6 @@ import kz.almaty.satbayevuniversity.ui.grade.ViewPagerFragment;
 import kz.almaty.satbayevuniversity.ui.individualPlan.ViewPagerIndividualPlan;
 import kz.almaty.satbayevuniversity.ui.notification.NotificationViewPagerFragment;
 import kz.almaty.satbayevuniversity.ui.schedule.ViewPagerSchedule;
-import kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment.ScheduleViewModel;
 
 public class MainAcademicFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener  {
     SharedPreferences.Editor editor = App.getContext().getSharedPreferences("shared_preferences",Context.MODE_PRIVATE).edit();
@@ -155,8 +149,6 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         }
     }
 
-    // TODO
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         editor.putBoolean(getString(R.string.only_server),false);
@@ -181,6 +173,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
                 firstTime = false;
                 replaceFragment(ViewPagerIndividualPlan.newInstance());
                 return true;
+
         }
         return false;
     };

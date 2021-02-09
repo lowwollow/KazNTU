@@ -46,14 +46,14 @@ public class UmkdFragment extends Fragment {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener((view, i, keyEvent) -> {
-            if(i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP){
-                ((HomeActivity)getActivity()).onNavigationItemSelected(((HomeActivity)getActivity()).navigationView.getMenu().getItem(0));
-                ((HomeActivity)getActivity()).navigationView.getMenu().getItem(0).setChecked(true);
+            if (i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP) {
+                ((HomeActivity) getActivity()).onNavigationItemSelected(((HomeActivity) getActivity()).navigationView.getMenu().getItem(0));
+                ((HomeActivity) getActivity()).navigationView.getMenu().getItem(0).setChecked(true);
                 return true;
             }
             return false;
@@ -67,19 +67,19 @@ public class UmkdFragment extends Fragment {
         umkdFragmentBinding.setUmkdViewModel(mViewModel);
         umkdFragmentBinding.umkdRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         umkdFragmentBinding.umkdRecyclerView.setHasFixedSize(true);
-        umkdFragmentBinding.umkdRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        umkdFragmentBinding.umkdRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         umkdAdapter = new UmkdAdapter(getContext());
         umkdFragmentBinding.umkdRecyclerView.setAdapter(umkdAdapter);
 
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("УМКД");
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("УМКД");
 
         toolbar.setNavigationOnClickListener(v -> {
-            ((HomeActivity)getActivity()).OpenToggleNavMenu();
+            ((HomeActivity) getActivity()).OpenToggleNavMenu();
         });
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mViewModel.getUmkd();
 
@@ -88,7 +88,7 @@ public class UmkdFragment extends Fragment {
         });
     }
 
-    private void log(String tag, String text){
+    private void log(String tag, String text) {
         Log.d(tag, text);
     }
 }

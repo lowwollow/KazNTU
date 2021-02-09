@@ -61,6 +61,12 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.admission.login.LoginActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.references.job.JobActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.references.school.SchoolActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.references.benefit.BenefitActivity"
+            android:screenOrientation="portrait"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

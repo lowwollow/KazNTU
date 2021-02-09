@@ -1,7 +1,5 @@
 package kz.almaty.satbayevuniversity.ui;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -11,12 +9,10 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -29,7 +25,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
@@ -43,14 +38,10 @@ import kz.almaty.satbayevuniversity.data.SharedPrefCache;
 import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.databinding.ActivityHomeBinding;
 import kz.almaty.satbayevuniversity.databinding.NavHeaderBinding;
-import kz.almaty.satbayevuniversity.ui.academicProgress.AcademicFragment;
 import kz.almaty.satbayevuniversity.ui.academicProgress.MainAcademicFragment;
-import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDiscipline;
-import kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines.ChosenDisciplineFragment;
-import kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment.ScheduleFragment;
+import kz.almaty.satbayevuniversity.ui.references.history.ReferencesFragment;
 import kz.almaty.satbayevuniversity.ui.settings.SettingsFragment;
 import kz.almaty.satbayevuniversity.ui.umkd.UmkdFragment;
-import kz.almaty.satbayevuniversity.utils.LocaleHelper;
 import kz.almaty.satbayevuniversity.utils.Storage;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -178,6 +169,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.settings:
                 replaceFragment(SettingsFragment.newInstance(),R.id.fragment_container);
+                break;
+
+            case R.id.references:
+                replaceFragment(ReferencesFragment.Companion.newInstanse(), R.id.fragment_container);
                 break;
             case R.id.logout:
                 exit();
