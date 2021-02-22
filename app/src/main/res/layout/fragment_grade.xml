@@ -45,64 +45,69 @@
             android:visibility="@{grade.loadRv ? View.GONE : View.VISIBLE}"/>
 
         <TextView
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@id/guideline9"
             android:id="@+id/CourseTitleId"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="5dp"
+            android:fontFamily="@font/open_sans_semibold"
             android:text="@string/courseName"
-            android:visibility="@{grade.loadRv ? View.GONE : View.VISIBLE}"/>
+            android:textColor="@color/black"
+            android:visibility="@{grade.loadRv ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@id/guideline9"
             android:id="@+id/Att1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="@string/att_1"
+            android:textColor="@color/black"
+            android:visibility="@{grade.loadRv ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
             app:layout_constraintEnd_toStartOf="@id/guideline6"
             app:layout_constraintStart_toEndOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/att_1"
-            android:visibility="@{grade.loadRv ? View.GONE : View.VISIBLE}"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@id/guideline9"
             android:id="@+id/Att2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="@string/att_2"
+            android:textColor="@color/black"
+            android:visibility="@{grade.loadRv ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
             app:layout_constraintEnd_toStartOf="@id/guideline7"
             app:layout_constraintStart_toEndOf="@+id/guideline6"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/att_2"
-            android:visibility="@{grade.loadRv ? View.GONE : View.VISIBLE}"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@id/guideline9"
             android:id="@+id/FinalTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="@string/finalBar"
+            android:textColor="@color/black"
+            android:visibility="@{grade.loadRv ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
             app:layout_constraintEnd_toStartOf="@id/guideline8"
             app:layout_constraintStart_toEndOf="@+id/guideline7"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/finalBar"
-            android:visibility="@{grade.loadRv ? View.GONE : View.VISIBLE}"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@id/guideline9"
             android:id="@+id/TotalTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="@string/total"
+            android:textColor="@color/black"
+            android:visibility="@{grade.loadRv ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/guideline8"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/total"
-            android:visibility="@{grade.loadRv ? View.GONE : View.VISIBLE}"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

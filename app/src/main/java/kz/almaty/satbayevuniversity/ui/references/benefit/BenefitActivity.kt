@@ -7,6 +7,8 @@ import kz.almaty.satbayevuniversity.R
 import kz.almaty.satbayevuniversity.ui.references.job.JobActivity
 
 class BenefitActivity : AppCompatActivity() {
+
+
     companion object {
         fun genInstance() = BenefitActivity()
     }
@@ -15,4 +17,5 @@ class BenefitActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.benefit_referense_activity)
     }
+
 }

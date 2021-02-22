@@ -147,19 +147,17 @@ public class WebViewFragment extends Fragment {
         mWebView.loadUrl( "javascript:window.location.reload( true )" );
         mWebView.loadUrl("https://docs.google.com/gview?embedded=true&url=http://ssomobile.satbayev.university/api/File/Download?fileID=" + course.getId());
         mWebView.reload();
-        mWebView.clearCache(false);
-        mWebView.clearView();
+        mWebView.clearCache(true);
     }
 
     private void sendFile() {
-        mViewModel.getDownloadFileLiveData().observe(this, file -> {
+        mViewModel.getDownloadFileLiveData().observe(getViewLifecycleOwner(), file -> {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.setType("application/msword");
             sendIntent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(App.getContext(),"kz.almaty.satbayevuniversity.provider", file));
             startActivity(sendIntent);
         });
-
         mViewModel.getFileFromServer();
     }
 

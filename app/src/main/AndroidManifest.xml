@@ -62,10 +62,13 @@
         <activity android:name=".ui.admission.login.LoginActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.references.job.JobActivity"
-            android:screenOrientation="portrait"/>
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".ui.references.school.SchoolActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.references.benefit.BenefitActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait"/>
         <meta-data
             android:name="preloaded_fonts"

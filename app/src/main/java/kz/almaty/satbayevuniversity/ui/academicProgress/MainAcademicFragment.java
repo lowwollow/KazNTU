@@ -38,9 +38,9 @@ import kz.almaty.satbayevuniversity.ui.individualPlan.ViewPagerIndividualPlan;
 import kz.almaty.satbayevuniversity.ui.notification.NotificationViewPagerFragment;
 import kz.almaty.satbayevuniversity.ui.schedule.ViewPagerSchedule;
 
-public class MainAcademicFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener  {
-    SharedPreferences.Editor editor = App.getContext().getSharedPreferences("shared_preferences",Context.MODE_PRIVATE).edit();
-    SharedPreferences sharedPreferences = App.getContext().getSharedPreferences("one_signal_notification_handler",Context.MODE_PRIVATE);
+public class MainAcademicFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener {
+    SharedPreferences.Editor editor = App.getContext().getSharedPreferences("shared_preferences", Context.MODE_PRIVATE).edit();
+    SharedPreferences sharedPreferences = App.getContext().getSharedPreferences("one_signal_notification_handler", Context.MODE_PRIVATE);
     private BottomNavigationView navigation;
     private static final String TAG = "MainAcademicFragment";
     public Toolbar toolbar;
@@ -54,6 +54,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
     public static MainAcademicFragment newInstance() {
         return new MainAcademicFragment();
     }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -66,33 +67,32 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         navigation.setOnNavigationItemSelectedListener(this);
         lottieAnimationView = view.findViewById(R.id.updateData_lottie);
         //loaderLottie = view.findViewById(R.id.lottie_loader);
-        int notification_type_id = sharedPreferences.getInt("typeId",1);
+        int notification_type_id = sharedPreferences.getInt("typeId", 1);
 
 
-
-        if (notification_type_id == 1){
+        if (notification_type_id == 1) {
             navigation.setSelectedItemId(R.id.academicProgressFragment);
-        }else if(notification_type_id == 3){
+        } else if (notification_type_id == 3) {
             navigation.setSelectedItemId(R.id.grade);
         }
-        sharedPreferences.edit().putInt("typeId",1).apply();
+        sharedPreferences.edit().putInt("typeId", 1).apply();
         return view;
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener((view, i, keyEvent) -> {
-            if(i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP){
-                    if(getFragmentManager().findFragmentById(R.id.main_academic_fragment_container) instanceof AcademicFragment){
-                        return false;
-                    }else{
-                        onNavigationItemSelected(navigation.getMenu().getItem(0));
-                        navigation.getMenu().getItem(0).setChecked(true);
-                        return true;
-                    }
+            if (i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP) {
+                if (getFragmentManager().findFragmentById(R.id.main_academic_fragment_container) instanceof AcademicFragment) {
+                    return false;
+                } else {
+                    onNavigationItemSelected(navigation.getMenu().getItem(0));
+                    navigation.getMenu().getItem(0).setChecked(true);
+                    return true;
+                }
             }
             return false;
         });
@@ -108,35 +108,34 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
         //((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.journal);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar.setNavigationOnClickListener(v -> {
-            ((HomeActivity)getActivity()).OpenToggleNavMenu();
+            ((HomeActivity) getActivity()).OpenToggleNavMenu();
         });
 
 
-
-        ConnectivityManager connManager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
 
         imageView.setOnClickListener(v -> {
-            if(connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
+            if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
                 changeAnimations();
-                editor.putBoolean(getString(R.string.only_server),true);
+                editor.putBoolean(getString(R.string.only_server), true);
                 editor.apply();
-                if(toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.journal))) {
+                if (toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.journal))) {
                     replaceFragment(AcademicFragment.newInstance());
-                }else if(toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.schedule))){
+                } else if (toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.schedule))) {
                     replaceFragment(ViewPagerSchedule.newInstance());
-                }else if(toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.grade))){
+                } else if (toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.grade))) {
                     replaceFragment(ViewPagerFragment.newInstance());
-                }else if(toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.notifications))){
+                } else if (toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.notifications))) {
                     replaceFragment(NotificationViewPagerFragment.newInstance());
-                }else if(toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.individualPlan))){
+                } else if (toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.individualPlan))) {
                     replaceFragment(ViewPagerIndividualPlan.newInstance());
                 }
             } else {
@@ -144,14 +143,14 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
             }
         });
 
-        if (!lottieAnimationView.isActivated()){
+        if (!lottieAnimationView.isActivated()) {
             lottieAnimationView.setVisibility(View.GONE);
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        editor.putBoolean(getString(R.string.only_server),false);
+        editor.putBoolean(getString(R.string.only_server), false);
         editor.apply();
         switch (item.getItemId()) {
             case R.id.academicProgressFragment:
@@ -176,7 +175,9 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
 
         }
         return false;
-    };
+    }
+
+    ;
 
     private void replaceFragment(Fragment newFragment) {
         assert getFragmentManager() != null;
@@ -184,7 +185,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         ft.commit();
     }
 
-    private void changeAnimations(){
+    private void changeAnimations() {
         Animation fadeOut = new AlphaAnimation(1, 0);
         fadeOut.setInterpolator(new AccelerateInterpolator());
         fadeOut.setStartOffset(125);
@@ -219,7 +220,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         });
     }
 
-    private void log(String tag, String text){
+    private void log(String tag, String text) {
         Log.d(tag, text);
     }
 

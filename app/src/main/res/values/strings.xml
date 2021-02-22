@@ -244,10 +244,10 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="referense_for_job">Для места работы</string>
+    <string name="referense_for_job">С места учебы</string>
     <string name="referense_for_school">Для школы</string>
     <string name="referense_for_benefit">Для пособия</string>
-    <string name="job_place_name">Название места работы</string>
+    <string name="study_place_name">Место предоставления справки</string>
     <string name="save_referense">Сохранить</string>
     <string name="advance_view_referense">предпросмотр</string>
     <string name="scholarship_text_item">С указанием стипендии</string>

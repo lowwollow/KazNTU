@@ -1,10 +1,9 @@
-<androidx.appcompat.widget.Toolbar
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbarFromMain"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:id="@+id/toolbarFromMain"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primary"
     android:theme="@style/AppThemeActionBar"
-    app:titleTextColor="@color/colorWhite"
     app:titleTextAppearance="@style/textSize"
-    xmlns:android="http://schemas.android.com/apk/res/android"/>
+    app:titleTextColor="@color/colorWhite" />

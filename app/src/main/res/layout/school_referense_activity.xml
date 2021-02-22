@@ -3,14 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="8dp">
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/job_reference_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary"
+        android:theme="@style/AppThemeActionBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextAppearance="@style/textSize"
+        app:titleTextColor="@color/colorWhite">
+
+        <TextView
+            style="@style/textSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Справка для школы"
+            android:textColor="@color/colorWhite" />
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
+        android:id="@+id/main_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="vertical"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -47,9 +69,17 @@
                 android:id="@+id/button2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/advance_view_referense"
+                android:layout_marginStart="2dp"
                 android:layout_weight="1"
-                android:layout_marginStart="2dp"/>
+                android:text="@string/advance_view_referense" />
         </LinearLayout>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bottom_img"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:srcCompat="@drawable/img_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_linear_layout"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
