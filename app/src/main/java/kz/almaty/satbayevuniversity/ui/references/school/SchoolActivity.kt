@@ -14,6 +14,8 @@ import kz.almaty.satbayevuniversity.ui.references.ReferencesListItem
 import kz.almaty.satbayevuniversity.ui.references.ReferenseWebView
 import kz.almaty.satbayevuniversity.ui.references.history.TestData
 import kz.almaty.satbayevuniversity.ui.references.job.JobActivity
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.zip.Inflater
 
 class SchoolActivity : AppCompatActivity() {
@@ -42,7 +44,10 @@ class SchoolActivity : AppCompatActivity() {
 
     private fun save(btn_save: Button) {
         btn_save.setOnClickListener {
-            ReferencesListItem.addItem(TestData("123","25.02.21","Школа",0,"0",false), this)
+            val uniqueID = UUID.randomUUID().toString()
+            val sdf = SimpleDateFormat("dd.M.yyyy")
+            val currentDate = sdf.format(Date())
+            ReferencesListItem.addItem(TestData(uniqueID,currentDate,"Школа",0,"0",false), this)
             finish()
         }
     }
