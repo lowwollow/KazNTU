@@ -21,6 +21,7 @@ object ReferencesListItem{
 
     fun addItem(item:TestData, context: Context){
         val favorites = getListOfItems(context)
+        // let is a lambda exp
         favorites?.let {
             //it.inL = true
             favorites.add(item)
