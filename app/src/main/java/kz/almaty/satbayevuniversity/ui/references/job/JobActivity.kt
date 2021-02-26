@@ -1,5 +1,6 @@
 package kz.almaty.satbayevuniversity.ui.references.job
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import kz.almaty.satbayevuniversity.R
 import kz.almaty.satbayevuniversity.databinding.JobReferenseActivityBinding
 import kz.almaty.satbayevuniversity.ui.references.ReferencesListItem
+import kz.almaty.satbayevuniversity.ui.references.ReferenseWebView
 import kz.almaty.satbayevuniversity.ui.references.history.TestData
 
 class JobActivity : AppCompatActivity() {
@@ -29,7 +31,6 @@ class JobActivity : AppCompatActivity() {
         img = binding.bottomImg
         btn_save = binding.buttonSave
         btn_show = binding.buttonShow
-
         setUpButtons(btn_save, btn_show)
     }
 
@@ -48,7 +49,9 @@ class JobActivity : AppCompatActivity() {
 
     private fun preview(btn_show: Button) {
         btn_show.setOnClickListener {
-
+            //TODO
+            val intent = Intent(this, ReferenseWebView.newInstanse()::class.java)
+            startActivity(intent)
         }
     }
 

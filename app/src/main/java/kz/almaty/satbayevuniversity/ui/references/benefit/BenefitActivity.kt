@@ -1,5 +1,6 @@
 package kz.almaty.satbayevuniversity.ui.references.benefit
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import kz.almaty.satbayevuniversity.R
 import kz.almaty.satbayevuniversity.databinding.BenefitReferenseActivityBinding
 import kz.almaty.satbayevuniversity.ui.references.ReferencesListItem
+import kz.almaty.satbayevuniversity.ui.references.ReferenseWebView
 import kz.almaty.satbayevuniversity.ui.references.history.TestData
 import kz.almaty.satbayevuniversity.ui.references.job.JobActivity
 
@@ -44,7 +46,8 @@ class BenefitActivity : AppCompatActivity() {
 
     private fun preview(btn_show: Button) {
         btn_show.setOnClickListener {
-
+            val intent = Intent(this, ReferenseWebView.newInstanse()::class.java)
+            startActivity(intent)
         }
     }
 

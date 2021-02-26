@@ -252,4 +252,5 @@
     <string name="advance_view_referense">предпросмотр</string>
     <string name="scholarship_text_item">С указанием стипендии</string>
     <string name="referense_pdf_type">Тип шапки для pdf файла</string>
+    <string name="referense_empty_text">Упс... У вас пока нет запросов на справки!</string>
 </resources>

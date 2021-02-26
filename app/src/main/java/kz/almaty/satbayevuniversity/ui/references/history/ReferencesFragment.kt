@@ -6,11 +6,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import kotlinx.android.synthetic.main.referense_fragment.*
 import kz.almaty.satbayevuniversity.R
 import kz.almaty.satbayevuniversity.ui.HomeActivity
@@ -24,6 +26,7 @@ class ReferencesFragment : Fragment() {
     lateinit var toolbar: Toolbar
     lateinit var adapter: ReferencesAdapter
     lateinit var viewModel: ReferencesListItem
+    lateinit var img: ImageView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
@@ -53,6 +56,8 @@ class ReferencesFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.references)
         reference_list.layoutManager = LinearLayoutManager(context)
+        emptyImage.visibility = View.GONE
+        emptyImageTextView.visibility = View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -76,6 +81,14 @@ class ReferencesFragment : Fragment() {
     private fun setupRecyclerView() {
         adapter = ReferencesAdapter(mutableListOf())
         val mutableList = context?.let { ReferencesListItem.getListOfItems(it) }!!
+        if (mutableList.isEmpty()) {
+            emptyImage.visibility = View.VISIBLE
+            emptyImageTextView.visibility = View.VISIBLE
+        }
+        else {
+            emptyImage.visibility = View.GONE
+            emptyImageTextView.visibility = View.GONE
+        }
         adapter.updateItems(mutableList)
         reference_list.adapter = adapter
     }

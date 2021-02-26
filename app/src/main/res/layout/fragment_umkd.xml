@@ -84,6 +84,6 @@
             app:layout_constraintEnd_toEndOf="@id/emptyImage"
             app:layout_constraintStart_toStartOf="@id/emptyImage"
             app:layout_constraintTop_toBottomOf="@+id/emptyImage"
-            tools:text="К сожалению, данные по данному запросу отсутствуют..." />
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
