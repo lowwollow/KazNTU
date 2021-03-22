@@ -3,6 +3,7 @@ package kz.almaty.satbayevuniversity.ui.individualPlan.chosenDisciplines;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;

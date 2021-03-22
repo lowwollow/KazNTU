@@ -1,5 +1,6 @@
 package kz.almaty.satbayevuniversity.ui.grade.transcriptFragment;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,6 +47,8 @@ public class TranscriptFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         transcriptFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_transcript, container, false);
         View view = transcriptFragmentBinding.getRoot();
+
+
         return view;
     }
 

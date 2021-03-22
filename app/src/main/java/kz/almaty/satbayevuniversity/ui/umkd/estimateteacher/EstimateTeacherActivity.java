@@ -118,14 +118,6 @@ public class EstimateTeacherActivity extends AppCompatActivity {
         finish();
     }
 
-    private User loadPreference(){
-        sPref = getSharedPreferences("MyPref", MODE_PRIVATE);
-        String savedToken = sPref.getString("MyToken", "");
-        String userName = sPref.getString("Username","");
-        String fullName = sPref.getString("FullName","");
-        User user = new User(savedToken, userName, fullName);
-        return user;
-    }
 
     private void postRating(int instructorId, String instructorName){
         String comment = getTextFrom();

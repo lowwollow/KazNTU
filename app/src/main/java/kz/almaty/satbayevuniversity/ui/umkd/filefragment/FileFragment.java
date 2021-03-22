@@ -14,7 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -27,6 +26,7 @@ public class FileFragment extends Fragment {
     private FileFragmentBinding fileFragmentBinding;
     private FileAdapter fileAdapter;
     private Toolbar toolbar;
+
     public static FileFragment newInstance() {
         return new FileFragment();
     }
@@ -45,20 +45,21 @@ public class FileFragment extends Fragment {
         View view = fileFragmentBinding.getRoot();
         toolbar = view.findViewById(R.id.toolbarFile);
         getToolbar();
+
         return view;
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
 
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener((view, i, keyEvent) -> {
-            if(i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP){
+            if (i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP) {
                 if (getChildFragmentManager().getBackStackEntryCount() > 0) {
                     getChildFragmentManager().popBackStackImmediate();
-                }else{
+                } else {
                     return false;
                 }
                 return true;
@@ -66,6 +67,7 @@ public class FileFragment extends Fragment {
             return false;
         });
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -73,7 +75,7 @@ public class FileFragment extends Fragment {
         fileFragmentBinding.setFile(mViewModel);
         fileFragmentBinding.fileRecyclerView.setHasFixedSize(true);
         fileFragmentBinding.fileRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        fileFragmentBinding.fileRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        fileFragmentBinding.fileRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         fileAdapter = new FileAdapter(getActivity());
         fileFragmentBinding.fileRecyclerView.setAdapter(fileAdapter);
@@ -89,19 +91,19 @@ public class FileFragment extends Fragment {
     }
 
     private void getToolbar() {
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.close_file_icon);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.files);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.close_file_icon);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.files);
     }
 
     @Override
     public void onDestroyView() {
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         super.onDestroyView();
     }
 
-    private void log(String tag, String text){
+    private void log(String tag, String text) {
         Log.d(tag, text);
     }
 }

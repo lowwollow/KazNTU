@@ -2,6 +2,7 @@ package kz.almaty.satbayevuniversity.ui.umkd.filefragment.fileDataFragment.webVi
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -71,7 +72,7 @@ public class WebViewFragment extends Fragment {
 
         mWebView.setVisibility(View.GONE);
         mWebView.setWebChromeClient(new WebChromeClient());
-
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mWebView.setWebViewClient(new WebViewClient()
         {
             @Override

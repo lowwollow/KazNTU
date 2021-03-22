@@ -18,15 +18,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
 import kz.almaty.satbayevuniversity.AuthViewModel;
 import kz.almaty.satbayevuniversity.R;
-import kz.almaty.satbayevuniversity.data.entity.Language;
-import kz.almaty.satbayevuniversity.data.entity.admission.education_info.Settings;
 import kz.almaty.satbayevuniversity.databinding.FragmentSettingsBinding;
 import kz.almaty.satbayevuniversity.ui.HomeActivity;
 import kz.almaty.satbayevuniversity.ui.LoginActivity;
@@ -41,7 +35,7 @@ public class SettingsFragment extends Fragment {
     public Toolbar toolbar;
     private Context context;
 
-    public static SettingsFragment newInstance(){
+    public static SettingsFragment newInstance() {
         return new SettingsFragment();
     }
 
@@ -49,7 +43,8 @@ public class SettingsFragment extends Fragment {
         this.context = context;
     }
 
-    public SettingsFragment () {}
+    public SettingsFragment() {
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -60,19 +55,20 @@ public class SettingsFragment extends Fragment {
         settingsLoginBtn = view.findViewById(R.id.settingsLoginBtn);
         settingsLanguage = view.findViewById(R.id.settingsLanguage);
         toolbar = view.findViewById(R.id.settingsToolbar);
+
         return view;
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
 
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener((view, i, keyEvent) -> {
-            if(i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP){
-                ((HomeActivity)getActivity()).onNavigationItemSelected(((HomeActivity)getActivity()).navigationView.getMenu().getItem(0));
-                ((HomeActivity)getActivity()).navigationView.getMenu().getItem(0).setChecked(true);
+            if (i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP) {
+                ((HomeActivity) getActivity()).onNavigationItemSelected(((HomeActivity) getActivity()).navigationView.getMenu().getItem(0));
+                ((HomeActivity) getActivity()).navigationView.getMenu().getItem(0).setChecked(true);
                 return true;
             }
             return false;
@@ -98,24 +94,24 @@ public class SettingsFragment extends Fragment {
         settingsLanguage.setOnClickListener(v -> {
             LanguageFragment languageFragment = new LanguageFragment();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, languageFragment );
+            transaction.replace(R.id.fragment_container, languageFragment);
             transaction.addToBackStack(null);
             transaction.commit();
         });
         settingsLoginBtn.setOnClickListener(v -> {
-         authViewModel.clearDB();
-         Intent intent = new Intent(getActivity(), LoginActivity.class);
-         startActivity(intent);
+            authViewModel.clearDB();
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
         });
 
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.settings);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.settings);
 
         toolbar.setNavigationOnClickListener(v -> {
-            ((HomeActivity)getActivity()).OpenToggleNavMenu();
+            ((HomeActivity) getActivity()).OpenToggleNavMenu();
         });
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 }

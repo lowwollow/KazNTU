@@ -2,6 +2,7 @@ package kz.almaty.satbayevuniversity.ui.settings.languageFragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -41,6 +42,7 @@ public class LanguageFragment extends Fragment implements LanguageAdapter.Langua
         View view =  inflater.inflate(R.layout.fragment_language, container, false);
         recyclerView = view.findViewById(R.id.languageRecycler);
         toolbar = view.findViewById(R.id.languageToolbar);
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         return view;
     }
 

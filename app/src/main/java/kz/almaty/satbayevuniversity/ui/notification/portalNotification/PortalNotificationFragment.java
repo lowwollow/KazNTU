@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -36,6 +35,7 @@ public class PortalNotificationFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         fragmentNotificationBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_notification, container, false);
         View view = fragmentNotificationBinding.getRoot();
+
         return view;
     }
 
@@ -46,7 +46,7 @@ public class PortalNotificationFragment extends Fragment {
         fragmentNotificationBinding.setNotification(mViewModel);
         mViewModel.getNotification();
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.notifications);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.notifications);
 
         fragmentNotificationBinding.notificationRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         fragmentNotificationBinding.notificationRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
@@ -69,7 +69,7 @@ public class PortalNotificationFragment extends Fragment {
         });
     }
 
-    private void log(String tag, String text){
+    private void log(String tag, String text) {
         Log.d(tag, text);
     }
 

@@ -68,7 +68,7 @@ public class App extends Application {
                 editor.apply();
             }
             Intent i = new Intent(getContext(), LoginActivity.class);
-            i.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
         }
 

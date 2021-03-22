@@ -16,60 +16,59 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-
 import java.util.List;
 
 import kz.almaty.satbayevuniversity.R;
 import kz.almaty.satbayevuniversity.data.SharedPrefCache;
-import kz.almaty.satbayevuniversity.data.entity.Language;
 import kz.almaty.satbayevuniversity.data.entity.notification.PushNotification;
 import kz.almaty.satbayevuniversity.databinding.FragmentPushNotificationBinding;
 
 public class PushNotificationFragment extends Fragment {
-        FragmentPushNotificationBinding fragmentPushNotificationBinding;
-        PushNotificationViewModel pushNotificationViewModel;
-        PushNotificationAdapter pushNotificationAdapter;
+    FragmentPushNotificationBinding fragmentPushNotificationBinding;
+    PushNotificationViewModel pushNotificationViewModel;
+    PushNotificationAdapter pushNotificationAdapter;
 
     public static PushNotificationFragment newInstance() {
         return new PushNotificationFragment();
     }
-        public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstanceState){
-            fragmentPushNotificationBinding =  DataBindingUtil.inflate(layoutInflater, R.layout.fragment_push_notification,viewGroup,false);
-            View view = fragmentPushNotificationBinding.getRoot();
-            return view;
-        }
-        public void onActivityCreated(Bundle savedInstanceState){
-            super.onActivityCreated(savedInstanceState);
 
-            pushNotificationViewModel = new ViewModelProvider(this).get(PushNotificationViewModel.class);
-            pushNotificationAdapter = new PushNotificationAdapter(getContext(),pushNotificationViewModel);
-            fragmentPushNotificationBinding.pushNotificationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            fragmentPushNotificationBinding.pushNotificationRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
-            fragmentPushNotificationBinding.pushNotificationRecyclerView.setAdapter(pushNotificationAdapter);
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstanceState) {
+        fragmentPushNotificationBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_push_notification, viewGroup, false);
+        View view = fragmentPushNotificationBinding.getRoot();
 
-            String lang1 = SharedPrefCache.getLang(getActivity());
-            getFromServer(lang1);
+        return view;
+    }
+
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        pushNotificationViewModel = new ViewModelProvider(this).get(PushNotificationViewModel.class);
+        pushNotificationAdapter = new PushNotificationAdapter(getContext(), pushNotificationViewModel);
+        fragmentPushNotificationBinding.pushNotificationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        fragmentPushNotificationBinding.pushNotificationRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        fragmentPushNotificationBinding.pushNotificationRecyclerView.setAdapter(pushNotificationAdapter);
+
+        String lang1 = SharedPrefCache.getLang(getActivity());
+        getFromServer(lang1);
 
 
-            pushNotificationViewModel.getNotificationLiveData().observe(getViewLifecycleOwner(), new Observer<List<PushNotification>>() {
-                @Override
-                public void onChanged(List<PushNotification> pushNotifications) {
-                    pushNotificationAdapter.setNotificationList(pushNotifications);
-                }
-            });
-            fragmentPushNotificationBinding.setViewModel(pushNotificationViewModel);
+        pushNotificationViewModel.getNotificationLiveData().observe(getViewLifecycleOwner(), new Observer<List<PushNotification>>() {
+            @Override
+            public void onChanged(List<PushNotification> pushNotifications) {
+                pushNotificationAdapter.setNotificationList(pushNotifications);
+            }
+        });
+        fragmentPushNotificationBinding.setViewModel(pushNotificationViewModel);
 
-            setUpItemTouchHelper();
-            setUpAnimationDecoratorHelper();
-        }
+        setUpItemTouchHelper();
+        setUpAnimationDecoratorHelper();
+    }
+
     private void setUpItemTouchHelper() {
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
@@ -83,7 +82,7 @@ public class PushNotificationFragment extends Fragment {
                 background = new ColorDrawable(Color.RED);
                 xMark = ContextCompat.getDrawable(getContext(), R.drawable.ic_clear_24dp);
                 xMark.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-                xMarkMargin = (int)getResources().getDimension(R.dimen.ic_clear_margin);
+                xMarkMargin = (int) getResources().getDimension(R.dimen.ic_clear_margin);
                 initiated = true;
             }
 
@@ -220,15 +219,15 @@ public class PushNotificationFragment extends Fragment {
         });
     }
 
-    private void getFromServer(String lang){
-        if (lang.equals("kk")){
+    private void getFromServer(String lang) {
+        if (lang.equals("kk")) {
             pushNotificationViewModel.getPushNotification("kz");
-        }else {
+        } else {
             pushNotificationViewModel.getPushNotification("ru");
         }
     }
 
-    private void log(String tag, String text){
+    private void log(String tag, String text) {
         Log.d(tag, text);
     }
 

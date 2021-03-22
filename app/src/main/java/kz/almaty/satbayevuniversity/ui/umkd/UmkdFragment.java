@@ -1,6 +1,5 @@
 package kz.almaty.satbayevuniversity.ui.umkd;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -15,7 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -42,6 +40,7 @@ public class UmkdFragment extends Fragment {
         umkdFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_umkd, container, false);
         view = umkdFragmentBinding.getRoot();
         toolbar = view.findViewById(R.id.umkd_toolbar);
+
         return view;
     }
 

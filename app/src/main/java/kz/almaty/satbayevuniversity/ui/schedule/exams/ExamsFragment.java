@@ -1,5 +1,6 @@
 package kz.almaty.satbayevuniversity.ui.schedule.exams;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +36,7 @@ public class ExamsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
         examsFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_exams, container, false);
         View view = examsFragmentBinding.getRoot();
         return view;

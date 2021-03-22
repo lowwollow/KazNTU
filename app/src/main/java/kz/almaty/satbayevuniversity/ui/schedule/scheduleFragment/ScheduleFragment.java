@@ -3,6 +3,8 @@ package kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,20 +88,34 @@ public class ScheduleFragment extends Fragment{
     private DateTimeFormatter dayOfMonthFormatter = DateTimeFormatter.ofPattern("d");
     private DateTimeFormatter dayOfWeekFormatter = DateTimeFormatter.ofPattern("EE");
 
-    public ScheduleFragment() {}
+    String FRAGMENT_TAG = "Schedule_fragment";
 
     public static ScheduleFragment newInstance() {
         return new ScheduleFragment();
     }
 
+    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
         scheduleFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_schedule, container, false);
         View view = scheduleFragmentBinding.getRoot();
         emptyConstraint = view.findViewById(R.id.emptyConstraint);
         calendarView =  view.findViewById(R.id.weekCalendar);
         return view;
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(getActivity(), "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            Toast.makeText(getActivity(), "portrait", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -121,6 +138,7 @@ public class ScheduleFragment extends Fragment{
         if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.schedule);
         }
+
         scheduleFragmentBinding.scheduleRecyclerView.setNestedScrollingEnabled(false);
         //swipe weekCalendar
         scheduleFragmentBinding.scheduleRecyclerView.setOnTouchListener(new OnSwipeTouchListener(getContext()) {
@@ -144,6 +162,7 @@ public class ScheduleFragment extends Fragment{
                 calendarView.scrollToDate(currentDay);
             }
         });
+
         mViewModel.getHandleTimeout().observe(getViewLifecycleOwner(), integer -> {
             if (integer == 1) {
                 Toast.makeText(getActivity(), R.string.internetConnection, Toast.LENGTH_SHORT).show();
@@ -158,6 +177,7 @@ public class ScheduleFragment extends Fragment{
                 getActivity().finish();
             }
         });
+
         mViewModel.getEmptyImage().observe(getViewLifecycleOwner(), noData->{
             if (noData) {
                 emptyConstraint.setVisibility(View.VISIBLE);
@@ -166,6 +186,7 @@ public class ScheduleFragment extends Fragment{
 
         setDateSchedule(currentDay);
         setCalendar();
+
     }
 
     @Override
@@ -291,4 +312,6 @@ public class ScheduleFragment extends Fragment{
     private void log(String tag, String text){
         Log.d(tag, text);
     }
+
+
 }

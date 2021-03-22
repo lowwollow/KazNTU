@@ -1,5 +1,6 @@
 package kz.almaty.satbayevuniversity.ui.individualPlan;
 import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ public class ViewPagerIndividualPlan extends Fragment {
         View view = inflater.inflate(R.layout.fragment_view_pager, container, false);
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager = view.findViewById(R.id.viewPager);
+
         return view;
     }
 

@@ -2,6 +2,7 @@ package kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment.studentsList;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -56,7 +57,6 @@ public class StudentsListFragment extends DialogFragment {
                 getDialog().dismiss();
             }
         });
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View view = fragmentStudentsListBinding.getRoot();
         studentListAdapter = new StudentListAdapter(getActivity());

@@ -117,7 +117,7 @@ public class ScheduleViewModel extends ViewModel {
     }
 
 
-    MutableLiveData<List<Schedule>> getScheduleLiveData(){
+    public MutableLiveData<List<Schedule>> getScheduleLiveData(){
         if(scheduleLiveData==null){
             scheduleLiveData = new MutableLiveData<>();
         }

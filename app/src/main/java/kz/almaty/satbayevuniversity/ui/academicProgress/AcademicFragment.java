@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,9 +75,20 @@ public class AcademicFragment extends Fragment {
         authViewModel =  new AuthViewModel();
         lottieAnimationView = academicFragmentBinding.lottieLoader;
         lottieAnimationView.setVisibility(View.GONE);
+        if (savedInstanceState != null) {
+            int id = (savedInstanceState.getInt("test"));
+            //Log.d("TEST", "onCreateView: " +  id);
+        }
+
         return academicFragmentBinding.getRoot();
     }
 
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("test", 1);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

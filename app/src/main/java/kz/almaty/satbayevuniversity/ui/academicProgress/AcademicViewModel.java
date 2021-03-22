@@ -92,7 +92,6 @@ public class AcademicViewModel extends ViewModel {
                              if(!responseJournalList.equals(responseJournalListForDB)){
                                  new Thread(() -> {
                                      update(responseJournalList);
-                                     System.out.println("#######update");
                                  }).start();
                                  academicData.setValue(responseJournalList);
                              }
@@ -146,7 +145,6 @@ public class AcademicViewModel extends ViewModel {
         return handleError;
     }
 
-    //TODO : fix
     LiveData<Boolean> getMutableLiveData(){
         if (mutableLiveData==null)
             mutableLiveData = new MutableLiveData<>();
@@ -183,7 +181,7 @@ public class AcademicViewModel extends ViewModel {
     }
 
     private class MyTask extends AsyncTask<Void, Void, Void>{
-        String lang = new String();
+        String lang;
         public MyTask(String lang){
             this.lang = lang;
         }

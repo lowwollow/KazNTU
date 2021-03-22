@@ -1,6 +1,7 @@
 package kz.almaty.satbayevuniversity.ui.individualPlan.deferedDisciplnes;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -57,6 +58,7 @@ public class DeferedDisciplineFragment extends Fragment {
         View view = individualPlanBinding.getRoot();
         img = individualPlanBinding.emptyImage;
         img.setVisibility(View.GONE);
+
         return view;
     }
 

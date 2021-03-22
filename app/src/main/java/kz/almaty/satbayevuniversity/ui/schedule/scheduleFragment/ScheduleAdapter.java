@@ -78,7 +78,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         return (scheduleList == null) ? 0 : scheduleList.size();
     }
 
-    void setScheduleList(List<Schedule> scheduleList){
+    public void setScheduleList(List<Schedule> scheduleList){
         this.scheduleList.clear();
         this.scheduleList.addAll(scheduleList);
         notifyItemRangeChanged(0, scheduleList.size());

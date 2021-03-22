@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:paddingBottom="45dp"
         android:id="@+id/scheduleConstraint"
-        tools:context="kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment.ScheduleFragment"
+        tools:context="kz.almaty.satbayevuniversity.ui.schedule_activity.ScheduleActivity"
         android:background="@color/colorWhite">
 
         <include

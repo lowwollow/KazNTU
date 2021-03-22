@@ -1,5 +1,6 @@
 package kz.almaty.satbayevuniversity.ui.grade.attestation;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +42,7 @@ public class GradeFragment extends Fragment {
         View view = gradeFragmentBinding.getRoot();
         gradeFragmentBinding.emptyImage.setVisibility(View.INVISIBLE);
         gradeFragmentBinding.emptyTextView.setVisibility(View.INVISIBLE);
+
         return view;
     }
 

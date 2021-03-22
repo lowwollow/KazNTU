@@ -35,14 +35,15 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name="kz.almaty.satbayevuniversity.ui.HomeActivity"
-            android:configChanges="locale"
-            android:screenOrientation="portrait"/>
+            android:configChanges="orientation|locale"
+        />
+
         <activity android:name="kz.almaty.satbayevuniversity.ui.umkd.estimateteacher.EstimateTeacherActivity"/>
         <activity
             android:name="kz.almaty.satbayevuniversity.ui.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
 

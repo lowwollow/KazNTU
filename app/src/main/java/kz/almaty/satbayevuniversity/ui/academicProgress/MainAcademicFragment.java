@@ -3,6 +3,7 @@ package kz.almaty.satbayevuniversity.ui.academicProgress;
 import android.animation.Animator;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -25,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -37,6 +40,7 @@ import kz.almaty.satbayevuniversity.ui.grade.ViewPagerFragment;
 import kz.almaty.satbayevuniversity.ui.individualPlan.ViewPagerIndividualPlan;
 import kz.almaty.satbayevuniversity.ui.notification.NotificationViewPagerFragment;
 import kz.almaty.satbayevuniversity.ui.schedule.ViewPagerSchedule;
+import kz.almaty.satbayevuniversity.ui.schedule.scheduleFragment.ScheduleFragment;
 
 public class MainAcademicFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener {
     SharedPreferences.Editor editor = App.getContext().getSharedPreferences("shared_preferences", Context.MODE_PRIVATE).edit();
@@ -68,7 +72,6 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         lottieAnimationView = view.findViewById(R.id.updateData_lottie);
         //loaderLottie = view.findViewById(R.id.lottie_loader);
         int notification_type_id = sharedPreferences.getInt("typeId", 1);
-
 
         if (notification_type_id == 1) {
             navigation.setSelectedItemId(R.id.academicProgressFragment);
@@ -117,10 +120,8 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
             ((HomeActivity) getActivity()).OpenToggleNavMenu();
         });
 
-
         ConnectivityManager connManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
-
 
         imageView.setOnClickListener(v -> {
             if (connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable() && activeNetwork.isConnected()) {
@@ -130,7 +131,7 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
                 if (toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.journal))) {
                     replaceFragment(AcademicFragment.newInstance());
                 } else if (toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.schedule))) {
-                    replaceFragment(ViewPagerSchedule.newInstance());
+                    replaceFragment(ScheduleFragment.newInstance());
                 } else if (toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.grade))) {
                     replaceFragment(ViewPagerFragment.newInstance());
                 } else if (toolbar.getTitle().toString().equalsIgnoreCase(getString(R.string.notifications))) {
@@ -146,6 +147,14 @@ public class MainAcademicFragment extends Fragment implements BottomNavigationVi
         if (!lottieAnimationView.isActivated()) {
             lottieAnimationView.setVisibility(View.GONE);
         }
+
+//        getView().getViewTreeObserver().addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener(){
+//            @Override
+//            public void onWindowFocusChanged(boolean hasFocus) {
+//                Log.d(TAG, "onWindowFocusChanged: " + getFragmentManager().findFragmentById(R.id.main_academic_fragment_container));
+//            }
+//        });
+
     }
 
     @Override

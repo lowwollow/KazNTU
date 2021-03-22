@@ -14,7 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -44,20 +43,21 @@ public class FileDataFragment extends Fragment {
         View view = fileDataFragmentBinding.getRoot();
         toolbar = view.findViewById(R.id.toolbarFileData);
         getToolbar();
+
         return view;
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
 
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener((view, i, keyEvent) -> {
-            if(i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP){
+            if (i == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_UP) {
                 if (getChildFragmentManager().getBackStackEntryCount() > 0) {
                     getChildFragmentManager().popBackStackImmediate();
-                }else{
+                } else {
                     return false;
                 }
                 return true;
@@ -65,11 +65,12 @@ public class FileDataFragment extends Fragment {
             return false;
         });
     }
+
     private void getToolbar() {
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.files);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.files);
     }
 
     @Override
@@ -84,7 +85,7 @@ public class FileDataFragment extends Fragment {
 
         fileDataFragmentBinding.recyclerFileDataFragment.setHasFixedSize(true);
         fileDataFragmentBinding.recyclerFileDataFragment.setLayoutManager(new LinearLayoutManager(getActivity()));
-        fileDataFragmentBinding.recyclerFileDataFragment.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        fileDataFragmentBinding.recyclerFileDataFragment.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         toolbar.setNavigationOnClickListener(v -> getFragmentManager().popBackStackImmediate());
 
@@ -94,7 +95,7 @@ public class FileDataFragment extends Fragment {
         fileAdapter.setFileDataList(courseList);
     }
 
-    private void log(String tag, String text){
+    private void log(String tag, String text) {
         Log.d(tag, text);
     }
 }

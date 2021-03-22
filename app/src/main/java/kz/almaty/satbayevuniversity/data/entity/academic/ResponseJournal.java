@@ -35,6 +35,8 @@ public class ResponseJournal implements Serializable {
 	@SerializedName("missedPercentFailed")
 	private boolean missedPercentFailed;
 
+
+	// later add to the Kotlin project
 	@TypeConverters(DataConverterAcademic.class)
 	@SerializedName("dates")
 	private List<DatesItem> dates;
